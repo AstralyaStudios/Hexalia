@@ -57,7 +57,7 @@ public final class ModBiomeModifier {
         SPAWN_SILK_MOTH,
         new BiomeModifiers.AddSpawnsBiomeModifier(
             biomes.getOrThrow(ModTags.Biomes.SILK_MOTH_SPAWNS),
-            List.of(new MobSpawnSettings.SpawnerData(ModEntities.SILK_MOTH.get(), 2, 1, 2))));
+            List.of(new MobSpawnSettings.SpawnerData(ModEntities.SILK_MOTH.get(), 6, 1, 2))));
 
     context.register(
         SPAWN_CACOFEY,

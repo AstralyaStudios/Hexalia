@@ -1,9 +1,9 @@
 {
   "type": "hexalia:natures_ritual",
-  "ingredients": [
-    {
-      "item": "minecraft:oxeye_daisy"
-    },
+  "center": {
+    "item": "minecraft:oxeye_daisy"
+  },
+  "offerings": [
     {
       "item": "hexalia:air_node"
     },

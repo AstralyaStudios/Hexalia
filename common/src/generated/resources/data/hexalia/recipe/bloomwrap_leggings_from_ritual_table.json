@@ -1,9 +1,9 @@
 {
   "type": "hexalia:natures_ritual",
-  "ingredients": [
-    {
-      "item": "minecraft:leather_leggings"
-    },
+  "center": {
+    "item": "minecraft:leather_leggings"
+  },
+  "offerings": [
     {
       "item": "minecraft:peony"
     },

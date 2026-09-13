@@ -48,7 +48,7 @@ public class ThornbowItem extends BowItem {
     }
 
     ThornArrowEntity projectile =
-        new ThornArrowEntity(ModEntities.THORN_ARROW.get(), level, player);
+        new ThornArrowEntity(ModEntities.THORN_ARROW.get(), level, player, stack);
 
     projectile.shootFromRotation(
         player, player.getXRot(), player.getYRot(), 0.0F, power * 3.0F, 1.0F);

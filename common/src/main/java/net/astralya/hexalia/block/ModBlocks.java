@@ -18,6 +18,7 @@ import net.astralya.hexalia.block.custom.GaleberriesVinePlantBlock;
 import net.astralya.hexalia.block.custom.GhostFernBlock;
 import net.astralya.hexalia.block.custom.GrimshadeBlock;
 import net.astralya.hexalia.block.custom.HerbBlock;
+import net.astralya.hexalia.block.custom.HerbJarBlock;
 import net.astralya.hexalia.block.custom.HexaliaSaplingBlock;
 import net.astralya.hexalia.block.custom.InfusedDirtBlock;
 import net.astralya.hexalia.block.custom.InfusedFarmlandBlock;
@@ -41,6 +42,7 @@ import net.astralya.hexalia.block.custom.SirenKelpBlock;
 import net.astralya.hexalia.block.custom.SmallCauldronBlock;
 import net.astralya.hexalia.block.custom.SunfireTomatoCropBlock;
 import net.astralya.hexalia.block.custom.WildSunfireTomatoBlock;
+import net.astralya.hexalia.block.custom.WildMandrakeBlock;
 import net.astralya.hexalia.block.custom.WindsongBlock;
 import net.astralya.hexalia.block.custom.WitchweedBlock;
 import net.astralya.hexalia.block.custom.wood.ModHangingSignBlock;
@@ -50,6 +52,7 @@ import net.astralya.hexalia.block.custom.wood.ModWallSignBlock;
 import net.astralya.hexalia.effect.ModMobEffects;
 import net.astralya.hexalia.util.ModWoodTypes;
 import net.astralya.hexalia.worldgen.ModConfiguredFeatures;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.block.Block;
@@ -154,6 +157,13 @@ public final class ModBlocks {
           () ->
               new ShelfBlock(
                   BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICKS).noOcclusion()));
+
+  public static final RegistrySupplier<Block> HERB_JAR =
+      BLOCKS.register(
+          "herb_jar",
+          () ->
+              new HerbJarBlock(
+                  BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).noOcclusion()));
 
   public static final RegistrySupplier<Block> DREAMCATCHER =
       BLOCKS.register(
@@ -401,8 +411,8 @@ public final class ModBlocks {
       BLOCKS.register(
           "wild_mandrake",
           () ->
-              new FlowerBlock(
-                  ModMobEffects.STUNNED,
+              new WildMandrakeBlock(
+                  BuiltInRegistries.MOB_EFFECT.wrapAsHolder(ModMobEffects.STUNNED.get()),
                   6,
                   BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)
                       .dynamicShape()

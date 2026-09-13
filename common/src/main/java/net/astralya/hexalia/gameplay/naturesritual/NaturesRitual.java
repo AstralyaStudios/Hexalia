@@ -1,6 +1,7 @@
 package net.astralya.hexalia.gameplay.naturesritual;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import net.astralya.hexalia.HexaliaConfig;
@@ -64,15 +65,7 @@ public final class NaturesRitual {
       return true;
     }
 
-    List<RitualBrazierBlockEntity> filled = new ArrayList<>();
-    for (BlockPos brazierPos : List.of(pos.north(2), pos.south(2), pos.east(2), pos.west(2))) {
-      if (level.getBlockEntity(brazierPos) instanceof RitualBrazierBlockEntity brazier
-          && !brazier.getStoredItem().isEmpty()) {
-        filled.add(brazier);
-      }
-    }
-
-    Match match = findMatch(level, tableItem, filled, table);
+    Match match = findMatch(level, pos, tableItem, table);
     if (match == null) {
       fail(level, pos, player, "message.hexalia.natures_ritual.wrong_recipe");
       return true;
@@ -98,7 +91,10 @@ public final class NaturesRitual {
     table.startTransformation(
         match.recipe.getResultItem(level.registryAccess()).copy(),
         match.usedBraziers.size() * 40,
-        match.usedBraziers);
+        match.usedBraziers,
+        match.id,
+        match.recipe.requiresSoul(),
+        player);
     table.setGrownCropPositions(grownCrops);
     play(level, pos);
     puff(level, pos, ParticleTypes.POOF, 5, 10);
@@ -107,17 +103,34 @@ public final class NaturesRitual {
 
   private static @Nullable Match findMatch(
       Level level,
+      BlockPos tablePos,
       ItemStack tableItem,
-      List<RitualBrazierBlockEntity> available,
       RitualTableBlockEntity table) {
     NaturesRitualRecipeInput input = new NaturesRitualRecipeInput(table);
     List<RecipeHolder<NaturesRitualRecipe>> candidates =
         level.getRecipeManager().getRecipesFor(ModRecipeTypes.NATURES_RITUAL.get(), input, level);
+    List<RitualBrazierBlockEntity> available = new ArrayList<>();
+    for (int dx = -8; dx <= 8; dx++) {
+      for (int dz = -8; dz <= 8; dz++) {
+        if (dx * dx + dz * dz > 64) {
+          continue;
+        }
+        BlockPos brazierPos = tablePos.offset(dx, 0, dz);
+        if (level.getBlockEntity(brazierPos) instanceof RitualBrazierBlockEntity brazier
+            && !brazier.getStoredItem().isEmpty()) {
+          available.add(brazier);
+        }
+      }
+    }
+    available.sort(
+        Comparator.comparingDouble(
+                (RitualBrazierBlockEntity brazier) ->
+                    tablePos.distSqr(brazier.getBlockPos()))
+            .thenComparingLong(brazier -> brazier.getBlockPos().asLong()));
 
     for (RecipeHolder<NaturesRitualRecipe> holder : candidates) {
       NaturesRitualRecipe recipe = holder.value();
-      var ingredients = recipe.getIngredients();
-      if (ingredients.isEmpty() || !ingredients.get(0).test(tableItem)) {
+      if (!recipe.centerIngredient().test(tableItem)) {
         continue;
       }
 
@@ -125,7 +138,7 @@ public final class NaturesRitual {
       List<RitualBrazierBlockEntity> used = new ArrayList<>();
       boolean matches = true;
 
-      for (Ingredient needed : ingredients.subList(1, ingredients.size())) {
+      for (Ingredient needed : recipe.offerings()) {
         int matchIndex = -1;
         for (int index = 0; index < pool.size(); index++) {
           if (needed.test(pool.get(index).getStoredItem())) {
@@ -141,7 +154,7 @@ public final class NaturesRitual {
       }
 
       if (matches) {
-        return new Match(recipe, used);
+        return new Match(holder.id(), recipe, used);
       }
     }
     return null;
@@ -235,5 +248,5 @@ public final class NaturesRitual {
     level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.8F, 0.5F);
   }
 
-  private record Match(NaturesRitualRecipe recipe, List<RitualBrazierBlockEntity> usedBraziers) {}
+  private record Match(net.minecraft.resources.ResourceLocation id, NaturesRitualRecipe recipe, List<RitualBrazierBlockEntity> usedBraziers) {}
 }

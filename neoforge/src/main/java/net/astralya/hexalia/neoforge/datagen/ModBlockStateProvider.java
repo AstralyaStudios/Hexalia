@@ -2,7 +2,9 @@ package net.astralya.hexalia.neoforge.datagen;
 
 import net.astralya.hexalia.Hexalia;
 import net.astralya.hexalia.block.ModBlocks;
+import net.astralya.hexalia.block.custom.HerbJarBlock;
 import net.astralya.hexalia.block.custom.RabbageCropBlock;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -48,6 +50,26 @@ public final class ModBlockStateProvider extends BlockStateProvider {
     cropBlock(ModBlocks.RABBAGE_CROP.get(), RabbageCropBlock.AGE);
     blockWithItem(ModBlocks.SALT_BLOCK.get());
     blockWithItem(ModBlocks.CELESTIAL_CRYSTAL_BLOCK.get());
+    ModelFile herbJarModel = models().getExistingFile(modLoc("block/herb_jar"));
+    ModelFile herbJarTagModel = models().getExistingFile(modLoc("block/jar_tag"));
+    for (Direction direction : Direction.Plane.HORIZONTAL) {
+      int rotationY = ((int) direction.toYRot() + 180) % 360;
+      getMultipartBuilder(ModBlocks.HERB_JAR.get())
+          .part()
+          .modelFile(herbJarModel)
+          .rotationY(rotationY)
+          .addModel()
+          .condition(HerbJarBlock.FACING, direction)
+          .end()
+          .part()
+          .modelFile(herbJarTagModel)
+          .rotationY(rotationY)
+          .addModel()
+          .condition(HerbJarBlock.FACING, direction)
+          .condition(HerbJarBlock.HAS_CONTENTS, true)
+          .end();
+    }
+    simpleBlockItem(ModBlocks.HERB_JAR.get(), herbJarModel);
     woodSet("cottonwood", ModBlocks.COTTONWOOD_LOG.get(), ModBlocks.STRIPPED_COTTONWOOD_LOG.get(), ModBlocks.COTTONWOOD_WOOD.get(), ModBlocks.STRIPPED_COTTONWOOD_WOOD.get(), ModBlocks.COTTONWOOD_PLANKS.get(), ModBlocks.COTTONWOOD_STAIRS.get(), ModBlocks.COTTONWOOD_SLAB.get(), ModBlocks.COTTONWOOD_BUTTON.get(), ModBlocks.COTTONWOOD_PRESSURE_PLATE.get(), ModBlocks.COTTONWOOD_FENCE.get(), ModBlocks.COTTONWOOD_FENCE_GATE.get(), ModBlocks.COTTONWOOD_TRAPDOOR.get(), ModBlocks.COTTONWOOD_DOOR.get());
     woodSet("willow", ModBlocks.WILLOW_LOG.get(), ModBlocks.STRIPPED_WILLOW_LOG.get(), ModBlocks.WILLOW_WOOD.get(), ModBlocks.STRIPPED_WILLOW_WOOD.get(), ModBlocks.WILLOW_PLANKS.get(), ModBlocks.WILLOW_STAIRS.get(), ModBlocks.WILLOW_SLAB.get(), ModBlocks.WILLOW_BUTTON.get(), ModBlocks.WILLOW_PRESSURE_PLATE.get(), ModBlocks.WILLOW_FENCE.get(), ModBlocks.WILLOW_FENCE_GATE.get(), ModBlocks.WILLOW_TRAPDOOR.get(), ModBlocks.WILLOW_DOOR.get());
     leavesBlock(ModBlocks.COTTONWOOD_LEAVES.get());

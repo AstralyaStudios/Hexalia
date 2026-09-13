@@ -10,6 +10,7 @@ import net.astralya.hexalia.block.entity.custom.CenserBlockEntity;
 import net.astralya.hexalia.block.entity.custom.DreamcatcherBlockEntity;
 import net.astralya.hexalia.block.entity.custom.EggClusterBlockEntity;
 import net.astralya.hexalia.block.entity.custom.GrimshadeBlockEntity;
+import net.astralya.hexalia.block.entity.custom.HerbJarBlockEntity;
 import net.astralya.hexalia.block.entity.custom.LourdesBlockEntity;
 import net.astralya.hexalia.block.entity.custom.MortarAndPestleBlockEntity;
 import net.astralya.hexalia.block.entity.custom.NautiliteBlockEntity;
@@ -86,6 +87,13 @@ public final class ModBlockEntityTypes {
           "shelf",
           () ->
               BlockEntityType.Builder.of(ShelfBlockEntity::new, ModBlocks.SHELF.get()).build(null));
+
+  public static final RegistrySupplier<BlockEntityType<HerbJarBlockEntity>> HERB_JAR =
+      BLOCK_ENTITY_TYPES.register(
+          "herb_jar",
+          () ->
+              BlockEntityType.Builder.of(HerbJarBlockEntity::new, ModBlocks.HERB_JAR.get())
+                  .build(null));
 
   public static final RegistrySupplier<BlockEntityType<DreamcatcherBlockEntity>> DREAMCATCHER =
       BLOCK_ENTITY_TYPES.register(

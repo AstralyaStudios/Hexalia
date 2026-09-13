@@ -1,14 +1,9 @@
 {
   "values": [
     "minecraft:dark_oak_log",
-    "minecraft:stripped_dark_oak_log",
     "hexalia:cottonwood_log",
-    "hexalia:stripped_cottonwood_log",
     "hexalia:cottonwood_wood",
-    "hexalia:stripped_cottonwood_wood",
     "hexalia:willow_log",
-    "hexalia:stripped_willow_log",
-    "hexalia:willow_wood",
-    "hexalia:stripped_willow_wood"
+    "hexalia:willow_wood"
   ]
 }

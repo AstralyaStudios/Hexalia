@@ -13,9 +13,14 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -39,6 +44,15 @@ public class AthameItem extends Item {
 
   public AthameItem(Properties properties) {
     super(properties);
+  }
+
+  public static ItemAttributeModifiers createAttributes() {
+    return ItemAttributeModifiers.builder()
+        .add(
+            Attributes.ATTACK_DAMAGE,
+            new AttributeModifier(BASE_ATTACK_DAMAGE_ID, 4.0, Operation.ADD_VALUE),
+            EquipmentSlotGroup.MAINHAND)
+        .build();
   }
 
   @Override

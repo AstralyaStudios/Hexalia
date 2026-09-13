@@ -12,6 +12,7 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.astralya.hexalia.compat.HexaliaRecipeGuiLayout;
+import net.astralya.hexalia.compat.NaturesRitualViewerIndicator;
 import net.astralya.hexalia.compat.rei.HexaliaReiDisplay;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.ItemLike;
@@ -106,6 +107,30 @@ public final class HexaliaReiCategory implements DisplayCategory<HexaliaReiDispl
       List<Widget> widgets, HexaliaReiDisplay display, Rectangle bounds) {
     addInputs(widgets, display, bounds, HexaliaRecipeGuiLayout.NATURES_RITUAL);
     addOutput(widgets, display, bounds, HexaliaRecipeGuiLayout.NATURES_RITUAL);
+    if (display.showSoulIndicator()) {
+      widgets.add(
+          Widgets.createTexturedWidget(
+              NaturesRitualViewerIndicator.TEXTURE,
+              new Rectangle(
+                  bounds.x + NaturesRitualViewerIndicator.X,
+                  bounds.y + NaturesRitualViewerIndicator.Y,
+                  NaturesRitualViewerIndicator.WIDTH,
+                  NaturesRitualViewerIndicator.HEIGHT),
+              0,
+              0,
+              NaturesRitualViewerIndicator.WIDTH,
+              NaturesRitualViewerIndicator.HEIGHT,
+              NaturesRitualViewerIndicator.WIDTH,
+              NaturesRitualViewerIndicator.HEIGHT));
+      widgets.add(
+          Widgets.createTooltip(
+              new Rectangle(
+                  bounds.x + NaturesRitualViewerIndicator.X,
+                  bounds.y + NaturesRitualViewerIndicator.Y,
+                  NaturesRitualViewerIndicator.WIDTH,
+                  NaturesRitualViewerIndicator.HEIGHT),
+              List.of(Component.translatable(NaturesRitualViewerIndicator.TOOLTIP_KEY))));
+    }
   }
 
   private static void addSimpleInputOutput(

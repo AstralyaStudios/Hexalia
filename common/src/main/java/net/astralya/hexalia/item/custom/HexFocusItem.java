@@ -4,7 +4,10 @@ import java.util.Set;
 import java.util.UUID;
 import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.entity.custom.CacofeyEntity;
+import net.astralya.hexalia.gameplay.enchantedplant.EnchantedPlantActivations;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -31,6 +34,22 @@ public class HexFocusItem extends Item {
 
   public HexFocusItem(Properties properties) {
     super(properties);
+  }
+
+  @Override
+  public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    ItemStack focus = player.getItemInHand(hand);
+    if (hand != InteractionHand.MAIN_HAND || player.getCooldowns().isOnCooldown(this)) {
+      return InteractionResultHolder.pass(focus);
+    }
+    ItemStack catalyst = player.getOffhandItem();
+    if (level instanceof ServerLevel serverLevel
+        && EnchantedPlantActivations.tryActivate(serverLevel, player, catalyst)) {
+      if (!player.getAbilities().instabuild) catalyst.shrink(1);
+      player.getCooldowns().addCooldown(this, 20);
+      return InteractionResultHolder.success(focus);
+    }
+    return InteractionResultHolder.pass(focus);
   }
 
   @Override

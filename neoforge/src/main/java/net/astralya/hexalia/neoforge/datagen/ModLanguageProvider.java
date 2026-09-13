@@ -127,6 +127,7 @@ public final class ModLanguageProvider extends LanguageProvider {
     add(ModBlocks.SMALL_CAULDRON.get(), "Small Cauldron");
 
     add(ModBlocks.SHELF.get(), "Shelf");
+    add(ModBlocks.HERB_JAR.get(), "Herb Jar");
     add(ModBlocks.RUSTIC_OVEN.get(), "Rustic Oven");
 
     add(ModBlocks.RITUAL_TABLE.get(), "Ritual Table");
@@ -201,6 +202,7 @@ public final class ModLanguageProvider extends LanguageProvider {
   }
 
   private void addItemTranslations() {
+    add(ModItems.HEARTSEED.get(), "Heartseed");
     add(ModItems.SALT.get(), "Salt");
     add(ModItems.TREE_RESIN.get(), "Tree Resin");
 
@@ -252,6 +254,11 @@ public final class ModLanguageProvider extends LanguageProvider {
     add(ModItems.SEARING_SAC.get(), "Searing Sac");
 
     add(ModItems.SAGE_PENDANT.get(), "Sage Pendant");
+    add(ModItems.SEAFOAM_TALISMAN.get(), "Seafoam Talisman");
+    add(ModItems.MOONWARD_RING.get(), "Moonward Ring");
+    add(ModItems.WITCHHEART_CLUSTER.get(), "Witchheart Cluster");
+    add(ModItems.WYRD_FEATHER.get(), "Wyrd Feather");
+    add(ModItems.GREEN_OMEN.get(), "Green Omen");
 
     add(ModItems.SILK_IDOL.get(), "Silk Idol");
     add(ModItems.CLARITY_IDOL.get(), "Clarity Idol");
@@ -269,6 +276,7 @@ public final class ModLanguageProvider extends LanguageProvider {
     add(ModItems.LADLE.get(), "Ladle");
 
     add(ModItems.KELPWEAVE_BLADE.get(), "Kelpweave Blade");
+    add(ModItems.CINDERHEW.get(), "Cinderhew");
     add(ModItems.THORNBOW.get(), "Thornbow");
 
     add(ModItems.SILKWEAVE_HOOD.get(), "Silkweave Hood");
@@ -297,6 +305,7 @@ public final class ModLanguageProvider extends LanguageProvider {
     add(ModItems.BREW_OF_SPIKESKIN.get(), "Brew of Spikeskin");
     add(ModItems.BREW_OF_SIPHON.get(), "Brew of Siphon");
     add(ModItems.BREW_OF_DAYBLOOM.get(), "Brew of Daybloom");
+    add(ModItems.BREW_OF_GRAVEBLOOM.get(), "Brew of Gravebloom");
     add(ModItems.BREW_OF_ARACHNID_GRACE.get(), "Brew of Arachnid Grace");
     add(ModItems.BREW_OF_HOMESTEAD.get(), "Brew of Homestead");
     add(ModItems.BREW_OF_HOLLOW_SILENCE.get(), "Brew of Hollow Silence");
@@ -334,6 +343,7 @@ public final class ModLanguageProvider extends LanguageProvider {
 
     add("tooltip.hexalia.hex_focus_gui", "Right-click with a Hex Focus");
     add("tooltip.hexalia.mutation", "Right-click with a Mutavis");
+    add("tooltip.hexalia.requires_soul", "Requires a soul sacrifice.");
 
     add("tooltip.hexalia.homestead_brew", "Teleports to your spawn");
     add("tooltip.hexalia.siphon_brew", "Siphon (4:00)");
@@ -341,6 +351,7 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("tooltip.hexalia.bloodlust_brew", "Bloodlust (4:00)");
     add("tooltip.hexalia.spikeskin_brew", "Spikeskin (4:00)");
     add("tooltip.hexalia.daybloom", "Daybloom (4:00)");
+    add("tooltip.hexalia.gravebloom", "Gravebloom (1:30)");
     add("tooltip.hexalia.arachnid_grace", "Arachnid Grace (4:00)");
     add("tooltip.hexalia.hollow_silence", "Hollow Silence (4:00)");
 
@@ -348,6 +359,14 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("tooltip.hexalia.brambleguard_salve", "Brambleguard (1:30)");
 
     add("tooltip.hexalia.hold_shift", "Hold SHIFT for more information");
+
+    add("tooltiep.hexalia.accessory.earplugs", "Protects against a Mandrake's stunning cry.");
+    add("tooltip.hexalia.accessory.sage_pendant", "Increases experience gained.");
+    add("tooltip.hexalia.accessory.seafoam_talisman", "Helps you breathe while underwater.");
+    add("tooltip.hexalia.accessory.moonward_ring", "Protects against Darkness and Blindness.");
+    add("tooltip.hexalia.accessory.witchheart_cluster", "Grants two extra hearts.");
+    add("tooltip.hexalia.accessory.wyrd_feather", "10% chance to avoid incoming attacks.");
+    add("tooltip.hexalia.accessory.green_omen", "10% chance to double crop drops.");
 
     add("tooltip.hexalia.bogshade_boots", "Full Set Bonus:");
     add("tooltip.hexalia.bogged_armor_2", "Poison Immunity and Water Breathing");
@@ -365,6 +384,7 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("tooltip.hexalia.enchanted_plant", "Enchanted Plant");
 
     add("tooltip.hexalia.shelf", "Can store up to 6 brews or potions");
+    add("tooltip.hexalia.herb_jar.stores", "Stores: %s × %s");
 
     add("tooltip.hexalia.thornbow.no_arrows", "Consumes no arrows.");
     add("tooltip.hexalia.thornbow.bleeding", "Thorn shots inflict bleeding.");
@@ -381,6 +401,7 @@ public final class ModLanguageProvider extends LanguageProvider {
 
     add("tooltip.hexalia.rootshaper.mode_3x3_active", "3×3 Mining: Active");
     add("tooltip.hexalia.rootshaper.mode_3x3_hint", "Sneak while mining to enable 3×3 mode");
+    add("tooltip.hexalia.cinderhew.fire_damage", "+2 Fire Damage");
   }
 
   private void addMessageTranslations() {
@@ -393,6 +414,7 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("message.hexalia.natures_ritual.wrong_recipe", "The ritual ingredients resonate incorrectly.");
     add("message.hexalia.ritual.stopped_ritual", "The ritual falters as an item is removed.");
     add("message.hexalia.natures_ritual.stopped_ritual", "The ritual falters as an item is removed.");
+    add("message.hexalia.natures_ritual.awaiting_soul", "The ritual awaits a soul sacrifice.");
 
     add("message.hexalia.rainfall_idol", "The skies darken as rain begins to fall...");
     add("message.hexalia.clarity_idol", "The clouds part, revealing a clear sky...");
@@ -405,6 +427,10 @@ public final class ModLanguageProvider extends LanguageProvider {
     add(
             "message.hexalia.astrylis.inactive",
             "A Celestial Crystal is required to activate the plant.");
+
+    add(
+            "message.hexalia.grimshade.peaceful",
+            "Grimshade cannot be activated in Peaceful difficulty.");
 
     add(
             "message.hexalia.ritual_brazier.invalid_item",
@@ -699,6 +725,11 @@ public final class ModLanguageProvider extends LanguageProvider {
     add(
             ModMobEffects.DAYBLOOM.get().getDescriptionId() + ".description",
             "Grants regeneration and increased speed during daylight, but darkness harms the user.");
+
+    add(ModMobEffects.GRAVEBLOOM.get(), "Gravebloom");
+    add(
+            ModMobEffects.GRAVEBLOOM.get().getDescriptionId() + ".description",
+            "Hostile mobs slain by the user briefly bloom the surrounding terrain with moss and magical plants.");
 
     add(ModMobEffects.ARACHNID_GRACE.get(), "Arachnid Grace");
     add(

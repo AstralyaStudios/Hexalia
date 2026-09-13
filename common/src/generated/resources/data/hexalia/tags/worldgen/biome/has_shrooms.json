@@ -1,6 +1,10 @@
 {
   "values": [
     "minecraft:old_growth_pine_taiga",
-    "minecraft:mushroom_fields"
+    "minecraft:mushroom_fields",
+    {
+      "id": "#c:is_mushroom",
+      "required": false
+    }
   ]
 }

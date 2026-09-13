@@ -3,12 +3,16 @@
   "package": "net.astralya.hexalia.fabric.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BlockMixin",
+    "CobwebMixin",
     "CropBlockMixin",
     "ExperienceOrbMixin",
     "LivingEntityMixin",
     "MobMixin",
+    "ServerLevelMixin",
     "StemBlockMixin",
-    "SugarCaneBlockMixin"
+    "SugarCaneBlockMixin",
+    "WoodTypeInvoker"
   ],
   "injectors": {
     "defaultRequire": 1

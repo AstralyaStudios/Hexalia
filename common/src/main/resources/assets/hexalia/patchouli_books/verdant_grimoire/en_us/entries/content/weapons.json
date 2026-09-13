@@ -17,6 +17,13 @@
     },
     {
       "type": "spotlight",
+      "item": "hexalia:cinderhew",
+      "title": "Cinderhew",
+      "anchor": "cinderhew",
+      "text": "A ritual-forged axe whose blows deal extra fire damage and briefly kindle their target. Use it to throw the axe; after striking or falling, it turns homeward and returns to your inventory. Crouch while using it on a log to char the wood into charcoal."
+    },
+    {
+      "type": "spotlight",
       "item": "hexalia:thornbow",
       "title": "Thornbow",
       "text": "Fires thorn arrows using its own durability instead of ammunition, inflicting Bleeding on targets."

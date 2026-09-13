@@ -1,9 +1,9 @@
 {
   "type": "hexalia:natures_ritual",
-  "ingredients": [
-    {
-      "item": "minecraft:blue_orchid"
-    },
+  "center": {
+    "item": "minecraft:blue_orchid"
+  },
+  "offerings": [
     {
       "item": "hexalia:air_node"
     },

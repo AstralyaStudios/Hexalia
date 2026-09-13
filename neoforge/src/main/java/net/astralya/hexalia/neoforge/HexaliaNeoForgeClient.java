@@ -1,16 +1,20 @@
 package net.astralya.hexalia.neoforge;
 
+import dev.architectury.platform.Platform;
+import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import net.astralya.hexalia.Hexalia;
 import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.block.entity.ModBlockEntityTypes;
 import net.astralya.hexalia.client.model.PestleModel;
 import net.astralya.hexalia.client.renderer.blockentity.CenserBlockEntityRenderer;
+import net.astralya.hexalia.client.renderer.blockentity.HerbJarBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.MortarAndPestleBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.RitualBrazierBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.RitualTableBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.ShelfBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.SmallCauldronBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.entity.CacofeyRenderer;
+import net.astralya.hexalia.client.renderer.entity.CinderhewProjectileRenderer;
 import net.astralya.hexalia.client.renderer.entity.ModBoatRenderer;
 import net.astralya.hexalia.client.renderer.entity.SilkMothRenderer;
 import net.astralya.hexalia.client.renderer.entity.ThornArrowRenderer;
@@ -27,6 +31,7 @@ import net.astralya.hexalia.particle.custom.LeavesParticle;
 import net.astralya.hexalia.particle.custom.SparkleParticle;
 import net.astralya.hexalia.particle.custom.SporeParticle;
 import net.astralya.hexalia.util.ModItemProperties;
+import net.astralya.hexalia.util.MagicResistanceTooltip;
 import net.astralya.hexalia.util.ModWoodTypes;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -38,11 +43,14 @@ import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 public final class HexaliaNeoForgeClient {
@@ -57,6 +65,24 @@ public final class HexaliaNeoForgeClient {
     modEventBus.addListener(HexaliaNeoForgeClient::registerBlockColors);
     modEventBus.addListener(HexaliaNeoForgeClient::registerItemColors);
     modEventBus.addListener(HexaliaNeoForgeClient::setupClient);
+    NeoForge.EVENT_BUS.addListener(HexaliaNeoForgeClient::addFullSetTooltip);
+  }
+
+  private static void addFullSetTooltip(ItemTooltipEvent event) {
+    if (event.getEntity() != null) {
+      MagicResistanceTooltip.addFullSetLineIfWorn(
+          event.getEntity(), event.getItemStack(), event.getToolTip());
+    }
+  }
+
+  private static void registerAccessoryRenderers() {
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.EARPLUGS.get());
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.SAGE_PENDANT.get());
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.SEAFOAM_TALISMAN.get());
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.MOONWARD_RING.get());
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.WITCHHEART_CLUSTER.get());
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.WYRD_FEATHER.get());
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.GREEN_OMEN.get());
   }
 
   private static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -70,6 +96,8 @@ public final class HexaliaNeoForgeClient {
         ModBlockEntityTypes.MORTAR_AND_PESTLE.get(), MortarAndPestleBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntityTypes.CENSER.get(), CenserBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntityTypes.SHELF.get(), ShelfBlockEntityRenderer::new);
+    event.registerBlockEntityRenderer(
+        ModBlockEntityTypes.HERB_JAR.get(), HerbJarBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntityTypes.MOD_SIGN.get(), SignRenderer::new);
     event.registerBlockEntityRenderer(
         ModBlockEntityTypes.MOD_HANGING_SIGN.get(), HangingSignRenderer::new);
@@ -85,6 +113,7 @@ public final class HexaliaNeoForgeClient {
     event.registerEntityRenderer(ModEntities.FROST_SAC.get(), ThrownItemRenderer::new);
     event.registerEntityRenderer(ModEntities.SEARING_SAC.get(), ThrownItemRenderer::new);
     event.registerEntityRenderer(ModEntities.THORN_ARROW.get(), ThornArrowRenderer::new);
+    event.registerEntityRenderer(ModEntities.CINDERHEW.get(), CinderhewProjectileRenderer::new);
   }
 
   private static void registerParticles(RegisterParticleProvidersEvent event) {
@@ -132,8 +161,13 @@ public final class HexaliaNeoForgeClient {
   private static void setupClient(FMLClientSetupEvent event) {
     event.enqueueWork(
         () -> {
+          WoodType.register(ModWoodTypes.COTTONWOOD);
+          WoodType.register(ModWoodTypes.WILLOW);
           Sheets.addWoodType(ModWoodTypes.COTTONWOOD);
           Sheets.addWoodType(ModWoodTypes.WILLOW);
+          if (Platform.isModLoaded("accessories")) {
+            registerAccessoryRenderers();
+          }
           registerCutoutBlocks();
           ModItemProperties.register();
         });
@@ -146,6 +180,7 @@ public final class HexaliaNeoForgeClient {
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.RITUAL_BRAZIER.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.SMALL_CAULDRON.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.CENSER.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.HERB_JAR.get(), RenderType.translucent());
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.DREAMCATCHER.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.CANDLE_SKULL.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.WITHER_CANDLE_SKULL.get(), cutout);

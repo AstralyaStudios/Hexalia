@@ -1,9 +1,9 @@
 {
   "type": "hexalia:natures_ritual",
-  "ingredients": [
-    {
-      "item": "minecraft:poppy"
-    },
+  "center": {
+    "item": "minecraft:poppy"
+  },
+  "offerings": [
     {
       "item": "hexalia:dream_paste"
     },
@@ -15,6 +15,12 @@
     },
     {
       "item": "hexalia:tree_resin"
+    },
+    {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    {
+      "item": "minecraft:slime_ball"
     }
   ],
   "output": "hexalia:morphora"

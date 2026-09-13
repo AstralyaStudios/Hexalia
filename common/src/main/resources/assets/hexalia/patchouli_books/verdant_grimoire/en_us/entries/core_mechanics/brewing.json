@@ -13,13 +13,13 @@
       "type": "text",
       "title": "Brewing Process",
       "anchor": "process",
-      "text": "Fill the cauldron with water first, then light or heat it from below. Add the ingredients after water is present, then use a $(l:hexalia:content/tools#ladle)Ladle$(/l) to stir the heated mixture and begin cooking."
+      "text": "Fill the cauldron with water from a suitable container, light the cauldron, and add the recipe ingredients one at a time. Use a $(l:hexalia:content/tools#ladle)Ladle$(/l) in your main hand to stir and begin cooking."
     },
     {
       "type": "text",
       "title": "On Cooking",
       "anchor": "cooking",
-      "text": "As the mixture cooks, it gradually transforms into its final result. The cauldron must remain heated, and space must be available for the output to form."
+      "text": "Keep the cauldron lit while it cooks. When the mixture is ready, use a Rustic Bottle to draw out each serving. An empty hand removes loose ingredients before brewing begins."
     },
     {
       "type": "text",
@@ -57,6 +57,11 @@
     {
       "type": "hexalia:recipe_page",
       "recipe_id": "hexalia:brew_of_daybloom_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_gravebloom_from_small_cauldron",
       "layout": "small_cauldron"
     },
     {

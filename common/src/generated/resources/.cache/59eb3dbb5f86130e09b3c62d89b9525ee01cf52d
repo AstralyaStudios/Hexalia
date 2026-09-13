@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-09T11:24:43.7820496	Loot Tables
+// 1.21.1	2026-09-10T01:32:00.4795849	Loot Tables
 8d3a58f84a73dfbdfc262ba6b55936886db0b7b6 data/hexalia/loot_table/blocks/aegiflora.json
 9a3df1e2ec6884b6a1d7d652b794a71a76999999 data/hexalia/loot_table/blocks/astrylis.json
 dad5439821b7d3507e19e2713ebd7503704e41ef data/hexalia/loot_table/blocks/begonia.json
@@ -30,6 +30,7 @@ f3d3fca576ecd83de493f1be17fdf082f5a00da9 data/hexalia/loot_table/blocks/dreamcat
 942620898ecf3aff7d85f6c290ba5bd3225c938c data/hexalia/loot_table/blocks/egg_cluster.json
 9709db5fa6bb485bce03b928f3719ada92a1a2e7 data/hexalia/loot_table/blocks/ghost_fern.json
 92c9f4cc60f35696108e3c00c10ef8abbdd61d25 data/hexalia/loot_table/blocks/grimshade.json
+bca28b0d0fec88fd5c16dc09225b5a6eb3abbdbb data/hexalia/loot_table/blocks/herb_jar.json
 8d7ce6b1777680d12277f12c61a5a03fd8fe2a9e data/hexalia/loot_table/blocks/infused_dirt.json
 c19b540e7b19c169a86fbea5efc0b187b94390b6 data/hexalia/loot_table/blocks/infused_farmland.json
 4bb0d3b18121d5d97a625245beb786917a3c5335 data/hexalia/loot_table/blocks/lavender.json

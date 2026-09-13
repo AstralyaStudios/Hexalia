@@ -1,9 +1,9 @@
 {
   "type": "hexalia:natures_ritual",
-  "ingredients": [
-    {
-      "item": "minecraft:kelp"
-    },
+  "center": {
+    "item": "minecraft:kelp"
+  },
+  "offerings": [
     {
       "item": "hexalia:siren_paste"
     },

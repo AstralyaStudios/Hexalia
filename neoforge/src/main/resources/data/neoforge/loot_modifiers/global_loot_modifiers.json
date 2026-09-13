@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "entries": [
+    "hexalia:accessories/simple_dungeon",
+    "hexalia:accessories/abandoned_mineshaft",
+    "hexalia:accessories/stronghold_corridor",
+    "hexalia:accessories/stronghold_crossing",
+    "hexalia:accessories/stronghold_library",
+    "hexalia:accessories/ancient_city",
+    "hexalia:accessories/ruined_portal",
+    "hexalia:accessories/woodland_mansion",
+    "hexalia:accessories/jungle_temple",
+    "hexalia:accessories/desert_pyramid"
+  ]
+}

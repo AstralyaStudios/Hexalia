@@ -6,12 +6,14 @@ import net.astralya.hexalia.block.entity.ModBlockEntityTypes;
 import net.astralya.hexalia.client.model.PestleModel;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.client.renderer.blockentity.CenserBlockEntityRenderer;
+import net.astralya.hexalia.client.renderer.blockentity.HerbJarBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.MortarAndPestleBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.RitualBrazierBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.RitualTableBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.ShelfBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.SmallCauldronBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.entity.CacofeyRenderer;
+import net.astralya.hexalia.client.renderer.entity.CinderhewProjectileRenderer;
 import net.astralya.hexalia.client.renderer.entity.ModBoatRenderer;
 import net.astralya.hexalia.client.renderer.entity.SilkMothRenderer;
 import net.astralya.hexalia.client.renderer.entity.ThornArrowRenderer;
@@ -27,14 +29,20 @@ import net.astralya.hexalia.particle.custom.LeavesParticle;
 import net.astralya.hexalia.particle.custom.SparkleParticle;
 import net.astralya.hexalia.particle.custom.SporeParticle;
 import net.astralya.hexalia.util.ModItemProperties;
+import net.astralya.hexalia.util.MagicResistanceTooltip;
 import net.astralya.hexalia.util.ModWoodTypes;
-import dev.architectury.registry.client.particle.ParticleProviderRegistry;
+import net.astralya.hexalia.fabric.mixin.WoodTypeInvoker;
+import dev.architectury.platform.Platform;
+import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.RenderType;
@@ -50,6 +58,9 @@ public final class HexaliaFabricClient implements ClientModInitializer {
   @Override
   public void onInitializeClient() {
     Hexalia.initClient();
+    if (Platform.isModLoaded("accessories")) {
+      registerAccessoryRenderers();
+    }
     registerLeafColors();
     registerCutoutBlocks();
     registerWoodTypes();
@@ -63,6 +74,8 @@ public final class HexaliaFabricClient implements ClientModInitializer {
         ModBlockEntityTypes.MORTAR_AND_PESTLE.get(), MortarAndPestleBlockEntityRenderer::new);
     BlockEntityRenderers.register(ModBlockEntityTypes.CENSER.get(), CenserBlockEntityRenderer::new);
     BlockEntityRenderers.register(ModBlockEntityTypes.SHELF.get(), ShelfBlockEntityRenderer::new);
+    BlockEntityRenderers.register(
+        ModBlockEntityTypes.HERB_JAR.get(), HerbJarBlockEntityRenderer::new);
     BlockEntityRenderers.register(ModBlockEntityTypes.MOD_SIGN.get(), SignRenderer::new);
     BlockEntityRenderers.register(
         ModBlockEntityTypes.MOD_HANGING_SIGN.get(), HangingSignRenderer::new);
@@ -78,20 +91,46 @@ public final class HexaliaFabricClient implements ClientModInitializer {
     EntityRendererRegistry.register(ModEntities.FROST_SAC.get(), ThrownItemRenderer::new);
     EntityRendererRegistry.register(ModEntities.SEARING_SAC.get(), ThrownItemRenderer::new);
     EntityRendererRegistry.register(ModEntities.THORN_ARROW.get(), ThornArrowRenderer::new);
+    EntityRendererRegistry.register(ModEntities.CINDERHEW.get(), CinderhewProjectileRenderer::new);
     MenuScreens.register(ModMenuTypes.NESTING_BLOCK.get(), NestingBlockScreen::new);
-    ParticleProviderRegistry.register(ModParticleTypes.SPORE, SporeParticle.Factory::new);
-    ParticleProviderRegistry.register(ModParticleTypes.SPARKLE, SparkleParticle.Factory::new);
-    ParticleProviderRegistry.register(ModParticleTypes.LEAVES, LeavesParticle.Factory::new);
-    ParticleProviderRegistry.register(
-        ModParticleTypes.INFUSED_BUBBLES, InfusedBubbleParticle.Factory::new);
-    ParticleProviderRegistry.register(ModParticleTypes.CACOFEY_DUST, CacofeyDustParticle.Factory::new);
-    ParticleProviderRegistry.register(
-        ModParticleTypes.CACOFEY_DUST_HELD, CacofeyDustHeldParticle.Factory::new);
+    ParticleFactoryRegistry particleFactories = ParticleFactoryRegistry.getInstance();
+    particleFactories.register(ModParticleTypes.SPORE.get(), SporeParticle.Factory::new);
+    particleFactories.register(ModParticleTypes.SPARKLE.get(), SparkleParticle.Factory::new);
+    particleFactories.register(ModParticleTypes.LEAVES.get(), LeavesParticle.Factory::new);
+    particleFactories.register(
+        ModParticleTypes.INFUSED_BUBBLES.get(), InfusedBubbleParticle.Factory::new);
+    particleFactories.register(
+        ModParticleTypes.CACOFEY_DUST.get(), CacofeyDustParticle.Factory::new);
+    particleFactories.register(
+        ModParticleTypes.CACOFEY_DUST_HELD.get(), CacofeyDustHeldParticle.Factory::new);
     ModItemProperties.register();
+    registerTooltips();
     registerBoatLayers();
   }
 
+  private static void registerTooltips() {
+    ItemTooltipCallback.EVENT.register(
+        (stack, context, type, tooltip) -> {
+          if (Minecraft.getInstance().player != null) {
+            MagicResistanceTooltip.addFullSetLineIfWorn(
+                Minecraft.getInstance().player, stack, tooltip);
+          }
+        });
+  }
+
+  private static void registerAccessoryRenderers() {
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.EARPLUGS.get());
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.SAGE_PENDANT.get());
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.SEAFOAM_TALISMAN.get());
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.MOONWARD_RING.get());
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.WITCHHEART_CLUSTER.get());
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.WYRD_FEATHER.get());
+    AccessoriesRendererRegistry.registerNoRenderer(ModItems.GREEN_OMEN.get());
+  }
+
   private static void registerWoodTypes() {
+    WoodTypeInvoker.hexalia$register(ModWoodTypes.COTTONWOOD);
+    WoodTypeInvoker.hexalia$register(ModWoodTypes.WILLOW);
     Sheets.SIGN_MATERIALS.put(
         ModWoodTypes.COTTONWOOD, Sheets.getSignMaterial(ModWoodTypes.COTTONWOOD));
     Sheets.SIGN_MATERIALS.put(ModWoodTypes.WILLOW, Sheets.getSignMaterial(ModWoodTypes.WILLOW));
@@ -121,6 +160,7 @@ public final class HexaliaFabricClient implements ClientModInitializer {
     BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.RITUAL_BRAZIER.get(), cutout);
     BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SMALL_CAULDRON.get(), cutout);
     BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CENSER.get(), cutout);
+    BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.HERB_JAR.get(), RenderType.translucent());
     BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DREAMCATCHER.get(), cutout);
     BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CANDLE_SKULL.get(), cutout);
     BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WITHER_CANDLE_SKULL.get(), cutout);

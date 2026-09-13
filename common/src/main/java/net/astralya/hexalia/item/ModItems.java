@@ -2,6 +2,7 @@ package net.astralya.hexalia.item;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
+import java.util.List;
 import net.astralya.hexalia.Hexalia;
 import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.effect.ModMobEffects;
@@ -14,9 +15,12 @@ import net.astralya.hexalia.item.custom.AthameItem;
 import net.astralya.hexalia.item.custom.BottleMothItem;
 import net.astralya.hexalia.item.custom.BrewItem;
 import net.astralya.hexalia.item.custom.BriarSickleItem;
+import net.astralya.hexalia.item.custom.CinderhewItem;
 import net.astralya.hexalia.item.custom.HexFocusItem;
+import net.astralya.hexalia.item.custom.HeartseedItem;
 import net.astralya.hexalia.item.custom.HomesteadBrewItem;
 import net.astralya.hexalia.item.custom.KelpweaveBladeItem;
+import net.astralya.hexalia.item.custom.MandrakeItem;
 import net.astralya.hexalia.item.custom.ModBoatItem;
 import net.astralya.hexalia.item.custom.MutavisItem;
 import net.astralya.hexalia.item.custom.PurifyingSacItem;
@@ -37,12 +41,14 @@ import net.astralya.hexalia.item.custom.armor.GhostveilItem;
 import net.astralya.hexalia.item.custom.armor.HexaliaGeoArmorItem;
 import net.astralya.hexalia.util.ModArmorMaterials;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
@@ -52,6 +58,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SignItem;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.level.block.Block;
 
 public final class ModItems {
@@ -83,6 +90,10 @@ public final class ModItems {
   public static final RegistrySupplier<Item> ANCIENT_SEED =
       ITEMS.register("ancient_seed", () -> new Item(defaultProperties()));
 
+  public static final RegistrySupplier<Item> HEARTSEED =
+      ITEMS.register(
+          "heartseed", () -> new HeartseedItem(defaultProperties().rarity(Rarity.RARE)));
+
   public static final RegistrySupplier<Item> SIREN_PASTE =
       ITEMS.register("siren_paste", () -> new Item(defaultProperties()));
 
@@ -111,7 +122,11 @@ public final class ModItems {
       ITEMS.register("ladle", () -> new Item(defaultProperties().stacksTo(1)));
 
   public static final RegistrySupplier<Item> ATHAME =
-      ITEMS.register("athame", () -> new AthameItem(defaultProperties().durability(64)));
+      ITEMS.register(
+          "athame",
+          () ->
+              new AthameItem(
+                  defaultProperties().durability(64).attributes(AthameItem.createAttributes())));
 
   public static final RegistrySupplier<Item> ROOTSHAPER =
       ITEMS.register(
@@ -134,6 +149,16 @@ public final class ModItems {
                       .rarity(Rarity.RARE)
                       .attributes(SwordItem.createAttributes(ModToolTiers.ANCIENT, 3, -2.0F))));
 
+  public static final RegistrySupplier<Item> CINDERHEW =
+      ITEMS.register(
+          "cinderhew",
+          () ->
+              new CinderhewItem(
+                  ModToolTiers.ANCIENT,
+                  defaultProperties()
+                      .rarity(Rarity.RARE)
+                      .attributes(AxeItem.createAttributes(ModToolTiers.ANCIENT, 3.0F, -3.0F))));
+
   public static final RegistrySupplier<Item> BRIAR_SICKLE =
       ITEMS.register(
           "briar_sickle",
@@ -148,7 +173,31 @@ public final class ModItems {
           "spiritroot_tether", () -> new SpiritrootTetherItem(defaultProperties().durability(32)));
 
   public static final RegistrySupplier<Item> SAGE_PENDANT =
-      ITEMS.register("sage_pendant", () -> new Item(defaultProperties().durability(32)));
+      ITEMS.register(
+          "sage_pendant",
+          () -> new Item(accessoryProperties("sage_pendant").durability(32)));
+
+  public static final RegistrySupplier<Item> SEAFOAM_TALISMAN =
+      ITEMS.register(
+          "seafoam_talisman",
+          () -> new Item(accessoryProperties("seafoam_talisman").stacksTo(1)));
+
+  public static final RegistrySupplier<Item> MOONWARD_RING =
+      ITEMS.register(
+          "moonward_ring", () -> new Item(accessoryProperties("moonward_ring").stacksTo(1)));
+
+  public static final RegistrySupplier<Item> WITCHHEART_CLUSTER =
+      ITEMS.register(
+          "witchheart_cluster",
+          () -> new Item(accessoryProperties("witchheart_cluster").stacksTo(1)));
+
+  public static final RegistrySupplier<Item> WYRD_FEATHER =
+      ITEMS.register(
+          "wyrd_feather", () -> new Item(accessoryProperties("wyrd_feather").stacksTo(1)));
+
+  public static final RegistrySupplier<Item> GREEN_OMEN =
+      ITEMS.register(
+          "green_omen", () -> new Item(accessoryProperties("green_omen").stacksTo(1)));
 
   public static final RegistrySupplier<Item> BOTTLED_MOTH =
       ITEMS.register("bottled_moth", () -> new BottleMothItem(defaultProperties().stacksTo(1)));
@@ -166,7 +215,10 @@ public final class ModItems {
       ITEMS.register(
           "earplugs",
           () ->
-              new EarplugsItem(ArmorMaterials.LEATHER, ArmorItem.Type.HELMET, defaultProperties()));
+              new EarplugsItem(
+                  ArmorMaterials.LEATHER,
+                  ArmorItem.Type.HELMET,
+                  accessoryProperties("earplugs")));
 
   public static final RegistrySupplier<Item> BOGSHADE_BOOTS =
       ITEMS.register(
@@ -391,6 +443,17 @@ public final class ModItems {
                   0,
                   blueTooltip("tooltip.hexalia.daybloom")));
 
+  public static final RegistrySupplier<Item> BREW_OF_GRAVEBLOOM =
+      ITEMS.register(
+          "brew_of_gravebloom",
+          () ->
+              new BrewItem(
+                  defaultProperties().stacksTo(4),
+                  () -> ModMobEffects.GRAVEBLOOM,
+                  1800,
+                  0,
+                  blueTooltip("tooltip.hexalia.gravebloom")));
+
   public static final RegistrySupplier<Item> BREW_OF_ARACHNID_GRACE =
       ITEMS.register(
           "brew_of_arachnid_grace",
@@ -464,7 +527,7 @@ public final class ModItems {
           () -> new ItemNameBlockItem(ModBlocks.SUNFIRE_TOMATO_CROP.get(), defaultProperties()));
 
   public static final RegistrySupplier<Item> MANDRAKE =
-      ITEMS.register("mandrake", () -> new Item(defaultProperties()));
+      ITEMS.register("mandrake", () -> new MandrakeItem(defaultProperties()));
 
   public static final RegistrySupplier<Item> MANDRAKE_SEEDS =
       ITEMS.register(
@@ -596,6 +659,9 @@ public final class ModItems {
 
   public static final RegistrySupplier<Item> SHELF =
       ITEMS.register("shelf", () -> new BlockItem(ModBlocks.SHELF.get(), defaultProperties()));
+
+  public static final RegistrySupplier<Item> HERB_JAR =
+      ITEMS.register("herb_jar", () -> new BlockItem(ModBlocks.HERB_JAR.get(), defaultProperties()));
 
   public static final RegistrySupplier<Item> DREAMCATCHER =
       ITEMS.register(
@@ -877,6 +943,14 @@ public final class ModItems {
 
   private static Item.Properties defaultProperties() {
     return new Item.Properties();
+  }
+
+  private static Item.Properties accessoryProperties(String name) {
+    Component tooltip =
+        Component.translatable("tooltip.hexalia.accessory." + name)
+            .withStyle(ChatFormatting.GRAY)
+            .withStyle(style -> style.withItalic(false));
+    return defaultProperties().component(DataComponents.LORE, new ItemLore(List.of(tooltip)));
   }
 
   private static Item.Properties armorMagicResistProperties(

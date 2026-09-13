@@ -64,6 +64,20 @@ subprojects {
                 includeGroup 'dev.emi'
             }
         }
+        maven {
+            name = 'WispForest'
+            url = 'https://maven.wispforest.io/releases/'
+            content {
+                includeGroupByRegex 'io\\.wispforest(\\..*)?'
+            }
+        }
+        maven {
+            name = 'Su5ed'
+            url = 'https://maven.su5ed.dev/releases/'
+            content {
+                includeGroup 'org.sinytra.forgified-fabric-api'
+            }
+        }
     }
 
     loom {

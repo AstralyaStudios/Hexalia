@@ -5,6 +5,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.astralya.hexalia.Hexalia;
 import net.astralya.hexalia.component.item.MothData;
+import net.astralya.hexalia.component.item.HerbJarData;
 import net.astralya.hexalia.component.item.SpiritrootTetherData;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -31,6 +32,15 @@ public final class ModComponents {
               DataComponentType.<MothData>builder()
                   .persistent(MothData.CODEC)
                   .networkSynchronized(MothData.STREAM_CODEC)
+                  .build());
+
+  public static final RegistrySupplier<DataComponentType<HerbJarData>> HERB_JAR =
+      COMPONENT_TYPES.register(
+          "herb_jar",
+          () ->
+              DataComponentType.<HerbJarData>builder()
+                  .persistent(HerbJarData.CODEC)
+                  .networkSynchronized(HerbJarData.STREAM_CODEC)
                   .build());
 
   public static final RegistrySupplier<DataComponentType<Float>> MAGIC_RESIST_PCT =

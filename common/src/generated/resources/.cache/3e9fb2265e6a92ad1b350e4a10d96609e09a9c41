@@ -1,10 +1,12 @@
-// 1.21.1	2026-08-09T11:24:43.8242668	Tags for minecraft:block mod id hexalia
+// 1.21.1	2026-09-05T11:20:37.4841519	Tags for minecraft:block mod id hexalia
 07b1dceed1fd4007536f686e89d3fa05173c8d5e data/c/tags/block/crops.json
 14835ee05f2eb66cecd359de9208e4332b57c085 data/c/tags/block/salt_blocks.json
 319da9e7317292fcbe7a40fa245caf6b1a4051b3 data/hexalia/tags/block/attracts_moth.json
 322433cbed0be4e8da074b600286aad1f9b7aff5 data/hexalia/tags/block/bogshade_no_slow.json
 0a9e24febf41067c0d25e9952dd0c726cba969b9 data/hexalia/tags/block/cottonwood_logs.json
-87fa80d32a3b760d919a0cb9e299909e776aac51 data/hexalia/tags/block/resin_logs.json
+18f6c3e25fbf105a77ac021dc6e7cc7ca3985816 data/hexalia/tags/block/gravebloom_plants.json
+73ced0e0ca04c9d4361a93b3580cfc489cdbf4de data/hexalia/tags/block/herbs.json
+be26bad827cebdf5ceb879a73ab396a6e05b02a0 data/hexalia/tags/block/resin_logs.json
 f0c306b3e190e9e0996b25c18bbfb5dc20d87ca5 data/hexalia/tags/block/spiritroot_bound_blocks.json
 b2ac93b5e91295fc810ffbae3327970632ffe14a data/hexalia/tags/block/willow_logs.json
 4617cc58d6dd0ffcebd6b4b9f98537ce7f64d7c7 data/minecraft/tags/block/all_hanging_signs.json

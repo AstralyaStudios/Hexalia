@@ -8,12 +8,15 @@ import net.astralya.hexalia.effect.custom.BleedingEffect;
 import net.astralya.hexalia.effect.custom.BloodlustEffect;
 import net.astralya.hexalia.effect.custom.BrambleguardEffect;
 import net.astralya.hexalia.effect.custom.DaybloomEffect;
+import net.astralya.hexalia.effect.custom.GravebloomEffect;
 import net.astralya.hexalia.effect.custom.HollowSilenceEffect;
 import net.astralya.hexalia.effect.custom.OverfedEffect;
 import net.astralya.hexalia.effect.custom.SiphonEffect;
 import net.astralya.hexalia.effect.custom.SlimewalkerEffect;
 import net.astralya.hexalia.effect.custom.SpikeskinEffect;
 import net.astralya.hexalia.effect.custom.StunnedEffect;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -40,6 +43,10 @@ public final class ModMobEffects {
       MOB_EFFECTS.register(
           "daybloom", () -> new DaybloomEffect(MobEffectCategory.NEUTRAL, 0xFFD95E));
 
+  public static final RegistrySupplier<MobEffect> GRAVEBLOOM =
+      MOB_EFFECTS.register(
+          "gravebloom", () -> new GravebloomEffect(MobEffectCategory.BENEFICIAL, 0x527A48));
+
   public static final RegistrySupplier<MobEffect> BLOODLUST =
       MOB_EFFECTS.register(
           "bloodlust",
@@ -48,7 +55,7 @@ public final class ModMobEffects {
                   .addAttributeModifier(
                       Attributes.ATTACK_DAMAGE,
                       id("bloodlust"),
-                      0.0F,
+                      3.0F,
                       AttributeModifier.Operation.ADD_VALUE));
 
   public static final RegistrySupplier<MobEffect> SPIKESKIN =
@@ -59,7 +66,7 @@ public final class ModMobEffects {
                   .addAttributeModifier(
                       Attributes.ARMOR,
                       id("spikeskin_armor"),
-                      0.0F,
+                      3.0F,
                       AttributeModifier.Operation.ADD_VALUE)
                   .addAttributeModifier(
                       Attributes.MOVEMENT_SPEED,
@@ -106,6 +113,13 @@ public final class ModMobEffects {
 
   private static ResourceLocation id(String path) {
     return ResourceLocation.fromNamespaceAndPath(Hexalia.MOD_ID, path);
+  }
+
+  public static Holder<MobEffect> holder(RegistrySupplier<MobEffect> effect) {
+    return BuiltInRegistries.MOB_EFFECT
+        .getResourceKey(effect.get())
+        .map(BuiltInRegistries.MOB_EFFECT::getHolderOrThrow)
+        .orElseThrow(() -> new IllegalStateException("Unregistered mob effect: " + effect.get()));
   }
 
   public static void init() {

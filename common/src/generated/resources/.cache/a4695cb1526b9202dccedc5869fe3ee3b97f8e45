@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-09T11:24:43.8328272	Block States: hexalia
+// 1.21.1	2026-09-10T08:34:31.5820111	Block States: hexalia
 368ad60b7ce2d171bd66227ed565b49645535d8c assets/hexalia/blockstates/aegiflora.json
 1008a016106b7c4af5a834ac32ca56468e0a6fa0 assets/hexalia/blockstates/astrylis.json
 2c754b7a35d1f42c348b41826d67f74cc29f6ff4 assets/hexalia/blockstates/begonia.json
@@ -22,6 +22,7 @@ f6c215bcdc3dcc7ccc00c8d807cd8aa39b46c85e assets/hexalia/blockstates/cottonwood_t
 61528b15831a64cf27a55765a5308f8e38c462cd assets/hexalia/blockstates/dreamshroom.json
 9a96c53c0ed3be70a123fbb6711e8f789f49f556 assets/hexalia/blockstates/ghost_fern.json
 6ea831a7e7d17307be967d986a115aae168492ce assets/hexalia/blockstates/grimshade.json
+9930f8d90cb871d33ef913993f599cd63c333ed2 assets/hexalia/blockstates/herb_jar.json
 8a7ac22bc2e43f8b29c3cf4856f71fef77831853 assets/hexalia/blockstates/infused_dirt.json
 80077efbd288372fb959c6369c0576c9df729e87 assets/hexalia/blockstates/lavender.json
 22a90f1f1425cea8e10336acba84651611d9fe28 assets/hexalia/blockstates/lourdes.json
@@ -197,6 +198,7 @@ a423a8c92a4770062e059d6e1d379980ae87a19a assets/hexalia/models/item/cottonwood_l
 f0e5773136726007612f413520c80a096bf68354 assets/hexalia/models/item/cottonwood_log.json
 b9e3165069e9ac5c7c3eedd92fef0800825884fd assets/hexalia/models/item/cottonwood_planks.json
 84cbf3d2e1621c3e05fbd8a9a3e6667ed960c482 assets/hexalia/models/item/cottonwood_wood.json
+54ec3a5f151ade0dc9653747364c1fe6afd8c2be assets/hexalia/models/item/herb_jar.json
 134de2f333015671ec12ac8ad0cb5ada2818e49f assets/hexalia/models/item/infused_dirt.json
 7f08f13d7427f7379f7f67a2df1da92a31aea2d0 assets/hexalia/models/item/salt_block.json
 a255087df51bbccc0f386ed25ea8e3d459bb661e assets/hexalia/models/item/stripped_cottonwood_log.json

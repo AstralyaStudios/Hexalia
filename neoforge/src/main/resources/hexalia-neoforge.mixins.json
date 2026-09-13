@@ -3,7 +3,10 @@
   "package": "net.astralya.hexalia.neoforge.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "CobwebMixin",
     "CropBlockMixin",
+    "LivingEntityMixin",
+    "ServerLevelMixin",
     "StemBlockMixin",
     "SugarCaneBlockMixin"
   ],

@@ -1,9 +1,9 @@
 {
   "type": "hexalia:natures_ritual",
-  "ingredients": [
-    {
-      "item": "minecraft:azure_bluet"
-    },
+  "center": {
+    "item": "minecraft:azure_bluet"
+  },
+  "offerings": [
     {
       "item": "hexalia:ghost_powder"
     },

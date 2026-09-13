@@ -7,6 +7,7 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import java.util.List;
 import net.astralya.hexalia.compat.HexaliaRecipeGuiLayout;
+import net.astralya.hexalia.compat.NaturesRitualViewerIndicator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
@@ -22,6 +23,7 @@ public final class HexaliaEmiRecipe implements EmiRecipe {
   private final boolean drawRitualBrazierFocus;
   private final boolean showRitualTableFocusTooltip;
   private final boolean showMutationTooltip;
+  private final boolean showSoulIndicator;
 
   public HexaliaEmiRecipe(
       EmiRecipeCategory category,
@@ -40,7 +42,18 @@ public final class HexaliaEmiRecipe implements EmiRecipe {
       EmiStack output,
       List<Component> recipeTooltips,
       List<Component> outputTooltips) {
-    this(category, layout, id, inputs, output, recipeTooltips, outputTooltips, false, false, false);
+    this(
+        category,
+        layout,
+        id,
+        inputs,
+        output,
+        recipeTooltips,
+        outputTooltips,
+        false,
+        false,
+        false,
+        false);
   }
 
   public HexaliaEmiRecipe(
@@ -53,7 +66,8 @@ public final class HexaliaEmiRecipe implements EmiRecipe {
       List<Component> outputTooltips,
       boolean drawRitualBrazierFocus,
       boolean showRitualTableFocusTooltip,
-      boolean showMutationTooltip) {
+      boolean showMutationTooltip,
+      boolean showSoulIndicator) {
     this.category = category;
     this.layout = layout;
     this.id = id;
@@ -64,6 +78,7 @@ public final class HexaliaEmiRecipe implements EmiRecipe {
     this.drawRitualBrazierFocus = drawRitualBrazierFocus;
     this.showRitualTableFocusTooltip = showRitualTableFocusTooltip;
     this.showMutationTooltip = showMutationTooltip;
+    this.showSoulIndicator = showSoulIndicator;
   }
 
   @Override
@@ -110,6 +125,27 @@ public final class HexaliaEmiRecipe implements EmiRecipe {
         layout.textureHeight(),
         256,
         256);
+
+    if (showSoulIndicator) {
+      widgets.addTexture(
+          NaturesRitualViewerIndicator.TEXTURE,
+          NaturesRitualViewerIndicator.X,
+          NaturesRitualViewerIndicator.Y,
+          NaturesRitualViewerIndicator.WIDTH,
+          NaturesRitualViewerIndicator.HEIGHT,
+          0,
+          0,
+          NaturesRitualViewerIndicator.WIDTH,
+          NaturesRitualViewerIndicator.HEIGHT,
+          NaturesRitualViewerIndicator.WIDTH,
+          NaturesRitualViewerIndicator.HEIGHT);
+      widgets.addTooltipText(
+          List.of(Component.translatable(NaturesRitualViewerIndicator.TOOLTIP_KEY)),
+          NaturesRitualViewerIndicator.X,
+          NaturesRitualViewerIndicator.Y,
+          NaturesRitualViewerIndicator.WIDTH,
+          NaturesRitualViewerIndicator.HEIGHT);
+    }
 
     if (!recipeTooltips.isEmpty()) {
       widgets.addTooltipText(recipeTooltips, 0, 0, layout.width(), layout.height());

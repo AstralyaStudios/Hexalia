@@ -1,9 +1,9 @@
 {
   "type": "hexalia:natures_ritual",
-  "ingredients": [
-    {
-      "item": "minecraft:leather_chestplate"
-    },
+  "center": {
+    "item": "minecraft:leather_chestplate"
+  },
+  "offerings": [
     {
       "item": "minecraft:moss_block"
     },

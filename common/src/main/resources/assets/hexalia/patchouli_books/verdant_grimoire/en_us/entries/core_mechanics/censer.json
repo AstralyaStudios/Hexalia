@@ -7,7 +7,13 @@
     {
       "type": "text",
       "title": "Censer Auras",
-      "text": "Different combinations of $(l:hexalia:resources/herbs)Herbs$(/l) burned within a Censer produce unique auras. Each pairing consumes both herbs when ignited and releases its effect into the surrounding area."
+      "text": "A Censer binds the virtues of two $(l:hexalia:resources/herbs)Herbs$(/l) into an aura. Place one herb at a time into an unlit Censer, then ignite a valid pair with a fire starter. Both herbs are consumed as the aura begins."
+    },
+    {
+      "type": "text",
+      "title": "Tending the Smoke",
+      "anchor": "use",
+      "text": "The Censer burns for a time and carries its effect through the surrounding area. Before lighting, remove the last herb with an empty hand. Extinguish a burning Censer with a shovel."
     },
     {
       "type": "text",

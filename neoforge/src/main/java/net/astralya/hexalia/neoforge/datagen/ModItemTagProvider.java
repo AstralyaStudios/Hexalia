@@ -6,12 +6,17 @@ import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.util.ModTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public final class ModItemTagProvider extends ItemTagsProvider {
@@ -25,6 +30,14 @@ public final class ModItemTagProvider extends ItemTagsProvider {
 
   @Override
   protected void addTags(HolderLookup.Provider lookupProvider) {
+    tag(accessoriesTag("hat")).add(ModItems.EARPLUGS.get());
+    tag(accessoriesTag("necklace"))
+        .add(ModItems.SAGE_PENDANT.get(), ModItems.SEAFOAM_TALISMAN.get());
+    tag(accessoriesTag("ring")).add(ModItems.MOONWARD_RING.get(), ModItems.GREEN_OMEN.get());
+    tag(accessoriesTag("charm"))
+        .add(
+            ModItems.WITCHHEART_CLUSTER.get(), ModItems.WYRD_FEATHER.get());
+
     tag(ItemTags.FLOWERS)
         .add(ModBlocks.SPIRIT_BLOOM.get().asItem())
         .add(ModBlocks.WITCHWEED.get().asItem())
@@ -107,6 +120,11 @@ public final class ModItemTagProvider extends ItemTagsProvider {
     tag(ItemTags.SHOVELS).add(ModItems.ROOTSHAPER.get());
     tag(ItemTags.PICKAXES).add(ModItems.ROOTSHAPER.get());
     tag(ItemTags.SWORDS).add(ModItems.KELPWEAVE_BLADE.get());
+    tag(ItemTags.AXES).add(ModItems.CINDERHEW.get());
+    tag(Tags.Items.RANGED_WEAPON_TOOLS).add(ModItems.THORNBOW.get());
+    tag(Tags.Items.MELEE_WEAPON_TOOLS)
+        .add(ModItems.CINDERHEW.get())
+        .add(ModItems.KELPWEAVE_BLADE.get());
 
     tag(ItemTags.HEAD_ARMOR)
         .add(ModItems.EARPLUGS.get())
@@ -130,11 +148,13 @@ public final class ModItemTagProvider extends ItemTagsProvider {
 
     tag(ItemTags.MINING_ENCHANTABLE)
         .add(ModItems.ROOTSHAPER.get())
+        .add(ModItems.CINDERHEW.get())
         .add(ModItems.BRIAR_SICKLE.get());
     tag(ItemTags.DURABILITY_ENCHANTABLE)
         .add(ModItems.ATHAME.get())
         .add(ModItems.ROOTSHAPER.get())
         .add(ModItems.KELPWEAVE_BLADE.get())
+        .add(ModItems.CINDERHEW.get())
         .add(ModItems.BRIAR_SICKLE.get())
         .add(ModItems.SPIRITROOT_TETHER.get())
         .add(ModItems.SAGE_PENDANT.get())
@@ -156,6 +176,7 @@ public final class ModItemTagProvider extends ItemTagsProvider {
         .add(ModItems.BLOOMWRAP_LEGGINGS.get())
         .add(ModItems.BLOOMWRAP_BOOTS.get());
     tag(ItemTags.SWORD_ENCHANTABLE).add(ModItems.KELPWEAVE_BLADE.get());
+    tag(ItemTags.MINING_LOOT_ENCHANTABLE).add(ModItems.CINDERHEW.get());
     tag(ItemTags.BOW_ENCHANTABLE).add(ModItems.THORNBOW.get());
     tag(ItemTags.HEAD_ARMOR_ENCHANTABLE)
         .add(ModItems.EARPLUGS.get())
@@ -181,24 +202,16 @@ public final class ModItemTagProvider extends ItemTagsProvider {
         .add(ModItems.BLOOMWRAP_BOOTS.get());
 
     tag(ModTags.Items.HERBS)
-        .add(ModBlocks.SPIRIT_BLOOM.get().asItem())
-        .add(ModItems.SIREN_KELP.get())
-        .add(ModBlocks.DREAMSHROOM.get().asItem())
-        .add(ModBlocks.GHOST_FERN.get().asItem())
         .add(ModBlocks.WITCHWEED.get().asItem())
+        .add(ModBlocks.SPIRIT_BLOOM.get().asItem())
+        .add(ModBlocks.DREAMSHROOM.get().asItem())
+        .add(ModItems.SIREN_KELP.get())
+        .add(ModBlocks.GHOST_FERN.get().asItem())
         .add(ModBlocks.CELESTIAL_BLOOM.get().asItem())
-        .add(ModBlocks.MORPHORA.get().asItem())
-        .add(ModBlocks.GRIMSHADE.get().asItem())
-        .add(ModBlocks.NAUTILITE.get().asItem())
-        .add(ModBlocks.WINDSONG.get().asItem())
-        .add(ModBlocks.ASTRYLIS.get().asItem())
-        .add(ModBlocks.LOURDES.get().asItem())
-        .add(ModBlocks.AEGIFLORA.get().asItem())
-        .add(ModBlocks.WITHERED_AEGIFLORA.get().asItem())
-        .add(ModBlocks.NIGHTSHADE_BUSH.get().asItem())
-        .add(ModBlocks.BEGONIA.get().asItem())
-        .add(ModBlocks.LAVENDER.get().asItem())
-        .add(ModBlocks.DAHLIA.get().asItem());
+        .add(ModItems.LOTUS_FLOWER.get());
+    tag(ModTags.Items.HERB_JAR_STORABLE)
+        .addTag(ModTags.Items.HERBS)
+        .addTag(ModTags.Items.CRUSHED_HERBS);
 
     tag(ModTags.Items.CRUSHED_HERBS)
         .add(ModItems.SPIRIT_POWDER.get())
@@ -213,6 +226,7 @@ public final class ModItemTagProvider extends ItemTagsProvider {
         .add(ModItems.BREW_OF_SPIKESKIN.get())
         .add(ModItems.BREW_OF_SIPHON.get())
         .add(ModItems.BREW_OF_DAYBLOOM.get())
+        .add(ModItems.BREW_OF_GRAVEBLOOM.get())
         .add(ModItems.BREW_OF_ARACHNID_GRACE.get())
         .add(ModItems.BREW_OF_HOLLOW_SILENCE.get())
         .add(ModItems.RUSTIC_BOTTLE.get());
@@ -290,5 +304,10 @@ public final class ModItemTagProvider extends ItemTagsProvider {
         .add(ModItems.RABBAGE_SEEDS.get())
         .add(ModItems.SUNFIRE_TOMATO_SEEDS.get());
     tag(ModTags.Compat.SERENE_SEASONS_WINTER_CROPS).add(ModItems.RABBAGE_SEEDS.get());
+  }
+
+  private static TagKey<Item> accessoriesTag(String path) {
+    return TagKey.create(
+        Registries.ITEM, ResourceLocation.fromNamespaceAndPath("accessories", path));
   }
 }

@@ -1,9 +1,9 @@
 {
   "type": "hexalia:natures_ritual",
-  "ingredients": [
-    {
-      "item": "minecraft:leather_helmet"
-    },
+  "center": {
+    "item": "minecraft:leather_helmet"
+  },
+  "offerings": [
     {
       "item": "minecraft:pink_tulip"
     },

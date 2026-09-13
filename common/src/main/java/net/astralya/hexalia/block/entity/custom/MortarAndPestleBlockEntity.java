@@ -5,6 +5,7 @@ import net.astralya.hexalia.recipe.ModRecipeTypes;
 import net.astralya.hexalia.recipe.MortarAndPestleRecipeInput;
 import net.astralya.hexalia.util.ItemInteractionHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -19,6 +20,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -28,7 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class MortarAndPestleBlockEntity extends BlockEntity
-    implements Container, Clearable, ItemInteractionHelper.ItemStorage {
+    implements WorldlyContainer, Clearable, ItemInteractionHelper.ItemStorage {
   public static final int SPIN_TICKS = 20;
   public static final int REQUIRED_SPINS = 3;
   public static final int INPUT_0 = 0;
@@ -37,6 +39,8 @@ public class MortarAndPestleBlockEntity extends BlockEntity
   public static final int OUTPUT = 3;
 
   private static final int SLOT_COUNT = 4;
+  private static final int[] INPUT_SLOTS = {INPUT_0, INPUT_1, INPUT_2};
+  private static final int[] OUTPUT_SLOTS = {OUTPUT};
   private static final String TAG_PESTLE_TICK = "PestleTick";
   private static final String TAG_PESTLE_COUNT = "PestleCount";
   private static final String TAG_PESTLING = "Pestling";
@@ -128,7 +132,23 @@ public class MortarAndPestleBlockEntity extends BlockEntity
 
   @Override
   public boolean canTakeItem(Container target, int slot, ItemStack stack) {
-    return slot == OUTPUT || (slot >= INPUT_0 && slot <= INPUT_2 && !hasOutput());
+    return slot == OUTPUT && hasOutput();
+  }
+
+  @Override
+  public int[] getSlotsForFace(Direction side) {
+    return side == Direction.DOWN ? OUTPUT_SLOTS : INPUT_SLOTS;
+  }
+
+  @Override
+  public boolean canPlaceItemThroughFace(
+      int slot, ItemStack stack, @Nullable Direction direction) {
+    return direction != Direction.DOWN && canPlaceItem(slot, stack);
+  }
+
+  @Override
+  public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction direction) {
+    return direction == Direction.DOWN && slot == OUTPUT && hasOutput();
   }
 
   @Override

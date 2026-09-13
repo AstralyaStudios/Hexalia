@@ -33,8 +33,14 @@ public final class ModItemModelProvider extends ItemModelProvider {
     basicItem(ModItems.LADLE.get());
     handheldItem(ModItems.ATHAME.get());
     handheldItem(ModItems.KELPWEAVE_BLADE.get());
+    handheldItem(ModItems.CINDERHEW.get());
     handheldItem(ModItems.BRIAR_SICKLE.get());
     basicItem(ModItems.SAGE_PENDANT.get());
+    basicItem(ModItems.SEAFOAM_TALISMAN.get());
+    basicItem(ModItems.MOONWARD_RING.get());
+    basicItem(ModItems.WITCHHEART_CLUSTER.get());
+    basicItem(ModItems.WYRD_FEATHER.get());
+    basicItem(ModItems.GREEN_OMEN.get());
     basicItem(ModItems.SILK_MOTH_SPAWN_EGG.get());
     basicItem(ModItems.CACOFEY_SPAWN_EGG.get());
     basicItem(ModItems.GHOSTVEIL.get());
@@ -58,11 +64,13 @@ public final class ModItemModelProvider extends ItemModelProvider {
     basicItem(ModItems.TEMPEST_IDOL.get());
     basicItem(ModItems.PURITY_IDOL.get());
     basicItem(ModItems.RUSTIC_BOTTLE.get());
+    basicItem(ModItems.HEARTSEED.get());
     basicItem(ModItems.BREW_OF_SPIKESKIN.get());
     basicItem(ModItems.BREW_OF_BLOODLUST.get());
     basicItem(ModItems.BREW_OF_SLIMEWALKER.get());
     basicItem(ModItems.BREW_OF_SIPHON.get());
     basicItem(ModItems.BREW_OF_DAYBLOOM.get());
+    basicItem(ModItems.BREW_OF_GRAVEBLOOM.get());
     basicItem(ModItems.BREW_OF_ARACHNID_GRACE.get());
     basicItem(ModItems.BREW_OF_HOMESTEAD.get());
     basicItem(ModItems.BREW_OF_HOLLOW_SILENCE.get());

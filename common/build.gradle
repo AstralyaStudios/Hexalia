@@ -28,6 +28,9 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
     modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
     modImplementation "software.bernie.geckolib:geckolib-common-${rootProject.minecraft_version}:$rootProject.geckolib_version"
+    modCompileOnly("io.wispforest:accessories-common:$rootProject.accessories_version-mojmap") {
+        transitive = false
+    }
     modCompileOnly "vazkii.patchouli:Patchouli:${rootProject.patchouli_version}-FABRIC"
     modCompileOnly "mezz.jei:jei-${rootProject.minecraft_version}-common-api:$rootProject.jei_version"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:${rootProject.rei_version}"

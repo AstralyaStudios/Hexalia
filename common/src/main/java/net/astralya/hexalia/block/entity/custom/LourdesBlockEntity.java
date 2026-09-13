@@ -1,6 +1,5 @@
 package net.astralya.hexalia.block.entity.custom;
 
-import java.util.ArrayList;
 import java.util.List;
 import net.astralya.hexalia.HexaliaConfig;
 import net.astralya.hexalia.block.entity.ModBlockEntityTypes;
@@ -19,7 +18,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -62,10 +60,8 @@ public class LourdesBlockEntity extends BlockEntity {
       return;
     }
     AABB area = new AABB(pos).inflate(HexaliaConfig.lourdesEffectRadius());
-    List<LivingEntity> targets = new ArrayList<>();
-    targets.addAll(level.getEntitiesOfClass(Player.class, area, LivingEntity::isAlive));
-    targets.addAll(level.getEntitiesOfClass(Animal.class, area, LivingEntity::isAlive));
-    for (LivingEntity target : targets) {
+    List<Animal> targets = level.getEntitiesOfClass(Animal.class, area, LivingEntity::isAlive);
+    for (Animal target : targets) {
       cleanseEffects(target);
       applyHealingAura(target);
     }

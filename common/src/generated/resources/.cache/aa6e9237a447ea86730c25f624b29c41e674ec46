@@ -1,11 +1,11 @@
-// 1.21.1	2026-08-09T11:24:43.7795235	Tags for minecraft:worldgen/biome mod id hexalia
+// 1.21.1	2026-09-09T00:02:27.7505132	Tags for minecraft:worldgen/biome mod id hexalia
 c3d4e55bd4ed5d178abb10df76626eccdab7c209 data/hexalia/tags/worldgen/biome/cacofey_spawns.json
 a98d7d0ca1bdef5682a1928aaee7ce724227c8c0 data/hexalia/tags/worldgen/biome/has_cool_biome_vegetation.json
-27b5c61d0bd6297d6f29b5f49d7a3a7d52b5e029 data/hexalia/tags/worldgen/biome/has_decorative_flowers.json
-f3da22dde9ab58a75ef89f5f43dcadc698e760f5 data/hexalia/tags/worldgen/biome/has_dry_biome_vegetation.json
-41fa040d0fb54e6268ac13a1ca75a845fa1824d0 data/hexalia/tags/worldgen/biome/has_floral_vegetation.json
+6f6872a7380476b1c0a280a5afe1f97a56a105b5 data/hexalia/tags/worldgen/biome/has_decorative_flowers.json
+f02c147afef0851ef35a286b3531f1791dcd8861 data/hexalia/tags/worldgen/biome/has_dry_biome_vegetation.json
+4b5111fc7c55caac9665de95a7b52170a88476a1 data/hexalia/tags/worldgen/biome/has_floral_vegetation.json
 5f176659fa27569cc678ddae4a306c2055a89a16 data/hexalia/tags/worldgen/biome/has_shaded_vegetation.json
-6b5b6188dc8d42fef0fbcbba6e03e9cd3a3a88d7 data/hexalia/tags/worldgen/biome/has_shrooms.json
+aab5a21e179850676aa7a1d01e3437a890dc8cc2 data/hexalia/tags/worldgen/biome/has_shrooms.json
 afd9da16b8e57511d3b12c69ccd4555d71ebb29f data/hexalia/tags/worldgen/biome/has_siren_kelp.json
-3e00d0ecf4c9744bbf1b1c80ff5270a55488fc87 data/hexalia/tags/worldgen/biome/has_swamp_vegetation.json
+07339991a37b81fcf4b9890fa18de034e1a9be8e data/hexalia/tags/worldgen/biome/has_swamp_vegetation.json
 6b35771c8d400b0921c04386d79e88b834c282ad data/hexalia/tags/worldgen/biome/silk_moth_spawns.json

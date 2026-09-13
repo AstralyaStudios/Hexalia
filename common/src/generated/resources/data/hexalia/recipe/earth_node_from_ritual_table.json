@@ -1,9 +1,9 @@
 {
   "type": "hexalia:natures_ritual",
-  "ingredients": [
-    {
-      "item": "minecraft:amethyst_shard"
-    },
+  "center": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "offerings": [
     {
       "item": "minecraft:clay_ball"
     },

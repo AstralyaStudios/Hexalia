@@ -18,7 +18,7 @@ public final class FabricEntitySpawns {
         BiomeSelectors.tag(ModTags.Biomes.SILK_MOTH_SPAWNS),
         MobCategory.CREATURE,
         ModEntities.SILK_MOTH.get(),
-        2,
+        6,
         1,
         2);
     BiomeModifications.addSpawn(

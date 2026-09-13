@@ -21,6 +21,7 @@ public final class ModTags {
         TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "salt_blocks"));
     public static final TagKey<Item> OFFHAND_EQUIPMENT = create("offhand_equipment");
     public static final TagKey<Item> HERBS = create("herbs");
+    public static final TagKey<Item> HERB_JAR_STORABLE = create("herb_jar_storable");
     public static final TagKey<Item> CRUSHED_HERBS = create("crushed_herbs");
     public static final TagKey<Item> BREWS = create("brews");
     public static final TagKey<Item> STUN_IMMUNE_HEADWEAR = create("stun_immune_headwear");
@@ -60,6 +61,8 @@ public final class ModTags {
   }
 
   public static final class Blocks {
+    public static final TagKey<Block> HERBS = create("herbs");
+    public static final TagKey<Block> GRAVEBLOOM_PLANTS = create("gravebloom_plants");
     public static final TagKey<Block> SALT_BLOCKS =
         TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "salt_blocks"));
     public static final TagKey<Block> COTTONWOOD_LOGS = create("cottonwood_logs");

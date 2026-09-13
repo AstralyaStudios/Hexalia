@@ -11,6 +11,7 @@ import net.astralya.hexalia.recipe.NaturesRitualRecipe;
 import net.astralya.hexalia.recipe.SmallCauldronRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -64,10 +65,10 @@ public class RecipePageComponent implements ICustomComponent {
 
     graphics.drawString(
         Minecraft.getInstance().font,
-        recipe.output.getHoverName(),
+        recipe.title,
         x
             + (PAGE_WIDTH / 2)
-            - (Minecraft.getInstance().font.width(recipe.output.getHoverName()) / 2),
+            - (Minecraft.getInstance().font.width(recipe.title) / 2),
         y,
         0xFF404040,
         false);
@@ -205,23 +206,29 @@ public class RecipePageComponent implements ICustomComponent {
     graphics.blit(RITUAL_TABLE_TEXTURE, left, top, 0, 0, 118, 80, 256, 256);
     int[][] slots = {
       {left + 27, top + 30},
+      {left + 3, top + 6},
+      {left + 27, top + 6},
+      {left + 51, top + 6},
       {left + 3, top + 30},
       {left + 51, top + 30},
-      {left + 27, top + 6},
-      {left + 27, top + 54}
+      {left + 3, top + 54},
+      {left + 27, top + 54},
+      {left + 51, top + 54}
     };
 
     for (int i = 0; i < slots.length; i++) {
       renderIngredient(
           graphics, context, currentRecipe, i, slots[i][0], slots[i][1], mouseX, mouseY);
     }
-    context.renderItemStack(
-        graphics,
-        left + 88 + ITEM_OFFSET_X,
-        top + 30 + ITEM_OFFSET_Y,
-        mouseX,
-        mouseY,
-        currentRecipe.output);
+    if (!currentRecipe.output.isEmpty()) {
+      context.renderItemStack(
+          graphics,
+          left + 88 + ITEM_OFFSET_X,
+          top + 30 + ITEM_OFFSET_Y,
+          mouseX,
+          mouseY,
+          currentRecipe.output);
+    }
   }
 
   private void renderIngredient(
@@ -313,13 +320,28 @@ public class RecipePageComponent implements ICustomComponent {
               .map(
                   holder -> {
                     NaturesRitualRecipe recipe = (NaturesRitualRecipe) holder.value();
+                    ItemStack output =
+                        recipe.getResultItem(client.level.registryAccess()).copy();
+                    Component title =
+                        recipe
+                            .entityResult()
+                            .<Component>map(
+                                result ->
+                                    Component.translatable(
+                                        result.entity().toLanguageKey("entity")))
+                            .orElseGet(output::getHoverName);
                     return new RecipeView(
                         List.copyOf(recipe.getIngredients()),
-                        recipe.getResultItem(client.level.registryAccess()).copy());
+                        output,
+                        title);
                   });
       default -> Optional.empty();
     };
   }
 
-  private record RecipeView(List<Ingredient> ingredients, ItemStack output) {}
+  private record RecipeView(List<Ingredient> ingredients, ItemStack output, Component title) {
+    private RecipeView(List<Ingredient> ingredients, ItemStack output) {
+      this(ingredients, output, output.getHoverName());
+    }
+  }
 }

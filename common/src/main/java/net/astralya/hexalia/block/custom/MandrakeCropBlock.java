@@ -1,13 +1,12 @@
 package net.astralya.hexalia.block.custom;
 
 import net.astralya.hexalia.effect.ModMobEffects;
+import net.astralya.hexalia.integration.accessories.AccessoriesIntegration;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.sound.ModSoundEvents;
-import net.astralya.hexalia.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -52,8 +51,8 @@ public class MandrakeCropBlock extends CropBlock {
     if (!level.isClientSide()
         && state.getValue(AGE) == MAX_AGE
         && !player.getAbilities().instabuild
-        && !player.getItemBySlot(EquipmentSlot.HEAD).is(ModTags.Items.STUN_IMMUNE_HEADWEAR)) {
-      player.addEffect(new MobEffectInstance(ModMobEffects.STUNNED, 60, 4));
+        && !AccessoriesIntegration.isWearingEarplugs(player)) {
+      player.addEffect(new MobEffectInstance(ModMobEffects.holder(ModMobEffects.STUNNED), 60, 0));
       level.playSound(
           null,
           player.getX(),

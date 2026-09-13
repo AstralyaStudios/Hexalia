@@ -7,7 +7,7 @@
     {
       "type": "text",
       "title": "Silk Moths",
-      "text": "Silk Moths are delicate magical insects found in forests, essential for producing silk-based resources."
+      "text": "Silk Moths are delicate magical insects found in forests, essential for producing silk-based resources. They may also be summoned through $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Nature's Ritual$(/l), which requires a soul sacrifice."
     },
     {
       "type": "text",

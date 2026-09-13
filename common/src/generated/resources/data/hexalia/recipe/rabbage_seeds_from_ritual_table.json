@@ -1,9 +1,9 @@
 {
   "type": "hexalia:natures_ritual",
-  "ingredients": [
-    {
-      "item": "minecraft:beetroot_seeds"
-    },
+  "center": {
+    "item": "minecraft:beetroot_seeds"
+  },
+  "offerings": [
     {
       "item": "hexalia:dream_paste"
     },

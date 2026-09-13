@@ -93,13 +93,15 @@ public class BriarSickleItem extends ShearsItem {
       return InteractionResult.PASS;
     }
 
-    level.playSound(
-        null,
-        player.blockPosition(),
-        SoundEvents.PLAYER_ATTACK_SWEEP,
-        SoundSource.PLAYERS,
-        0.8F,
-        1.0F);
+    if (shearingMode) {
+      level.playSound(
+          null,
+          player.blockPosition(),
+          SoundEvents.SHEEP_SHEAR,
+          SoundSource.PLAYERS,
+          0.8F,
+          1.0F);
+    }
     player.swing(context.getHand(), true);
     stack.hurtAndBreak(1, player, Player.getSlotForHand(context.getHand()));
     return InteractionResult.CONSUME;

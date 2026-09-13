@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": { "min": 1, "max": 10 },
+      "entries": [
+        { "type": "minecraft:item", "weight": 20, "name": "minecraft:amethyst_shard" },
+        { "type": "minecraft:item", "weight": 20, "name": "hexalia:silk_fiber" },
+        { "type": "minecraft:item", "weight": 20, "name": "hexalia:rustic_bottle" }
+      ]
+    },
+    {
+      "rolls": { "min": 0, "max": 4 },
+      "entries": [
+        { "type": "minecraft:item", "weight": 15, "name": "hexalia:saltsprout" },
+        { "type": "minecraft:item", "weight": 15, "name": "hexalia:siren_kelp" },
+        { "type": "minecraft:item", "weight": 15, "name": "hexalia:lotus_flower" }
+      ]
+    },
+    {
+      "rolls": { "min": 0, "max": 2 },
+      "entries": [
+        { "type": "minecraft:item", "weight": 5, "name": "hexalia:ghost_powder" },
+        { "type": "minecraft:item", "weight": 5, "name": "hexalia:saltsprout" },
+        { "type": "minecraft:item", "weight": 5, "name": "hexalia:spirit_powder" }
+      ]
+    }
+  ]
+}

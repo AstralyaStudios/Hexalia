@@ -51,6 +51,7 @@ public final class ModBlockLootTableProvider extends LootTableProvider {
             ModBlocks.CENSER.get(),
             ModBlocks.NESTING_BLOCK.get(),
             ModBlocks.SHELF.get(),
+            ModBlocks.HERB_JAR.get(),
             ModBlocks.DREAMCATCHER.get(),
             ModBlocks.CANDLE_SKULL.get(),
             ModBlocks.WITHER_CANDLE_SKULL.get(),
@@ -159,6 +160,7 @@ public final class ModBlockLootTableProvider extends LootTableProvider {
       dropSelf(ModBlocks.CENSER.get());
       dropSelf(ModBlocks.NESTING_BLOCK.get());
       dropSelf(ModBlocks.SHELF.get());
+      add(ModBlocks.HERB_JAR.get(), noDrop());
       dropSelf(ModBlocks.DREAMCATCHER.get());
       dropSelf(ModBlocks.CANDLE_SKULL.get());
       dropSelf(ModBlocks.WITHER_CANDLE_SKULL.get());

@@ -6,6 +6,7 @@ import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
+import java.util.ArrayList;
 import java.util.List;
 import net.astralya.hexalia.compat.HexaliaRecipeGuiLayout;
 import net.astralya.hexalia.item.ModItems;
@@ -16,8 +17,11 @@ import net.astralya.hexalia.recipe.MutationRecipe;
 import net.astralya.hexalia.recipe.NaturesRitualRecipe;
 import net.astralya.hexalia.recipe.SmallCauldronRecipe;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -101,13 +105,14 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
           HexaliaEmiRecipeCategories.NATURES_RITUAL,
           HexaliaRecipeGuiLayout.NATURES_RITUAL,
           holder,
-          recipe.ingredients(),
-          recipe.output(),
+          naturesRitualInputs(recipe),
+          naturesRitualResult(recipe),
           List.of(),
           List.of(),
           false,
-          recipe.ingredients().size() > 4,
-          false);
+          recipe.offerings().size() > 3,
+          false,
+          recipe.requiresSoul());
     }
 
     for (RecipeHolder<CelestialInfusionRecipe> holder :
@@ -123,6 +128,7 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
           List.of(),
           List.of(),
           true,
+          false,
           false,
           false);
     }
@@ -141,7 +147,8 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
           List.of(),
           false,
           false,
-          true);
+          true,
+          false);
     }
   }
 
@@ -180,6 +187,7 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
         outputTooltips,
         false,
         false,
+        false,
         false);
   }
 
@@ -194,7 +202,8 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
       List<Component> outputTooltips,
       boolean drawRitualBrazierFocus,
       boolean showRitualTableFocusTooltip,
-      boolean showMutationTooltip) {
+      boolean showMutationTooltip,
+      boolean showSoulIndicator) {
     List<EmiIngredient> inputs = ingredients.stream().map(EmiIngredient::of).toList();
     EmiStack emiOutput = EmiStack.of(output.copy());
     if (inputs.isEmpty() || emiOutput.isEmpty()) {
@@ -212,7 +221,8 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
             outputTooltips,
             drawRitualBrazierFocus,
             showRitualTableFocusTooltip,
-            showMutationTooltip));
+            showMutationTooltip,
+            showSoulIndicator));
   }
 
   private static void addWorkstation(
@@ -227,6 +237,23 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
           tooltip("jei.hexalia.tooltip.experience", recipe.getExperience()));
     }
     return List.of(tooltip("jei.hexalia.tooltip.brew_time", recipe.getBrewTime()));
+  }
+
+  private static List<Ingredient> naturesRitualInputs(NaturesRitualRecipe recipe) {
+    List<Ingredient> inputs = new ArrayList<>();
+    inputs.add(recipe.centerIngredient());
+    inputs.addAll(recipe.offerings().subList(0, Math.min(recipe.offerings().size(), 8)));
+    return inputs;
+  }
+
+  private static ItemStack naturesRitualResult(NaturesRitualRecipe recipe) {
+    if (recipe.isItemResult()) return recipe.itemResult();
+    EntityType<?> type =
+        recipe.entityResult()
+            .flatMap(result -> BuiltInRegistries.ENTITY_TYPE.getOptional(result.entity()))
+            .orElse(null);
+    SpawnEggItem spawnEgg = type == null ? null : SpawnEggItem.byId(type);
+    return spawnEgg == null ? ItemStack.EMPTY : spawnEgg.getDefaultInstance();
   }
 
   private static Component tooltip(String key, Object... arguments) {

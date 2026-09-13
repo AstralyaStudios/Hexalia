@@ -13,7 +13,7 @@
     {
       "type": "text",
       "title": "Preparation",
-      "text": "Place Ritual Braziers in the cardinal directions around a Ritual Table, then prepare each brazier with the required item and salt. When the ritual succeeds, its contents are consumed and the brazier returns to an idle state."
+      "text": "For $(l:hexalia:core_mechanics/natures_ritual)Nature's Ritual$(/l), place an offering in each needed brazier, then add Salt. Braziers may stand anywhere on the Ritual Table's level within 8 blocks; no fixed pattern is required. Only the braziers matched to a ritual are consumed."
     }
   ]
 }

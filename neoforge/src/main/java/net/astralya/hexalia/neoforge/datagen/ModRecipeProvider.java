@@ -4,6 +4,7 @@ import java.util.concurrent.CompletableFuture;
 import net.astralya.hexalia.Hexalia;
 import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.item.ModItems;
+import net.astralya.hexalia.entity.ModEntities;
 import net.astralya.hexalia.neoforge.datagen.custom.CelestialInfusionRecipeBuilder;
 import net.astralya.hexalia.neoforge.datagen.custom.MortarAndPestleRecipeBuilder;
 import net.astralya.hexalia.neoforge.datagen.custom.MutationRecipeBuilder;
@@ -300,6 +301,15 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
                             ItemPredicate.Builder.item().of(Items.COBBLED_DEEPSLATE_SLAB).build()))
             .save(recipeOutput);
 
+    ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.HERB_JAR.get(), 2)
+            .pattern(" S ")
+            .pattern("G G")
+            .pattern("GGG")
+            .define('S', Items.OAK_SLAB)
+            .define('G', Items.GLASS)
+            .unlockedBy("has_glass", inventoryTrigger(ItemPredicate.Builder.item().of(Items.GLASS).build()))
+            .save(recipeOutput);
+
     ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.DREAMCATCHER.get())
             .pattern(" S ")
             .pattern("SPS")
@@ -559,15 +569,6 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
 
   private void buildNaturesRitualRecipes(RecipeOutput recipeOutput) {
     NaturesRitualRecipeBuilder.ritual(
-                    RecipeCategory.MISC, Ingredient.of(Items.DIAMOND), Items.NETHER_STAR)
-            .requiresBrazierIngredient(Ingredient.of(Items.ECHO_SHARD))
-            .requiresBrazierIngredient(Ingredient.of(Items.EMERALD))
-            .unlockedBy(
-                    "has_diamond",
-                    inventoryTrigger(ItemPredicate.Builder.item().of(Items.DIAMOND).build()))
-            .save(recipeOutput, id("debug_natures_ritual"));
-
-    NaturesRitualRecipeBuilder.ritual(
                     RecipeCategory.MISC, Ingredient.of(Items.AMETHYST_SHARD), ModItems.FIRE_NODE.get())
             .requiresBrazierIngredient(Ingredient.of(Items.COAL))
             .requiresBrazierIngredient(Ingredient.of(Items.SUNFLOWER))
@@ -609,6 +610,8 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .requiresBrazierIngredient(Ingredient.of(ModItems.EARTH_NODE.get()))
             .requiresBrazierIngredient(Ingredient.of(Items.BONE_MEAL))
             .requiresBrazierIngredient(Ingredient.of(Items.GLOWSTONE_DUST))
+            .requiresBrazierIngredient(Ingredient.of(Items.AMETHYST_SHARD))
+            .requiresBrazierIngredient(Ingredient.of(Items.SUNFLOWER))
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
@@ -622,6 +625,8 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .requiresBrazierIngredient(Ingredient.of(Items.WOODEN_SWORD))
             .requiresBrazierIngredient(Ingredient.of(Items.KELP))
             .requiresBrazierIngredient(Ingredient.of(ModItems.SIREN_PASTE.get()))
+            .requiresBrazierIngredient(Ingredient.of(Items.PRISMARINE_SHARD))
+            .requiresBrazierIngredient(Ingredient.of(Items.NAUTILUS_SHELL))
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
@@ -635,10 +640,27 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .requiresBrazierIngredient(Ingredient.of(Items.WOODEN_PICKAXE))
             .requiresBrazierIngredient(Ingredient.of(Items.WOODEN_SHOVEL))
             .requiresBrazierIngredient(Ingredient.of(ModItems.DREAM_PASTE.get()))
+            .requiresBrazierIngredient(Ingredient.of(Items.ROOTED_DIRT))
+            .requiresBrazierIngredient(Ingredient.of(ModItems.TREE_RESIN.get()))
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
             .save(recipeOutput, id("rootshaper_from_ritual_table"));
+
+    NaturesRitualRecipeBuilder.ritual(
+                    RecipeCategory.TOOLS,
+                    Ingredient.of(ModItems.ANCIENT_SEED.get()),
+                    ModItems.CINDERHEW.get())
+            .requiresBrazierIngredient(Ingredient.of(Items.WOODEN_AXE))
+            .requiresBrazierIngredient(Ingredient.of(ModItems.FIRE_NODE.get()))
+            .requiresBrazierIngredient(Ingredient.of(Items.BLAZE_POWDER))
+            .requiresBrazierIngredient(Ingredient.of(ModItems.TREE_RESIN.get()))
+            .requiresBrazierIngredient(Ingredient.of(Items.CHARCOAL))
+            .requiresBrazierIngredient(Ingredient.of(Items.FLINT))
+            .unlockedBy(
+                    "has_hex_focus",
+                    inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .save(recipeOutput, id("cinderhew_from_ritual_table"));
 
     // --- Sage Pendant: updated to include spirit powder ---
     NaturesRitualRecipeBuilder.ritual(
@@ -649,6 +671,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .requiresBrazierIngredient(Ingredient.of(Items.BOOK))
             .requiresBrazierIngredient(Ingredient.of(Items.EXPERIENCE_BOTTLE))
             .requiresBrazierIngredient(Ingredient.of(ModItems.SPIRIT_POWDER.get()))
+            .requiresBrazierIngredient(Ingredient.of(Items.AMETHYST_SHARD))
             .unlockedBy(
                     "has_celestial_crystal",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.CELESTIAL_CRYSTAL.get()).build()))
@@ -773,10 +796,63 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .requiresBrazierIngredient(Ingredient.of(ModItems.SPIRIT_POWDER.get()))
             .requiresBrazierIngredient(Ingredient.of(ModItems.EARTH_NODE.get()))
             .requiresBrazierIngredient(Ingredient.of(ModItems.TREE_RESIN.get()))
+            .requiresBrazierIngredient(Ingredient.of(Items.FERMENTED_SPIDER_EYE))
+            .requiresBrazierIngredient(Ingredient.of(Items.SLIME_BALL))
             .unlockedBy(
                     "has_mutavis",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.MUTAVIS.get()).build()))
             .save(recipeOutput, id("morphora_from_ritual_table"));
+
+    NaturesRitualRecipeBuilder.ritual(
+            RecipeCategory.MISC,
+            Ingredient.of(Items.GOLDEN_APPLE),
+            ModItems.HEARTSEED.get())
+        .requiresBrazierIngredient(Ingredient.of(ModItems.FRAGRANT_NECTAR.get()))
+        .requiresBrazierIngredient(Ingredient.of(Items.AMETHYST_SHARD))
+        .requiresBrazierIngredient(Ingredient.of(ModItems.SPIRIT_POWDER.get()))
+        .requiresBrazierIngredient(Ingredient.of(ModItems.LOTUS_FLOWER.get()))
+        .requiresBrazierIngredient(Ingredient.of(Items.HONEYCOMB))
+        .requiresBrazierIngredient(Ingredient.of(Items.POPPY))
+        .unlockedBy(
+            "has_hex_focus",
+            inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+        .save(recipeOutput, id("heartseed_from_ritual_table"));
+
+    NaturesRitualRecipeBuilder.summoning(
+            RecipeCategory.MISC,
+            Ingredient.of(ModItems.FRAGRANT_NECTAR.get()),
+            ModEntities.SILK_MOTH.get())
+        .requiresBrazierIngredient(Ingredient.of(Items.STRING))
+        .requiresBrazierIngredient(Ingredient.of(Items.WHITE_WOOL))
+        .requiresBrazierIngredient(Ingredient.of(ModItems.SPIRIT_POWDER.get()))
+        .requiresBrazierIngredient(Ingredient.of(ModItems.CELESTIAL_BLOOM.get()))
+        .requiresBrazierIngredient(Ingredient.of(Items.GLOWSTONE_DUST))
+        .requiresBrazierIngredient(Ingredient.of(ModItems.WITCHWEED.get()))
+        .requiresSoul(true)
+        .unlockedBy(
+            "has_fragrant_nectar",
+            inventoryTrigger(
+                ItemPredicate.Builder.item().of(ModItems.FRAGRANT_NECTAR.get()).build()))
+        .save(recipeOutput, id("summon_silk_moth"));
+
+    NaturesRitualRecipeBuilder.summoning(
+            RecipeCategory.MISC,
+            Ingredient.of(ModItems.GALEBERRIES_COOKIE.get()),
+            ModEntities.CACOFEY.get())
+        .requiresBrazierIngredient(Ingredient.of(ModItems.SPIRIT_POWDER.get()))
+        .requiresBrazierIngredient(Ingredient.of(ModItems.TREE_RESIN.get()))
+        .requiresBrazierIngredient(Ingredient.of(Items.JUNGLE_SAPLING))
+        .requiresBrazierIngredient(Ingredient.of(Items.COCOA_BEANS))
+        .requiresBrazierIngredient(Ingredient.of(Items.MELON_SLICE))
+        .requiresBrazierIngredient(Ingredient.of(Items.WHEAT_SEEDS))
+        .requiresBrazierIngredient(Ingredient.of(Items.MOSS_BLOCK))
+        .requiresBrazierIngredient(Ingredient.of(Items.BROWN_MUSHROOM))
+        .requiresSoul(true)
+        .unlockedBy(
+            "has_galeberries_cookie",
+            inventoryTrigger(
+                ItemPredicate.Builder.item().of(ModItems.GALEBERRIES_COOKIE.get()).build()))
+        .save(recipeOutput, id("summon_cacofey"));
   }
 
   private void buildSmallCauldronRecipes(RecipeOutput recipeOutput) {
@@ -828,6 +904,14 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             Ingredient.of(ModItems.SPIRIT_POWDER.get()),
             Ingredient.of(Items.GLOW_BERRIES),
             Ingredient.of(ModBlocks.WITCHWEED.get()));
+    smallCauldronBrew(
+            recipeOutput,
+            "brew_of_gravebloom_from_small_cauldron",
+            ModItems.BREW_OF_GRAVEBLOOM.get(),
+            Ingredient.of(ModItems.SPIRIT_POWDER.get()),
+            Ingredient.of(Items.ROTTEN_FLESH),
+            Ingredient.of(ModBlocks.WITCHWEED.get()),
+            Ingredient.of(ModItems.TREE_RESIN.get()));
     smallCauldronBrew(
             recipeOutput,
             "brew_of_arachnid_grace_from_small_cauldron",

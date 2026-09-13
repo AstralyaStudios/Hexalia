@@ -1,5 +1,6 @@
 package net.astralya.hexalia.compat.rei;
 
+import java.util.ArrayList;
 import java.util.List;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
@@ -20,8 +21,11 @@ import net.astralya.hexalia.recipe.MutationRecipe;
 import net.astralya.hexalia.recipe.NaturesRitualRecipe;
 import net.astralya.hexalia.recipe.SmallCauldronRecipe;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeInput;
@@ -100,9 +104,10 @@ public class HexaliaReiPlugin implements REIClientPlugin {
           displayWithRecipeTooltips(
               HexaliaReiRecipeTypes.NATURES_RITUAL,
               Layout.NATURES_RITUAL,
-              recipe.ingredients(),
-              recipe.output(),
-              naturesRitualTooltips()));
+              naturesRitualInputs(recipe),
+              naturesRitualResult(recipe),
+              List.of(),
+              recipe.requiresSoul()));
     }
     for (CelestialInfusionRecipe recipe :
         recipes(registry, ModRecipeTypes.CELESTIAL_INFUSION.get())) {
@@ -168,6 +173,22 @@ public class HexaliaReiPlugin implements REIClientPlugin {
         recipeTooltips);
   }
 
+  private static HexaliaReiDisplay displayWithRecipeTooltips(
+      CategoryIdentifier<HexaliaReiDisplay> category,
+      Layout layout,
+      List<Ingredient> ingredients,
+      ItemStack output,
+      List<Component> recipeTooltips,
+      boolean showSoulIndicator) {
+    return new HexaliaReiDisplay(
+        category,
+        layout,
+        EntryIngredients.ofIngredients(ingredients),
+        List.of(output(output, List.of())),
+        recipeTooltips,
+        showSoulIndicator);
+  }
+
   private static EntryIngredient output(ItemStack output, List<Component> tooltips) {
     if (tooltips.isEmpty()) {
       return EntryIngredients.of(output);
@@ -189,11 +210,21 @@ public class HexaliaReiPlugin implements REIClientPlugin {
     return List.of(tooltip("jei.hexalia.tooltip.brew_time", recipe.getBrewTime()));
   }
 
-  private static List<Component> naturesRitualTooltips() {
-    return List.of(
-        tooltip("jei.hexalia.tooltip.requires_hex_focus"),
-        tooltip("jei.hexalia.tooltip.requires_salted_braziers"),
-        tooltip("jei.hexalia.tooltip.requires_mature_crops"));
+  private static List<Ingredient> naturesRitualInputs(NaturesRitualRecipe recipe) {
+    List<Ingredient> inputs = new ArrayList<>();
+    inputs.add(recipe.centerIngredient());
+    inputs.addAll(recipe.offerings().subList(0, Math.min(recipe.offerings().size(), 8)));
+    return inputs;
+  }
+
+  private static ItemStack naturesRitualResult(NaturesRitualRecipe recipe) {
+    if (recipe.isItemResult()) return recipe.itemResult();
+    EntityType<?> type =
+        recipe.entityResult()
+            .flatMap(result -> BuiltInRegistries.ENTITY_TYPE.getOptional(result.entity()))
+            .orElse(null);
+    SpawnEggItem spawnEgg = type == null ? null : SpawnEggItem.byId(type);
+    return spawnEgg == null ? ItemStack.EMPTY : spawnEgg.getDefaultInstance();
   }
 
   private static List<Component> celestialInfusionTooltips() {

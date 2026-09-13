@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_diamond": {
+    "has_hex_focus": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:diamond"
+            "items": "hexalia:hex_focus"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hexalia:debug_natures_ritual"
+        "recipe": "hexalia:heartseed_from_ritual_table"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -23,12 +23,12 @@
       "has_the_recipe"
     ],
     [
-      "has_diamond"
+      "has_hex_focus"
     ]
   ],
   "rewards": {
     "recipes": [
-      "hexalia:debug_natures_ritual"
+      "hexalia:heartseed_from_ritual_table"
     ]
   }
 }

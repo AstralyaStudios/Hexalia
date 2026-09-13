@@ -1,6 +1,7 @@
 package net.astralya.hexalia.entity.custom.projectile;
 
 import net.astralya.hexalia.effect.ModMobEffects;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -21,11 +22,12 @@ public class ThornArrowEntity extends AbstractArrow {
   }
 
   public ThornArrowEntity(
-      EntityType<? extends ThornArrowEntity> type, Level level, LivingEntity shooter) {
-    super(type, level);
-    setOwner(shooter);
+      EntityType<? extends ThornArrowEntity> type,
+      Level level,
+      LivingEntity shooter,
+      ItemStack weapon) {
+    super(type, shooter, level, new ItemStack(Items.ARROW), weapon);
     this.pickup = Pickup.DISALLOWED;
-    setPos(shooter.getX(), shooter.getEyeY() - 0.1D, shooter.getZ());
     setBaseDamage(1.5D);
   }
 
@@ -40,7 +42,9 @@ public class ThornArrowEntity extends AbstractArrow {
     super.onHitEntity(hit);
 
     if (!level().isClientSide && hit.getEntity() instanceof LivingEntity living) {
-      living.addEffect(new MobEffectInstance(ModMobEffects.BLEEDING, 60, 0));
+      living.addEffect(
+          new MobEffectInstance(
+              BuiltInRegistries.MOB_EFFECT.wrapAsHolder(ModMobEffects.BLEEDING.get()), 60, 0));
     }
   }
 

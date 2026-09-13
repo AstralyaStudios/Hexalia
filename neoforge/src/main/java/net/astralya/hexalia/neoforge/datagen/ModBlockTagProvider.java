@@ -172,16 +172,12 @@ public final class ModBlockTagProvider extends BlockTagsProvider {
             net.minecraft.world.level.block.Blocks.SOUL_SAND,
             net.minecraft.world.level.block.Blocks.HONEY_BLOCK);
     tag(ModTags.Blocks.RESIN_LOGS)
-            .add(Blocks.DARK_OAK_LOG,
-                    Blocks.STRIPPED_DARK_OAK_LOG,
-                    ModBlocks.COTTONWOOD_LOG.get(),
-                    ModBlocks.STRIPPED_COTTONWOOD_LOG.get(),
-                    ModBlocks.COTTONWOOD_WOOD.get(),
-                    ModBlocks.STRIPPED_COTTONWOOD_WOOD.get(),
-                    ModBlocks.WILLOW_LOG.get(),
-                    ModBlocks.STRIPPED_WILLOW_LOG.get(),
-                    ModBlocks.WILLOW_WOOD.get(),
-                    ModBlocks.STRIPPED_WILLOW_WOOD.get());
+        .add(
+            Blocks.DARK_OAK_LOG,
+            ModBlocks.COTTONWOOD_LOG.get(),
+            ModBlocks.COTTONWOOD_WOOD.get(),
+            ModBlocks.WILLOW_LOG.get(),
+            ModBlocks.WILLOW_WOOD.get());
     tag(ModTags.Blocks.COTTONWOOD_LOGS)
         .add(
             ModBlocks.COTTONWOOD_LOG.get(),
@@ -233,6 +229,35 @@ public final class ModBlockTagProvider extends BlockTagsProvider {
             ModBlocks.WILLOW_HANGING_SIGN.get(),
             ModBlocks.WILLOW_HANGING_WALL_SIGN.get());
     tag(ModTags.Blocks.SPIRITROOT_BOUND_BLOCKS).add(ModBlocks.SPIRIT_BLOOM.get());
+    tag(ModTags.Blocks.HERBS)
+        .add(ModBlocks.WITCHWEED.get())
+        .add(ModBlocks.SPIRIT_BLOOM.get())
+        .add(ModBlocks.DREAMSHROOM.get())
+        .add(ModBlocks.SIREN_KELP.get())
+        .add(ModBlocks.GHOST_FERN.get())
+        .add(ModBlocks.CELESTIAL_BLOOM.get())
+        .add(ModBlocks.LOTUS_FLOWER.get());
+    tag(ModTags.Blocks.GRAVEBLOOM_PLANTS)
+        .add(
+            Blocks.BROWN_MUSHROOM,
+            Blocks.RED_MUSHROOM,
+            Blocks.DANDELION,
+            Blocks.POPPY,
+            Blocks.BLUE_ORCHID,
+            Blocks.ALLIUM,
+            Blocks.AZURE_BLUET,
+            Blocks.RED_TULIP,
+            Blocks.ORANGE_TULIP,
+            Blocks.WHITE_TULIP,
+            Blocks.PINK_TULIP,
+            Blocks.OXEYE_DAISY,
+            Blocks.CORNFLOWER,
+            Blocks.LILY_OF_THE_VALLEY,
+            ModBlocks.WITCHWEED.get(),
+            ModBlocks.SPIRIT_BLOOM.get(),
+            ModBlocks.DREAMSHROOM.get(),
+            ModBlocks.GHOST_FERN.get(),
+            ModBlocks.CELESTIAL_BLOOM.get());
     tag(ModTags.Blocks.ATTRACTS_MOTH)
         .add(net.minecraft.world.level.block.Blocks.LANTERN)
         .add(net.minecraft.world.level.block.Blocks.SEA_LANTERN)

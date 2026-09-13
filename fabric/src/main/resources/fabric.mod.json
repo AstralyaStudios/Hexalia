@@ -16,6 +16,9 @@
     "client": [
       "net.astralya.hexalia.fabric.HexaliaFabricClient"
     ],
+    "jei_mod_plugin": [
+      "net.astralya.hexalia.compat.jei.HexaliaJeiPlugin"
+    ],
     "emi": [
       "net.astralya.hexalia.compat.emi.HexaliaEmiPlugin"
     ],
@@ -35,6 +38,7 @@
     "geckolib": ">=4.7.6"
   },
   "suggests": {
+    "accessories": "*",
     "patchouli": "*",
     "emi": "*",
     "roughlyenoughitems": "*"

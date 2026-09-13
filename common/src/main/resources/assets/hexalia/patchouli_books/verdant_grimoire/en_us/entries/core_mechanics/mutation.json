@@ -7,13 +7,13 @@
     {
       "type": "text",
       "title": "Mutation",
-      "text": "Mutation is the process of transforming natural blocks into new forms using Mutavis. Through it, hidden aspects of the world are revealed, allowing common materials to take on magical properties."
+      "text": "Mutavis is a resinous preparation that awakens hidden possibilities in ordinary blocks. Use it directly on a compatible block to transform it or draw forth a new resource."
     },
     {
       "type": "text",
       "title": "Using Mutavis",
       "anchor": "usage",
-      "text": "Mutavis is made with the $(l:hexalia:core_mechanics/mortar_and_pestle)Mortar and Pestle$(/l) from Tree Resin, a Slimeball, and any crushed herb. It can then be applied directly to blocks to trigger a transformation."
+      "text": "Grind Tree Resin, a Slimeball, and any crushed herb in the $(l:hexalia:core_mechanics/mortar_and_pestle)Mortar and Pestle$(/l). Hold the resulting Mutavis and use it on a block shown in the recipes below."
     },
     {
       "type": "hexalia:recipe_page",

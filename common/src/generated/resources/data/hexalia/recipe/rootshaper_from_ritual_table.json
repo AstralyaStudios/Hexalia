@@ -1,9 +1,9 @@
 {
   "type": "hexalia:natures_ritual",
-  "ingredients": [
-    {
-      "item": "hexalia:ancient_seed"
-    },
+  "center": {
+    "item": "hexalia:ancient_seed"
+  },
+  "offerings": [
     {
       "item": "hexalia:earth_node"
     },
@@ -15,6 +15,12 @@
     },
     {
       "item": "hexalia:dream_paste"
+    },
+    {
+      "item": "minecraft:rooted_dirt"
+    },
+    {
+      "item": "hexalia:tree_resin"
     }
   ],
   "output": "hexalia:rootshaper"
