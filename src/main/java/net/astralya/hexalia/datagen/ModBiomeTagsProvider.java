@@ -5,6 +5,7 @@ import net.astralya.hexalia.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -22,7 +23,8 @@ public class ModBiomeTagsProvider extends BiomeTagsProvider {
         // Vegetation
         this.tag(ModTags.Biomes.HAS_SHROOMS)
                 .add(Biomes.OLD_GROWTH_PINE_TAIGA)
-                .add(Biomes.MUSHROOM_FIELDS);
+                .add(Biomes.MUSHROOM_FIELDS)
+                .addOptionalTag(new ResourceLocation("forge", "is_mushroom"));
 
         this.tag(ModTags.Biomes.HAS_SIREN_KELP)
                 .addTag(BiomeTags.IS_OCEAN);
@@ -33,7 +35,8 @@ public class ModBiomeTagsProvider extends BiomeTagsProvider {
 
         this.tag(ModTags.Biomes.HAS_SWAMP_VEGETATION)
                 .add(Biomes.MANGROVE_SWAMP)
-                .add(Biomes.SWAMP);
+                .add(Biomes.SWAMP)
+                .addOptionalTag(new ResourceLocation("forge", "is_swamp"));
 
         this.tag(ModTags.Biomes.HAS_FLORAL_VEGETATION)
                 .add(Biomes.MEADOW)
@@ -54,7 +57,8 @@ public class ModBiomeTagsProvider extends BiomeTagsProvider {
                 .add(Biomes.DESERT)
                 .add(Biomes.BADLANDS)
                 .add(Biomes.WINDSWEPT_SAVANNA)
-                .add(Biomes.SAVANNA);
+                .add(Biomes.SAVANNA)
+                .addOptionalTag(new ResourceLocation("forge", "is_desert"));
 
         // Entities
         this.tag(ModTags.Biomes.SILK_MOTH_SPAWNS)

@@ -76,6 +76,8 @@ public class ModCreativeModeTabs {
         output.accept(ModItems.MANDRAKE_SEEDS.get());
         output.accept(ModItems.SUNFIRE_TOMATO_SEEDS.get());
         output.accept(ModItems.RABBAGE_SEEDS.get());
+        output.accept(ModBlocks.WILD_MANDRAKE.get());
+        output.accept(ModBlocks.WILD_SUNFIRE_TOMATO.get());
 
         output.accept(ModItems.MANDRAKE.get());
         output.accept(ModItems.SUNFIRE_TOMATO.get());
@@ -100,6 +102,7 @@ public class ModCreativeModeTabs {
         output.accept(ModItems.BREW_OF_HOMESTEAD.get());
         output.accept(ModItems.BREW_OF_SIPHON.get());
         output.accept(ModItems.BREW_OF_DAYBLOOM.get());
+        output.accept(ModItems.BREW_OF_GRAVEBLOOM.get());
         output.accept(ModItems.BREW_OF_ARACHNID_GRACE.get());
         output.accept(ModItems.BREW_OF_HOLLOW_SILENCE.get());
 
@@ -144,6 +147,12 @@ public class ModCreativeModeTabs {
     }
 
     private static void acceptWearables(CreativeModeTab.Output output) {
+        output.accept(ModItems.SAGE_PENDANT.get());
+        output.accept(ModItems.SEAFOAM_TALISMAN.get());
+        output.accept(ModItems.MOONWARD_RING.get());
+        output.accept(ModItems.WITCHHEART_CLUSTER.get());
+        output.accept(ModItems.WYRD_FEATHER.get());
+        output.accept(ModItems.GREEN_OMEN.get());
         output.accept(ModItems.EARPLUGS.get());
         output.accept(ModItems.GHOSTVEIL.get());
         output.accept(ModItems.BOGSHADE_BOOTS.get());
@@ -165,6 +174,7 @@ public class ModCreativeModeTabs {
         output.accept(ModItems.SMALL_CAULDRON.get());
         output.accept(ModBlocks.SHELF.get());
         output.accept(ModBlocks.RITUAL_TABLE.get());
+        output.accept(ModItems.HERB_JAR.get());
         output.accept(ModBlocks.INFUSED_DIRT.get());
         output.accept(ModBlocks.INFUSED_FARMLAND.get());
         output.accept(ModBlocks.RITUAL_BRAZIER.get());
@@ -180,10 +190,11 @@ public class ModCreativeModeTabs {
     }
 
     private static void acceptRareItems(CreativeModeTab.Output output) {
+        output.accept(ModItems.HEARTSEED.get());
         output.accept(ModItems.ANCIENT_SEED.get());
         output.accept(ModItems.KELPWEAVE_BLADE.get());
         output.accept(ModItems.ROOTSHAPER.get());
-        output.accept(ModItems.SAGE_PENDANT.get());
+        output.accept(ModItems.CINDERHEW.get());
         output.accept(ModItems.THORNBOW.get());
         output.accept(ModItems.BRIAR_SICKLE.get());
     }

@@ -1,6 +1,16 @@
 {
   "entries": [
-    "hexalia:ancient_seed_from_jungle_temples"
+    "hexalia:accessories/ruined_portal",
+    "hexalia:ancient_seed_from_jungle_temples",
+    "hexalia:accessories/stronghold_crossing",
+    "hexalia:accessories/stronghold_corridor",
+    "hexalia:accessories/jungle_temple",
+    "hexalia:accessories/ancient_city",
+    "hexalia:accessories/stronghold_library",
+    "hexalia:accessories/simple_dungeon",
+    "hexalia:accessories/woodland_mansion",
+    "hexalia:accessories/abandoned_mineshaft",
+    "hexalia:accessories/desert_pyramid"
   ],
   "replace": false
 }

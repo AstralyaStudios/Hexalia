@@ -2,6 +2,7 @@ package net.astralya.hexalia.event;
 
 import net.astralya.hexalia.HexaliaMod;
 import net.astralya.hexalia.effect.ModMobEffects;
+import net.astralya.hexalia.compat.accessory.AccessoryLookup;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.item.custom.armor.GhostveilItem;
 import net.astralya.hexalia.util.MagicResistanceHelper;
@@ -33,15 +34,18 @@ public class ModGameEvents {
     @SubscribeEvent
     public static void onExperiencePickup(PlayerXpEvent.PickupXp event) {
         Player player = event.getEntity();
-        ItemStack offhand = player.getOffhandItem();
-        if (!offhand.isEmpty() && offhand.getItem() == ModItems.SAGE_PENDANT.get()) {
+        ItemStack pendant = player.getOffhandItem();
+        if (!pendant.is(ModItems.SAGE_PENDANT.get())) {
+            pendant = AccessoryLookup.getEquippedStack(player, ModItems.SAGE_PENDANT.get());
+        }
+        if (!pendant.isEmpty()) {
             ExperienceOrb orb = event.getOrb();
             int baseXp = orb.value;
             int bonus = (int) Math.floor(baseXp * 2.0);
             orb.value += bonus;
-            if (!player.level().isClientSide && !player.isCreative() && offhand.isDamageableItem()) {
+            if (!player.level().isClientSide && !player.isCreative() && pendant.isDamageableItem()) {
                 if (player instanceof ServerPlayer serverPlayer && player.level() instanceof ServerLevel serverLevel) {
-                    offhand.hurtAndBreak(1, serverPlayer, p -> p.broadcastBreakEvent(EquipmentSlot.OFFHAND));
+                    pendant.hurtAndBreak(1, serverPlayer, p -> p.broadcastBreakEvent(EquipmentSlot.OFFHAND));
                 }
             }
         }

@@ -22,6 +22,8 @@ public class ModBlockEntityTypes {
             () -> BlockEntityType.Builder.of(RitualTableBlockEntity::new, ModBlocks.RITUAL_TABLE.get()).build(null));
     public static final RegistryObject<BlockEntityType<RitualBrazierBlockEntity>> RITUAL_BRAZIER = BLOCK_ENTITY_TYPE.register("ritual_brazier",
             () -> BlockEntityType.Builder.of(RitualBrazierBlockEntity::new, ModBlocks.RITUAL_BRAZIER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<HerbJarBlockEntity>> HERB_JAR = BLOCK_ENTITY_TYPE.register("herb_jar",
+            () -> BlockEntityType.Builder.of(HerbJarBlockEntity::new, ModBlocks.HERB_JAR.get()).build(null));
     public static final RegistryObject<BlockEntityType<ShelfBlockEntity>> SHELF = BLOCK_ENTITY_TYPE.register("shelf",
             () -> BlockEntityType.Builder.of(ShelfBlockEntity::new, ModBlocks.SHELF.get()).build(null));
     public static final RegistryObject<BlockEntityType<CenserBlockEntity>> CENSER = BLOCK_ENTITY_TYPE.register("censer",

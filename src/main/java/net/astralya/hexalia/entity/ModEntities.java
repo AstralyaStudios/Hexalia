@@ -43,6 +43,10 @@ public class ModEntities {
             () -> EntityType.Builder.<ThornArrowEntity>of(ThornArrowEntity::new, MobCategory.MISC).sized(0.5f, 0.5f)
                     .clientTrackingRange(4).updateInterval(20).build("thorn_arrow"));
 
+    public static final RegistryObject<EntityType<CinderhewProjectile>> CINDERHEW = ENTITY_TYPE.register("cinderhew",
+            () -> EntityType.Builder.<CinderhewProjectile>of(CinderhewProjectile::new, MobCategory.MISC)
+                    .sized(0.5f, 0.5f).clientTrackingRange(8).updateInterval(1).build("cinderhew"));
+
     // Boats
     public static final RegistryObject<EntityType<ModBoatEntity>> MOD_BOAT = ENTITY_TYPE.register("mod_boat",
             () -> EntityType.Builder.<ModBoatEntity>of(ModBoatEntity::new, MobCategory.MISC)

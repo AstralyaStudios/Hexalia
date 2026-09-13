@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:seafoam_talisman",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:moonward_ring",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:witchheart_cluster",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:wyrd_feather",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:green_omen",
+          "weight": 20
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "hexalia:accessories/accessory"
+}

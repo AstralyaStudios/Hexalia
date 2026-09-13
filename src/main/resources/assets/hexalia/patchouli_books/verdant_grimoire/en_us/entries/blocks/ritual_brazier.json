@@ -8,17 +8,12 @@
       "type": "spotlight",
       "item": "hexalia:ritual_brazier",
       "title": "Ritual Brazier",
-      "text": "A ritual vessel used in $(l:hexalia:core_mechanics/celestial_infusion)Celestial Infusion$(/l) and $(l:hexalia:core_mechanics/natures_ritual)Nature's Ritual$(/l). It holds ingredients, salt, and focused ritual energy."
+      "text": "A ritual vessel used in $(l:hexalia:core_mechanics/celestial_infusion)Celestial Infusion$(/l) and $(l:hexalia:core_mechanics/natures_ritual)Nature's Ritual$(/l). To create one, crouch and right-click any plank block with an $(l:hexalia:content/tools#athame)Athame$(/l)."
     },
     {
       "type": "text",
-      "title": "Crafting",
-      "text": "A Ritual Brazier is shaped directly in the world. Crouch and right-click any plank block with an $(l:hexalia:content/tools#athame)Athame$(/l) to carve it into a brazier."
-    },
-    {
-      "type": "text",
-      "title": "Use",
-      "text": "Place items into the brazier for rituals, then follow the requirements of the ritual being performed. Some rituals need salt, surrounding plants, or open sky before they can be activated."
+      "title": "Preparation",
+      "text": "For Nature's Ritual, place an offering in each needed brazier, then add Salt. Braziers may stand anywhere on the Ritual Table's level within 8 blocks; no fixed pattern is required. Only matched braziers are consumed. Celestial Infusion instead uses one unsalted brazier beneath open sky."
     }
   ]
 }

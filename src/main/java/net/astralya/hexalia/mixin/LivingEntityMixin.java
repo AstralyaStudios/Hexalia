@@ -39,7 +39,10 @@ public class LivingEntityMixin {
     public void returnDamage(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
         float newAmount = cir.getReturnValue();
         Entity attacker = source.getEntity();
-        if (hexalia$livingEntity.hasEffect(ModMobEffects.SPIKESKIN.get()) && attacker instanceof LivingEntity livingAttacker) {
+        if (hexalia$livingEntity.hasEffect(ModMobEffects.SPIKESKIN.get())
+                && attacker instanceof LivingEntity livingAttacker
+                && !(source.is(net.minecraft.world.damagesource.DamageTypes.INDIRECT_MAGIC)
+                && source.getDirectEntity() == hexalia$livingEntity)) {
             livingAttacker.hurt(livingAttacker.damageSources().indirectMagic(livingAttacker, hexalia$livingEntity),
                     (float) (newAmount * 0.2)
                             + Objects.requireNonNull(hexalia$livingEntity.getEffect(ModMobEffects.SPIKESKIN.get())).getAmplifier() + 1);

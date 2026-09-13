@@ -2,6 +2,7 @@ package net.astralya.hexalia.block.entity.custom;
 
 import net.astralya.hexalia.Configuration;
 import net.astralya.hexalia.block.entity.ModBlockEntityTypes;
+import net.astralya.hexalia.gameplay.enchantedplant.WindsongDeflection;
 import net.astralya.hexalia.sound.ModSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -71,7 +72,7 @@ public class WindsongBlockEntity extends BlockEntity {
 
                 for (Entity projectile : projectiles) {
                     if (!projectile.isRemoved()) {
-                        discardProjectile(serverLevel, projectile);
+                        deflectProjectile(serverLevel, pPos, (Projectile) projectile);
                     }
                 }
 
@@ -85,7 +86,11 @@ public class WindsongBlockEntity extends BlockEntity {
         }
     }
 
-    private void discardProjectile(ServerLevel pLevel, Entity projectile) {
+    private void deflectProjectile(ServerLevel pLevel, BlockPos sourcePos, Projectile projectile) {
+        Vec3 source = Vec3.atCenterOf(sourcePos);
+        Vec3 outward = projectile.position().subtract(source);
+        outward = new Vec3(outward.x, 0.0, outward.z);
+        if (!WindsongDeflection.deflect(projectile, outward)) return;
         pLevel.playSound(null, projectile.getX(), projectile.getY(), projectile.getZ(),
                 ModSoundEvents.WIND_BURST.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
 
@@ -100,7 +105,6 @@ public class WindsongBlockEntity extends BlockEntity {
             pLevel.sendParticles(ParticleTypes.EFFECT, x, y, z, 1, 0, 0, 0, 0.1);
         }
 
-        projectile.discard();
     }
 
     private void emitParticles(ServerLevel level, BlockPos pos) {

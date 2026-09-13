@@ -1,9 +1,9 @@
 {
   "type": "hexalia:ritual_table",
-  "ingredients": [
-    {
-      "item": "hexalia:celestial_crystal"
-    },
+  "center": {
+    "item": "hexalia:celestial_crystal"
+  },
+  "offerings": [
     {
       "item": "hexalia:spirit_powder"
     },
@@ -15,6 +15,9 @@
     },
     {
       "item": "minecraft:experience_bottle"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
     }
   ],
   "output": {

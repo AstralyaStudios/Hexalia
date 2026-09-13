@@ -88,6 +88,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     private void generateFunctionalBlocks() {
         // Simple drops
         this.dropSelf(ModBlocks.RITUAL_BRAZIER.get());
+        this.dropSelf(ModBlocks.HERB_JAR.get());
         this.dropSelf(ModBlocks.INFUSED_DIRT.get());
         this.dropSelf(ModBlocks.SALT_LAMP.get());
         this.dropSelf(ModBlocks.CANDLE_SKULL.get());

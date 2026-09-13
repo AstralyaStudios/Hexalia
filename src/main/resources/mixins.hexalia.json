@@ -5,11 +5,12 @@
   "minVersion": "0.8",
   "refmap": "mixins.hexalia.refmap.json",
   "mixins": [
+    "BlockMixin",
     "CobwebMixin",
     "LivingEntityMixin",
     "MobMixin",
     "SugarCanePlanting",
-    "WardenVibrationUserMixin"
+    "ServerLevelMixin"
   ],
   "injectors": {
     "defaultRequire": 1

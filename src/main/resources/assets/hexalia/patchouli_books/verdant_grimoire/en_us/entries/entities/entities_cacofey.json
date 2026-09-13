@@ -7,7 +7,7 @@
     {
       "type": "text",
       "title": "Cacofey",
-      "text": "The Cacofey is a mischievous creature found in jungles, known for stealing food and assisting with farming once tamed."
+      "text": "The Cacofey is a mischievous jungle creature, known for stealing food and assisting with farming once tamed. It can also be summoned through $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Nature's Ritual$(/l), which requires a soul sacrifice."
     },
     {
       "type": "text",

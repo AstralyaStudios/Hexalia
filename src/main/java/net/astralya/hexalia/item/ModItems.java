@@ -38,6 +38,8 @@ public class ModItems {
     public static final RegistryObject<Item> EARTH_NODE = ITEMS.register("earth_node", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ANCIENT_SEED = ITEMS.register("ancient_seed",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> HEARTSEED = ITEMS.register("heartseed",
+            () -> new HeartseedItem(new Item.Properties().rarity(Rarity.RARE)));
 
     // Crops & Seeds
     public static final RegistryObject<Item> SUNFIRE_TOMATO = ITEMS.register("sunfire_tomato",
@@ -99,7 +101,7 @@ public class ModItems {
     public static final RegistryObject<Item> SEARING_SAC = ITEMS.register("searing_sac",
             () -> new ThrownSacItem(new Item.Properties(), SearingSacProjectile::new));
     public static final RegistryObject<Item> SAGE_PENDANT = ITEMS.register("sage_pendant",
-            () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).durability(64)));
+            () -> new AccessoryItem(new Item.Properties().rarity(Rarity.UNCOMMON).durability(64), "sage_pendant"));
     public static final RegistryObject<Item> SILK_IDOL = ITEMS.register("silk_idol",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CLARITY_IDOL = ITEMS.register("clarity_idol",
@@ -116,10 +118,23 @@ public class ModItems {
             () -> new BriarSickleItem(new Item.Properties().durability(256)));
     public static final RegistryObject<Item> ROOTSHAPER = ITEMS.register("rootshaper",
             () -> new RootshaperItem(new Item.Properties().rarity(Rarity.RARE).durability(1561)));
+    public static final RegistryObject<Item> CINDERHEW = ITEMS.register("cinderhew",
+            () -> new CinderhewItem(ModToolTiers.ANCIENT, 3.0F, -3.0F,
+                    new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> SPIRITROOT_TETHER = ITEMS.register("spiritroot_tether",
             () -> new SpiritrootTetherItem(new Item.Properties().durability(32)));
     public static final RegistryObject<Item> LADLE = ITEMS.register("ladle",
             () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> SEAFOAM_TALISMAN = ITEMS.register("seafoam_talisman",
+            () -> new AccessoryItem(new Item.Properties().stacksTo(1), "seafoam_talisman"));
+    public static final RegistryObject<Item> MOONWARD_RING = ITEMS.register("moonward_ring",
+            () -> new AccessoryItem(new Item.Properties().stacksTo(1), "moonward_ring"));
+    public static final RegistryObject<Item> WITCHHEART_CLUSTER = ITEMS.register("witchheart_cluster",
+            () -> new AccessoryItem(new Item.Properties().stacksTo(1), "witchheart_cluster"));
+    public static final RegistryObject<Item> WYRD_FEATHER = ITEMS.register("wyrd_feather",
+            () -> new AccessoryItem(new Item.Properties().stacksTo(1), "wyrd_feather"));
+    public static final RegistryObject<Item> GREEN_OMEN = ITEMS.register("green_omen",
+            () -> new AccessoryItem(new Item.Properties().stacksTo(1), "green_omen"));
 
     // Block Items
     public static final RegistryObject<Item> CANDLE_SKULL = ITEMS.register("candle_skull",
@@ -132,6 +147,8 @@ public class ModItems {
             () -> new BlockItem(ModBlocks.SMALL_CAULDRON.get(), new Item.Properties()));
     public static final RegistryObject<Item> MORTAR_AND_PESTLE = ITEMS.register("mortar_and_pestle",
             () -> new BlockItem(ModBlocks.MORTAR_AND_PESTLE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> HERB_JAR = ITEMS.register("herb_jar",
+            () -> new HerbJarBlockItem(ModBlocks.HERB_JAR.get(), new Item.Properties()));
 
     // Weapons & Armor
     public static final RegistryObject<Item> KELPWEAVE_BLADE = ITEMS.register("kelpweave_blade",
@@ -187,6 +204,9 @@ public class ModItems {
     public static final RegistryObject<Item> BREW_OF_DAYBLOOM = ITEMS.register("brew_of_daybloom",
             () -> new BrewItem(new Item.Properties().stacksTo(4), ModMobEffects.DAYBLOOM, 20 * 240, 0,
                     Component.translatable("tooltip.hexalia.daybloom").withStyle(ChatFormatting.BLUE)));
+    public static final RegistryObject<Item> BREW_OF_GRAVEBLOOM = ITEMS.register("brew_of_gravebloom",
+            () -> new BrewItem(new Item.Properties().stacksTo(4), ModMobEffects.GRAVEBLOOM, 20 * 90, 0,
+                    Component.translatable("tooltip.hexalia.gravebloom").withStyle(ChatFormatting.BLUE)));
     public static final RegistryObject<Item> BREW_OF_ARACHNID_GRACE = ITEMS.register("brew_of_arachnid_grace",
             () -> new BrewItem(new Item.Properties().stacksTo(4), ModMobEffects.ARACHNID_GRACE, 20 * 240, 0,
                     Component.translatable("tooltip.hexalia.arachnid_grace").withStyle(ChatFormatting.BLUE)));

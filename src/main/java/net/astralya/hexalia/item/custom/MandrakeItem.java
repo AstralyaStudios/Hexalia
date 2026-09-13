@@ -1,6 +1,7 @@
 package net.astralya.hexalia.item.custom;
 
 import net.astralya.hexalia.Configuration;
+import net.astralya.hexalia.compat.accessory.AccessoryLookup;
 import net.astralya.hexalia.effect.ModMobEffects;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.sound.ModSoundEvents;
@@ -36,8 +37,13 @@ public class MandrakeItem extends Item {
 
             List<Entity> entities = level.getEntities(player, player.getBoundingBox().inflate(radius));
             for (Entity entity : entities) {
-                if (entity instanceof LivingEntity livingEntity && !(player.getItemBySlot(EquipmentSlot.HEAD).is(ModTags.Items.STUN_IMMUNE_HEADWEAR))) {
-                    livingEntity.addEffect(new MobEffectInstance(ModMobEffects.STUNNED.get(), stunDuration * 20, 0));
+                if (entity instanceof LivingEntity livingEntity) {
+                    boolean protectedByEarplugs = livingEntity instanceof Player target
+                            && (target.getItemBySlot(EquipmentSlot.HEAD).is(ModTags.Items.STUN_IMMUNE_HEADWEAR)
+                            || AccessoryLookup.hasEquipped(target, ModItems.EARPLUGS.get()));
+                    if (!protectedByEarplugs) {
+                        livingEntity.addEffect(new MobEffectInstance(ModMobEffects.STUNNED.get(), stunDuration, 0));
+                    }
                 }
             }
 

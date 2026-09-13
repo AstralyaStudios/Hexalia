@@ -17,6 +17,7 @@ public class ModTags {
 
         public static final TagKey<Item> HERBS = createItemTag("herbs");
         public static final TagKey<Item> CRUSHED_HERBS = createItemTag("crushed_herbs");
+        public static final TagKey<Item> HERB_JAR_STORABLE = createItemTag("herb_jar_storable");
         public static final TagKey<Item> BREWS = createItemTag("brews");
         public static final TagKey<Item> COTTONWOOD_LOGS = createItemTag("cottonwood_logs");
         public static final TagKey<Item> WILLOW_LOGS = createItemTag("willow_logs");
@@ -55,6 +56,9 @@ public class ModTags {
     public static class Blocks {
 
         public static final TagKey<Block> ATTRACTS_MOTH = createBlockTag("attracts_moth");
+        public static final TagKey<Block> HERBS = createBlockTag("herbs");
+        public static final TagKey<Block> RESIN_LOGS = createBlockTag("resin_logs");
+        public static final TagKey<Block> GRAVEBLOOM_PLANTS = createBlockTag("gravebloom_plants");
         public static final TagKey<Block> COTTONWOOD_LOGS = createBlockTag("cottonwood_logs");
         public static final TagKey<Block> WILLOW_LOGS = createBlockTag("willow_logs");
         public static final TagKey<Block> SPIRITROOT_BOUND_BLOCKS = createBlockTag("spiritroot_bound_blocks");

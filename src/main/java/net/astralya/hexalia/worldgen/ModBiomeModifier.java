@@ -57,7 +57,7 @@ public final class ModBiomeModifier {
                 SPAWN_SILK_MOTH,
                 new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                         biomes.getOrThrow(ModTags.Biomes.SILK_MOTH_SPAWNS),
-                        List.of(new MobSpawnSettings.SpawnerData(ModEntities.SILK_MOTH_ENTITY.get(), 2, 1, 2))
+                        List.of(new MobSpawnSettings.SpawnerData(ModEntities.SILK_MOTH_ENTITY.get(), 6, 1, 2))
                 )
         );
 

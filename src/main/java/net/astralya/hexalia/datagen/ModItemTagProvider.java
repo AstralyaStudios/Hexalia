@@ -101,18 +101,23 @@ public class ModItemTagProvider extends ItemTagsProvider {
     private void addCustomTags() {
         // Herbs and magical components
         tag(ModTags.Items.HERBS)
-                .add(ModBlocks.SPIRIT_BLOOM.get().asItem())
-                .add(ModItems.SIREN_KELP.get())
-                .add(ModBlocks.DREAMSHROOM.get().asItem())
-                .add(ModBlocks.GHOST_FERN.get().asItem())
                 .add(ModBlocks.WITCHWEED.get().asItem())
-                .add(ModBlocks.CELESTIAL_BLOOM.get().asItem());
+                .add(ModBlocks.SPIRIT_BLOOM.get().asItem())
+                .add(ModBlocks.DREAMSHROOM.get().asItem())
+                .add(ModItems.SIREN_KELP.get())
+                .add(ModBlocks.GHOST_FERN.get().asItem())
+                .add(ModBlocks.CELESTIAL_BLOOM.get().asItem())
+                .add(ModItems.LOTUS_FLOWER.get());
 
         tag(ModTags.Items.CRUSHED_HERBS)
                 .add(ModItems.SPIRIT_POWDER.get().asItem())
                 .add(ModItems.SIREN_PASTE.get())
                 .add(ModItems.DREAM_PASTE.get())
                 .add(ModItems.GHOST_POWDER.get());
+
+        tag(ModTags.Items.HERB_JAR_STORABLE)
+                .addTag(ModTags.Items.HERBS)
+                .addTag(ModTags.Items.CRUSHED_HERBS);
 
         // Brews
         tag(ModTags.Items.BREWS)
@@ -122,6 +127,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.BREW_OF_SPIKESKIN.get())
                 .add(ModItems.BREW_OF_SIPHON.get())
                 .add(ModItems.BREW_OF_DAYBLOOM.get())
+                .add(ModItems.BREW_OF_GRAVEBLOOM.get())
                 .add(ModItems.BREW_OF_ARACHNID_GRACE.get())
                 .add(ModItems.BREW_OF_HOLLOW_SILENCE.get())
                 .add(ModItems.RUSTIC_BOTTLE.get());

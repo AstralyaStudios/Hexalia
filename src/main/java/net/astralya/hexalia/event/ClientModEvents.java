@@ -1,8 +1,10 @@
 package net.astralya.hexalia.event;
 
 import net.astralya.hexalia.HexaliaMod;
+import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.client.model.PestleModel;
 import net.astralya.hexalia.client.renderer.entity.CacofeyRenderer;
+import net.astralya.hexalia.client.renderer.entity.CinderhewProjectileRenderer;
 import net.astralya.hexalia.client.renderer.entity.ModBoatRenderer;
 import net.astralya.hexalia.client.renderer.entity.SilkMothRenderer;
 import net.astralya.hexalia.client.renderer.entity.ThornArrowRenderer;
@@ -16,6 +18,8 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -38,6 +42,7 @@ public class ClientModEvents {
         EntityRenderers.register(ModEntities.MOD_BOAT.get(), context -> new ModBoatRenderer(context, false));
         EntityRenderers.register(ModEntities.MOD_CHEST_BOAT.get(), context -> new ModBoatRenderer(context, true));
         EntityRenderers.register(ModEntities.THORN_ARROW.get(), ThornArrowRenderer::new);
+        EntityRenderers.register(ModEntities.CINDERHEW.get(), CinderhewProjectileRenderer::new);
         EntityRenderers.register(ModEntities.SILK_MOTH_ENTITY.get(), SilkMothRenderer::new);
         EntityRenderers.register(ModEntities.CACOFEY_ENTITY.get(), CacofeyRenderer::new);
 
@@ -45,6 +50,7 @@ public class ClientModEvents {
         Sheets.addWoodType(ModWoodTypes.WILLOW);
 
         event.enqueueWork(ModItemProperties::addCustomItemProperties);
+        event.enqueueWork(() -> ItemBlockRenderTypes.setRenderLayer(ModBlocks.HERB_JAR.get(), RenderType.translucent()));
     }
 
     @SubscribeEvent

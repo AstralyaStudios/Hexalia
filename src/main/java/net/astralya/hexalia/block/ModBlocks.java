@@ -127,7 +127,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> RABBAGE_CROP = BLOCKS.register("rabbage_crop",
             () -> new RabbageCropBlock(BlockBehaviour.Properties.copy(Blocks.POTATOES)));
     public static final RegistryObject<Block> WILD_MANDRAKE = registerBlock("wild_mandrake",
-            () -> new FlowerBlock(ModMobEffects.STUNNED, 6, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+            () -> new WildMandrakeBlock(ModMobEffects.STUNNED, 6, BlockBehaviour.Properties.copy(Blocks.POPPY)));
     public static final RegistryObject<Block> WILD_SUNFIRE_TOMATO = registerBlock("wild_sunfire_tomato",
             () -> new WildSunfireTomatoBlock(BlockBehaviour.Properties.copy(Blocks.POPPY).lightLevel(state -> 4)));
     public static final RegistryObject<Block> CHILLBERRY_BUSH = BLOCKS.register("chillberry_bush",
@@ -156,6 +156,8 @@ public class ModBlocks {
             () -> new RitualTableBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICKS).noOcclusion()));
     public static final RegistryObject<Block> RITUAL_BRAZIER = registerBlock("ritual_brazier",
             () -> new RitualBrazierBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> HERB_JAR = BLOCKS.register("herb_jar",
+            () -> new HerbJarBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).noOcclusion()));
     public static final RegistryObject<Block> CENSER = registerBlock("censer",
             () -> new CenserBlock(BlockBehaviour.Properties.copy(Blocks.CAMPFIRE).lightLevel(state -> state.getValue(LIT) ? 12 : 0).noOcclusion()));
     public static final RegistryObject<Block> DREAMCATCHER = registerBlock("dreamcatcher",

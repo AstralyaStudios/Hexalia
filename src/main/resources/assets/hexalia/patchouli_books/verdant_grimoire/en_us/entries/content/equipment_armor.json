@@ -28,6 +28,30 @@
       "title": "Earplugs",
       "text": "Protects the wearer from the harmful cries of Mandrakes, making them essential for safe harvesting."
     },
+    {
+      "type": "text",
+      "title": "Talismans & Charms",
+      "anchor": "accessories",
+      "text": "These small relics grant their gift while worn."
+    },
+    {
+      "type": "spotlight",
+      "item": [{"item": "hexalia:seafoam_talisman"}, {"item": "hexalia:moonward_ring"}],
+      "title": "Seafoam & Moonward",
+      "text": "The Seafoam Talisman steadily restores breath underwater. The Moonward Ring continually clears Blindness and Darkness."
+    },
+    {
+      "type": "spotlight",
+      "item": [{"item": "hexalia:witchheart_cluster"}, {"item": "hexalia:wyrd_feather"}],
+      "title": "Heart & Feather",
+      "text": "The Witchheart Cluster grants two extra hearts. The Wyrd Feather gives a small chance to slip unharmed from a direct melee or projectile strike."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:green_omen",
+      "title": "Green Omen",
+      "text": "When you harvest a mature crop, the Green Omen sometimes doubles everything the crop would have dropped."
+    },
 
     {
       "type": "spotlight",
@@ -68,16 +92,17 @@
         { "item": "hexalia:bloomwrap_hat" },
         { "item": "hexalia:bloomwrap_robes" }
       ],
-      "title": "Upper Garments",
+      "title": "Bloomwrap — Upper Garments",
       "text": "The Hat reduces knockback and grants resistance to stuns, while the Robes reflect a portion of incoming damage back to attackers."
     },
+
     {
       "type": "spotlight",
       "item": [
         { "item": "hexalia:bloomwrap_leggings" },
         { "item": "hexalia:bloomwrap_boots" }
       ],
-      "title": "Lower Garments",
+      "title": "Bloomwrap — Lower Garments",
       "text": "The Leggings grant regeneration when near flowers, and the Boots increase movement speed on leaves."
     }
   ]

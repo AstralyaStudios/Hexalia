@@ -13,19 +13,19 @@
       "type": "text",
       "title": "Processing",
       "anchor": "processing",
-      "text": "Right-click with ingredients to place up to three items into the mortar. With an empty hand, crouch and right-click three times to fully crush a valid recipe."
+      "text": "Right-click with each ingredient to place up to three items in the mortar. Once a valid mixture is ready, crouch and right-click three times with an empty hand to grind it."
     },
     {
       "type": "text",
       "title": "Collection",
       "anchor": "collection",
-      "text": "Once processing is complete, the result remains in the mortar. Right-click the mortar with an empty hand to collect the output."
+      "text": "The finished result remains in the bowl. Stand normally and right-click with an empty hand to collect it. The recipe pages below show only what goes in and what comes out."
     },
     {
       "type": "text",
       "title": "Characteristics",
       "anchor": "mechanics",
-      "text": "$(li)Holds up to three items$(li)Manual activation required$(li)No fuel or external power$(li)Produces refined materials used across Hexalia"
+      "text": "The mortar holds up to three items and needs no fuel. If the mixture is not valid, grinding will not begin; remove ingredients with an empty hand and try another combination."
     },
     {
       "type": "text",

@@ -1,9 +1,9 @@
 {
   "type": "hexalia:ritual_table",
-  "ingredients": [
-    {
-      "item": "minecraft:amethyst_shard"
-    },
+  "center": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "offerings": [
     {
       "item": "minecraft:feather"
     },

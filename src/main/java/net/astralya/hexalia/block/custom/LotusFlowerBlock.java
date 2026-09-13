@@ -75,12 +75,12 @@ public class LotusFlowerBlock extends WaterlilyBlock implements BonemealableBloc
 
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
-        return true;
+        return random.nextFloat() < 0.6F;
     }
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        popResource(level, pos, new ItemStack(this));
+        HerbSpreading.spread(level, random, pos, state);
     }
 
     @Override

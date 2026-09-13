@@ -216,6 +216,23 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     }
 
     private void addCustomModTags() {
+        tag(ModTags.Blocks.HERBS)
+                .add(ModBlocks.WITCHWEED.get(), ModBlocks.SPIRIT_BLOOM.get(), ModBlocks.DREAMSHROOM.get(),
+                        ModBlocks.SIREN_KELP.get(), ModBlocks.GHOST_FERN.get(),
+                        ModBlocks.CELESTIAL_BLOOM.get(), ModBlocks.LOTUS_FLOWER.get());
+
+        tag(ModTags.Blocks.RESIN_LOGS)
+                .add(Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_WOOD, ModBlocks.COTTONWOOD_LOG.get(),
+                        ModBlocks.COTTONWOOD_WOOD.get(), ModBlocks.WILLOW_LOG.get(), ModBlocks.WILLOW_WOOD.get());
+
+        tag(ModTags.Blocks.GRAVEBLOOM_PLANTS)
+                .add(Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM, Blocks.DANDELION, Blocks.POPPY,
+                        Blocks.BLUE_ORCHID, Blocks.ALLIUM, Blocks.AZURE_BLUET, Blocks.RED_TULIP,
+                        Blocks.ORANGE_TULIP, Blocks.WHITE_TULIP, Blocks.PINK_TULIP, Blocks.OXEYE_DAISY,
+                        Blocks.CORNFLOWER, Blocks.LILY_OF_THE_VALLEY, ModBlocks.WITCHWEED.get(),
+                        ModBlocks.SPIRIT_BLOOM.get(), ModBlocks.DREAMSHROOM.get(), ModBlocks.GHOST_FERN.get(),
+                        ModBlocks.CELESTIAL_BLOOM.get());
+
         tag(ModTags.Blocks.SALT_BLOCKS)
                 .add(ModBlocks.SALT_BLOCK.get());
 

@@ -37,3 +37,10 @@ description='''A magical mod focused on herbology and potion brewing.'''
     versionRange="${patchouli_version_range}"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.hexalia]]
+    modId="curios"
+    mandatory=false
+    versionRange="[5.2.0,)"
+    ordering="AFTER"
+    side="BOTH"

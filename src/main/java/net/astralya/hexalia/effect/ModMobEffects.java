@@ -6,6 +6,7 @@ import net.astralya.hexalia.effect.custom.BleedingEffect;
 import net.astralya.hexalia.effect.custom.BloodlustEffect;
 import net.astralya.hexalia.effect.custom.BrambleguardEffect;
 import net.astralya.hexalia.effect.custom.DaybloomEffect;
+import net.astralya.hexalia.effect.custom.GravebloomEffect;
 import net.astralya.hexalia.effect.custom.HollowSilenceEffect;
 import net.astralya.hexalia.effect.custom.OverfedEffect;
 import net.astralya.hexalia.effect.custom.SiphonEffect;
@@ -35,6 +36,9 @@ public class ModMobEffects {
 
     public static final RegistryObject<MobEffect> DAYBLOOM = MOB_EFFECTS.register("daybloom",
             () -> new DaybloomEffect(MobEffectCategory.NEUTRAL, 0xFFD95E));
+
+    public static final RegistryObject<MobEffect> GRAVEBLOOM = MOB_EFFECTS.register("gravebloom",
+            () -> new GravebloomEffect(MobEffectCategory.BENEFICIAL, 0x527A48));
 
     public static final RegistryObject<MobEffect> BLOODLUST = MOB_EFFECTS.register("bloodlust",
             () -> new BloodlustEffect(MobEffectCategory.NEUTRAL, 0x8A0303).addAttributeModifier(

@@ -20,6 +20,12 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.function.Consumer;
+import java.util.List;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 public class EarplugsItem extends ArmorItem implements GeoItem {
 
@@ -57,4 +63,9 @@ public class EarplugsItem extends ArmorItem implements GeoItem {
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() { return cache; }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+        tooltip.add(Component.translatable("tooltip.hexalia.accessory.earplugs").withStyle(ChatFormatting.GRAY));
+    }
 }

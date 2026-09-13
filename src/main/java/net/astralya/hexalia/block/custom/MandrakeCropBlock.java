@@ -1,5 +1,6 @@
 package net.astralya.hexalia.block.custom;
 
+import net.astralya.hexalia.compat.accessory.AccessoryLookup;
 import net.astralya.hexalia.effect.ModMobEffects;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.sound.ModSoundEvents;
@@ -46,7 +47,8 @@ public class MandrakeCropBlock extends CropBlock {
     public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
         if (!pLevel.isClientSide() && pState.getValue(AGE) == MAX_AGE) {
-            if (!(pPlayer.getItemBySlot(EquipmentSlot.HEAD).is(ModTags.Items.STUN_IMMUNE_HEADWEAR)) && !(pPlayer.getAbilities().instabuild)) {
+            if (!(pPlayer.getItemBySlot(EquipmentSlot.HEAD).is(ModTags.Items.STUN_IMMUNE_HEADWEAR))
+                    && !AccessoryLookup.hasEquipped(pPlayer, ModItems.EARPLUGS.get()) && !(pPlayer.getAbilities().instabuild)) {
                 pPlayer.addEffect(new MobEffectInstance(ModMobEffects.STUNNED.get(), 60, 0));
                 pLevel.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSoundEvents.MANDRAKE_SCREAM.get(),
                         SoundSource.PLAYERS, 1.0f, 1.0f);

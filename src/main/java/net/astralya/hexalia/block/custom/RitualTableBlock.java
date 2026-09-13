@@ -40,6 +40,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -143,15 +144,7 @@ public class RitualTableBlock extends BaseEntityBlock {
             return true;
         }
 
-        BlockPos[] offsets = {pos.north(2), pos.south(2), pos.east(2), pos.west(2)};
-        List<RitualBrazierBlockEntity> filled = new ArrayList<>();
-        for (BlockPos brazierPos : offsets) {
-            if (level.getBlockEntity(brazierPos) instanceof RitualBrazierBlockEntity brazier && !brazier.getStoredItem().isEmpty()) {
-                filled.add(brazier);
-            }
-        }
-
-        Match match = findMatch(level, tableItem, filled, tableBE);
+        Match match = findMatch(level, pos, tableItem, tableBE);
         if (match == null) {
             fail(level, pos, player, "message.hexalia.ritual.wrong_recipe");
             return true;
@@ -177,9 +170,12 @@ public class RitualTableBlock extends BaseEntityBlock {
         int duration = match.usedBraziers.size() * 40;
 
         tableBE.startTransformation(
-                match.recipe.getResultItem(level.registryAccess()).copy(),
+                match.recipe.itemResult(),
                 duration,
-                match.usedBraziers
+                match.usedBraziers,
+                match.recipe.getId(),
+                match.recipe.requiresSoul(),
+                player
         );
         tableBE.setGrownCropPositions(grownCrops);
 
@@ -189,21 +185,34 @@ public class RitualTableBlock extends BaseEntityBlock {
     }
 
     @Nullable
-    private Match findMatch(Level level, ItemStack tableItem, List<RitualBrazierBlockEntity> available, RitualTableBlockEntity tableBE) {
+    private Match findMatch(Level level, BlockPos tablePos, ItemStack tableItem, RitualTableBlockEntity tableBE) {
         List<RitualTableRecipe> candidates = level.getRecipeManager().getAllRecipesFor(RitualTableRecipe.Type.INSTANCE);
 
         for (RitualTableRecipe recipe : candidates) {
-            List<Ingredient> ingredients = recipe.getIngredients();
-            if (ingredients.isEmpty() || !ingredients.get(0).test(tableItem)) {
+            if (!recipe.centerIngredient().test(tableItem)) {
                 continue;
             }
+
+            List<RitualBrazierBlockEntity> available = new ArrayList<>();
+            for (int dx = -8; dx <= 8; dx++) {
+                for (int dz = -8; dz <= 8; dz++) {
+                    if (dx * dx + dz * dz > 64) continue;
+                    BlockPos brazierPos = tablePos.offset(dx, 0, dz);
+                    if (level.getBlockEntity(brazierPos) instanceof RitualBrazierBlockEntity brazier
+                            && !brazier.getStoredItem().isEmpty()) {
+                        available.add(brazier);
+                    }
+                }
+            }
+            available.sort(Comparator
+                    .comparingDouble((RitualBrazierBlockEntity brazier) -> tablePos.distSqr(brazier.getBlockPos()))
+                    .thenComparingLong(brazier -> brazier.getBlockPos().asLong()));
 
             List<RitualBrazierBlockEntity> pool = new ArrayList<>(available);
             List<RitualBrazierBlockEntity> used = new ArrayList<>();
 
             boolean ok = true;
-            for (int i = 1; i < ingredients.size(); i++) {
-                Ingredient needed = ingredients.get(i);
+            for (Ingredient needed : recipe.offerings()) {
                 int foundIndex = -1;
 
                 for (int j = 0; j < pool.size(); j++) {

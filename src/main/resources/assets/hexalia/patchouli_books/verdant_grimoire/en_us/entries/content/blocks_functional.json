@@ -31,6 +31,13 @@
     },
     {
       "type": "spotlight",
+      "item": "hexalia:herb_jar",
+      "title": "Herb Jar",
+      "anchor": "herb_jar",
+      "text": "Stores up to 8 valid ingredients of one kind. Right-click with a matching item to insert it; use an empty hand to take one out. The jar keeps its contents when broken and carried."
+    },
+    {
+      "type": "spotlight",
       "item": "hexalia:nesting_block",
       "title": "Nesting Block",
       "anchor": "nesting_block",

@@ -1,5 +1,7 @@
 package net.astralya.hexalia.item.custom;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -7,6 +9,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +27,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class AthameItem extends Item {
+    private final Multimap<Attribute, AttributeModifier> attributeModifiers;
     private static final Set<Block> STRIPPABLE_LOGS = Set.of(Blocks.DARK_OAK_LOG, ModBlocks.COTTONWOOD_LOG.get());
     private static final Map<Block, Block> STRIPPED_BLOCKS = Map.of(
             Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG,
@@ -29,6 +36,15 @@ public class AthameItem extends Item {
 
     public AthameItem(Properties pProperties) {
         super(pProperties);
+        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(
+                BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", 4.0, AttributeModifier.Operation.ADDITION));
+        this.attributeModifiers = builder.build();
+    }
+
+    @Override
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+        return slot == EquipmentSlot.MAINHAND ? attributeModifiers : super.getDefaultAttributeModifiers(slot);
     }
 
     @Override
