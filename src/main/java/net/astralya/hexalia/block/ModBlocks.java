@@ -133,7 +133,7 @@ public class ModBlocks {
     public static final Block RABBAGE_CROP = registerBlockWithoutBlockItem("rabbage_crop",
             new RabbageCropBlock(FabricBlockSettings.copyOf(Blocks.POTATOES)));
     public static final Block WILD_MANDRAKE = registerBlock("wild_mandrake",
-            new FlowerBlock(ModMobEffects.STUNNED, 6, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque().noCollision()));
+            new WildMandrakeBlock(ModMobEffects.STUNNED, 6, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque().noCollision()));
     public static final Block WILD_SUNFIRE_TOMATO = registerBlock("wild_sunfire_tomato",
             new WildSunfireTomatoBlock(FabricBlockSettings.copyOf(Blocks.CORNFLOWER).luminance(state -> 4).nonOpaque()));
     public static final Block CHILLBERRY_BUSH = registerBlockWithoutBlockItem("chillberry_bush",
@@ -162,6 +162,8 @@ public class ModBlocks {
             new RitualTableBlock(FabricBlockSettings.copyOf(Blocks.DEEPSLATE_BRICKS)));
     public static final Block RITUAL_BRAZIER = registerBlock("ritual_brazier",
             new RitualBrazierBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)));
+    public static final Block HERB_JAR = registerBlockWithoutBlockItem("herb_jar",
+            new HerbJarBlock(FabricBlockSettings.copyOf(Blocks.GLASS).nonOpaque()));
     public static final Block CENSER = registerBlock("censer",
             new CenserBlock(FabricBlockSettings.copyOf(Blocks.CAMPFIRE).nonOpaque().luminance(state -> state.get(CenserBlock.LIT) ? 12 : 0)));
     public static final Block DREAMCATCHER = registerBlock("dreamcatcher",

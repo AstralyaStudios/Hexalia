@@ -5,12 +5,14 @@ import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.block.entity.ModBlockEntityTypes;
 import net.astralya.hexalia.client.model.PestleModel;
 import net.astralya.hexalia.client.renderer.blockentity.CenserBlockEntityRenderer;
+import net.astralya.hexalia.client.renderer.blockentity.HerbJarBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.MortarAndPestleBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.RitualBrazierBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.RitualTableBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.ShelfBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.SmallCauldronBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.entity.CacofeyRenderer;
+import net.astralya.hexalia.client.renderer.entity.CinderhewProjectileRenderer;
 import net.astralya.hexalia.client.renderer.entity.SilkMothRenderer;
 import net.astralya.hexalia.client.renderer.entity.ThornArrowRenderer;
 import net.astralya.hexalia.client.screen.NestingBlockScreen;
@@ -102,6 +104,7 @@ public class HexaliaModClient implements ClientModInitializer {
                 ModBlocks.POTTED_BEGONIA,
                 ModBlocks.POTTED_MORPHORA,
                 ModBlocks.RITUAL_BRAZIER,
+                ModBlocks.HERB_JAR,
                 ModBlocks.MORPHORA,
                 ModBlocks.LAVENDER,
                 ModBlocks.POTTED_LAVENDER,
@@ -175,6 +178,7 @@ public class HexaliaModClient implements ClientModInitializer {
         BlockEntityRendererFactories.register(ModBlockEntityTypes.MOD_SIGN, SignBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntityTypes.MOD_HANGING_SIGN, HangingSignBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntityTypes.RITUAL_BRAZIER, RitualBrazierBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntityTypes.HERB_JAR, HerbJarBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntityTypes.SHELF, ShelfBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntityTypes.CENSER, CenserBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntityTypes.RITUAL_TABLE, RitualTableBlockEntityRenderer::new);
@@ -189,6 +193,7 @@ public class HexaliaModClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.FROST_SAC, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.SEARING_SAC, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.THORN_ARROW, ThornArrowRenderer::new);
+        EntityRendererRegistry.register(ModEntities.CINDERHEW, CinderhewProjectileRenderer::new);
         EntityRendererRegistry.register(ModEntities.SILK_MOTH_ENTITY, SilkMothRenderer::new);
         EntityRendererRegistry.register(ModEntities.CACOFEY_ENTITY, CacofeyRenderer::new);
     }

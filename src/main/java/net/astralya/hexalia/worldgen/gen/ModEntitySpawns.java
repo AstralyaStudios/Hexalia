@@ -25,7 +25,7 @@ public final class ModEntitySpawns {
                 BiomeSelectors.tag(ModTags.Biomes.SILK_MOTH_SPAWNS),
                 SpawnGroup.CREATURE,
                 ModEntities.SILK_MOTH_ENTITY,
-                2,
+                6,
                 1,
                 2
         );

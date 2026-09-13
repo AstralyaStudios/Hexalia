@@ -204,6 +204,31 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     }
 
     private void addCustomModTags() {
+        getOrCreateTagBuilder(ModTags.Blocks.HERBS)
+                .add(ModBlocks.WITCHWEED)
+                .add(ModBlocks.SPIRIT_BLOOM)
+                .add(ModBlocks.DREAMSHROOM)
+                .add(ModBlocks.SIREN_KELP)
+                .add(ModBlocks.GHOST_FERN)
+                .add(ModBlocks.CELESTIAL_BLOOM)
+                .add(ModBlocks.LOTUS_FLOWER);
+
+        getOrCreateTagBuilder(ModTags.Blocks.RESIN_LOGS)
+                .add(Blocks.DARK_OAK_LOG)
+                .add(Blocks.DARK_OAK_WOOD)
+                .add(ModBlocks.COTTONWOOD_LOG)
+                .add(ModBlocks.COTTONWOOD_WOOD)
+                .add(ModBlocks.WILLOW_LOG)
+                .add(ModBlocks.WILLOW_WOOD);
+
+        getOrCreateTagBuilder(ModTags.Blocks.GRAVEBLOOM_PLANTS)
+                .add(Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM, Blocks.DANDELION, Blocks.POPPY,
+                        Blocks.BLUE_ORCHID, Blocks.ALLIUM, Blocks.AZURE_BLUET, Blocks.RED_TULIP,
+                        Blocks.ORANGE_TULIP, Blocks.WHITE_TULIP, Blocks.PINK_TULIP, Blocks.OXEYE_DAISY,
+                        Blocks.CORNFLOWER, Blocks.LILY_OF_THE_VALLEY, ModBlocks.WITCHWEED,
+                        ModBlocks.SPIRIT_BLOOM, ModBlocks.DREAMSHROOM, ModBlocks.GHOST_FERN,
+                        ModBlocks.CELESTIAL_BLOOM);
+
         getOrCreateTagBuilder(ModTags.Blocks.SALT_BLOCKS)
                 .add(ModBlocks.SALT_BLOCK);
 

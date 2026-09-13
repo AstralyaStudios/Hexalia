@@ -58,6 +58,7 @@ public class ModItems {
     public static final Item AIR_NODE = registerItem("air_node", new Item(new FabricItemSettings()));
     public static final Item EARTH_NODE = registerItem("earth_node", new Item(new FabricItemSettings()));
     public static final Item ANCIENT_SEED = registerItem("ancient_seed", new Item(new FabricItemSettings().rarity(Rarity.RARE)));
+    public static final Item HEARTSEED = registerItem("heartseed", new HeartseedItem(new FabricItemSettings().rarity(Rarity.RARE)));
 
     public static final Item SUNFIRE_TOMATO = registerItem("sunfire_tomato",
             new Item(new FabricItemSettings().food(ModFoodComponents.SUNFIRE_TOMATO)));
@@ -115,7 +116,7 @@ public class ModItems {
     public static final Item SEARING_SAC = registerItem("searing_sac",
             new ThrownSacItem(new FabricItemSettings(), SearingSacProjectile::new));
     public static final Item SAGE_PENDANT = registerItem("sage_pendant",
-            new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON).maxDamage(64)));
+            new AccessoryItem(new FabricItemSettings().rarity(Rarity.UNCOMMON).maxDamage(64), "sage_pendant"));
     public static final Item SILK_IDOL = registerItem("silk_idol",
             new Item(new FabricItemSettings()));
     public static final Item CLARITY_IDOL = registerItem("clarity_idol",
@@ -132,10 +133,18 @@ public class ModItems {
             new BriarSickleItem(new FabricItemSettings().maxDamage(256)));
     public static final Item ROOTSHAPER = registerItem("rootshaper",
             new RootshaperItem(new FabricItemSettings().rarity(Rarity.RARE).maxDamage(1561)));
+    public static final Item CINDERHEW = registerItem("cinderhew",
+            new CinderhewItem(ModToolMaterials.ANCIENT, 3.0F, -3.0F,
+                    new FabricItemSettings().rarity(Rarity.RARE)));
     public static final Item SPIRITROOT_TETHER = registerItem("spiritroot_tether",
             new SpiritrootTetherItem(new FabricItemSettings().maxDamage(32)));
     public static final Item LADLE = registerItem("ladle",
             new Item(new FabricItemSettings().maxCount(1)));
+    public static final Item SEAFOAM_TALISMAN = registerItem("seafoam_talisman", new AccessoryItem(new FabricItemSettings().maxCount(1), "seafoam_talisman"));
+    public static final Item MOONWARD_RING = registerItem("moonward_ring", new AccessoryItem(new FabricItemSettings().maxCount(1), "moonward_ring"));
+    public static final Item WITCHHEART_CLUSTER = registerItem("witchheart_cluster", new AccessoryItem(new FabricItemSettings().maxCount(1), "witchheart_cluster"));
+    public static final Item WYRD_FEATHER = registerItem("wyrd_feather", new AccessoryItem(new FabricItemSettings().maxCount(1), "wyrd_feather"));
+    public static final Item GREEN_OMEN = registerItem("green_omen", new AccessoryItem(new FabricItemSettings().maxCount(1), "green_omen"));
 
     public static final Item CANDLE_SKULL = registerItem("candle_skull",
             new BlockItem(ModBlocks.CANDLE_SKULL, new FabricItemSettings().rarity(Rarity.UNCOMMON)));
@@ -149,6 +158,8 @@ public class ModItems {
             new BlockItem(ModBlocks.MORTAR_AND_PESTLE, new FabricItemSettings()));
     public static final Item RITUAL_TABLE = registerItem("ritual_table",
             new BlockItem(ModBlocks.RITUAL_TABLE, new FabricItemSettings()));
+    public static final Item HERB_JAR = registerItem("herb_jar",
+            new HerbJarBlockItem(ModBlocks.HERB_JAR, new FabricItemSettings()));
 
     public static final Item KELPWEAVE_BLADE = registerItem("kelpweave_blade",
             new KelpweaveBladeItem(ModToolMaterials.ANCIENT, new FabricItemSettings().rarity(Rarity.RARE)));
@@ -201,6 +212,9 @@ public class ModItems {
     public static final Item BREW_OF_DAYBLOOM = registerItem("brew_of_daybloom",
             new BrewItem(new FabricItemSettings().maxCount(4), () -> ModMobEffects.DAYBLOOM, 20 * 240, 0,
                     Text.translatable("tooltip.hexalia.daybloom").formatted(Formatting.BLUE)));
+    public static final Item BREW_OF_GRAVEBLOOM = registerItem("brew_of_gravebloom",
+            new BrewItem(new FabricItemSettings().maxCount(4), () -> ModMobEffects.GRAVEBLOOM, 20 * 90, 0,
+                    Text.translatable("tooltip.hexalia.gravebloom").formatted(Formatting.BLUE)));
     public static final Item BREW_OF_ARACHNID_GRACE = registerItem("brew_of_arachnid_grace",
             new BrewItem(new FabricItemSettings().maxCount(4), () -> ModMobEffects.ARACHNID_GRACE, 20 * 240, 0,
                     Text.translatable("tooltip.hexalia.arachnid_grace").formatted(Formatting.BLUE)));

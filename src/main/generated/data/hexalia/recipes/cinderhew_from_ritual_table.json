@@ -1,0 +1,29 @@
+{
+  "type": "hexalia:ritual_table",
+  "center": {
+    "item": "hexalia:ancient_seed"
+  },
+  "offerings": [
+    {
+      "item": "minecraft:wooden_axe"
+    },
+    {
+      "item": "hexalia:fire_node"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "hexalia:tree_resin"
+    },
+    {
+      "item": "minecraft:charcoal"
+    },
+    {
+      "item": "minecraft:flint"
+    }
+  ],
+  "output": {
+    "item": "hexalia:cinderhew"
+  }
+}

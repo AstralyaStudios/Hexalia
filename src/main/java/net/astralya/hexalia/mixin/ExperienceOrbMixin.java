@@ -1,6 +1,7 @@
 package net.astralya.hexalia.mixin;
 
 import net.astralya.hexalia.item.ModItems;
+import net.astralya.hexalia.compat.accessory.AccessoryLookup;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -19,15 +20,18 @@ public class ExperienceOrbMixin {
 
     @Inject(method = "onPlayerCollision", at = @At("HEAD"))
     private void hexalia$sagePendantXpBonus(PlayerEntity player, CallbackInfo ci) {
-        ItemStack offhand = player.getOffHandStack();
-        if (!offhand.isOf(ModItems.SAGE_PENDANT)) {
+        ItemStack pendant = player.getOffHandStack();
+        if (!pendant.isOf(ModItems.SAGE_PENDANT)) {
+            pendant = AccessoryLookup.getEquippedStack(player, ModItems.SAGE_PENDANT);
+        }
+        if (pendant.isEmpty()) {
             return;
         }
 
         this.amount += (int) Math.floor(this.amount * 2.0D);
 
-        if (!player.getWorld().isClient && !player.isCreative() && offhand.isDamageable()) {
-            offhand.damage(1, player, entity -> entity.sendToolBreakStatus(Hand.OFF_HAND));
+        if (!player.getWorld().isClient && !player.isCreative() && pendant.isDamageable()) {
+            pendant.damage(1, player, entity -> entity.sendToolBreakStatus(Hand.OFF_HAND));
         }
     }
 }

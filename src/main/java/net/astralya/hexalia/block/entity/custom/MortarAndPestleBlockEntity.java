@@ -367,18 +367,15 @@ public class MortarAndPestleBlockEntity extends BlockEntity implements SidedInve
 
     @Override
     public int[] getAvailableSlots(Direction side) {
-        if (side == Direction.UP) {
-            return INPUT_SLOTS;
-        }
         if (side == Direction.DOWN) {
             return OUTPUT_SLOTS;
         }
-        return new int[0];
+        return INPUT_SLOTS;
     }
 
     @Override
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction direction) {
-        if (direction != Direction.UP || slot < INPUT_0 || slot > INPUT_2 || stack.isEmpty() || hasOutput()) {
+        if (direction == Direction.DOWN || slot < INPUT_0 || slot > INPUT_2 || stack.isEmpty() || hasOutput()) {
             return false;
         }
 

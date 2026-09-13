@@ -1,9 +1,9 @@
 {
   "type": "hexalia:ritual_table",
-  "ingredients": [
-    {
-      "item": "hexalia:ancient_seed"
-    },
+  "center": {
+    "item": "hexalia:ancient_seed"
+  },
+  "offerings": [
     {
       "item": "hexalia:siren_paste"
     },
@@ -15,6 +15,12 @@
     },
     {
       "item": "minecraft:kelp"
+    },
+    {
+      "item": "minecraft:prismarine_shard"
+    },
+    {
+      "item": "minecraft:nautilus_shell"
     }
   ],
   "output": {

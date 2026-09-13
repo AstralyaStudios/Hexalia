@@ -79,12 +79,12 @@ public class LotusFlowerBlock extends LilyPadBlock implements Fertilizable {
 
     @Override
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
-        return true;
+        return random.nextFloat() < 0.6F;
     }
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        Block.dropStack(world, pos, new ItemStack(this));
+        HerbSpreading.spread(world, random, pos, state);
     }
 
     @Override

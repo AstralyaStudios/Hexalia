@@ -37,7 +37,7 @@ public class ThornArrowEntity extends PersistentProjectileEntity {
         super.onEntityHit(entityHitResult);
         if (!getWorld().isClient && entityHitResult.getEntity() instanceof LivingEntity livingEntity) {
             livingEntity.addStatusEffect(
-                    new StatusEffectInstance(ModMobEffects.BLEEDING, 100, 0),
+                    new StatusEffectInstance(ModMobEffects.BLEEDING, 60, 0),
                     getOwner()
             );
         }

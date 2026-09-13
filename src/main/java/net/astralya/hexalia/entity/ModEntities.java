@@ -4,6 +4,7 @@ import net.astralya.hexalia.HexaliaMod;
 import net.astralya.hexalia.entity.custom.CacofeyEntity;
 import net.astralya.hexalia.entity.custom.SilkMothEntity;
 import net.astralya.hexalia.entity.custom.projectile.FoulSacProjectile;
+import net.astralya.hexalia.entity.custom.projectile.CinderhewProjectile;
 import net.astralya.hexalia.entity.custom.projectile.FrostSacProjectile;
 import net.astralya.hexalia.entity.custom.projectile.PurifyingSacProjectile;
 import net.astralya.hexalia.entity.custom.projectile.RabbageProjectile;
@@ -80,6 +81,16 @@ public class ModEntities {
             new Identifier(HexaliaMod.MODID, "thorn_arrow"),
             FabricEntityTypeBuilder.<ThornArrowEntity>create(SpawnGroup.MISC, ThornArrowEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5F, 0.5F))
+                    .build()
+    );
+
+    public static final EntityType<CinderhewProjectile> CINDERHEW = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(HexaliaMod.MODID, "cinderhew"),
+            FabricEntityTypeBuilder.<CinderhewProjectile>create(SpawnGroup.MISC, CinderhewProjectile::new)
+                    .dimensions(EntityDimensions.fixed(0.5F, 0.5F))
+                    .trackRangeBlocks(8)
+                    .trackedUpdateRate(1)
                     .build()
     );
 

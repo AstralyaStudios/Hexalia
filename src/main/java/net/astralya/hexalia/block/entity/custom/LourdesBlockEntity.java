@@ -10,7 +10,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -64,11 +63,8 @@ public class LourdesBlockEntity extends BlockEntity {
         }
 
         Box box = new Box(pos).expand(RADIUS);
-        List<LivingEntity> targets = new ArrayList<>();
-        targets.addAll(world.getEntitiesByClass(PlayerEntity.class, box, LivingEntity::isAlive));
-        targets.addAll(world.getEntitiesByClass(AnimalEntity.class, box, LivingEntity::isAlive));
-
-        for (LivingEntity target : targets) {
+        List<AnimalEntity> targets = world.getEntitiesByClass(AnimalEntity.class, box, LivingEntity::isAlive);
+        for (AnimalEntity target : targets) {
             cleanseEffects(target);
             applyHealingAura(target);
         }

@@ -14,14 +14,14 @@
       "item": "hexalia:hex_focus",
       "title": "Hex Focus",
       "anchor": "hex_focus",
-      "text": "The Hex Focus is the primary magical tool used to activate rituals and interactions. It is used in $(l:hexalia:core_mechanics/celestial_infusion)Celestial Infusion$(/l), $(l:hexalia:core_mechanics/natures_ritual)Nature's Ritual$(/l), and to trigger certain enchanted plants. It can also transform Deepslate into a Ritual Table."
+      "text": "The Hex Focus channels intent into magical workings. Use it to awaken systems and enchanted plants that call for focused power. It can also transform Deepslate into a Ritual Table; each system's chapter explains its own preparation."
     },
     {
       "type": "spotlight",
       "item": "hexalia:athame",
       "title": "Athame",
       "anchor": "athame",
-      "text": "A precision tool used in both gathering and crafting. It extracts Tree Resin from specific logs, harvests Lotus Blossoms, and can shape planks into a Ritual Brazier when used while crouching."
+      "text": "An Athame extracts Tree Resin, harvests Lotus Blossoms, and shapes planks into a $(l:hexalia:blocks/ritual_brazier)Ritual Brazier$(/l) when used while crouching. It also gives the soul sacrifice required by certain $(l:hexalia:core_mechanics/natures_ritual#sacrifice)summoning rituals$(/l)."
     },
     {
       "type": "spotlight",
@@ -56,7 +56,14 @@
       "item": "hexalia:sage_pendant",
       "title": "Sage Pendant",
       "anchor": "sage_pendant",
-      "text": "A magical artifact that enhances experience gained when worn. Its power draws from the experience itself, gradually wearing down with use."
+      "text": "When worn or held in the off hand, the Sage Pendant triples experience gained. Each gain wears upon the pendant, so its wisdom is finite."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:heartseed",
+      "title": "Heartseed",
+      "anchor": "heartseed",
+      "text": "Offer this rare seed to an untamed tameable animal to bind its trust to you at once. The seed is consumed when the bond takes root."
     },
     {
       "type": "text",

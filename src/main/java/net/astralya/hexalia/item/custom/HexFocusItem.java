@@ -24,6 +24,26 @@ import java.util.Set;
 import java.util.UUID;
 
 public class HexFocusItem extends Item {
+    @Override
+    public net.minecraft.util.TypedActionResult<ItemStack> use(
+            net.minecraft.world.World level, net.minecraft.entity.player.PlayerEntity player,
+            net.minecraft.util.Hand hand) {
+        ItemStack focus = player.getStackInHand(hand);
+        if (hand != net.minecraft.util.Hand.MAIN_HAND
+                || player.getItemCooldownManager().isCoolingDown(this)) {
+            return net.minecraft.util.TypedActionResult.pass(focus);
+        }
+        ItemStack catalyst = player.getOffHandStack();
+        if (level instanceof net.minecraft.server.world.ServerWorld serverLevel
+                && net.astralya.hexalia.gameplay.enchantedplant.EnchantedPlantActivations
+                        .tryActivate(serverLevel, player, catalyst)) {
+            if (!player.getAbilities().creativeMode) catalyst.decrement(1);
+            player.getItemCooldownManager().set(this, 20);
+            return net.minecraft.util.TypedActionResult.success(focus);
+        }
+        return net.minecraft.util.TypedActionResult.pass(focus);
+    }
+
 
     private static final int BLOCK_BREAK_EVENT_ID = 2001;
     private static final Set<Block> VALID_BLOCKS = Set.of(Blocks.COBBLED_DEEPSLATE, Blocks.DEEPSLATE);

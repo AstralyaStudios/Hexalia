@@ -12,6 +12,7 @@ import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
+import net.minecraft.entity.EntityType;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.registry.Registries;
@@ -23,14 +24,26 @@ import java.util.function.Consumer;
 
 public class RitualTableRecipeBuilder implements CraftingRecipeJsonBuilder {
 
-    private final DefaultedList<Ingredient> ingredients = DefaultedList.of();
+    private Ingredient centerIngredient;
+    private final DefaultedList<Ingredient> offerings = DefaultedList.of();
     private final ItemStack output;
     private final Item resultItem;
+    private final Identifier entityResult;
+    private final int entityCount;
     private final Advancement.Builder advancement = Advancement.Builder.create();
 
     private RitualTableRecipeBuilder(ItemStack output) {
         this.output = output.copy();
         this.resultItem = this.output.getItem();
+        this.entityResult = null;
+        this.entityCount = 0;
+    }
+
+    private RitualTableRecipeBuilder(EntityType<?> entityType, int count) {
+        this.output = ItemStack.EMPTY;
+        this.resultItem = net.minecraft.item.Items.AIR;
+        this.entityResult = Registries.ENTITY_TYPE.getId(entityType);
+        this.entityCount = count;
     }
 
     public static RitualTableRecipeBuilder ritual(ItemConvertible result, int count) {
@@ -41,16 +54,24 @@ public class RitualTableRecipeBuilder implements CraftingRecipeJsonBuilder {
         return new RitualTableRecipeBuilder(output);
     }
 
+    public static RitualTableRecipeBuilder summon(EntityType<?> entityType, int count) {
+        if (count < 1) throw new IllegalArgumentException("Entity result count must be at least one");
+        return new RitualTableRecipeBuilder(entityType, count);
+    }
+
     public RitualTableRecipeBuilder tableItem(ItemConvertible item) {
-        return addIngredient(Ingredient.ofItems(item));
+        this.centerIngredient = Ingredient.ofItems(item);
+        return this;
     }
 
     public RitualTableRecipeBuilder brazierItem(ItemConvertible item) {
-        return addIngredient(Ingredient.ofItems(item));
+        this.offerings.add(Ingredient.ofItems(item));
+        return this;
     }
 
     public RitualTableRecipeBuilder addIngredient(Ingredient ingredient) {
-        this.ingredients.add(ingredient);
+        if (this.centerIngredient == null) this.centerIngredient = ingredient;
+        else this.offerings.add(ingredient);
         return this;
     }
 
@@ -80,13 +101,9 @@ public class RitualTableRecipeBuilder implements CraftingRecipeJsonBuilder {
 
     @Override
     public void offerTo(Consumer<RecipeJsonProvider> exporter, Identifier recipeId) {
-        if (this.ingredients.isEmpty()) {
+        if (this.centerIngredient == null) {
             throw new IllegalStateException("Ritual Table recipe must have at least 1 ingredient (table item).");
         }
-        if (this.ingredients.size() > 5) {
-            throw new IllegalStateException("Too many ingredients for Ritual Table recipe (max 5: 1 table + 4 braziers).");
-        }
-
         this.advancement.parent(new Identifier("recipes/root"))
                 .criterion("has_the_recipe", RecipeUnlockedCriterion.create(recipeId))
                 .rewards(AdvancementRewards.Builder.recipe(recipeId));
@@ -96,7 +113,10 @@ public class RitualTableRecipeBuilder implements CraftingRecipeJsonBuilder {
         exporter.accept(new JsonBuilder(
                 recipeId,
                 this.output,
-                this.ingredients,
+                this.entityResult,
+                this.entityCount,
+                this.centerIngredient,
+                this.offerings,
                 this.advancement,
                 advId
         ));
@@ -105,15 +125,22 @@ public class RitualTableRecipeBuilder implements CraftingRecipeJsonBuilder {
     public static class JsonBuilder implements RecipeJsonProvider {
         private final Identifier id;
         private final ItemStack output;
-        private final DefaultedList<Ingredient> ingredients;
+        private final Identifier entityResult;
+        private final int entityCount;
+        private final Ingredient centerIngredient;
+        private final DefaultedList<Ingredient> offerings;
         private final Advancement.Builder advancement;
         private final Identifier advancementId;
 
-        public JsonBuilder(Identifier id, ItemStack output, DefaultedList<Ingredient> ingredients,
+        public JsonBuilder(Identifier id, ItemStack output, Identifier entityResult, int entityCount,
+                           Ingredient centerIngredient, DefaultedList<Ingredient> offerings,
                            Advancement.Builder advancement, Identifier advancementId) {
             this.id = id;
             this.output = output.copy();
-            this.ingredients = ingredients;
+            this.entityResult = entityResult;
+            this.entityCount = entityCount;
+            this.centerIngredient = centerIngredient;
+            this.offerings = offerings;
             this.advancement = advancement;
             this.advancementId = advancementId;
         }
@@ -122,18 +149,24 @@ public class RitualTableRecipeBuilder implements CraftingRecipeJsonBuilder {
         public void serialize(JsonObject json) {
             json.addProperty("type", "hexalia:ritual_table");
 
-            JsonArray ing = new JsonArray();
-            for (Ingredient i : this.ingredients) {
-                ing.add(i.toJson());
-            }
-            json.add("ingredients", ing);
+            json.add("center", this.centerIngredient.toJson());
+            JsonArray offeringJson = new JsonArray();
+            for (Ingredient offering : this.offerings) offeringJson.add(offering.toJson());
+            json.add("offerings", offeringJson);
 
-            JsonObject out = new JsonObject();
-            out.addProperty("item", Registries.ITEM.getId(this.output.getItem()).toString());
-            if (this.output.getCount() > 1) {
-                out.addProperty("count", this.output.getCount());
+            if (entityResult != null) {
+                json.addProperty("requires_soul", true);
+                JsonObject result = new JsonObject();
+                result.addProperty("type", "entity");
+                result.addProperty("entity", entityResult.toString());
+                result.addProperty("count", entityCount);
+                json.add("result", result);
+            } else {
+                JsonObject out = new JsonObject();
+                out.addProperty("item", Registries.ITEM.getId(this.output.getItem()).toString());
+                if (this.output.getCount() > 1) out.addProperty("count", this.output.getCount());
+                json.add("output", out);
             }
-            json.add("output", out);
         }
 
         @Override

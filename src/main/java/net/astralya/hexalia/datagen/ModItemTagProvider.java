@@ -90,18 +90,23 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
     private void addCustomTags() {
         getOrCreateTagBuilder(ModTags.Items.HERBS)
-                .add(ModBlocks.SPIRIT_BLOOM.asItem())
-                .add(ModItems.SIREN_KELP)
-                .add(ModBlocks.DREAMSHROOM.asItem())
-                .add(ModBlocks.GHOST_FERN.asItem())
                 .add(ModBlocks.WITCHWEED.asItem())
-                .add(ModBlocks.CELESTIAL_BLOOM.asItem());
+                .add(ModBlocks.SPIRIT_BLOOM.asItem())
+                .add(ModBlocks.DREAMSHROOM.asItem())
+                .add(ModItems.SIREN_KELP)
+                .add(ModBlocks.GHOST_FERN.asItem())
+                .add(ModBlocks.CELESTIAL_BLOOM.asItem())
+                .add(ModItems.LOTUS_FLOWER);
 
         getOrCreateTagBuilder(ModTags.Items.CRUSHED_HERBS)
                 .add(ModItems.DREAM_PASTE)
                 .add(ModItems.SIREN_PASTE)
                 .add(ModItems.SPIRIT_POWDER)
                 .add(ModItems.GHOST_POWDER);
+
+        getOrCreateTagBuilder(ModTags.Items.HERB_JAR_STORABLE)
+                .addTag(ModTags.Items.HERBS)
+                .addTag(ModTags.Items.CRUSHED_HERBS);
 
         getOrCreateTagBuilder(ModTags.Items.BREWS)
                 .add(ModItems.BREW_OF_HOMESTEAD)
@@ -110,6 +115,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.BREW_OF_SPIKESKIN)
                 .add(ModItems.BREW_OF_SIPHON)
                 .add(ModItems.BREW_OF_DAYBLOOM)
+                .add(ModItems.BREW_OF_GRAVEBLOOM)
                 .add(ModItems.BREW_OF_ARACHNID_GRACE)
                 .add(ModItems.BREW_OF_HOLLOW_SILENCE)
                 .add(ModItems.RUSTIC_BOTTLE);

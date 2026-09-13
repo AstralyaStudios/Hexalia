@@ -10,6 +10,10 @@ import net.astralya.hexalia.entity.ModEntities;
 import net.astralya.hexalia.entity.custom.CacofeyEntity;
 import net.astralya.hexalia.entity.custom.SilkMothEntity;
 import net.astralya.hexalia.event.RootshaperEventHandler;
+import net.astralya.hexalia.event.GravebloomEventHandler;
+import net.astralya.hexalia.event.CinderhewEventHandler;
+import net.astralya.hexalia.event.AccessoryEffectHandler;
+import net.astralya.hexalia.event.NaturesRitualSoulEvents;
 import net.astralya.hexalia.gameplay.censer.CenserServerTickHandler;
 import net.astralya.hexalia.item.ModCreativeModeTabs;
 import net.astralya.hexalia.item.ModItems;
@@ -70,6 +74,10 @@ public class HexaliaMod implements ModInitializer {
 		ModVanillaBehaviors.register();
 		CenserServerTickHandler.register();
 		RootshaperEventHandler.register();
+		GravebloomEventHandler.register();
+		CinderhewEventHandler.register();
+		AccessoryEffectHandler.register();
+		NaturesRitualSoulEvents.register();
 	}
 
 	private static void registerAttributes() {

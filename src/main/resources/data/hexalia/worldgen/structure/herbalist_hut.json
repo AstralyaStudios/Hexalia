@@ -11,7 +11,6 @@
   },
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
   "use_expansion_hack": false,
-  "liquid_settings": "apply_waterlogging",
   "spawn_overrides": {
     "monster": {
       "bounding_box": "full",
@@ -35,6 +34,5 @@
         }
       ]
     }
-  },
-  "pool_aliases": []
+  }
 }

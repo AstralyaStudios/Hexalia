@@ -55,7 +55,7 @@ public class RecipePageComponent implements ICustomComponent {
             return;
         }
 
-        Text title = recipe.output.getName();
+        Text title = recipe.title;
         graphics.drawText(
                 MinecraftClient.getInstance().textRenderer,
                 title,
@@ -145,10 +145,14 @@ public class RecipePageComponent implements ICustomComponent {
         graphics.drawTexture(RITUAL_TABLE_TEXTURE, left, top, 0, 0, 118, 80, 256, 256);
         int[][] slots = {
                 {left + 27, top + 30},
+                {left + 3, top + 6},
+                {left + 27, top + 6},
+                {left + 51, top + 6},
                 {left + 3, top + 30},
                 {left + 51, top + 30},
-                {left + 27, top + 6},
-                {left + 27, top + 54}
+                {left + 3, top + 54},
+                {left + 27, top + 54},
+                {left + 51, top + 54}
         };
 
         for (int i = 0; i < slots.length; i++) {
@@ -156,7 +160,9 @@ public class RecipePageComponent implements ICustomComponent {
                 context.renderIngredient(graphics, slots[i][0] + ITEM_OFFSET_X, slots[i][1] + ITEM_OFFSET_Y, mouseX, mouseY, currentRecipe.ingredients.get(i));
             }
         }
-        context.renderItemStack(graphics, left + 88 + ITEM_OFFSET_X, top + 30 + ITEM_OFFSET_Y, mouseX, mouseY, currentRecipe.output);
+        if (!currentRecipe.output.isEmpty()) {
+            context.renderItemStack(graphics, left + 88 + ITEM_OFFSET_X, top + 30 + ITEM_OFFSET_Y, mouseX, mouseY, currentRecipe.output);
+        }
     }
 
     private int centeredX(int width) {
@@ -197,11 +203,20 @@ public class RecipePageComponent implements ICustomComponent {
             case "ritual_table" -> manager.listAllOfType(ModRecipes.RITUAL_TABLE_TYPE).stream()
                     .filter(recipe -> recipe.getId().equals(id))
                     .findFirst()
-                    .map(recipe -> new RecipeView(List.copyOf(recipe.getIngredients()), recipe.getOutput(registryManager).copy()));
+                    .map(recipe -> {
+                        ItemStack output = recipe.getOutput(registryManager).copy();
+                        Text title = recipe.entityResult()
+                                .<Text>map(result -> Text.translatable(result.entityId().toTranslationKey("entity")))
+                                .orElseGet(output::getName);
+                        return new RecipeView(List.copyOf(recipe.getIngredients()), output, title);
+                    });
             default -> Optional.empty();
         };
     }
 
-    private record RecipeView(List<Ingredient> ingredients, ItemStack output) {
+    private record RecipeView(List<Ingredient> ingredients, ItemStack output, Text title) {
+        private RecipeView(List<Ingredient> ingredients, ItemStack output) {
+            this(ingredients, output, output.getName());
+        }
     }
 }

@@ -7,13 +7,7 @@
     {
       "type": "text",
       "title": "Brewing",
-      "text": "Brewing in Hexalia is performed using the $(l:hexalia:core_mechanics/brewing)Small Cauldron$(/l). Ingredients are combined and stirred with a Ladle, transforming into powerful consumable brews."
-    },
-    {
-      "type": "text",
-      "title": "Process",
-      "anchor": "process",
-      "text": "Fill the cauldron with water, heat it, add ingredients, then stir with a Ladle and allow the mixture to cook. Once complete, the result can be collected using a Rustic Bottle."
+      "text": "The $(l:hexalia:core_mechanics/brewing)Small Cauldron$(/l) chapter teaches the brewing method and lists each ingredient combination. These pages record what each finished brew does."
     },
     {
       "type": "text",
@@ -62,6 +56,12 @@
       "item": "hexalia:brew_of_arachnid_grace",
       "title": "Brew of Arachnid Grace",
       "text": "Allows wall climbing, removes poison, and enables free movement through cobwebs, but weakens you in water."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:brew_of_gravebloom",
+      "title": "Brew of Gravebloom",
+      "text": "While its blessing lasts, monsters you slay may leave a small mossy patch where they fall, with fresh herbs and other plants rising from it."
     },
     {
       "type": "spotlight",

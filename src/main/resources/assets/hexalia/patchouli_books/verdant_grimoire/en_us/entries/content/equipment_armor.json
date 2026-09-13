@@ -28,6 +28,30 @@
       "title": "Earplugs",
       "text": "Protects the wearer from the harmful cries of Mandrakes, making them essential for safe harvesting."
     },
+    {
+      "type": "text",
+      "title": "Talismans & Charms",
+      "anchor": "accessories",
+      "text": "These small relics grant their gift while worn."
+    },
+    {
+      "type": "spotlight",
+      "item": [{"item": "hexalia:seafoam_talisman"}, {"item": "hexalia:moonward_ring"}],
+      "title": "Seafoam & Moonward",
+      "text": "The Seafoam Talisman steadily restores breath underwater. The Moonward Ring continually clears Blindness and Darkness."
+    },
+    {
+      "type": "spotlight",
+      "item": [{"item": "hexalia:witchheart_cluster"}, {"item": "hexalia:wyrd_feather"}],
+      "title": "Heart & Feather",
+      "text": "The Witchheart Cluster grants two extra hearts. The Wyrd Feather gives a small chance to slip unharmed from a direct melee or projectile strike."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:green_omen",
+      "title": "Green Omen",
+      "text": "When you harvest a mature crop, the Green Omen sometimes doubles everything the crop would have dropped."
+    },
 
     {
       "type": "spotlight",

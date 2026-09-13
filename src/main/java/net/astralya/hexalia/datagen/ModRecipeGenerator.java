@@ -6,6 +6,7 @@ import net.astralya.hexalia.datagen.custom.MutationRecipeBuilder;
 import net.astralya.hexalia.datagen.custom.RitualBrazierRecipeBuilder;
 import net.astralya.hexalia.datagen.custom.RitualTableRecipeBuilder;
 import net.astralya.hexalia.datagen.custom.SmallCauldronRecipeBuilder;
+import net.astralya.hexalia.entity.ModEntities;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.util.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -515,6 +516,17 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                         Registries.ITEM.getId(ModItems.BREW_OF_DAYBLOOM).getPath() + "_from_small_cauldron"));
 
         SmallCauldronRecipeBuilder.cauldron(
+                        Ingredient.ofItems(ModItems.SPIRIT_POWDER),
+                        Ingredient.ofItems(Items.ROTTEN_FLESH),
+                        Ingredient.ofItems(ModBlocks.WITCHWEED),
+                        Ingredient.ofItems(ModItems.TREE_RESIN),
+                        new ItemStack(ModItems.BREW_OF_GRAVEBLOOM)
+                ).brewTime(4800)
+                .criterion("has_rustic_bottle", InventoryChangedCriterion.Conditions.items(ModItems.RUSTIC_BOTTLE))
+                .offerTo(exporter, new Identifier("hexalia",
+                        Registries.ITEM.getId(ModItems.BREW_OF_GRAVEBLOOM).getPath() + "_from_small_cauldron"));
+
+        SmallCauldronRecipeBuilder.cauldron(
                         Ingredient.ofItems(Items.SPIDER_EYE),
                         Ingredient.ofItems(ModItems.GHOST_POWDER),
                         Ingredient.ofItems(Items.BLACK_DYE),
@@ -537,6 +549,17 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                         Registries.ITEM.getId(ModItems.BREW_OF_HOLLOW_SILENCE).getPath() + "_from_small_cauldron"));
 
         // Recipes for Ritual Table Items
+        RitualTableRecipeBuilder.ritual(new ItemStack(ModItems.HEARTSEED, 1))
+                .tableItem(Items.GOLDEN_APPLE)
+                .brazierItem(ModItems.FRAGRANT_NECTAR)
+                .brazierItem(Items.AMETHYST_SHARD)
+                .brazierItem(ModItems.SPIRIT_POWDER)
+                .brazierItem(ModItems.LOTUS_FLOWER)
+                .brazierItem(Items.HONEYCOMB)
+                .brazierItem(Items.POPPY)
+                .criterion("has_hex_focus", InventoryChangedCriterion.Conditions.items(ModItems.HEX_FOCUS))
+                .offerTo(exporter, id(pathOf(ModItems.HEARTSEED) + "_from_ritual_table"));
+
         RitualTableRecipeBuilder.ritual(new ItemStack(ModBlocks.GRIMSHADE.asItem(), 1))
                 .tableItem(Blocks.AZURE_BLUET)
                 .brazierItem(ModItems.GHOST_POWDER)
@@ -561,6 +584,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .brazierItem(Items.GOLD_NUGGET)
                 .brazierItem(Items.BOOK)
                 .brazierItem(Items.EXPERIENCE_BOTTLE)
+                .brazierItem(Items.AMETHYST_SHARD)
                 .criterion("has_celestial_crystal", InventoryChangedCriterion.Conditions.items(ModItems.CELESTIAL_CRYSTAL))
                 .offerTo(exporter, id(pathOf(ModItems.SAGE_PENDANT) + "_from_ritual_table"));
 
@@ -570,6 +594,8 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .brazierItem(ModItems.SPIRIT_POWDER)
                 .brazierItem(ModItems.EARTH_NODE)
                 .brazierItem(ModItems.TREE_RESIN)
+                .brazierItem(Items.FERMENTED_SPIDER_EYE)
+                .brazierItem(Items.SLIME_BALL)
                 .criterion("has_poppy", InventoryChangedCriterion.Conditions.items(Blocks.POPPY))
                 .offerTo(exporter, id(pathOf(ModBlocks.MORPHORA) + "_from_ritual_table"));
 
@@ -579,6 +605,8 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .brazierItem(ModItems.WATER_NODE)
                 .brazierItem(Items.IRON_NUGGET)
                 .brazierItem(Items.KELP)
+                .brazierItem(Items.PRISMARINE_SHARD)
+                .brazierItem(Items.NAUTILUS_SHELL)
                 .criterion("has_ancient_seed", InventoryChangedCriterion.Conditions.items(ModItems.ANCIENT_SEED))
                 .offerTo(exporter, id(pathOf(ModItems.KELPWEAVE_BLADE) + "_from_ritual_table"));
 
@@ -588,8 +616,21 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .brazierItem(ModItems.DREAM_PASTE)
                 .brazierItem(Items.WOODEN_SHOVEL)
                 .brazierItem(Items.WOODEN_PICKAXE)
+                .brazierItem(Items.ROOTED_DIRT)
+                .brazierItem(ModItems.TREE_RESIN)
                 .criterion("has_ancient_seed", InventoryChangedCriterion.Conditions.items(ModItems.ANCIENT_SEED))
                 .offerTo(exporter, id(pathOf(ModItems.ROOTSHAPER) + "_from_ritual_table"));
+
+        RitualTableRecipeBuilder.ritual(new ItemStack(ModItems.CINDERHEW, 1))
+                .tableItem(ModItems.ANCIENT_SEED)
+                .brazierItem(Items.WOODEN_AXE)
+                .brazierItem(ModItems.FIRE_NODE)
+                .brazierItem(Items.BLAZE_POWDER)
+                .brazierItem(ModItems.TREE_RESIN)
+                .brazierItem(Items.CHARCOAL)
+                .brazierItem(Items.FLINT)
+                .criterion("has_hex_focus", InventoryChangedCriterion.Conditions.items(ModItems.HEX_FOCUS))
+                .offerTo(exporter, id(pathOf(ModItems.CINDERHEW) + "_from_ritual_table"));
 
         RitualTableRecipeBuilder.ritual(new ItemStack(ModBlocks.NAUTILITE.asItem(), 1))
                 .tableItem(Items.KELP)
@@ -615,6 +656,8 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .brazierItem(ModItems.EARTH_NODE)
                 .brazierItem(Items.BONE_MEAL)
                 .brazierItem(Items.GLOWSTONE_DUST)
+                .brazierItem(Items.AMETHYST_SHARD)
+                .brazierItem(Items.SUNFLOWER)
                 .criterion("has_lily_of_the_valley", InventoryChangedCriterion.Conditions.items(Blocks.LILY_OF_THE_VALLEY))
                 .offerTo(exporter, id(pathOf(ModBlocks.ASTRYLIS) + "_from_ritual_table"));
 
@@ -699,6 +742,30 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .brazierItem(Items.SUGAR)
                 .criterion("has_hex_focus", InventoryChangedCriterion.Conditions.items(ModItems.HEX_FOCUS))
                 .offerTo(exporter, id(pathOf(ModItems.BLOOMWRAP_BOOTS) + "_from_ritual_table"));
+
+        RitualTableRecipeBuilder.summon(ModEntities.SILK_MOTH_ENTITY, 1)
+                .tableItem(ModItems.FRAGRANT_NECTAR)
+                .brazierItem(Items.STRING)
+                .brazierItem(Blocks.WHITE_WOOL)
+                .brazierItem(ModItems.SPIRIT_POWDER)
+                .brazierItem(ModBlocks.CELESTIAL_BLOOM)
+                .brazierItem(Items.GLOWSTONE_DUST)
+                .brazierItem(ModBlocks.WITCHWEED)
+                .criterion("has_hex_focus", InventoryChangedCriterion.Conditions.items(ModItems.HEX_FOCUS))
+                .offerTo(exporter, id("summon_silk_moth"));
+
+        RitualTableRecipeBuilder.summon(ModEntities.CACOFEY_ENTITY, 1)
+                .tableItem(ModItems.GALEBERRIES_COOKIE)
+                .brazierItem(ModItems.SPIRIT_POWDER)
+                .brazierItem(ModItems.TREE_RESIN)
+                .brazierItem(Blocks.JUNGLE_SAPLING)
+                .brazierItem(Items.COCOA_BEANS)
+                .brazierItem(Items.MELON_SLICE)
+                .brazierItem(Items.WHEAT_SEEDS)
+                .brazierItem(Blocks.MOSS_BLOCK)
+                .brazierItem(Items.BROWN_MUSHROOM)
+                .criterion("has_hex_focus", InventoryChangedCriterion.Conditions.items(ModItems.HEX_FOCUS))
+                .offerTo(exporter, id("summon_cacofey"));
 
         // Mortar and Pestle Recipes (using custom builder)
         MortarAndPestleRecipeBuilder.mortar(

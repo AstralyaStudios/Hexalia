@@ -4,6 +4,14 @@
     "minecraft:meadow",
     "minecraft:old_growth_birch_forest",
     "minecraft:birch_forest",
-    "minecraft:flower_forest"
+    "minecraft:flower_forest",
+    {
+      "id": "#c:birch_forest",
+      "required": false
+    },
+    {
+      "id": "#c:flower_forests",
+      "required": false
+    }
   ]
 }

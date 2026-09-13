@@ -3,6 +3,7 @@
   "package": "net.astralya.hexalia.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BlockMixin",
     "CobwebMixin",
     "CropBlockMixin",
     "ExperienceOrbMixin",

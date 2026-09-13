@@ -3,24 +3,49 @@ package net.astralya.hexalia.block.custom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PlantBlock;
+import net.minecraft.block.Fertilizable;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
+import net.minecraft.server.world.ServerWorld;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class WildSunfireTomatoBlock extends PlantBlock {
+public class WildSunfireTomatoBlock extends PlantBlock implements Fertilizable {
     protected static final VoxelShape SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 10.0, 11.0);
     public WildSunfireTomatoBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean client) { return true; }
+    @Override public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) { return random.nextFloat() < 0.8F; }
+    @Override public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) { WildCropSpreading.spread(world, random, pos, state); }
+
+    @Override public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        ItemStack stack = player.getStackInHand(hand);
+        if (!stack.isOf(Items.SHEARS)) return ActionResult.PASS;
+        if (!world.isClient) {
+            createFireParticles(world, pos);
+            dropStack(world, pos, new ItemStack(this));
+            world.removeBlock(pos, false);
+            stack.damage(1, player, p -> p.sendToolBreakStatus(hand));
+        }
+        return ActionResult.success(world.isClient);
     }
 
     @Override

@@ -7,25 +7,25 @@
     {
       "type": "text",
       "title": "Nature's Ritual",
-      "text": "Nature's Ritual is a structured transmutation process performed at a Ritual Table. It draws upon surrounding braziers, salt, and nearby plant life to reshape materials into new forms."
+      "text": "Nature's Ritual gathers a central catalyst, salted offerings, and the vigor of cultivated land at a Ritual Table. Its workings may transmute an item or call forth a living creature."
     },
     {
       "type": "text",
-      "title": "Structure",
+      "title": "Ritual Ground",
       "anchor": "structure",
-      "text": "A Ritual Table must be surrounded by four $(l:hexalia:blocks/ritual_brazier)Ritual Braziers$(/l), placed in the cardinal directions. Each brazier contributes to the ritual and must be properly prepared."
+      "text": "Set $(l:hexalia:blocks/ritual_brazier)Ritual Braziers$(/l) freely around the table. They need no fixed formation, but must share the table's Y level and lie within 8 blocks horizontally. A ritual may call for any number of offerings."
     },
     {
       "type": "text",
       "title": "Preparation",
       "anchor": "preparation",
-      "text": "Ingredients are placed within the braziers and covered with $(l:hexalia:resources/salt)Salt$(/l). A base item is then set on the table, ready to receive the transformation."
+      "text": "Place the recipe's central catalyst on the table. Put one required offering in each nearby brazier and add $(l:hexalia:resources/salt)Salt$(/l) to those braziers. Offerings may be arranged in any order."
     },
     {
       "type": "text",
       "title": "Activation",
       "anchor": "activation",
-      "text": "When activated with a Hex Focus, the ritual draws energy from the prepared braziers and nearby cultivated land, channeling it into the item at the center."
+      "text": "Use a $(l:hexalia:content/tools#hex_focus)Hex Focus$(/l) on the prepared table. The ritual chooses only the braziers needed to match its offerings; unrelated or surplus braziers are ignored."
     },
     {
       "type": "text",
@@ -37,12 +37,18 @@
       "type": "text",
       "title": "Result",
       "anchor": "result",
-      "text": "If the ritual is correctly prepared, the base item is transformed. The ingredients and salt are consumed, and the braziers return to an idle state."
+      "text": "When the working completes, the catalyst becomes the result and only the selected offerings and their salt are consumed. Used braziers then return to rest."
     },
     {
       "type": "text",
-      "title": "On Failure",
-      "text": "Improper preparation\u2014such as missing salt, incorrect ingredients, or insufficient surrounding growth\u2014will prevent the ritual from completing."
+      "title": "Soul Offerings",
+      "anchor": "sacrifice",
+      "text": "Some summonings require a soul. After the offerings finish, the ritual waits: slay a nearby living creature with an $(l:hexalia:content/tools#athame)Athame$(/l) to give the waiting working its final breath."
+    },
+    {
+      "type": "text",
+      "title": "When It Will Not Begin",
+      "text": "Check the catalyst and offerings, salt every brazier the ritual actually needs, and ensure enough fully grown crops stand nearby. A soul is required only after a marked summoning has accepted its offerings."
     },
     {
       "type": "hexalia:recipe_page",
@@ -137,6 +143,31 @@
     {
       "type": "hexalia:recipe_page",
       "recipe_id": "hexalia:windsong_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:heartseed_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:cinderhew_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:sage_pendant_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:summon_silk_moth",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:summon_cacofey",
       "layout": "ritual_table"
     }
   ]

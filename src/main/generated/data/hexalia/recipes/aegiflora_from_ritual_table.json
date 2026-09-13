@@ -1,9 +1,9 @@
 {
   "type": "hexalia:ritual_table",
-  "ingredients": [
-    {
-      "item": "minecraft:dandelion"
-    },
+  "center": {
+    "item": "minecraft:dandelion"
+  },
+  "offerings": [
     {
       "item": "hexalia:ghost_powder"
     },

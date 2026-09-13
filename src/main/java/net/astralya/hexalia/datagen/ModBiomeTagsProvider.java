@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 
@@ -19,7 +20,8 @@ public class ModBiomeTagsProvider extends FabricTagProvider<Biome> {
     protected void configure(RegistryWrapper.WrapperLookup registries) {
         getOrCreateTagBuilder(ModTags.Biomes.HAS_SHROOMS)
                 .add(BiomeKeys.OLD_GROWTH_PINE_TAIGA)
-                .add(BiomeKeys.MUSHROOM_FIELDS);
+                .add(BiomeKeys.MUSHROOM_FIELDS)
+                .addOptionalTag(new Identifier("c", "mushroom"));
 
         getOrCreateTagBuilder(ModTags.Biomes.HAS_SIREN_KELP)
                 .add(BiomeKeys.OCEAN)
@@ -34,17 +36,21 @@ public class ModBiomeTagsProvider extends FabricTagProvider<Biome> {
 
         getOrCreateTagBuilder(ModTags.Biomes.HAS_DECORATIVE_FLOWERS)
                 .add(BiomeKeys.SUNFLOWER_PLAINS)
-                .add(BiomeKeys.PLAINS);
+                .add(BiomeKeys.PLAINS)
+                .addOptionalTag(new Identifier("c", "plains"));
 
         getOrCreateTagBuilder(ModTags.Biomes.HAS_SWAMP_VEGETATION)
                 .add(BiomeKeys.MANGROVE_SWAMP)
-                .add(BiomeKeys.SWAMP);
+                .add(BiomeKeys.SWAMP)
+                .addOptionalTag(new Identifier("c", "swamp"));
 
         getOrCreateTagBuilder(ModTags.Biomes.HAS_FLORAL_VEGETATION)
                 .add(BiomeKeys.MEADOW)
                 .add(BiomeKeys.OLD_GROWTH_BIRCH_FOREST)
                 .add(BiomeKeys.BIRCH_FOREST)
-                .add(BiomeKeys.FLOWER_FOREST);
+                .add(BiomeKeys.FLOWER_FOREST)
+                .addOptionalTag(new Identifier("c", "birch_forest"))
+                .addOptionalTag(new Identifier("c", "flower_forests"));
 
         getOrCreateTagBuilder(ModTags.Biomes.HAS_SHADED_VEGETATION)
                 .add(BiomeKeys.DARK_FOREST);
@@ -59,7 +65,8 @@ public class ModBiomeTagsProvider extends FabricTagProvider<Biome> {
                 .add(BiomeKeys.DESERT)
                 .add(BiomeKeys.BADLANDS)
                 .add(BiomeKeys.WINDSWEPT_SAVANNA)
-                .add(BiomeKeys.SAVANNA);
+                .add(BiomeKeys.SAVANNA)
+                .addOptionalTag(new Identifier("c", "desert"));
 
         getOrCreateTagBuilder(ModTags.Biomes.SILK_MOTH_SPAWNS)
                 .add(BiomeKeys.FOREST)

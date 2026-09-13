@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     "minecraft:sunflower_plains",
-    "minecraft:plains"
+    "minecraft:plains",
+    {
+      "id": "#c:plains",
+      "required": false
+    }
   ]
 }

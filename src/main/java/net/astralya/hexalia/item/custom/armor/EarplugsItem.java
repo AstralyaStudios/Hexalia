@@ -20,6 +20,12 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.List;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class EarplugsItem extends ArmorItem implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
@@ -59,5 +65,10 @@ public class EarplugsItem extends ArmorItem implements GeoItem {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("tooltip.hexalia.accessory.earplugs").formatted(Formatting.GRAY));
     }
 }

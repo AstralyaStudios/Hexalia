@@ -43,6 +43,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -140,17 +141,7 @@ public class RitualTableBlock extends BlockWithEntity {
             return true;
         }
 
-        BlockPos[] offsets = {pos.north(2), pos.south(2), pos.east(2), pos.west(2)};
-        List<RitualBrazierBlockEntity> filledBraziers = new ArrayList<>();
-
-        for (BlockPos brazierPos : offsets) {
-            BlockEntity blockEntity = world.getBlockEntity(brazierPos);
-            if (blockEntity instanceof RitualBrazierBlockEntity brazier && !brazier.getStoredItem().isEmpty()) {
-                filledBraziers.add(brazier);
-            }
-        }
-
-        MatchResult match = findMatchingRecipe(world, tableItem, filledBraziers);
+        MatchResult match = findMatchingRecipe(world, pos, tableItem);
         if (match == null) {
             fail(world, pos, player, "message.hexalia.ritual.wrong_recipe");
             return true;
@@ -174,39 +165,45 @@ public class RitualTableBlock extends BlockWithEntity {
         }
 
         int duration = match.usedBraziers.size() * 40;
-        tableBE.startTransformation(match.recipe.getOutput(world.getRegistryManager()).copy(), duration, match.usedBraziers);
+        tableBE.startTransformation(match.recipe.itemResult(), duration, match.usedBraziers,
+                match.recipe.getId(), match.recipe.requiresSoul(), player);
         tableBE.setGrownCropPositions(grownCrops);
-
-        for (RitualBrazierBlockEntity brazier : match.usedBraziers) {
-            BlockPos brazierPos = brazier.getPos();
-            BlockState brazierState = world.getBlockState(brazierPos);
-            if (brazierState.contains(RitualBrazierBlock.SALTED) && brazierState.get(RitualBrazierBlock.SALTED)) {
-                world.setBlockState(brazierPos, brazierState.with(RitualBrazierBlock.SALTED, false), Block.NOTIFY_ALL);
-            }
-        }
 
         play(world, pos);
         puff(world, pos, ParticleTypes.POOF, 5, 10);
         return true;
     }
 
-    private @Nullable MatchResult findMatchingRecipe(World world, ItemStack tableItem, List<RitualBrazierBlockEntity> availableBraziers) {
+    private @Nullable MatchResult findMatchingRecipe(World world, BlockPos tablePos, ItemStack tableItem) {
         SimpleInventory inventory = new SimpleInventory(RitualTableRecipe.INPUT_SLOTS);
         inventory.setStack(0, tableItem.copy());
 
         List<RitualTableRecipe> candidates = world.getRecipeManager().getAllMatches(ModRecipes.RITUAL_TABLE_TYPE, inventory, world);
 
         for (RitualTableRecipe recipe : candidates) {
-            List<Ingredient> ingredients = recipe.getIngredients();
-            if (ingredients.isEmpty() || !ingredients.get(0).test(tableItem)) {
+            if (!recipe.centerIngredient().test(tableItem)) {
                 continue;
             }
+
+            List<RitualBrazierBlockEntity> availableBraziers = new ArrayList<>();
+            for (int dx = -8; dx <= 8; dx++) {
+                for (int dz = -8; dz <= 8; dz++) {
+                    if (dx * dx + dz * dz > 64) continue;
+                    BlockEntity blockEntity = world.getBlockEntity(tablePos.add(dx, 0, dz));
+                    if (blockEntity instanceof RitualBrazierBlockEntity brazier && !brazier.getStoredItem().isEmpty()) {
+                        availableBraziers.add(brazier);
+                    }
+                }
+            }
+            availableBraziers.sort(Comparator
+                    .comparingDouble((RitualBrazierBlockEntity brazier) -> tablePos.getSquaredDistance(brazier.getPos()))
+                    .thenComparingLong(brazier -> brazier.getPos().asLong()));
 
             List<RitualBrazierBlockEntity> pool = new ArrayList<>(availableBraziers);
             List<RitualBrazierBlockEntity> used = new ArrayList<>();
             boolean matches = true;
 
-            for (Ingredient ingredient : ingredients.subList(1, ingredients.size())) {
+            for (Ingredient ingredient : recipe.offerings()) {
                 int index = -1;
                 for (int i = 0; i < pool.size(); i++) {
                     if (ingredient.test(pool.get(i).getStoredItem())) {

@@ -1,0 +1,32 @@
+{
+  "type": "hexalia:ritual_table",
+  "center": {
+    "item": "hexalia:fragrant_nectar"
+  },
+  "offerings": [
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:white_wool"
+    },
+    {
+      "item": "hexalia:spirit_powder"
+    },
+    {
+      "item": "hexalia:celestial_bloom"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    {
+      "item": "hexalia:witchweed"
+    }
+  ],
+  "requires_soul": true,
+  "result": {
+    "type": "entity",
+    "count": 1,
+    "entity": "hexalia:silk_moth"
+  }
+}

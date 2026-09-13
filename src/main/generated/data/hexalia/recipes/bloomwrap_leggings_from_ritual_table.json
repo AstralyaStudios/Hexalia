@@ -1,9 +1,9 @@
 {
   "type": "hexalia:ritual_table",
-  "ingredients": [
-    {
-      "item": "minecraft:leather_leggings"
-    },
+  "center": {
+    "item": "minecraft:leather_leggings"
+  },
+  "offerings": [
     {
       "item": "minecraft:peony"
     },

@@ -6,107 +6,49 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.astralya.hexalia.HexaliaMod;
+import net.astralya.hexalia.compat.RitualTableViewerLayout;
 import net.astralya.hexalia.recipe.RitualTableRecipe;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public final class RitualTableEmiRecipe implements EmiRecipe {
-
     public static final Identifier TEXTURE = new Identifier(HexaliaMod.MODID, "textures/gui/ritual_table_gui.png");
-
     private final RitualTableRecipe recipe;
     private final List<EmiIngredient> inputs;
     private final List<EmiStack> outputs;
 
     public RitualTableEmiRecipe(RitualTableRecipe recipe) {
         this.recipe = recipe;
-        this.inputs = getInputs(recipe);
-        this.outputs = List.of(EmiStack.of(recipe.getOutput(null).copy()));
+        this.inputs = new ArrayList<>();
+        inputs.add(EmiIngredient.of(recipe.centerIngredient()));
+        recipe.offerings().stream().limit(8).map(EmiIngredient::of).forEach(inputs::add);
+        outputs = List.of(EmiStack.of(RitualTableViewerLayout.displayResult(recipe)));
     }
 
-    @Override
-    public EmiRecipeCategory getCategory() {
-        return RitualTableEmiCategory.CATEGORY;
-    }
+    @Override public EmiRecipeCategory getCategory() { return RitualTableEmiCategory.CATEGORY; }
+    @Override public Identifier getId() { return recipe.getId(); }
+    @Override public List<EmiIngredient> getInputs() { return inputs; }
+    @Override public List<EmiStack> getOutputs() { return outputs; }
+    @Override public int getDisplayWidth() { return RitualTableViewerLayout.WIDTH; }
+    @Override public int getDisplayHeight() { return RitualTableViewerLayout.HEIGHT; }
 
-    @Override
-    public Identifier getId() {
-        return this.recipe.getId();
-    }
-
-    @Override
-    public List<EmiIngredient> getInputs() {
-        return this.inputs;
-    }
-
-    @Override
-    public List<EmiStack> getOutputs() {
-        return this.outputs;
-    }
-
-    @Override
-    public int getDisplayWidth() {
-        return 118;
-    }
-
-    @Override
-    public int getDisplayHeight() {
-        return 88;
-    }
-
-    @Override
-    public void addWidgets(WidgetHolder widgets) {
-        widgets.addTexture(TEXTURE, 0, 0, 118, 80, 0, 0);
-
-        if (!this.inputs.isEmpty()) {
-            widgets.addSlot(this.inputs.get(0), 27, 30)
-                    .drawBack(false);
+    @Override public void addWidgets(WidgetHolder widgets) {
+        widgets.addTexture(TEXTURE, 0, 0, RitualTableViewerLayout.WIDTH, RitualTableViewerLayout.HEIGHT, 0, 0);
+        for (int index = 0; index < inputs.size(); index++) {
+            int[] position = RitualTableViewerLayout.INPUTS[index];
+            widgets.addSlot(inputs.get(index), position[0], position[1]).drawBack(false);
         }
-
-        if (this.inputs.size() > 1) {
-            widgets.addSlot(this.inputs.get(1), 3, 30)
-                    .drawBack(false);
+        widgets.addSlot(outputs.get(0), RitualTableViewerLayout.OUTPUT_X, RitualTableViewerLayout.OUTPUT_Y)
+                .drawBack(false).recipeContext(this);
+        if (recipe.requiresSoul()) {
+            widgets.addTexture(RitualTableViewerLayout.SOUL_TEXTURE,
+                    RitualTableViewerLayout.SOUL_X, RitualTableViewerLayout.SOUL_Y,
+                    RitualTableViewerLayout.SOUL_SIZE, RitualTableViewerLayout.SOUL_SIZE, 0, 0);
+            widgets.addTooltipText(List.of(Text.translatable(RitualTableViewerLayout.SOUL_TOOLTIP)),
+                    RitualTableViewerLayout.SOUL_X, RitualTableViewerLayout.SOUL_Y,
+                    RitualTableViewerLayout.SOUL_SIZE, RitualTableViewerLayout.SOUL_SIZE);
         }
-
-        if (this.inputs.size() > 2) {
-            widgets.addSlot(this.inputs.get(2), 51, 30)
-                    .drawBack(false);
-        }
-
-        if (this.inputs.size() > 3) {
-            widgets.addSlot(this.inputs.get(3), 27, 6)
-                    .drawBack(false);
-        }
-
-        if (this.inputs.size() > 4) {
-            widgets.addSlot(this.inputs.get(4), 27, 54)
-                    .drawBack(false);
-
-            widgets.addTooltipText(
-                    List.of(Text.translatable("tooltip.hexalia.hex_focus_gui")),
-                    3,
-                    62,
-                    16,
-                    16
-            );
-        }
-
-        widgets.addSlot(this.outputs.get(0), 88, 30)
-                .drawBack(false)
-                .recipeContext(this);
-    }
-
-    private static List<EmiIngredient> getInputs(RitualTableRecipe recipe) {
-        List<EmiIngredient> list = new ArrayList<>();
-
-        for (Ingredient ingredient : recipe.getIngredients()) {
-            list.add(EmiIngredient.of(ingredient));
-        }
-
-        return list;
     }
 }

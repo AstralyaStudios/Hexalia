@@ -69,6 +69,8 @@ public class ModCreativeModeTabs {
         entries.add(ModItems.MANDRAKE_SEEDS);
         entries.add(ModItems.SUNFIRE_TOMATO_SEEDS);
         entries.add(ModItems.RABBAGE_SEEDS);
+        entries.add(ModBlocks.WILD_MANDRAKE);
+        entries.add(ModBlocks.WILD_SUNFIRE_TOMATO);
         entries.add(ModItems.MANDRAKE);
         entries.add(ModItems.SUNFIRE_TOMATO);
         entries.add(ModItems.CHILLBERRIES);
@@ -92,6 +94,7 @@ public class ModCreativeModeTabs {
         entries.add(ModItems.BREW_OF_HOMESTEAD);
         entries.add(ModItems.BREW_OF_SIPHON);
         entries.add(ModItems.BREW_OF_DAYBLOOM);
+        entries.add(ModItems.BREW_OF_GRAVEBLOOM);
         entries.add(ModItems.BREW_OF_ARACHNID_GRACE);
         entries.add(ModItems.BREW_OF_HOLLOW_SILENCE);
         entries.add(ModItems.BRAMBLEGUARD_SALVE);
@@ -131,6 +134,12 @@ public class ModCreativeModeTabs {
     }
 
     private static void acceptWearables(ItemGroup.Entries entries) {
+        entries.add(ModItems.SAGE_PENDANT);
+        entries.add(ModItems.SEAFOAM_TALISMAN);
+        entries.add(ModItems.MOONWARD_RING);
+        entries.add(ModItems.WITCHHEART_CLUSTER);
+        entries.add(ModItems.WYRD_FEATHER);
+        entries.add(ModItems.GREEN_OMEN);
         entries.add(ModItems.EARPLUGS);
         entries.add(ModItems.GHOSTVEIL);
         entries.add(ModItems.BOGSHADE_BOOTS);
@@ -152,6 +161,7 @@ public class ModCreativeModeTabs {
         entries.add(ModItems.SMALL_CAULDRON);
         entries.add(ModBlocks.SHELF);
         entries.add(ModItems.RITUAL_TABLE);
+        entries.add(ModItems.HERB_JAR);
         entries.add(ModBlocks.INFUSED_DIRT);
         entries.add(ModBlocks.INFUSED_FARMLAND);
         entries.add(ModBlocks.RITUAL_BRAZIER);
@@ -167,10 +177,11 @@ public class ModCreativeModeTabs {
     }
 
     private static void acceptRareItems(ItemGroup.Entries entries) {
+        entries.add(ModItems.HEARTSEED);
         entries.add(ModItems.ANCIENT_SEED);
         entries.add(ModItems.KELPWEAVE_BLADE);
         entries.add(ModItems.ROOTSHAPER);
-        entries.add(ModItems.SAGE_PENDANT);
+        entries.add(ModItems.CINDERHEW);
         entries.add(ModItems.THORNBOW);
         entries.add(ModItems.BRIAR_SICKLE);
     }
