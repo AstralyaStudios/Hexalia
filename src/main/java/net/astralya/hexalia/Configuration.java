@@ -21,7 +21,7 @@ public final class Configuration implements ConfigData {
 
     @ConfigEntry.Category("others")
     @ConfigEntry.BoundedDiscrete(min = 1, max = 60)
-    public int mandrakeStunDuration = 6;
+    public int mandrakeStunDuration = 8;
 
     @ConfigEntry.Category("others")
     @ConfigEntry.BoundedDiscrete(min = 1, max = 60)

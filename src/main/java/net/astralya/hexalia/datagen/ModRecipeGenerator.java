@@ -781,6 +781,12 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .offerTo(exporter, id("sugar_from_mortar"));
 
         MortarAndPestleRecipeBuilder.mortar(
+                        Ingredient.ofItems(ModBlocks.COTTONWOOD_CATKIN),
+                        new ItemStack(Items.STRING, 2)
+                ).unlockedByItem("has_mortar_and_pestle", ModItems.MORTAR_AND_PESTLE)
+                .offerTo(exporter, id("string_from_mortar"));
+
+        MortarAndPestleRecipeBuilder.mortar(
                         Ingredient.ofItems(Items.BLAZE_ROD),
                         new ItemStack(Items.BLAZE_POWDER, 3)
                 ).unlockedByItem("has_mortar_and_pestle", ModItems.MORTAR_AND_PESTLE)

@@ -51,7 +51,7 @@ public class MandrakeItem extends Item {
                             || AccessoryLookup.hasEquipped(target, ModItems.EARPLUGS));
 
                     if (!protectedByEarplugs) {
-                        living.addStatusEffect(new StatusEffectInstance(ModMobEffects.STUNNED, stunDuration, 0));
+                        living.addStatusEffect(new StatusEffectInstance(ModMobEffects.STUNNED, stunDuration * 20, 0));
                     }
                 }
             }

@@ -7,6 +7,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.entity.EntityGroup;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -39,6 +40,9 @@ public class WitheringCalmEffect implements ICenserEffect {
         Box area = new Box(pos).expand(radius);
 
         for (LivingEntity entity : world.getEntitiesByClass(LivingEntity.class, area, living -> true)) {
+            if (entity.getGroup() == EntityGroup.UNDEAD) {
+                continue;
+            }
             applyWither(entity);
 
             if (entity instanceof MobEntity mob) {

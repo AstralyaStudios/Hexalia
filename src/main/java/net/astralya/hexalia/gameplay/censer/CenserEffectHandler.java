@@ -4,8 +4,12 @@ import net.astralya.hexalia.Configuration;
 import net.astralya.hexalia.block.custom.CenserBlock;
 import net.astralya.hexalia.block.entity.custom.CenserBlockEntity;
 import net.astralya.hexalia.gameplay.censer.effects.ICenserEffect;
+import net.astralya.hexalia.gameplay.censer.effects.UndeadVeilEffect;
+import net.astralya.hexalia.gameplay.censer.effects.WitheringCalmEffect;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.EntityGroup;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -121,6 +125,20 @@ public final class CenserEffectHandler {
 
     public static boolean isUndeadVeilActiveInArea(World world, BlockPos pos) {
         return isSpatialCacheHit(world, pos);
+    }
+
+    public static boolean shouldPreventPlayerTarget(MobEntity mob) {
+        Map<BlockPos, ActiveEffect> effects = ACTIVE_EFFECTS.get(mob.getWorld());
+        if (effects == null) return false;
+        double radiusSq = Math.pow(Configuration.CENSER_EFFECT_RADIUS.get(), 2);
+        for (Map.Entry<BlockPos, ActiveEffect> entry : effects.entrySet()) {
+            if (mob.getBlockPos().getSquaredDistance(entry.getKey()) > radiusSq) continue;
+            if (entry.getValue().effect() instanceof UndeadVeilEffect
+                    && mob.getType().isIn(net.astralya.hexalia.util.ModTags.EntityTypes.AFFECTED_BY_UNDEAD_VEIL)
+                || entry.getValue().effect() instanceof WitheringCalmEffect
+                    && mob.getGroup() != EntityGroup.UNDEAD) return true;
+        }
+        return false;
     }
 
     public static boolean isEffectActiveInArea(World world, BlockPos pos, HerbCombination combo) {

@@ -97,14 +97,20 @@ public final class GravebloomEventHandler {
         }
         RegistryEntryLookup<Block> blocks = world.getRegistryManager().getWrapperOrThrow(RegistryKeys.BLOCK);
         RegistryEntryList.Named<Block> gravebloomPlants = blocks.getOptional(ModTags.Blocks.GRAVEBLOOM_PLANTS).orElse(null);
-        RegistryEntryList.Named<Block> herbs = blocks.getOptional(ModTags.Blocks.HERBS).orElse(null);
-        if (gravebloomPlants == null || gravebloomPlants.size() == 0 || herbs == null || herbs.size() == 0) {
+        if (gravebloomPlants == null || gravebloomPlants.size() == 0) {
             return 0;
         }
 
         Set<BlockPos> used = new HashSet<>();
         List<RegistryEntry<Block>> herbPlants = new ArrayList<>();
-        herbs.forEach(herbPlants::add);
+        gravebloomPlants.forEach(plant -> {
+            if (plant.isIn(ModTags.Blocks.HERBS)) {
+                herbPlants.add(plant);
+            }
+        });
+        if (herbPlants.isEmpty()) {
+            return 0;
+        }
         if (!tryPlaceSprout(world, moss, herbPlants, used)) {
             return 0;
         }

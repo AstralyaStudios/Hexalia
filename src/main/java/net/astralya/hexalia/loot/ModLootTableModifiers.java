@@ -16,16 +16,16 @@ public final class ModLootTableModifiers {
     private static final Identifier JUNGLE_TEMPLE_CHEST = new Identifier("minecraft", "chests/jungle_temple");
     private static final Identifier ACCESSORY_TABLE = new Identifier("hexalia", "accessories/accessory");
     private static final Map<Identifier, Float> ACCESSORY_INJECTIONS = Map.ofEntries(
-            entry("simple_dungeon", 0.10F),
-            entry("abandoned_mineshaft", 0.07F),
-            entry("stronghold_corridor", 0.08F),
-            entry("stronghold_crossing", 0.10F),
-            entry("stronghold_library", 0.12F),
-            entry("ancient_city", 0.18F),
-            entry("ruined_portal", 0.07F),
-            entry("woodland_mansion", 0.15F),
-            entry("jungle_temple", 0.10F),
-            entry("desert_pyramid", 0.10F));
+            entry("simple_dungeon", 0.15F),
+            entry("abandoned_mineshaft", 0.10F),
+            entry("stronghold_corridor", 0.12F),
+            entry("stronghold_crossing", 0.15F),
+            entry("stronghold_library", 0.18F),
+            entry("ancient_city", 0.25F),
+            entry("ruined_portal", 0.10F),
+            entry("woodland_mansion", 0.22F),
+            entry("jungle_temple", 0.15F),
+            entry("desert_pyramid", 0.15F));
 
     private ModLootTableModifiers() {
     }

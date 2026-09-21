@@ -31,7 +31,7 @@ public abstract class MobMixin extends LivingEntity {
 
     @Inject(method = "getTarget", at = @At("RETURN"), cancellable = true)
     private void hexalia$preventTargetGetting(CallbackInfoReturnable<LivingEntity> cir) {
-        if (!hexalia$shouldIgnorePlayers()) {
+        if (!CenserEffectHandler.shouldPreventPlayerTarget((MobEntity) (Object) this)) {
             return;
         }
 
@@ -53,7 +53,8 @@ public abstract class MobMixin extends LivingEntity {
             return;
         }
 
-        if (hexalia$shouldIgnorePlayers() && target instanceof PlayerEntity) {
+        if (CenserEffectHandler.shouldPreventPlayerTarget((MobEntity) (Object) this)
+                && target instanceof PlayerEntity) {
             ci.cancel();
         }
     }
