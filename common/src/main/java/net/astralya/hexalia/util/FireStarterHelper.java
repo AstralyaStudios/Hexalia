@@ -14,7 +14,9 @@ public final class FireStarterHelper {
   private FireStarterHelper() {}
 
   public static boolean isFireStarter(ItemStack stack) {
-    return stack.is(Items.FLINT_AND_STEEL) || stack.is(Items.FIRE_CHARGE) || canLightWithNeoForge(stack);
+    return stack.is(Items.FLINT_AND_STEEL)
+        || stack.is(Items.FIRE_CHARGE)
+        || canLightWithNeoForge(stack);
   }
 
   public static void consumeFireStarter(

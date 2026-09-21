@@ -17,7 +17,8 @@ final class HerbSpreading {
   static void spread(
       ServerLevel level, RandomSource random, BlockPos origin, BlockState state, boolean aquatic) {
     int remaining = 8;
-    for (BlockPos nearby : BlockPos.betweenClosed(origin.offset(-3, -1, -3), origin.offset(3, 1, 3))) {
+    for (BlockPos nearby :
+        BlockPos.betweenClosed(origin.offset(-3, -1, -3), origin.offset(3, 1, 3))) {
       if (level.getBlockState(nearby).is(state.getBlock()) && --remaining <= 0) return;
     }
 
@@ -33,16 +34,16 @@ final class HerbSpreading {
 
   private static boolean isValidTarget(
       ServerLevel level, BlockPos pos, BlockState state, boolean aquatic) {
-    boolean available = aquatic
-        ? level.getBlockState(pos).canBeReplaced() && level.getFluidState(pos).is(FluidTags.WATER)
-        : level.isEmptyBlock(pos);
+    boolean available =
+        aquatic
+            ? level.getBlockState(pos).canBeReplaced()
+                && level.getFluidState(pos).is(FluidTags.WATER)
+            : level.isEmptyBlock(pos);
     return available && state.canSurvive(level, pos);
   }
 
   private static BlockPos step(BlockPos origin, RandomSource random) {
     return origin.offset(
-        random.nextInt(3) - 1,
-        random.nextInt(2) - random.nextInt(2),
-        random.nextInt(3) - 1);
+        random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
   }
 }

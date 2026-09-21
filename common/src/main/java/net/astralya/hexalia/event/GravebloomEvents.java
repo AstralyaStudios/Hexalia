@@ -90,7 +90,12 @@ public final class GravebloomEvents {
           1.35,
           0.01);
       level.playSound(
-          null, origin, SoundEvents.MOSS_PLACE, SoundSource.BLOCKS, 0.55F, 0.9F + random.nextFloat() * 0.2F);
+          null,
+          origin,
+          SoundEvents.MOSS_PLACE,
+          SoundSource.BLOCKS,
+          0.55F,
+          0.9F + random.nextFloat() * 0.2F);
     }
   }
 
@@ -117,22 +122,21 @@ public final class GravebloomEvents {
             .registryOrThrow(Registries.BLOCK)
             .getTag(ModTags.Blocks.GRAVEBLOOM_PLANTS)
             .orElse(null);
-    HolderSet.Named<Block> herbs =
-        level
-            .registryAccess()
-            .registryOrThrow(Registries.BLOCK)
-            .getTag(ModTags.Blocks.HERBS)
-            .orElse(null);
-    if (gravebloomPlants == null
-        || gravebloomPlants.size() == 0
-        || herbs == null
-        || herbs.size() == 0) {
+    if (gravebloomPlants == null || gravebloomPlants.size() == 0) {
       return 0;
     }
 
     Set<BlockPos> used = new HashSet<>();
     List<Holder<Block>> herbPlants = new ArrayList<>();
-    herbs.forEach(herbPlants::add);
+    gravebloomPlants.forEach(
+        plant -> {
+          if (plant.is(ModTags.Blocks.HERBS)) {
+            herbPlants.add(plant);
+          }
+        });
+    if (herbPlants.isEmpty()) {
+      return 0;
+    }
     if (!tryPlaceSprout(level, moss, herbPlants, used)) {
       return 0;
     }
@@ -146,10 +150,7 @@ public final class GravebloomEvents {
   }
 
   private static boolean tryPlaceSprout(
-      ServerLevel level,
-      List<BlockPos> moss,
-      List<Holder<Block>> pool,
-      Set<BlockPos> used) {
+      ServerLevel level, List<BlockPos> moss, List<Holder<Block>> pool, Set<BlockPos> used) {
     Random random = new Random(level.getRandom().nextLong());
     List<BlockPos> targets = new ArrayList<>(moss);
     List<Holder<Block>> plants = new ArrayList<>(pool);

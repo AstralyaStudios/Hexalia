@@ -48,8 +48,9 @@ public final class NaturesRitualSoulEvents {
         }
       }
     }
-    candidates.sort(Comparator.comparingDouble(Candidate::distance)
-        .thenComparingLong(candidate -> candidate.pos().asLong()));
+    candidates.sort(
+        Comparator.comparingDouble(Candidate::distance)
+            .thenComparingLong(candidate -> candidate.pos().asLong()));
     for (Candidate candidate : candidates) {
       if (candidate.table().tryCaptureSoul(origin)) {
         level.sendParticles(
@@ -72,6 +73,5 @@ public final class NaturesRitualSoulEvents {
     return weapon != null && weapon.is(ModItems.ATHAME.get());
   }
 
-  private record Candidate(
-      BlockPos pos, RitualTableBlockEntity table, double distance) {}
+  private record Candidate(BlockPos pos, RitualTableBlockEntity table, double distance) {}
 }

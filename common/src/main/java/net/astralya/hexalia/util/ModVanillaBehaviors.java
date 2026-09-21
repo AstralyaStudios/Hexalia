@@ -69,7 +69,9 @@ public final class ModVanillaBehaviors {
                 && SmallCauldronBlock.tryLightFromDispenser(level, targetPos, targetState, stack)) {
               return stack;
             }
-            return fallback == null ? super.execute(source, stack) : fallback.dispense(source, stack);
+            return fallback == null
+                ? super.execute(source, stack)
+                : fallback.dispense(source, stack);
           }
         });
   }

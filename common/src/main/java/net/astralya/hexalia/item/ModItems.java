@@ -16,8 +16,8 @@ import net.astralya.hexalia.item.custom.BottleMothItem;
 import net.astralya.hexalia.item.custom.BrewItem;
 import net.astralya.hexalia.item.custom.BriarSickleItem;
 import net.astralya.hexalia.item.custom.CinderhewItem;
-import net.astralya.hexalia.item.custom.HexFocusItem;
 import net.astralya.hexalia.item.custom.HeartseedItem;
+import net.astralya.hexalia.item.custom.HexFocusItem;
 import net.astralya.hexalia.item.custom.HomesteadBrewItem;
 import net.astralya.hexalia.item.custom.KelpweaveBladeItem;
 import net.astralya.hexalia.item.custom.MandrakeItem;
@@ -91,8 +91,7 @@ public final class ModItems {
       ITEMS.register("ancient_seed", () -> new Item(defaultProperties()));
 
   public static final RegistrySupplier<Item> HEARTSEED =
-      ITEMS.register(
-          "heartseed", () -> new HeartseedItem(defaultProperties().rarity(Rarity.RARE)));
+      ITEMS.register("heartseed", () -> new HeartseedItem(defaultProperties().rarity(Rarity.RARE)));
 
   public static final RegistrySupplier<Item> SIREN_PASTE =
       ITEMS.register("siren_paste", () -> new Item(defaultProperties()));
@@ -174,13 +173,11 @@ public final class ModItems {
 
   public static final RegistrySupplier<Item> SAGE_PENDANT =
       ITEMS.register(
-          "sage_pendant",
-          () -> new Item(accessoryProperties("sage_pendant").durability(32)));
+          "sage_pendant", () -> new Item(accessoryProperties("sage_pendant").durability(32)));
 
   public static final RegistrySupplier<Item> SEAFOAM_TALISMAN =
       ITEMS.register(
-          "seafoam_talisman",
-          () -> new Item(accessoryProperties("seafoam_talisman").stacksTo(1)));
+          "seafoam_talisman", () -> new Item(accessoryProperties("seafoam_talisman").stacksTo(1)));
 
   public static final RegistrySupplier<Item> MOONWARD_RING =
       ITEMS.register(
@@ -196,8 +193,7 @@ public final class ModItems {
           "wyrd_feather", () -> new Item(accessoryProperties("wyrd_feather").stacksTo(1)));
 
   public static final RegistrySupplier<Item> GREEN_OMEN =
-      ITEMS.register(
-          "green_omen", () -> new Item(accessoryProperties("green_omen").stacksTo(1)));
+      ITEMS.register("green_omen", () -> new Item(accessoryProperties("green_omen").stacksTo(1)));
 
   public static final RegistrySupplier<Item> BOTTLED_MOTH =
       ITEMS.register("bottled_moth", () -> new BottleMothItem(defaultProperties().stacksTo(1)));
@@ -216,9 +212,7 @@ public final class ModItems {
           "earplugs",
           () ->
               new EarplugsItem(
-                  ArmorMaterials.LEATHER,
-                  ArmorItem.Type.HELMET,
-                  accessoryProperties("earplugs")));
+                  ArmorMaterials.LEATHER, ArmorItem.Type.HELMET, accessoryProperties("earplugs")));
 
   public static final RegistrySupplier<Item> BOGSHADE_BOOTS =
       ITEMS.register(
@@ -661,7 +655,8 @@ public final class ModItems {
       ITEMS.register("shelf", () -> new BlockItem(ModBlocks.SHELF.get(), defaultProperties()));
 
   public static final RegistrySupplier<Item> HERB_JAR =
-      ITEMS.register("herb_jar", () -> new BlockItem(ModBlocks.HERB_JAR.get(), defaultProperties()));
+      ITEMS.register(
+          "herb_jar", () -> new BlockItem(ModBlocks.HERB_JAR.get(), defaultProperties()));
 
   public static final RegistrySupplier<Item> DREAMCATCHER =
       ITEMS.register(

@@ -19,7 +19,6 @@ import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 
@@ -73,7 +72,8 @@ public final class NaturesRitualJeiCategory
   private static ItemStack displayResult(NaturesRitualRecipe recipe) {
     if (recipe.isItemResult()) return recipe.itemResult();
     EntityType<?> type =
-        recipe.entityResult()
+        recipe
+            .entityResult()
             .flatMap(result -> BuiltInRegistries.ENTITY_TYPE.getOptional(result.entity()))
             .orElse(null);
     SpawnEggItem spawnEgg = type == null ? null : SpawnEggItem.byId(type);
@@ -103,8 +103,7 @@ public final class NaturesRitualJeiCategory
   private static final class SoulIndicatorTooltip implements IRecipeWidget {
     @Override
     public ScreenPosition getPosition() {
-      return new ScreenPosition(
-          NaturesRitualViewerIndicator.X, NaturesRitualViewerIndicator.Y);
+      return new ScreenPosition(NaturesRitualViewerIndicator.X, NaturesRitualViewerIndicator.Y);
     }
 
     @Override

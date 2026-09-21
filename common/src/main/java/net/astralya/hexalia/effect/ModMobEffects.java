@@ -102,8 +102,7 @@ public final class ModMobEffects {
           "brambleguard", () -> new BrambleguardEffect(MobEffectCategory.NEUTRAL, 0x415437));
 
   public static final RegistrySupplier<MobEffect> STUNNED =
-      MOB_EFFECTS.register(
-          "stunned", () -> new StunnedEffect(MobEffectCategory.HARMFUL, 0xFFFFDD));
+      MOB_EFFECTS.register("stunned", () -> new StunnedEffect(MobEffectCategory.HARMFUL, 0xFFFFDD));
 
   public static final RegistrySupplier<MobEffect> BLEEDING =
       MOB_EFFECTS.register(

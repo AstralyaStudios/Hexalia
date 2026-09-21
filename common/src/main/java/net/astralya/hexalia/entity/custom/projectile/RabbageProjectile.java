@@ -59,7 +59,8 @@ public class RabbageProjectile extends ThrowableItemProjectile {
     if (entity instanceof LivingEntity livingEntity) {
       int damage = 1;
       entity.hurt(this.damageSources().thrown(this, this.getOwner()), damage);
-      livingEntity.addEffect(new MobEffectInstance(ModMobEffects.BLEEDING, 100, 0));
+      livingEntity.addEffect(
+          new MobEffectInstance(ModMobEffects.holder(ModMobEffects.BLEEDING), 100, 0));
     }
   }
 

@@ -6,6 +6,7 @@
     "CobwebMixin",
     "CropBlockMixin",
     "LivingEntityMixin",
+    "MobMixin",
     "ServerLevelMixin",
     "StemBlockMixin",
     "SugarCaneBlockMixin"

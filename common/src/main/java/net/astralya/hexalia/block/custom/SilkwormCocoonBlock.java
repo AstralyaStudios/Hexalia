@@ -133,10 +133,12 @@ public class SilkwormCocoonBlock extends Block {
         && !hasOtherCocoonAttached(level, attachedPos, pos);
   }
 
-  private static boolean hasOtherCocoonAttached(LevelReader level, BlockPos attachedPos, BlockPos pos) {
+  private static boolean hasOtherCocoonAttached(
+      LevelReader level, BlockPos attachedPos, BlockPos pos) {
     for (Direction direction : Direction.Plane.HORIZONTAL) {
       BlockPos neighborPos = attachedPos.relative(direction);
-      if (!neighborPos.equals(pos) && level.getBlockState(neighborPos).getBlock() instanceof SilkwormCocoonBlock) {
+      if (!neighborPos.equals(pos)
+          && level.getBlockState(neighborPos).getBlock() instanceof SilkwormCocoonBlock) {
         return true;
       }
     }

@@ -11,7 +11,8 @@ final class WildCropSpreading {
 
   static void spread(ServerLevel level, RandomSource random, BlockPos origin, BlockState state) {
     int remaining = 10;
-    for (BlockPos nearby : BlockPos.betweenClosed(origin.offset(-4, -1, -4), origin.offset(4, 1, 4))) {
+    for (BlockPos nearby :
+        BlockPos.betweenClosed(origin.offset(-4, -1, -4), origin.offset(4, 1, 4))) {
       if (level.getBlockState(nearby).is(state.getBlock()) && --remaining <= 0) return;
     }
 
@@ -27,8 +28,6 @@ final class WildCropSpreading {
 
   private static BlockPos step(BlockPos origin, RandomSource random) {
     return origin.offset(
-        random.nextInt(3) - 1,
-        random.nextInt(2) - random.nextInt(2),
-        random.nextInt(3) - 1);
+        random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
   }
 }

@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
-import net.minecraft.server.MinecraftServer;
 import net.astralya.hexalia.HexaliaConfig;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -32,10 +32,11 @@ final class NautiliteActivation {
 
     int radius = Math.max(1, HexaliaConfig.nautiliteEffectRadius());
     AABB area = player.getBoundingBox().inflate(radius);
-    for (LivingEntity target : level.getEntitiesOfClass(
-        LivingEntity.class,
-        area,
-        entity -> entity instanceof Guardian || entity instanceof Drowned)) {
+    for (LivingEntity target :
+        level.getEntitiesOfClass(
+            LivingEntity.class,
+            area,
+            entity -> entity instanceof Guardian || entity instanceof Drowned)) {
       target.hurt(level.damageSources().magic(), PULSE_DAMAGE);
       level.sendParticles(
           ParticleTypes.NAUTILUS,

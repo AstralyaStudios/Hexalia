@@ -49,9 +49,7 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
 
   private static void registerWorkstations(EmiRegistry registry) {
     addWorkstation(
-        registry,
-        HexaliaEmiRecipeCategories.MORTAR_AND_PESTLE,
-        ModItems.MORTAR_AND_PESTLE.get());
+        registry, HexaliaEmiRecipeCategories.MORTAR_AND_PESTLE, ModItems.MORTAR_AND_PESTLE.get());
     addWorkstation(
         registry, HexaliaEmiRecipeCategories.SMALL_CAULDRON, ModItems.SMALL_CAULDRON.get());
     addWorkstation(
@@ -249,7 +247,8 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
   private static ItemStack naturesRitualResult(NaturesRitualRecipe recipe) {
     if (recipe.isItemResult()) return recipe.itemResult();
     EntityType<?> type =
-        recipe.entityResult()
+        recipe
+            .entityResult()
             .flatMap(result -> BuiltInRegistries.ENTITY_TYPE.getOptional(result.entity()))
             .orElse(null);
     SpawnEggItem spawnEgg = type == null ? null : SpawnEggItem.byId(type);

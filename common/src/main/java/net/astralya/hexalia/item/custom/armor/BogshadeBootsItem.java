@@ -14,12 +14,7 @@ import net.minecraft.world.level.Level;
 
 public class BogshadeBootsItem extends HexaliaGeoArmorItem {
   public BogshadeBootsItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
-    super(
-        material,
-        type,
-        properties,
-        "bogshade_boots",
-        "bogshade_boots");
+    super(material, type, properties, "bogshade_boots", "bogshade_boots");
   }
 
   @Override

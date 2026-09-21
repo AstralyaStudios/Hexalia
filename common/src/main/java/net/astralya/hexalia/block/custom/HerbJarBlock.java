@@ -46,8 +46,7 @@ public class HerbJarBlock extends BaseEntityBlock {
   public static final MapCodec<HerbJarBlock> CODEC = simpleCodec(HerbJarBlock::new);
   private static final VoxelShape SHAPE =
       Shapes.or(
-          Block.box(4.0, 0.0, 4.0, 12.0, 11.0, 12.0),
-          Block.box(5.0, 11.0, 5.0, 11.0, 12.0, 11.0));
+          Block.box(4.0, 0.0, 4.0, 12.0, 11.0, 12.0), Block.box(5.0, 11.0, 5.0, 11.0, 12.0, 11.0));
 
   public HerbJarBlock(Properties properties) {
     super(properties);
@@ -151,8 +150,7 @@ public class HerbJarBlock extends BaseEntityBlock {
   @Override
   protected InteractionResult useWithoutItem(
       BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-    if (!(level.getBlockEntity(pos) instanceof HerbJarBlockEntity herbJar)
-        || herbJar.isEmpty()) {
+    if (!(level.getBlockEntity(pos) instanceof HerbJarBlockEntity herbJar) || herbJar.isEmpty()) {
       return InteractionResult.PASS;
     }
     if (level.isClientSide()) {
@@ -196,14 +194,9 @@ public class HerbJarBlock extends BaseEntityBlock {
 
   @Override
   public void setPlacedBy(
-      Level level,
-      BlockPos pos,
-      BlockState state,
-      @Nullable LivingEntity placer,
-      ItemStack stack) {
+      Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
     super.setPlacedBy(level, pos, state, placer, stack);
-    if (!level.isClientSide()
-        && level.getBlockEntity(pos) instanceof HerbJarBlockEntity herbJar) {
+    if (!level.isClientSide() && level.getBlockEntity(pos) instanceof HerbJarBlockEntity herbJar) {
       HerbJarData data = stack.get(ModComponents.HERB_JAR.get());
       if (data != null) {
         herbJar.restoreData(data);

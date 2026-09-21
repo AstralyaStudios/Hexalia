@@ -141,8 +141,7 @@ public class MortarAndPestleBlockEntity extends BlockEntity
   }
 
   @Override
-  public boolean canPlaceItemThroughFace(
-      int slot, ItemStack stack, @Nullable Direction direction) {
+  public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction direction) {
     return direction != Direction.DOWN && canPlaceItem(slot, stack);
   }
 

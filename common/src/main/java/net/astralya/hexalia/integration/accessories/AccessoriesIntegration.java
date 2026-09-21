@@ -1,7 +1,7 @@
 package net.astralya.hexalia.integration.accessories;
 
-import java.util.function.BiPredicate;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.util.ModTags;
 import net.minecraft.world.entity.EquipmentSlot;

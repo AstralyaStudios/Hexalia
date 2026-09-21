@@ -40,8 +40,15 @@ final class GrimshadeActivation {
 
   static boolean activate(ServerLevel level, Player player) {
     if (level.getDifficulty() == Difficulty.PEACEFUL) {
-      player.displayClientMessage(Component.translatable("message.hexalia.grimshade.peaceful"), true);
-      level.playSound(null, player.blockPosition(), SoundEvents.SOUL_ESCAPE.value(), SoundSource.PLAYERS, 0.35F, 0.65F);
+      player.displayClientMessage(
+          Component.translatable("message.hexalia.grimshade.peaceful"), true);
+      level.playSound(
+          null,
+          player.blockPosition(),
+          SoundEvents.SOUL_ESCAPE.value(),
+          SoundSource.PLAYERS,
+          0.35F,
+          0.65F);
       return false;
     }
 
@@ -50,9 +57,20 @@ final class GrimshadeActivation {
     convertSkeletons(level, origin, radius);
     convertSkulls(level, origin, radius);
     level.playSound(null, origin, SoundEvents.WITHER_AMBIENT, SoundSource.PLAYERS, 0.65F, 1.15F);
-    level.sendParticles(ParticleTypes.SOUL, origin.getX() + 0.5, origin.getY() + 1.0, origin.getZ() + 0.5, 20, 0.7, 0.8, 0.7, 0.02);
+    level.sendParticles(
+        ParticleTypes.SOUL,
+        origin.getX() + 0.5,
+        origin.getY() + 1.0,
+        origin.getZ() + 0.5,
+        20,
+        0.7,
+        0.8,
+        0.7,
+        0.02);
 
-    ACTIVE_PLAYERS.put(player.getUUID(), level.getServer().getTickCount() + Math.max(1, HexaliaConfig.grimshadeDuration()));
+    ACTIVE_PLAYERS.put(
+        player.getUUID(),
+        level.getServer().getTickCount() + Math.max(1, HexaliaConfig.grimshadeDuration()));
     applyAura(level, player, radius);
     return true;
   }
@@ -66,7 +84,10 @@ final class GrimshadeActivation {
     while (entries.hasNext()) {
       Map.Entry<UUID, Integer> entry = entries.next();
       Player player = server.getPlayerList().getPlayer(entry.getKey());
-      if (server.getTickCount() >= entry.getValue() || player == null || !player.isAlive() || player.isRemoved()) {
+      if (server.getTickCount() >= entry.getValue()
+          || player == null
+          || !player.isAlive()
+          || player.isRemoved()) {
         entries.remove();
         continue;
       }
@@ -78,10 +99,14 @@ final class GrimshadeActivation {
   private static void applyAura(ServerLevel level, Player player, int radius) {
     if (level.getDifficulty() != Difficulty.PEACEFUL) {
       AABB area = player.getBoundingBox().inflate(radius);
-      for (LivingEntity target : level.getEntitiesOfClass(LivingEntity.class, area,
-          entity -> entity.isAlive() && !(entity instanceof Player))) {
+      for (LivingEntity target :
+          level.getEntitiesOfClass(
+              LivingEntity.class,
+              area,
+              entity -> entity.isAlive() && !(entity instanceof Player))) {
         target.addEffect(new MobEffectInstance(MobEffects.WITHER, EFFECT_DURATION, 0, true, true));
-        target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, EFFECT_DURATION, 0, true, true));
+        target.addEffect(
+            new MobEffectInstance(MobEffects.WEAKNESS, EFFECT_DURATION, 0, true, true));
         level.sendParticles(
             ParticleTypes.SOUL,
             target.getX(),
@@ -93,15 +118,30 @@ final class GrimshadeActivation {
             target.getBbWidth() * 0.25,
             0.01);
       }
-      level.sendParticles(ParticleTypes.WITCH, player.getX(), player.getY() + 1.0, player.getZ(), 3, 0.175, 0.25, 0.175, 0.01);
+      level.sendParticles(
+          ParticleTypes.WITCH,
+          player.getX(),
+          player.getY() + 1.0,
+          player.getZ(),
+          3,
+          0.175,
+          0.25,
+          0.175,
+          0.01);
     }
   }
 
   private static void convertSkeletons(ServerLevel level, BlockPos origin, int radius) {
-    for (Skeleton skeleton : level.getEntitiesOfClass(Skeleton.class, new AABB(origin).inflate(radius))) {
+    for (Skeleton skeleton :
+        level.getEntitiesOfClass(Skeleton.class, new AABB(origin).inflate(radius))) {
       WitherSkeleton replacement = EntityType.WITHER_SKELETON.create(level);
       if (replacement == null) continue;
-      replacement.moveTo(skeleton.getX(), skeleton.getY(), skeleton.getZ(), skeleton.getYRot(), skeleton.getXRot());
+      replacement.moveTo(
+          skeleton.getX(),
+          skeleton.getY(),
+          skeleton.getZ(),
+          skeleton.getYRot(),
+          skeleton.getXRot());
       replacement.setDeltaMovement(skeleton.getDeltaMovement());
       replacement.setCustomName(skeleton.getCustomName());
       replacement.setCustomNameVisible(skeleton.isCustomNameVisible());
@@ -109,7 +149,16 @@ final class GrimshadeActivation {
       replacement.setHealth(Math.min(replacement.getMaxHealth(), skeleton.getHealth()));
       skeleton.discard();
       level.addFreshEntity(replacement);
-      level.sendParticles(ParticleTypes.SOUL, replacement.getX(), replacement.getY() + 1.0, replacement.getZ(), 8, 0.3, 0.6, 0.3, 0.02);
+      level.sendParticles(
+          ParticleTypes.SOUL,
+          replacement.getX(),
+          replacement.getY() + 1.0,
+          replacement.getZ(),
+          8,
+          0.3,
+          0.6,
+          0.3,
+          0.02);
     }
   }
 
@@ -120,10 +169,14 @@ final class GrimshadeActivation {
       if (cursor.distSqr(origin) > radius * radius) continue;
       BlockState state = level.getBlockState(cursor);
       if (state.is(Blocks.SKELETON_SKULL)) {
-        level.setBlock(cursor, copyProperties(state, Blocks.WITHER_SKELETON_SKULL.defaultBlockState()), 3);
+        level.setBlock(
+            cursor, copyProperties(state, Blocks.WITHER_SKELETON_SKULL.defaultBlockState()), 3);
       } else if (state.is(Blocks.SKELETON_WALL_SKULL)) {
-        BlockState replacement = copyProperties(state, Blocks.WITHER_SKELETON_WALL_SKULL.defaultBlockState());
-        if (state.hasProperty(WallSkullBlock.FACING)) replacement = replacement.setValue(WallSkullBlock.FACING, state.getValue(WallSkullBlock.FACING));
+        BlockState replacement =
+            copyProperties(state, Blocks.WITHER_SKELETON_WALL_SKULL.defaultBlockState());
+        if (state.hasProperty(WallSkullBlock.FACING))
+          replacement =
+              replacement.setValue(WallSkullBlock.FACING, state.getValue(WallSkullBlock.FACING));
         level.setBlock(cursor, replacement, 3);
       }
     }
@@ -132,7 +185,11 @@ final class GrimshadeActivation {
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static BlockState copyProperties(BlockState from, BlockState to) {
     for (var property : from.getProperties()) {
-      if (to.hasProperty(property)) to = to.setValue((net.minecraft.world.level.block.state.properties.Property) property, from.getValue(property));
+      if (to.hasProperty(property))
+        to =
+            to.setValue(
+                (net.minecraft.world.level.block.state.properties.Property) property,
+                from.getValue(property));
     }
     return to;
   }

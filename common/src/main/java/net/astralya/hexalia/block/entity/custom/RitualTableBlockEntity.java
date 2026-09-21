@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import net.astralya.hexalia.Hexalia;
 import net.astralya.hexalia.block.custom.RitualBrazierBlock;
 import net.astralya.hexalia.block.entity.ModBlockEntityTypes;
 import net.astralya.hexalia.gameplay.naturesritual.NaturesRitual;
-import net.astralya.hexalia.Hexalia;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.particle.ModParticleTypes;
 import net.astralya.hexalia.recipe.NaturesRitualRecipe;
@@ -15,25 +15,25 @@ import net.astralya.hexalia.util.ItemInteractionHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -45,7 +45,13 @@ public class RitualTableBlockEntity extends BlockEntity
   private static final int SLOT = 0;
   private static final int DEFAULT_DURATION = 8 * 20;
   private static final int MANIFESTATION_DURATION = 50;
-  public enum RitualState { IDLE, PROCESSING_OFFERINGS, AWAITING_SOUL, SOUL_MANIFESTATION }
+
+  public enum RitualState {
+    IDLE,
+    PROCESSING_OFFERINGS,
+    AWAITING_SOUL,
+    SOUL_MANIFESTATION
+  }
 
   private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
 
@@ -179,8 +185,12 @@ public class RitualTableBlockEntity extends BlockEntity
   }
 
   public void startTransformation(
-      ItemStack output, int durationTicks, List<RitualBrazierBlockEntity> braziers,
-      ResourceLocation recipeId, boolean requiresSoul, Player activatingPlayer) {
+      ItemStack output,
+      int durationTicks,
+      List<RitualBrazierBlockEntity> braziers,
+      ResourceLocation recipeId,
+      boolean requiresSoul,
+      Player activatingPlayer) {
     if (ritualState != RitualState.IDLE) {
       return;
     }
@@ -213,7 +223,8 @@ public class RitualTableBlockEntity extends BlockEntity
   }
 
   public boolean tryCaptureSoul(BlockPos sacrificeOrigin) {
-    if (!(level instanceof ServerLevel server) || ritualState != RitualState.AWAITING_SOUL) return false;
+    if (!(level instanceof ServerLevel server) || ritualState != RitualState.AWAITING_SOUL)
+      return false;
     capturedSoulOrigin = sacrificeOrigin.immutable();
     manifestationTicksRemaining = MANIFESTATION_DURATION;
     manifestationAnimationStart = server.getGameTime();
@@ -328,12 +339,7 @@ public class RitualTableBlockEntity extends BlockEntity
 
     if (currentTime >= 16 && currentTime < 34 && level instanceof ServerLevel server) {
       spawnItemParticles(
-          server,
-          table.cachedParticleItem,
-          brazier.getBlockPos(),
-          pos,
-          currentTime - 16,
-          18);
+          server, table.cachedParticleItem, brazier.getBlockPos(), pos, currentTime - 16, 18);
     }
 
     if (currentTime == ticksPerBrazier - 1) {
@@ -445,8 +451,7 @@ public class RitualTableBlockEntity extends BlockEntity
       return;
     }
 
-    float progress =
-        Math.min(1.0F, elapsed / (table.activeBraziers.size() * 40.0F));
+    float progress = Math.min(1.0F, elapsed / (table.activeBraziers.size() * 40.0F));
     float intensity = 0.45F + progress * 0.55F;
     long gameTime = server.getGameTime();
 
@@ -604,8 +609,10 @@ public class RitualTableBlockEntity extends BlockEntity
         double sourceY = table.capturedSoulOrigin.getY() + 0.75;
         double sourceZ = table.capturedSoulOrigin.getZ() + 0.5;
         double x = sourceX + (center.getX() + 0.5 - sourceX) * adjustedProgress;
-        double y = sourceY + (center.getY() + 1.1 - sourceY) * adjustedProgress
-            + Math.sin(adjustedProgress * Math.PI) * 0.65;
+        double y =
+            sourceY
+                + (center.getY() + 1.1 - sourceY) * adjustedProgress
+                + Math.sin(adjustedProgress * Math.PI) * 0.65;
         double z = sourceZ + (center.getZ() + 0.5 - sourceZ) * adjustedProgress;
         server.sendParticles(
             ParticleTypes.SOUL,
@@ -708,7 +715,8 @@ public class RitualTableBlockEntity extends BlockEntity
     table.syncVisualState();
   }
 
-  private static void completeManifestation(Level level, BlockPos pos, RitualTableBlockEntity table) {
+  private static void completeManifestation(
+      Level level, BlockPos pos, RitualTableBlockEntity table) {
     if (!(level instanceof ServerLevel server) || table.pendingRecipeId == null) {
       manifestationFailed(table, "missing pending recipe");
       return;
@@ -724,7 +732,8 @@ public class RitualTableBlockEntity extends BlockEntity
       return;
     }
     NaturesRitualRecipe.EntityResult entityResult = result.get();
-    EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.getOptional(entityResult.entity()).orElse(null);
+    EntityType<?> entityType =
+        BuiltInRegistries.ENTITY_TYPE.getOptional(entityResult.entity()).orElse(null);
     if (entityType == null || entityResult.count() < 1) {
       manifestationFailed(table, "entity result is invalid");
       return;
@@ -801,13 +810,13 @@ public class RitualTableBlockEntity extends BlockEntity
         0.3,
         0.35,
         0.02);
-    server.playSound(
-        null, pos, SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 0.8F, 0.85F);
+    server.playSound(null, pos, SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 0.8F, 0.85F);
     resetManifestation(table);
   }
 
   private static void manifestationFailed(RitualTableBlockEntity table, String reason) {
-    Hexalia.LOGGER.warn("Nature's Ritual manifestation at {} failed: {}", table.getBlockPos(), reason);
+    Hexalia.LOGGER.warn(
+        "Nature's Ritual manifestation at {} failed: {}", table.getBlockPos(), reason);
     resetManifestation(table);
   }
 
@@ -915,9 +924,15 @@ public class RitualTableBlockEntity extends BlockEntity
     ContainerHelper.loadAllItems(tag, inventory, registries);
     transformTicksRemaining = tag.getInt("TicksLeft");
     totalTransformTicks = tag.getInt("TotalTicks");
-    try { ritualState = RitualState.valueOf(tag.getString("RitualState")); }
-    catch (IllegalArgumentException ignored) { ritualState = RitualState.IDLE; }
-    pendingRecipeId = tag.contains("PendingRecipe") ? ResourceLocation.tryParse(tag.getString("PendingRecipe")) : null;
+    try {
+      ritualState = RitualState.valueOf(tag.getString("RitualState"));
+    } catch (IllegalArgumentException ignored) {
+      ritualState = RitualState.IDLE;
+    }
+    pendingRecipeId =
+        tag.contains("PendingRecipe")
+            ? ResourceLocation.tryParse(tag.getString("PendingRecipe"))
+            : null;
     activatingPlayerId = tag.hasUUID("ActivatingPlayer") ? tag.getUUID("ActivatingPlayer") : null;
     manifestationTicksRemaining = tag.getInt("ManifestationTicks");
     manifestationAnimationStart = tag.getLong("ManifestationAnimationStart");

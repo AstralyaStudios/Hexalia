@@ -114,7 +114,8 @@ public class CinderhewProjectile extends AbstractArrow {
         owner instanceof ServerPlayer serverPlayer ? serverPlayer : null,
         item -> {});
     setCarriedStack(stack);
-    level().playSound(null, blockPosition(), SoundEvents.AXE_STRIP, SoundSource.PLAYERS, 0.6F, 0.8F);
+    level()
+        .playSound(null, blockPosition(), SoundEvents.AXE_STRIP, SoundSource.PLAYERS, 0.6F, 0.8F);
     if (stack.isEmpty()) {
       discard();
       return;
@@ -137,8 +138,9 @@ public class CinderhewProjectile extends AbstractArrow {
     entityData.set(RETURNING, true);
     setNoPhysics(true);
     inGround = false;
-    level().playSound(
-        null, blockPosition(), SoundEvents.TRIDENT_RETURN, SoundSource.PLAYERS, 0.55F, 1.15F);
+    level()
+        .playSound(
+            null, blockPosition(), SoundEvents.TRIDENT_RETURN, SoundSource.PLAYERS, 0.55F, 1.15F);
   }
 
   private void tickReturn() {
@@ -173,8 +175,14 @@ public class CinderhewProjectile extends AbstractArrow {
       player.drop(stack, false);
     }
     setCarriedStack(ItemStack.EMPTY);
-    level().playSound(
-        null, player.blockPosition(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.45F, 1.1F);
+    level()
+        .playSound(
+            null,
+            player.blockPosition(),
+            SoundEvents.ITEM_PICKUP,
+            SoundSource.PLAYERS,
+            0.45F,
+            1.1F);
     discard();
   }
 

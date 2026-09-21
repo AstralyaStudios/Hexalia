@@ -51,12 +51,6 @@ public final class GreenOmenEffects {
         0.2,
         0.25,
         0.0);
-    level.playSound(
-        null,
-        pos,
-        SoundEvents.AMETHYST_BLOCK_CHIME,
-        SoundSource.PLAYERS,
-        0.3F,
-        1.2F);
+    level.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 0.3F, 1.2F);
   }
 }

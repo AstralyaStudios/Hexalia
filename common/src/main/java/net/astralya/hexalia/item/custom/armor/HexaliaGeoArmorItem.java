@@ -90,7 +90,9 @@ public class HexaliaGeoArmorItem extends ArmorItem implements GeoItem {
       Class<?> rendererClass =
           Class.forName("net.astralya.hexalia.client.renderer.item.HexaliaArmorRenderer");
       return (GeoRenderProvider)
-          rendererClass.getMethod("createRenderProvider", HexaliaGeoArmorItem.class).invoke(null, this);
+          rendererClass
+              .getMethod("createRenderProvider", HexaliaGeoArmorItem.class)
+              .invoke(null, this);
     } catch (ReflectiveOperationException exception) {
       throw new IllegalStateException("Unable to create Hexalia armor renderer", exception);
     }

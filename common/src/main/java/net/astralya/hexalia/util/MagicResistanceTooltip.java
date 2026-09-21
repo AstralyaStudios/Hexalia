@@ -18,8 +18,7 @@ public final class MagicResistanceTooltip {
     if (bonus <= 0.0F) return;
     tooltip.add(
         Component.translatable(
-                "tooltip.hexalia.magic_resist_full_set",
-                MagicResistanceHelper.formatPercent(bonus))
+                "tooltip.hexalia.magic_resist_full_set", MagicResistanceHelper.formatPercent(bonus))
             .withStyle(ChatFormatting.GREEN));
   }
 }

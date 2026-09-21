@@ -7,8 +7,8 @@ import net.astralya.hexalia.entity.boat.ModBoatEntity;
 import net.astralya.hexalia.entity.boat.ModChestBoatEntity;
 import net.astralya.hexalia.entity.custom.CacofeyEntity;
 import net.astralya.hexalia.entity.custom.SilkMothEntity;
-import net.astralya.hexalia.entity.custom.projectile.FoulSacProjectile;
 import net.astralya.hexalia.entity.custom.projectile.CinderhewProjectile;
+import net.astralya.hexalia.entity.custom.projectile.FoulSacProjectile;
 import net.astralya.hexalia.entity.custom.projectile.FrostSacProjectile;
 import net.astralya.hexalia.entity.custom.projectile.PurifyingSacProjectile;
 import net.astralya.hexalia.entity.custom.projectile.RabbageProjectile;
@@ -110,8 +110,7 @@ public final class ModEntities {
       ENTITY_TYPES.register(
           "cinderhew",
           () ->
-              EntityType.Builder.<CinderhewProjectile>of(
-                      CinderhewProjectile::new, MobCategory.MISC)
+              EntityType.Builder.<CinderhewProjectile>of(CinderhewProjectile::new, MobCategory.MISC)
                   .sized(0.5F, 0.5F)
                   .clientTrackingRange(8)
                   .updateInterval(1)

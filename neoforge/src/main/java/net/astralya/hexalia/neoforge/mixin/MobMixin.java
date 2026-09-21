@@ -1,6 +1,5 @@
-package net.astralya.hexalia.fabric.mixin;
+package net.astralya.hexalia.neoforge.mixin;
 
-import net.astralya.hexalia.util.ArmorBehaviorHelper;
 import net.astralya.hexalia.gameplay.censer.CenserEffectHandler;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -12,13 +11,10 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(Mob.class)
 public class MobMixin {
   @ModifyVariable(method = "setTarget", at = @At("HEAD"), argsOnly = true, ordinal = 0)
-  private LivingEntity hexalia$clearGhostveilTarget(LivingEntity target) {
+  private LivingEntity hexalia$clearCenserTarget(LivingEntity target) {
     Mob mob = (Mob) (Object) this;
-    if (target instanceof Player player
-        && (ArmorBehaviorHelper.shouldGhostveilClearTarget(mob, player)
-            || CenserEffectHandler.shouldPreventPlayerTarget(mob))) {
-      return null;
-    }
-    return target;
+    return target instanceof Player && CenserEffectHandler.shouldPreventPlayerTarget(mob)
+        ? null
+        : target;
   }
 }

@@ -27,7 +27,8 @@ public class MandrakeItem extends Item {
   public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
     if (!level.isClientSide && user instanceof Player player) {
       List<Entity> entities =
-          level.getEntities(player, player.getBoundingBox().inflate(HexaliaConfig.mandrakeScreamRadius()));
+          level.getEntities(
+              player, player.getBoundingBox().inflate(HexaliaConfig.mandrakeScreamRadius()));
       for (Entity entity : entities) {
         if (entity instanceof LivingEntity livingEntity
             && (!(livingEntity instanceof Player target)
@@ -35,7 +36,7 @@ public class MandrakeItem extends Item {
           livingEntity.addEffect(
               new MobEffectInstance(
                   ModMobEffects.holder(ModMobEffects.STUNNED),
-                  HexaliaConfig.mandrakeStunDuration(),
+                  HexaliaConfig.mandrakeStunDuration() * 20,
                   0));
         }
       }

@@ -30,7 +30,7 @@ public final class ModFoodProperties {
           .nutrition(6)
           .usingConvertsTo(Items.BOWL)
           .saturationModifier(0.7F)
-          .effect(new MobEffectInstance(ModMobEffects.OVERFED, 900), 1.0F)
+          .effect(new MobEffectInstance(ModMobEffects.holder(ModMobEffects.OVERFED), 900), 1.0F)
           .build();
 
   public static final FoodProperties SUNFIRE_TOMATO =

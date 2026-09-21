@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-10T01:32:00.4864926	Recipes
+// 1.21.1	2026-09-20T11:09:06.1513368	Recipes
 8e3914b7e3c19cbac5d4e1188efc85e9f5145b88 data/hexalia/advancement/recipes/brewing/brew_of_arachnid_grace_from_small_cauldron.json
 42d904b08fdcfb97cfacfeb8988a42cc0b1948da data/hexalia/advancement/recipes/brewing/brew_of_bloodlust_from_small_cauldron.json
 dd5e15ee62212778f17207bc0303a4fd792f9a11 data/hexalia/advancement/recipes/brewing/brew_of_daybloom_from_small_cauldron.json
@@ -105,6 +105,7 @@ a227c12c5c74fe41ad6404d4acebe1bb17998a61 data/hexalia/advancement/recipes/mortar
 e615738fe93102b7ea923aecbfbcc22e03b1d103 data/hexalia/advancement/recipes/mortar_and_pestle/salt_from_mortar.json
 f4b5d4e78a77e330e6e56b1530b011ea77c58901 data/hexalia/advancement/recipes/mortar_and_pestle/siren_paste_from_mortar.json
 71f5cd149f76213a0d106dfdac78a1e8319b376d data/hexalia/advancement/recipes/mortar_and_pestle/spirit_powder_from_mortar.json
+82b7594a4ddd9ca452a9dc036705460fa9edc4ac data/hexalia/advancement/recipes/mortar_and_pestle/string_from_mortar.json
 b280763f7b4665323a659aa23ea082e72653f3df data/hexalia/advancement/recipes/mortar_and_pestle/sugar_from_mortar.json
 a46885788b830b3f400b3a330d524d188eb0ddc9 data/hexalia/advancement/recipes/mutation/andesite_from_mutation.json
 7f16758f987cbf0e216738c3b32b236c861e6810 data/hexalia/advancement/recipes/mutation/blackstone_from_mutation.json
@@ -278,6 +279,7 @@ edcb30ee68e85e70fa357d1e762d3fba2d5d5cc7 data/hexalia/recipe/silkweave_mantle.js
 3c5560d5d562759812c84dcf94e0a71f29e84b45 data/hexalia/recipe/spiritroot_tether.json
 3664ecb0945126b9edfd8fe44bf17af1e66b51f3 data/hexalia/recipe/spirit_bloom_from_mutation.json
 ddef98ffca8627ef9c7602dcf54ff3e4a6987b75 data/hexalia/recipe/spirit_powder_from_mortar.json
+cafed52faec522dbd59bb315eaeb48c270b1cf21 data/hexalia/recipe/string_from_mortar.json
 d85a32019b25a51d3ee04a402090ec04b46b6622 data/hexalia/recipe/stripped_cottonwood_wood.json
 50564d5342e19e08995653dd3422c80612c54e6d data/hexalia/recipe/stripped_willow_wood.json
 1169358a14bce2ffdbd4f2e0f889466a6cc77894 data/hexalia/recipe/sugar_from_mortar.json

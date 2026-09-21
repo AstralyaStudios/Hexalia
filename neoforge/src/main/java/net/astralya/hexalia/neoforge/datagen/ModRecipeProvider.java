@@ -973,6 +973,15 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .save(recipeOutput, id("sugar_from_mortar"));
 
     MortarAndPestleRecipeBuilder.mortar(
+                    Ingredient.of(ModItems.COTTONWOOD_CATKIN.get()),
+                    new ItemStack(Items.STRING, 2))
+            .unlockedBy(
+                    "has_mortar_and_pestle",
+                    inventoryTrigger(
+                            ItemPredicate.Builder.item().of(ModItems.MORTAR_AND_PESTLE.get()).build()))
+            .save(recipeOutput, id("string_from_mortar"));
+
+    MortarAndPestleRecipeBuilder.mortar(
                     Ingredient.of(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_POWDER, 3))
             .unlockedBy(
                     "has_mortar_and_pestle",

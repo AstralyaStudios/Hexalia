@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.UUID;
 import net.astralya.hexalia.HexaliaConfig;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -30,12 +30,11 @@ public final class WindsongActivation {
   private WindsongActivation() {}
 
   static boolean activate(ServerLevel level, Player player) {
-    ACTIVE_PLAYERS.put(
-        player.getUUID(),
-        level.getServer().getTickCount() + HAND_DURATION);
+    ACTIVE_PLAYERS.put(player.getUUID(), level.getServer().getTickCount() + HAND_DURATION);
     Vec3 normal = horizontalFacing(player);
     Vec3 center = barrierCenter(player, normal);
-    level.sendParticles(ParticleTypes.CLOUD, center.x, center.y, center.z, 18, 1.6, 1.8, 0.35, 0.03);
+    level.sendParticles(
+        ParticleTypes.CLOUD, center.x, center.y, center.z, 18, 1.6, 1.8, 0.35, 0.03);
     level.playSound(
         null,
         player.blockPosition(),
@@ -68,19 +67,21 @@ public final class WindsongActivation {
       Vec3 normal = horizontalFacing(player);
       Vec3 tangent = new Vec3(-normal.z, 0.0, normal.x);
       Vec3 center = barrierCenter(player, normal);
-      AABB plane = new AABB(
-          center.x - Math.abs(tangent.x) * HALF_WIDTH - Math.abs(normal.x) * HALF_THICKNESS,
-          center.y - HALF_HEIGHT,
-          center.z - Math.abs(tangent.z) * HALF_WIDTH - Math.abs(normal.z) * HALF_THICKNESS,
-          center.x + Math.abs(tangent.x) * HALF_WIDTH + Math.abs(normal.x) * HALF_THICKNESS,
-          center.y + HALF_HEIGHT,
-          center.z + Math.abs(tangent.z) * HALF_WIDTH + Math.abs(normal.z) * HALF_THICKNESS);
+      AABB plane =
+          new AABB(
+              center.x - Math.abs(tangent.x) * HALF_WIDTH - Math.abs(normal.x) * HALF_THICKNESS,
+              center.y - HALF_HEIGHT,
+              center.z - Math.abs(tangent.z) * HALF_WIDTH - Math.abs(normal.z) * HALF_THICKNESS,
+              center.x + Math.abs(tangent.x) * HALF_WIDTH + Math.abs(normal.x) * HALF_THICKNESS,
+              center.y + HALF_HEIGHT,
+              center.z + Math.abs(tangent.z) * HALF_WIDTH + Math.abs(normal.z) * HALF_THICKNESS);
 
       boolean playedDeflectionSound = false;
-      for (Projectile projectile : level.getEntitiesOfClass(
-          Projectile.class,
-          plane,
-          candidate -> candidate.isAlive() && candidate.getOwner() != player)) {
+      for (Projectile projectile :
+          level.getEntitiesOfClass(
+              Projectile.class,
+              plane,
+              candidate -> candidate.isAlive() && candidate.getOwner() != player)) {
         if (!WindsongDeflection.deflect(projectile, normal)) continue;
         if (!playedDeflectionSound) {
           level.playSound(
@@ -94,7 +95,16 @@ public final class WindsongActivation {
               1.0F);
           playedDeflectionSound = true;
         }
-        level.sendParticles(ParticleTypes.POOF, projectile.getX(), projectile.getY(), projectile.getZ(), 5, 0.2, 0.2, 0.2, 0.03);
+        level.sendParticles(
+            ParticleTypes.POOF,
+            projectile.getX(),
+            projectile.getY(),
+            projectile.getZ(),
+            5,
+            0.2,
+            0.2,
+            0.2,
+            0.03);
       }
 
       if (server.getTickCount() % 4 == 0) {
@@ -162,7 +172,8 @@ public final class WindsongActivation {
       double across = (level.random.nextDouble() * 2.0 - 1.0) * HALF_WIDTH;
       double vertical = (level.random.nextDouble() * 2.0 - 1.0) * HALF_HEIGHT;
       Vec3 point = center.add(tangent.scale(across)).add(0.0, vertical, 0.0);
-      level.sendParticles(ParticleTypes.CLOUD, point.x, point.y, point.z, 1, 0.04, 0.04, 0.04, 0.01);
+      level.sendParticles(
+          ParticleTypes.CLOUD, point.x, point.y, point.z, 1, 0.04, 0.04, 0.04, 0.01);
     }
   }
 

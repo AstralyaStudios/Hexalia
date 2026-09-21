@@ -1,0 +1,10 @@
+{
+  "type": "hexalia:mortar_and_pestle",
+  "count": 2,
+  "ingredients": [
+    {
+      "item": "hexalia:cottonwood_catkin"
+    }
+  ],
+  "result": "minecraft:string"
+}

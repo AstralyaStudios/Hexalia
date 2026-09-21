@@ -85,8 +85,7 @@ public final class AccessoryEffects {
     player.setAirSupply(Math.min(restoredAir, player.getMaxAirSupply()));
   }
 
-  private static EventResult onLivingHurt(
-      LivingEntity entity, DamageSource source, float amount) {
+  private static EventResult onLivingHurt(LivingEntity entity, DamageSource source, float amount) {
     if (!(entity instanceof Player player)
         || player.level().isClientSide()
         || !isDirectAttack(source)

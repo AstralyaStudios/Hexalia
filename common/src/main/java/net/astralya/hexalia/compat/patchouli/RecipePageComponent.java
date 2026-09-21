@@ -66,9 +66,7 @@ public class RecipePageComponent implements ICustomComponent {
     graphics.drawString(
         Minecraft.getInstance().font,
         recipe.title,
-        x
-            + (PAGE_WIDTH / 2)
-            - (Minecraft.getInstance().font.width(recipe.title) / 2),
+        x + (PAGE_WIDTH / 2) - (Minecraft.getInstance().font.width(recipe.title) / 2),
         y,
         0xFF404040,
         false);
@@ -320,20 +318,15 @@ public class RecipePageComponent implements ICustomComponent {
               .map(
                   holder -> {
                     NaturesRitualRecipe recipe = (NaturesRitualRecipe) holder.value();
-                    ItemStack output =
-                        recipe.getResultItem(client.level.registryAccess()).copy();
+                    ItemStack output = recipe.getResultItem(client.level.registryAccess()).copy();
                     Component title =
                         recipe
                             .entityResult()
                             .<Component>map(
                                 result ->
-                                    Component.translatable(
-                                        result.entity().toLanguageKey("entity")))
+                                    Component.translatable(result.entity().toLanguageKey("entity")))
                             .orElseGet(output::getHoverName);
-                    return new RecipeView(
-                        List.copyOf(recipe.getIngredients()),
-                        output,
-                        title);
+                    return new RecipeView(List.copyOf(recipe.getIngredients()), output, title);
                   });
       default -> Optional.empty();
     };

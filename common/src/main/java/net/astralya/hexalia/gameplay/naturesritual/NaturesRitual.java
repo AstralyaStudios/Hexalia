@@ -21,6 +21,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -28,7 +29,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
@@ -102,10 +102,7 @@ public final class NaturesRitual {
   }
 
   private static @Nullable Match findMatch(
-      Level level,
-      BlockPos tablePos,
-      ItemStack tableItem,
-      RitualTableBlockEntity table) {
+      Level level, BlockPos tablePos, ItemStack tableItem, RitualTableBlockEntity table) {
     NaturesRitualRecipeInput input = new NaturesRitualRecipeInput(table);
     List<RecipeHolder<NaturesRitualRecipe>> candidates =
         level.getRecipeManager().getRecipesFor(ModRecipeTypes.NATURES_RITUAL.get(), input, level);
@@ -124,8 +121,7 @@ public final class NaturesRitual {
     }
     available.sort(
         Comparator.comparingDouble(
-                (RitualBrazierBlockEntity brazier) ->
-                    tablePos.distSqr(brazier.getBlockPos()))
+                (RitualBrazierBlockEntity brazier) -> tablePos.distSqr(brazier.getBlockPos()))
             .thenComparingLong(brazier -> brazier.getBlockPos().asLong()));
 
     for (RecipeHolder<NaturesRitualRecipe> holder : candidates) {
@@ -248,5 +244,8 @@ public final class NaturesRitual {
     level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.8F, 0.5F);
   }
 
-  private record Match(net.minecraft.resources.ResourceLocation id, NaturesRitualRecipe recipe, List<RitualBrazierBlockEntity> usedBraziers) {}
+  private record Match(
+      net.minecraft.resources.ResourceLocation id,
+      NaturesRitualRecipe recipe,
+      List<RitualBrazierBlockEntity> usedBraziers) {}
 }

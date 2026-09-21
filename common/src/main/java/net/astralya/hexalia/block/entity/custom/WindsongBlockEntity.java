@@ -95,7 +95,8 @@ public class WindsongBlockEntity extends BlockEntity {
     }
   }
 
-  private static void deflectProjectile(ServerLevel level, BlockPos sourcePos, Projectile projectile) {
+  private static void deflectProjectile(
+      ServerLevel level, BlockPos sourcePos, Projectile projectile) {
     Vec3 source = Vec3.atCenterOf(sourcePos);
     Vec3 outward = projectile.position().subtract(source);
     outward = new Vec3(outward.x, 0.0, outward.z);

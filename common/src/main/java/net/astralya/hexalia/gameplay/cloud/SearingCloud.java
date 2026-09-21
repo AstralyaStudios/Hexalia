@@ -22,7 +22,8 @@ public class SearingCloud extends AreaEffectCloud {
     super(level, x, y, z);
     this.holdPlan =
         SacCloudHelper.configureWithHold(this, durationSeconds, HOLD_SECONDS, 3.0F, 0xE85A2A);
-    this.addEffect(new MobEffectInstance(ModMobEffects.BLEEDING, 200, 0, false, true));
+    this.addEffect(
+        new MobEffectInstance(ModMobEffects.holder(ModMobEffects.BLEEDING), 200, 0, false, true));
   }
 
   @Override

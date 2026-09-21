@@ -22,11 +22,7 @@ public class HexaliaSaplingBlock extends SaplingBlock {
 
   private static TreeGrower createTreeGrower(
       String name, ResourceKey<ConfiguredFeature<?, ?>> configuredFeature) {
-    return new TreeGrower(
-        name,
-        Optional.empty(),
-        Optional.of(configuredFeature),
-        Optional.empty());
+    return new TreeGrower(name, Optional.empty(), Optional.of(configuredFeature), Optional.empty());
   }
 
   @Override

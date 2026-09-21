@@ -61,5 +61,4 @@ public final class ArmorBehaviorHelper {
         || source.is(DamageTypes.WITHER)
         || source.is(DamageTypes.DRAGON_BREATH);
   }
-
 }

@@ -220,7 +220,8 @@ public class HexaliaReiPlugin implements REIClientPlugin {
   private static ItemStack naturesRitualResult(NaturesRitualRecipe recipe) {
     if (recipe.isItemResult()) return recipe.itemResult();
     EntityType<?> type =
-        recipe.entityResult()
+        recipe
+            .entityResult()
             .flatMap(result -> BuiltInRegistries.ENTITY_TYPE.getOptional(result.entity()))
             .orElse(null);
     SpawnEggItem spawnEgg = type == null ? null : SpawnEggItem.byId(type);

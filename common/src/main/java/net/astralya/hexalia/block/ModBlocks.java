@@ -41,8 +41,8 @@ import net.astralya.hexalia.block.custom.SilkwormCocoonBlock;
 import net.astralya.hexalia.block.custom.SirenKelpBlock;
 import net.astralya.hexalia.block.custom.SmallCauldronBlock;
 import net.astralya.hexalia.block.custom.SunfireTomatoCropBlock;
-import net.astralya.hexalia.block.custom.WildSunfireTomatoBlock;
 import net.astralya.hexalia.block.custom.WildMandrakeBlock;
+import net.astralya.hexalia.block.custom.WildSunfireTomatoBlock;
 import net.astralya.hexalia.block.custom.WindsongBlock;
 import net.astralya.hexalia.block.custom.WitchweedBlock;
 import net.astralya.hexalia.block.custom.wood.ModHangingSignBlock;
@@ -161,9 +161,7 @@ public final class ModBlocks {
   public static final RegistrySupplier<Block> HERB_JAR =
       BLOCKS.register(
           "herb_jar",
-          () ->
-              new HerbJarBlock(
-                  BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).noOcclusion()));
+          () -> new HerbJarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).noOcclusion()));
 
   public static final RegistrySupplier<Block> DREAMCATCHER =
       BLOCKS.register(

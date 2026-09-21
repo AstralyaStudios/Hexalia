@@ -6,9 +6,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -21,10 +21,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.BlockHitResult;
 
 public class WildSunfireTomatoBlock extends BushBlock implements BonemealableBlock {
   public static final MapCodec<WildSunfireTomatoBlock> CODEC =
@@ -40,12 +40,32 @@ public class WildSunfireTomatoBlock extends BushBlock implements BonemealableBlo
     return CODEC;
   }
 
-  @Override public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) { return true; }
-  @Override public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) { return random.nextFloat() < 0.8F; }
-  @Override public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) { WildCropSpreading.spread(level, random, pos, state); }
+  @Override
+  public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+    return true;
+  }
 
   @Override
-  protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+  public boolean isBonemealSuccess(
+      Level level, RandomSource random, BlockPos pos, BlockState state) {
+    return random.nextFloat() < 0.8F;
+  }
+
+  @Override
+  public void performBonemeal(
+      ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+    WildCropSpreading.spread(level, random, pos, state);
+  }
+
+  @Override
+  protected ItemInteractionResult useItemOn(
+      ItemStack stack,
+      BlockState state,
+      Level level,
+      BlockPos pos,
+      Player player,
+      InteractionHand hand,
+      BlockHitResult hit) {
     if (!stack.is(Items.SHEARS)) return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
     if (!level.isClientSide()) {
       spawnFireParticles(level, pos);

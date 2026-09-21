@@ -152,8 +152,7 @@ public class HerbJarBlockEntity extends BlockEntity implements WorldlyContainer,
   }
 
   @Override
-  public boolean canPlaceItemThroughFace(
-      int slot, ItemStack stack, @Nullable Direction direction) {
+  public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction direction) {
     return direction != Direction.DOWN && canPlaceItem(slot, stack);
   }
 

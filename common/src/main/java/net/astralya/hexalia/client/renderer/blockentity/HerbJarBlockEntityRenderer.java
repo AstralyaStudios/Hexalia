@@ -13,8 +13,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public final class HerbJarBlockEntityRenderer
-    implements BlockEntityRenderer<HerbJarBlockEntity> {
+public final class HerbJarBlockEntityRenderer implements BlockEntityRenderer<HerbJarBlockEntity> {
   private static final float[] LAYER_HEIGHTS = {
     1.5F / 16.0F,
     2.5F / 16.0F,

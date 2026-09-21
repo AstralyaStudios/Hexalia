@@ -43,20 +43,18 @@ public final class RitualTableBlockEntityRenderer
     } else if (blockEntity.isAwaitingSoul()) {
       catalystBob = Mth.sin(animationTime * 0.06F) * 0.018F;
     } else if (blockEntity.isManifestingSoul()) {
-      catalystBob = Mth.sin(animationTime * 0.09F) * (0.03F + manifestationProgress * 0.025F)
-          + manifestationProgress * 0.035F;
+      catalystBob =
+          Mth.sin(animationTime * 0.09F) * (0.03F + manifestationProgress * 0.025F)
+              + manifestationProgress * 0.035F;
     }
     float offeringTick = blockEntity.getOfferingAnimationTick(partialTick);
     float absorptionProgress = Mth.clamp((offeringTick - 34.0F) / 6.0F, 0.0F, 1.0F);
     float catalystPulse = Mth.sin(absorptionProgress * Mth.PI) * 0.08F;
-    float manifestationPulse =
-        Mth.clamp((manifestationProgress - 0.8F) / 0.2F, 0.0F, 1.0F) * 0.04F;
+    float manifestationPulse = Mth.clamp((manifestationProgress - 0.8F) / 0.2F, 0.0F, 1.0F) * 0.04F;
 
     poseStack.pushPose();
     poseStack.translate(
-        0.5F,
-        1.05F + catalystBob + catalystPulse * 0.25F + manifestationPulse * 0.2F,
-        0.5F);
+        0.5F, 1.05F + catalystBob + catalystPulse * 0.25F + manifestationPulse * 0.2F, 0.5F);
     poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getRenderingRotation()));
     poseStack.scale(
         0.45F + catalystPulse + manifestationPulse,
@@ -99,15 +97,12 @@ public final class RitualTableBlockEntityRenderer
     if (offeringTick >= 10.0F && offeringTick < 16.0F) {
       y += Mth.sin((offeringTick - 10.0F) * Mth.PI / 3.0F) * 0.015F;
     }
-    float scale =
-        offeringTick < 16.0F ? 0.4F : 0.4F * (1.0F - (offeringTick - 16.0F) / 18.0F);
+    float scale = offeringTick < 16.0F ? 0.4F : 0.4F * (1.0F - (offeringTick - 16.0F) / 18.0F);
 
     BlockPos tablePos = blockEntity.getBlockPos();
     poseStack.pushPose();
     poseStack.translate(
-        origin.getX() - tablePos.getX() + 0.5F,
-        y,
-        origin.getZ() - tablePos.getZ() + 0.5F);
+        origin.getX() - tablePos.getX() + 0.5F, y, origin.getZ() - tablePos.getZ() + 0.5F);
     poseStack.mulPose(Axis.YP.rotationDegrees(animationTime * 1.5F));
     poseStack.scale(scale, scale, scale);
     itemRenderer.renderStatic(

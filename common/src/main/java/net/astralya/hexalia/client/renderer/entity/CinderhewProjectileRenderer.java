@@ -4,9 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.astralya.hexalia.entity.custom.projectile.CinderhewProjectile;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
@@ -39,14 +39,14 @@ public class CinderhewProjectileRenderer extends EntityRenderer<CinderhewProject
           Axis.XP.rotationDegrees((projectile.tickCount + partialTick) * DEGREES_PER_TICK));
     }
     itemRenderer.renderStatic(
-            projectile.getCarriedStack(),
-            ItemDisplayContext.FIXED,
-            packedLight,
-            0,
-            poseStack,
-            buffer,
-            projectile.level(),
-            projectile.getId());
+        projectile.getCarriedStack(),
+        ItemDisplayContext.FIXED,
+        packedLight,
+        0,
+        poseStack,
+        buffer,
+        projectile.level(),
+        projectile.getId());
     poseStack.popPose();
     super.render(projectile, entityYaw, partialTick, poseStack, buffer, packedLight);
   }

@@ -360,7 +360,7 @@ public final class ModLanguageProvider extends LanguageProvider {
 
     add("tooltip.hexalia.hold_shift", "Hold SHIFT for more information");
 
-    add("tooltiep.hexalia.accessory.earplugs", "Protects against a Mandrake's stunning cry.");
+    add("tooltip.hexalia.accessory.earplugs", "Protects against a Mandrake's stunning cry.");
     add("tooltip.hexalia.accessory.sage_pendant", "Increases experience gained.");
     add("tooltip.hexalia.accessory.seafoam_talisman", "Helps you breathe while underwater.");
     add("tooltip.hexalia.accessory.moonward_ring", "Protects against Darkness and Blindness.");

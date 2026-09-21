@@ -23,12 +23,32 @@ public class WildMandrakeBlock extends FlowerBlock implements BonemealableBlock 
     super(effect, seconds, properties);
   }
 
-  @Override public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) { return true; }
-  @Override public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) { return random.nextFloat() < 0.8F; }
-  @Override public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) { WildCropSpreading.spread(level, random, pos, state); }
+  @Override
+  public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+    return true;
+  }
 
   @Override
-  protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+  public boolean isBonemealSuccess(
+      Level level, RandomSource random, BlockPos pos, BlockState state) {
+    return random.nextFloat() < 0.8F;
+  }
+
+  @Override
+  public void performBonemeal(
+      ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+    WildCropSpreading.spread(level, random, pos, state);
+  }
+
+  @Override
+  protected ItemInteractionResult useItemOn(
+      ItemStack stack,
+      BlockState state,
+      Level level,
+      BlockPos pos,
+      Player player,
+      InteractionHand hand,
+      BlockHitResult hit) {
     if (!stack.is(Items.SHEARS)) return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
     if (!level.isClientSide()) {
       popResource(level, pos, new ItemStack(this));
