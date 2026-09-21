@@ -681,6 +681,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath("hexalia", "sugar_from_mortar"));
 
         MortarAndPestleRecipeBuilder.mortar(
+                        Ingredient.of(ModBlocks.COTTONWOOD_CATKIN.get()),
+                        new ItemStack(Items.STRING, 2)
+                ).unlockedByItem("has_mortar_and_pestle", ModItems.MORTAR_AND_PESTLE.get())
+                .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath("hexalia", "string_from_mortar"));
+
+        MortarAndPestleRecipeBuilder.mortar(
                         Ingredient.of(Items.BLAZE_ROD),
                         new ItemStack(Items.BLAZE_POWDER, 3)
                 ).unlockedByItem("has_mortar_and_pestle", ModItems.MORTAR_AND_PESTLE.get())

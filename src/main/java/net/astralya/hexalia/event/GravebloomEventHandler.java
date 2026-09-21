@@ -100,15 +100,20 @@ public final class GravebloomEventHandler {
         }
         HolderSet.Named<Block> gravebloomPlants = level.registryAccess().registryOrThrow(Registries.BLOCK)
                 .getTag(ModTags.Blocks.GRAVEBLOOM_PLANTS).orElse(null);
-        HolderSet.Named<Block> herbs = level.registryAccess().registryOrThrow(Registries.BLOCK)
-                .getTag(ModTags.Blocks.HERBS).orElse(null);
-        if (gravebloomPlants == null || gravebloomPlants.size() == 0 || herbs == null || herbs.size() == 0) {
+        if (gravebloomPlants == null || gravebloomPlants.size() == 0) {
             return 0;
         }
 
         Set<BlockPos> used = new HashSet<>();
         List<Holder<Block>> herbPlants = new ArrayList<>();
-        herbs.forEach(herbPlants::add);
+        gravebloomPlants.forEach(plant -> {
+            if (plant.is(ModTags.Blocks.HERBS)) {
+                herbPlants.add(plant);
+            }
+        });
+        if (herbPlants.isEmpty()) {
+            return 0;
+        }
         if (!tryPlaceSprout(level, moss, herbPlants, used)) {
             return 0;
         }

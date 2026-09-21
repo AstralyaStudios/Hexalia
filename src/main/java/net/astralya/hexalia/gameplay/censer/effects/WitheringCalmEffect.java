@@ -8,6 +8,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.phys.AABB;
 import org.joml.Vector3f;
@@ -40,6 +41,7 @@ public class WitheringCalmEffect implements ICenserEffect {
         AABB area = new AABB(pos).inflate(radius);
 
         for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, area)) {
+            if (entity.getMobType() == MobType.UNDEAD) continue;
             applyWither(entity);
             if (entity instanceof Mob mob) stripAggression(mob);
         }

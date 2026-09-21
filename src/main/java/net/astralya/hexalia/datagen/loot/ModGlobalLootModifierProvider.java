@@ -23,16 +23,16 @@ public class ModGlobalLootModifierProvider extends GlobalLootModifierProvider {
                 LootItemRandomChanceCondition.randomChance(0.35F).build()
         }, ModItems.ANCIENT_SEED.get()));
 
-        addAccessory("simple_dungeon", 0.10F);
-        addAccessory("abandoned_mineshaft", 0.07F);
-        addAccessory("stronghold_corridor", 0.08F);
-        addAccessory("stronghold_crossing", 0.10F);
-        addAccessory("stronghold_library", 0.12F);
-        addAccessory("ancient_city", 0.18F);
-        addAccessory("ruined_portal", 0.07F);
-        addAccessory("woodland_mansion", 0.15F);
-        addAccessory("jungle_temple", 0.10F);
-        addAccessory("desert_pyramid", 0.10F);
+        addAccessory("simple_dungeon", 0.15F);
+        addAccessory("abandoned_mineshaft", 0.10F);
+        addAccessory("stronghold_corridor", 0.12F);
+        addAccessory("stronghold_crossing", 0.15F);
+        addAccessory("stronghold_library", 0.18F);
+        addAccessory("ancient_city", 0.25F);
+        addAccessory("ruined_portal", 0.10F);
+        addAccessory("woodland_mansion", 0.22F);
+        addAccessory("jungle_temple", 0.15F);
+        addAccessory("desert_pyramid", 0.15F);
     }
 
     private void addAccessory(String chest, float chance) {

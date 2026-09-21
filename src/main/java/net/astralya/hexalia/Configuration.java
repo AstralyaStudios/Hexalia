@@ -81,8 +81,8 @@ public final class Configuration {
                 .defineInRange("mandrakeScreamRadius", 5.0D, 1.0D, 32.0D);
 
         MANDRAKE_STUN_DURATION = builder
-                .comment("Stun duration in seconds applied by the Mandrake scream. Default: 6 seconds")
-                .defineInRange("mandrakeStunDuration", 6, 1, 60);
+                .comment("Stun duration in seconds applied by the Mandrake scream. Default: 8 seconds")
+                .defineInRange("mandrakeStunDuration", 8, 1, 60);
 
         FOUL_SAC_DURATION = builder
                 .comment("Duration in seconds of the poisonous cloud created by the Foul Sac. Default: 8 seconds")

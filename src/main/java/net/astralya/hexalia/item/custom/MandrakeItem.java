@@ -42,7 +42,7 @@ public class MandrakeItem extends Item {
                             && (target.getItemBySlot(EquipmentSlot.HEAD).is(ModTags.Items.STUN_IMMUNE_HEADWEAR)
                             || AccessoryLookup.hasEquipped(target, ModItems.EARPLUGS.get()));
                     if (!protectedByEarplugs) {
-                        livingEntity.addEffect(new MobEffectInstance(ModMobEffects.STUNNED.get(), stunDuration, 0));
+                        livingEntity.addEffect(new MobEffectInstance(ModMobEffects.STUNNED.get(), stunDuration * 20, 0));
                     }
                 }
             }

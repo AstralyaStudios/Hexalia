@@ -2,27 +2,185 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": { "min": 1, "max": 10 },
+      "rolls": 4,
       "entries": [
-        { "type": "minecraft:item", "weight": 20, "name": "minecraft:amethyst_shard" },
-        { "type": "minecraft:item", "weight": 20, "name": "hexalia:silk_fiber" },
-        { "type": "minecraft:item", "weight": 20, "name": "hexalia:rustic_bottle" }
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:lavender",
+          "weight": 18,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 3 }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:witchweed",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 3 }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:dreamshroom",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 2 }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:mandrake",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 2 }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:sunfire_tomato",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 3 }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:rabbage_seeds",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 3 }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:salt",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 3 }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:tree_resin",
+          "weight": 9,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 2 }
+            }
+          ]
+        }
       ]
     },
     {
-      "rolls": { "min": 0, "max": 4 },
+      "rolls": 2,
       "entries": [
-        { "type": "minecraft:item", "weight": 15, "name": "hexalia:saltsprout" },
-        { "type": "minecraft:item", "weight": 15, "name": "hexalia:siren_kelp" },
-        { "type": "minecraft:item", "weight": 15, "name": "hexalia:lotus_flower" }
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:silk_fiber",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 3 }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:ghost_powder",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 2 }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:spirit_powder",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 2 }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:rustic_bottle",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 2 }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bowl",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "type": "minecraft:uniform", "min": 1, "max": 2 }
+            }
+          ]
+        }
       ]
     },
     {
-      "rolls": { "min": 0, "max": 2 },
+      "rolls": 1,
       "entries": [
-        { "type": "minecraft:item", "weight": 5, "name": "hexalia:ghost_powder" },
-        { "type": "minecraft:item", "weight": 5, "name": "hexalia:saltsprout" },
-        { "type": "minecraft:item", "weight": 5, "name": "hexalia:spirit_powder" }
+        {
+          "type": "minecraft:empty",
+          "weight": 80
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:herb_jar",
+          "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:menders_salve",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:brew_of_gravebloom",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hexalia:green_omen",
+          "weight": 1
+        }
       ]
     }
   ]
