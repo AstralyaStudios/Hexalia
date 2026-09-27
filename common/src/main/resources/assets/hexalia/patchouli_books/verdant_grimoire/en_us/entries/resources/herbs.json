@@ -1,0 +1,68 @@
+{
+  "name": "Herbs",
+  "icon": "hexalia:spirit_bloom",
+  "category": "hexalia:resources",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Herbs",
+      "text": "Herbs are magical plants used throughout Hexalia in rituals, brews, infusions, and other mystical practices. Some are refined into powders or pastes, while others are valued in their natural form."
+    },
+    {
+      "type": "text",
+      "title": "Obtaining Herbs",
+      "anchor": "obtaining",
+      "text": "Herbs are not usually found growing naturally. Instead, they are obtained by using $(l:hexalia:core_mechanics/mutation)Mutavis$(/l) on specific vanilla blocks in the world, causing hidden flora to emerge."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:spirit_bloom",
+      "title": "Spirit Bloom",
+      "anchor": "spirit_bloom",
+      "text": "Found through swamp-born growth, Spirit Bloom can be refined into Spirit Powder. It is commonly used in brews and in the workings of the Censer."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:dreamshroom",
+      "title": "Dreamshroom",
+      "anchor": "dreamshroom",
+      "text": "A rare fungal herb tied to altered sight and movement. It can be refined into Dream Paste and is used in effects linked to speed, vision, and dreams."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:ghost_fern",
+      "title": "Ghost Fern",
+      "anchor": "ghost_fern",
+      "text": "Ghost Fern yields Ghost Powder, a material associated with spectral, pacifying, and ethereal properties."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:siren_kelp",
+      "title": "Siren Kelp",
+      "anchor": "siren_kelp",
+      "text": "An aquatic herb refined into Siren Paste. Its uses are often tied to water, aquatic boons, and protection against flame."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:witchweed",
+      "title": "Witchweed",
+      "anchor": "witchweed",
+      "text": "A natural herb used directly as a crafting ingredient. Though simple in form, it appears in many foundational Hexalia recipes."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:lotus_blossom",
+      "title": "Lotus Blossom",
+      "anchor": "lotus_blossom",
+      "text": "A rare blossom used directly in crafting and other magical workings. Its value lies in its purity rather than refinement."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:celestial_bloom",
+      "title": "Celestial Bloom",
+      "anchor": "celestial_bloom",
+      "text": "Celestial Bloom holds starlit energy and is used in $(l:hexalia:core_mechanics/celestial_infusion)Celestial Infusion$(/l) through the Ritual Brazier."
+    }
+  ]
+}

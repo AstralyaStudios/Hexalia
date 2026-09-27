@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hexalia:has_shrooms",
+  "features": "hexalia:pale_mushroom_placed",
+  "step": "vegetal_decoration"
+}

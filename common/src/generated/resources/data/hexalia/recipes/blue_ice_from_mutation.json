@@ -1,0 +1,9 @@
+{
+  "type": "hexalia:mutation",
+  "input": {
+    "item": "minecraft:ice"
+  },
+  "output": {
+    "item": "minecraft:blue_ice"
+  }
+}

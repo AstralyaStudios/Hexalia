@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "net.astralya.hexalia.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+    "client.HexaliaGeoArmorItemMixin"
+  ]
+}

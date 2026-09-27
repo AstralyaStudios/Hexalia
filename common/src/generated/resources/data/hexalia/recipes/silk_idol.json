@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "tag": "hexalia:crushed_herbs"
+    },
+    "S": {
+      "item": "hexalia:silk_fiber"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SPS",
+    " S "
+  ],
+  "result": {
+    "item": "hexalia:silk_idol"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "hexalia:block/cottonwood_planks"
+  }
+}

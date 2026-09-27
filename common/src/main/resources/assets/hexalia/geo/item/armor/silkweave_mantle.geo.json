@@ -1,0 +1,61 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "bipedBody",
+					"pivot": [0, 24, 0]
+				},
+				{
+					"name": "armorBody",
+					"parent": "bipedBody",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-4.25, 19, -2.5], "size": [8.5, 5.5, 5], "inflate": 0.28, "uv": [22, 27]},
+						{"origin": [-4, 12, -2], "size": [8, 12, 4], "inflate": 0.28, "uv": [0, 11]},
+						{"origin": [-5, 12.5, -3], "size": [10, 3, 6], "pivot": [0, 14, 0], "rotation": [0, 0, -2.5], "uv": [14, 68]}
+					]
+				},
+				{
+					"name": "bipedRightArm",
+					"pivot": [-5, 22, 0]
+				},
+				{
+					"name": "armorRightArm",
+					"parent": "bipedRightArm",
+					"pivot": [-5, 22, 0],
+					"cubes": [
+						{"origin": [-8, 15, -2], "size": [4, 9, 4], "inflate": 0.28, "uv": [56, 43]},
+						{"origin": [-8.25, 11.75, -2.25], "size": [4.5, 5.25, 4.5], "inflate": 0.28, "uv": [66, 27]},
+						{"origin": [-8.5, 14.75, -2.5], "size": [2.5, 3.25, 5], "inflate": 0.28, "pivot": [-7.25, 16.875, 0], "rotation": [0, 0, -5], "uv": [0, 68]},
+						{"origin": [-8.5, 21, -2.5], "size": [4.75, 3.5, 5], "inflate": 0.28, "uv": [50, 56]}
+					]
+				},
+				{
+					"name": "bipedLeftArm",
+					"pivot": [5, 22, 0]
+				},
+				{
+					"name": "armorLeftArm",
+					"parent": "bipedLeftArm",
+					"pivot": [5, 22, 0],
+					"cubes": [
+						{"origin": [4, 15, -2], "size": [4, 9, 4], "inflate": 0.28, "uv": [40, 43]},
+						{"origin": [3.75, 11.75, -2.25], "size": [4.5, 5.25, 4.5], "inflate": 0.28, "uv": [66, 18]},
+						{"origin": [6, 14.75, -2.5], "size": [2.5, 3.25, 5], "inflate": 0.28, "pivot": [7.25, 16.875, 0], "rotation": [0, 0, 5], "uv": [40, 64]},
+						{"origin": [3.75, 21, -2.5], "size": [4.75, 3.5, 5], "inflate": 0.28, "uv": [32, 56]}
+					]
+				}
+			]
+		}
+	]
+}

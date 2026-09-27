@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:natures_ritual",
+  "center": {
+    "item": "minecraft:leather_chestplate"
+  },
+  "offerings": [
+    {
+      "item": "minecraft:moss_block"
+    },
+    {
+      "item": "hexalia:earth_node"
+    },
+    {
+      "item": "hexalia:silk_fiber"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    }
+  ],
+  "output": "hexalia:bloomwrap_robes"
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "minecraft:leather_chestplate"
+    },
+    "S": {
+      "item": "hexalia:silk_fiber"
+    },
+    "T": {
+      "item": "minecraft:string"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SLS",
+    "TWT"
+  ],
+  "result": {
+    "item": "hexalia:silkweave_bindings"
+  },
+  "show_notification": true
+}

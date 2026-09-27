@@ -1,0 +1,39 @@
+{
+  "parent": "hexalia:table_manners",
+  "criteria": {
+    "has_kelpweave_blade": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:kelpweave_blade"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.kelp_yourself.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:kelpweave_blade",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.kelp_yourself.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_kelpweave_blade"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

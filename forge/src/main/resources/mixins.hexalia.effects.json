@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "package": "net.astralya.hexalia.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "mixins": [
+    "CobwebMixin",
+    "CropBlockMixin",
+    "FoodDataMixin",
+    "forge.GreenOmenBlockMixin",
+    "LivingEntityMixin",
+    "ServerLevelMixin",
+    "SugarCanePlanting",
+    "WardenVibrationUserMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

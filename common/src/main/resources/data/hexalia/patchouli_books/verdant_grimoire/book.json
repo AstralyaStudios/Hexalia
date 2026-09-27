@@ -1,0 +1,13 @@
+{
+  "name": "item.hexalia.verdant_grimoire",
+  "landing_text": "item.hexalia.verdant_grimoire.landing_text",
+  "filler_texture": "hexalia:textures/gui/patchouli/filler.png",
+  "version": 2,
+  "creative_tab": "hexalia:hexalia",
+  "use_resource_pack": true,
+  "dont_generate_book": true,
+  "custom_book_item": "hexalia:verdant_grimoire",
+  "show_progress": false,
+  "link_hover_color": "a64d79",
+  "link_color": "674ea7"
+}

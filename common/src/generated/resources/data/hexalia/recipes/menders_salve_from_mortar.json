@@ -1,0 +1,17 @@
+{
+  "type": "hexalia:mortar_and_pestle",
+  "ingredients": [
+    {
+      "item": "minecraft:cornflower"
+    },
+    {
+      "item": "hexalia:tree_resin"
+    },
+    {
+      "item": "minecraft:oxeye_daisy"
+    }
+  ],
+  "output": {
+    "item": "hexalia:menders_salve"
+  }
+}

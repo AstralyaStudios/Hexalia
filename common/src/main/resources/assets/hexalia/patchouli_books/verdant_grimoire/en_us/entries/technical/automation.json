@@ -1,0 +1,36 @@
+{
+  "name": "Automation",
+  "icon": "minecraft:hopper",
+  "category": "hexalia:technical",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Automation",
+      "text": "Many Hexalia systems can be automated using redstone and item transport, allowing for efficient and scalable setups."
+    },
+    {
+      "type": "text",
+      "title": "Enchanted Plants",
+      "anchor": "plants",
+      "text": "Enchanted Plants can be activated using a Hex Focus through a Dispenser. Certain plants can also be fed automatically using items.$(br2)$(li)Astrylis accepts Celestial Crystals$(li)Lourdes accepts Lotus Blossoms"
+    },
+    {
+      "type": "text",
+      "title": "Inventory Automation",
+      "anchor": "inventory",
+      "text": "All blocks with inventories support item insertion and extraction, allowing integration with hoppers and other transport systems.$(br2)$(li)Small Cauldron$(li)Censer$(li)Ritual Brazier$(li)Ritual Table$(li)Nesting Block$(li)Shelf$(li)Mortar and Pestle"
+    },
+    {
+      "type": "text",
+      "title": "Redstone",
+      "anchor": "redstone",
+      "text": "The Mortar and Pestle can be triggered using redstone, allowing its processing to be automated."
+    },
+    {
+      "type": "text",
+      "title": "On Setup",
+      "text": "Automation in Hexalia combines item movement, activation, and processing. With the right setup, many systems can run without direct interaction."
+    }
+  ]
+}

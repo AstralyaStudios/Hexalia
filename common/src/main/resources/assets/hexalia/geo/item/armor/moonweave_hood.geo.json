@@ -1,0 +1,36 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "bipedHead",
+					"pivot": [0, 24, 0]
+				},
+				{
+					"name": "armorHead",
+					"parent": "bipedHead",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [5.5, 26, -4.25], "size": [1, 4.5, 9.5], "pivot": [-0.5, 29, 0], "rotation": [0, 0, 25], "uv": [0, 43]},
+						{"origin": [-6.5, 26, -4.25], "size": [1, 4.5, 9.5], "pivot": [0.5, 29, 0], "rotation": [0, 0, -25], "uv": [20, 43]},
+						{"origin": [4.87464, 26.29848, -5.25], "size": [1, 6.75, 10.5], "pivot": [-0.12536, 30.29848, 0], "rotation": [0, 0, -10], "uv": [24, 11]},
+						{"origin": [-5.87464, 26.29848, -5.25], "size": [1, 6.75, 10.5], "pivot": [0.12536, 30.29848, 0], "rotation": [0, 0, 10], "uv": [0, 27]},
+						{"origin": [-5.19404, 33.04859, -5.25], "size": [10.5, 1, 10.5], "uv": [0, 0]},
+						{"origin": [-6, 23.5, 5.225], "size": [12, 10.5, 0], "uv": [40, 0]},
+						{"origin": [-6.1, 27.5, -5.2], "size": [12.2, 6.5, 0], "uv": [22, 37]},
+						{"origin": [-4.5, 23.5, 0.25], "size": [9, 0, 5], "uv": [41, 38]}
+					]
+				}
+			]
+		}
+	]
+}

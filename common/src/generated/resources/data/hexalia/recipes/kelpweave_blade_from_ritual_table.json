@@ -1,0 +1,27 @@
+{
+  "type": "hexalia:natures_ritual",
+  "center": {
+    "item": "hexalia:ancient_seed"
+  },
+  "offerings": [
+    {
+      "item": "hexalia:water_node"
+    },
+    {
+      "item": "minecraft:wooden_sword"
+    },
+    {
+      "item": "minecraft:kelp"
+    },
+    {
+      "item": "hexalia:siren_paste"
+    },
+    {
+      "item": "minecraft:prismarine_shard"
+    },
+    {
+      "item": "minecraft:nautilus_shell"
+    }
+  ],
+  "output": "hexalia:kelpweave_blade"
+}

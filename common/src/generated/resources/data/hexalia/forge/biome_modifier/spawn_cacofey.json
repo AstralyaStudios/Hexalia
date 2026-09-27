@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hexalia:cacofey_spawns",
+  "spawners": {
+    "type": "hexalia:cacofey",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 8
+  }
+}

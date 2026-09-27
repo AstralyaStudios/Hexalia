@@ -1,0 +1,8 @@
+{
+  "parent": "hexalia:block/template_farmland",
+  "textures": {
+    "particle": "hexalia:block/infused_dirt",
+    "dirt": "hexalia:block/infused_dirt",
+    "top": "hexalia:block/infused_farmland"
+  }
+}

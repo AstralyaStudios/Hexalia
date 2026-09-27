@@ -1,0 +1,6 @@
+{
+  "amount": 1,
+  "order": 2,
+  "icon": "trinkets:gui/slots/charm",
+  "tooltip_predicates": []
+}

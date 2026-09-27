@@ -1,0 +1,51 @@
+{
+  "name": "Salt",
+  "icon": "hexalia:salt",
+  "category": "hexalia:resources",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Salt",
+      "text": "Salt is a fundamental material in Hexalia, bridging practical crafting and ritual work. It is most commonly derived from natural growth and refined for magical use."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:salt",
+      "title": "Obtaining Salt",
+      "anchor": "obtaining",
+      "text": "Salt is primarily obtained by processing $(l:hexalia:resources/crops#saltsprout)Saltsprout$(/l) using a $(l:hexalia:core_mechanics/mortar_and_pestle)Mortar and Pestle$(/l)."
+    },
+    {
+      "type": "text",
+      "title": "Ritual Use",
+      "anchor": "rituals",
+      "text": "Salt plays a central role in $(l:hexalia:core_mechanics/natures_ritual)Nature's Ritual$(/l). It is often required as part of ritual offerings, forming the foundation for many transformations and processes."
+    },
+    {
+      "type": "text",
+      "title": "On Substitutes",
+      "anchor": "tags",
+      "text": "Salt is flexible in its use. Any item belonging to common salt tags may be used in its place during crafting or ritual offerings, allowing compatibility with other sources."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:salt_block",
+      "title": "Salt Block",
+      "anchor": "salt_block",
+      "text": "Compressed salt can be formed into blocks for easier storage and transport when working with large quantities."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:salt_lamp",
+      "title": "Salt Lamp",
+      "anchor": "salt_lamp",
+      "text": "A crafted light source made from salt. It emits a warm glow and can be placed freely, including hanging from above."
+    },
+    {
+      "type": "text",
+      "title": "On Purification",
+      "text": "Salt is also used in simple transformations, such as refining otherwise unusable materials into something more practical."
+    }
+  ]
+}

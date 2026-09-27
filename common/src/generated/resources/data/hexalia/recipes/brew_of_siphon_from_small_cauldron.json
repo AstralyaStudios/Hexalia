@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:small_cauldron",
+  "duration": 4800,
+  "ingredients": [
+    {
+      "item": "hexalia:dream_paste"
+    },
+    {
+      "item": "hexalia:siren_paste"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:redstone"
+    }
+  ],
+  "result": {
+    "item": "hexalia:brew_of_siphon"
+  }
+}

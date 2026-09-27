@@ -1,0 +1,35 @@
+{
+  "type": "hexalia:wild_crop",
+  "config": {
+    "ground_predicate": {
+      "type": "minecraft:any_of",
+      "predicates": [
+        {
+          "type": "minecraft:matching_block_tag",
+          "tag": "minecraft:dirt"
+        },
+        {
+          "type": "minecraft:matching_block_tag",
+          "tag": "minecraft:sand"
+        },
+        {
+          "type": "minecraft:matching_blocks",
+          "blocks": [
+            "minecraft:gravel",
+            "minecraft:clay"
+          ]
+        }
+      ]
+    },
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hexalia:siren_kelp"
+      }
+    },
+    "tries": 2,
+    "water_plant": true,
+    "xz_spread": 3,
+    "y_spread": 1
+  }
+}

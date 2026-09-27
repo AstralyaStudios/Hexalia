@@ -1,0 +1,38 @@
+{
+  "name": "Salves",
+  "icon": "hexalia:brambleguard_salve",
+  "category": "hexalia:content",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Salves",
+      "text": "Salves are quick-use consumables crafted with the $(l:hexalia:core_mechanics/mortar_and_pestle)Mortar and Pestle$(/l). They provide immediate effects, making them ideal for reactive use in combat or survival situations."
+    },
+    {
+      "type": "text",
+      "title": "On Use",
+      "anchor": "use",
+      "text": "Unlike brews, salves act instantly and last for a short duration. They are simple to prepare and are best used when immediate response is needed."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:brambleguard_salve",
+      "title": "Brambleguard Salve",
+      "anchor": "brambleguard",
+      "text": "Grants Brambleguard, increasing armor and providing immunity to Bleeding effects."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:menders_salve",
+      "title": "Mender's Salve",
+      "anchor": "menders",
+      "text": "Applies Regeneration for a short duration, restoring health over time."
+    },
+    {
+      "type": "text",
+      "title": "On Preparation",
+      "text": "Salves are faster to prepare than more complex mixtures, making them a reliable option when time and resources are limited."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:small_cauldron",
+  "duration": 4800,
+  "ingredients": [
+    {
+      "item": "hexalia:mandrake"
+    },
+    {
+      "item": "hexalia:spirit_powder"
+    },
+    {
+      "item": "hexalia:tree_resin"
+    },
+    {
+      "item": "minecraft:rotten_flesh"
+    }
+  ],
+  "result": {
+    "item": "hexalia:brew_of_bloodlust"
+  }
+}

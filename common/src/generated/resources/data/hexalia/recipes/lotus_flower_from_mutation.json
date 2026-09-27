@@ -1,0 +1,9 @@
+{
+  "type": "hexalia:mutation",
+  "input": {
+    "item": "minecraft:lily_pad"
+  },
+  "output": {
+    "item": "hexalia:lotus_flower"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_silkweave_hood": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:silkweave_hood"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hexalia:moonweave_hood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_silkweave_hood",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hexalia:moonweave_hood"
+    ]
+  },
+  "sends_telemetry_event": true
+}

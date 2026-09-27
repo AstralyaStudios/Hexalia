@@ -1,0 +1,9 @@
+{
+  "type": "hexalia:mutation",
+  "input": {
+    "item": "minecraft:dirt"
+  },
+  "output": {
+    "item": "minecraft:rooted_dirt"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hexalia:block/shelf",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hexalia:block/shelf"
+    },
+    "facing=south": {
+      "model": "hexalia:block/shelf",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hexalia:block/shelf",
+      "y": 270
+    }
+  }
+}

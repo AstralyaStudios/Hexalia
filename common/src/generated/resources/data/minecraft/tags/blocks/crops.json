@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "hexalia:sunfire_tomato_crop",
+    "hexalia:mandrake_crop",
+    "hexalia:rabbage_crop",
+    "hexalia:saltsprout",
+    "hexalia:chillberry_bush"
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "parent": "hexalia:crush_course",
+  "criteria": {
+    "celestial_bloom": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:celestial_bloom"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "dreamshroom": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:dreamshroom"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "ghost_fern": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:ghost_fern"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "siren_kelp": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:siren_kelp"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "spirit_bloom": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:spirit_bloom"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.herb_nerd.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:spirit_bloom"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.herb_nerd.title"
+    }
+  },
+  "requirements": [
+    [
+      "dreamshroom"
+    ],
+    [
+      "spirit_bloom"
+    ],
+    [
+      "ghost_fern"
+    ],
+    [
+      "celestial_bloom"
+    ],
+    [
+      "siren_kelp"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

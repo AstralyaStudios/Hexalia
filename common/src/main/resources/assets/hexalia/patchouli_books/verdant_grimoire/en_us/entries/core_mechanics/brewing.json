@@ -1,0 +1,93 @@
+{
+  "name": "Brewing",
+  "icon": "hexalia:small_cauldron",
+  "category": "hexalia:core_mechanics",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Small Cauldron",
+      "text": "The Small Cauldron is used to brew magical mixtures by combining water, ingredients, and heat. Through careful preparation and timing, it produces a wide range of useful concoctions."
+    },
+    {
+      "type": "text",
+      "title": "Brewing Process",
+      "anchor": "process",
+      "text": "Fill the cauldron with water from a suitable container, light the cauldron, and add the recipe ingredients one at a time. Use a $(l:hexalia:content/tools#ladle)Ladle$(/l) in your main hand to stir and begin cooking."
+    },
+    {
+      "type": "text",
+      "title": "On Cooking",
+      "anchor": "cooking",
+      "text": "Keep the cauldron lit while it cooks. When the mixture is ready, use a Rustic Bottle to draw out each serving. An empty hand removes loose ingredients before brewing begins."
+    },
+    {
+      "type": "text",
+      "title": "Spoiled Mixture",
+      "anchor": "spoiled",
+      "text": "Improper combinations result in a spoiled mixture. This unstable substance emits corrupted energy and can harm those nearby until it is cleansed or removed."
+    },
+    {
+      "type": "text",
+      "title": "Overcooking",
+      "anchor": "overcooking",
+      "text": "Leaving a finished brew unattended will degrade its quality, reducing the yield. Careful timing ensures the best results."
+    },
+    {
+      "type": "text",
+      "title": "Ladle",
+      "anchor": "ladle",
+      "text": "A Ladle only stirs a prepared cauldron: it must contain water, be heated, and hold at least one ingredient. Without that setup, mixtures will not properly combine or progress."
+    },
+    {
+      "type": "text",
+      "title": "On Brewing",
+      "text": "Brewing rewards attention and experimentation. Different ingredient combinations yield different results, with success depending on both preparation and timing."
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_arachnid_grace_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_bloodlust_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_daybloom_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_gravebloom_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_hollow_silence_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_homestead_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_siphon_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_slimewalker_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_spikeskin_from_small_cauldron",
+      "layout": "small_cauldron"
+    }
+  ]
+}

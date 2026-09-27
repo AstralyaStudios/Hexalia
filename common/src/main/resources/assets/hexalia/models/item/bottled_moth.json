@@ -1,0 +1,10 @@
+{
+  "parent": "item/generated",
+  "textures": { "layer0": "hexalia:item/bottled_moth_default" },
+
+  "overrides": [
+    { "predicate": { "hexalia:variant": 1 }, "model": "hexalia:item/bottled_moth_blue"  },
+    { "predicate": { "hexalia:variant": 2 }, "model": "hexalia:item/bottled_moth_pink"  },
+    { "predicate": { "hexalia:variant": 3 }, "model": "hexalia:item/bottled_moth_black" }
+  ]
+}

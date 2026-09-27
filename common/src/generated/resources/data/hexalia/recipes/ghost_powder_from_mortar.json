@@ -1,0 +1,11 @@
+{
+  "type": "hexalia:mortar_and_pestle",
+  "ingredients": [
+    {
+      "item": "hexalia:ghost_fern"
+    }
+  ],
+  "output": {
+    "item": "hexalia:ghost_powder"
+  }
+}

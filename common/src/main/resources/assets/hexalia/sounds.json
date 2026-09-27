@@ -1,0 +1,36 @@
+{
+  "mandrake_scream": {
+    "subtitle": "sounds.hexalia.mandrake_scream",
+    "sounds": [
+      "hexalia:mandrake_scream"
+    ]
+  },
+
+  "ritual_success": {
+    "subtitle": "sounds.hexalia.ritual_success",
+    "sounds": [
+      "hexalia:ritual_success"
+    ]
+  },
+
+  "sac_impact": {
+    "subtitle": "sounds.hexalia.sac_impact",
+    "sounds": [
+      "hexalia:sac_impact"
+    ]
+  },
+
+  "cacofey_giggle": {
+    "subtitle": "sounds.hexalia.cacofey_giggle",
+    "sounds": [
+      "hexalia:cacofey_giggle"
+    ]
+  },
+
+  "wind_burst": {
+    "subtitle": "sounds.hexalia.wind_burst",
+    "sounds": [
+      "hexalia:wind_burst"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "hexalia:mortar_and_pestle",
+  "ingredients": [
+    {
+      "item": "minecraft:poppy"
+    },
+    {
+      "item": "hexalia:rabbage"
+    },
+    {
+      "item": "minecraft:azure_bluet"
+    }
+  ],
+  "output": {
+    "item": "hexalia:brambleguard_salve"
+  }
+}

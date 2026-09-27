@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "hexalia:cottonwood_hanging_sign",
+    "hexalia:cottonwood_hanging_wall_sign",
+    "hexalia:willow_hanging_sign",
+    "hexalia:willow_hanging_wall_sign"
+  ]
+}

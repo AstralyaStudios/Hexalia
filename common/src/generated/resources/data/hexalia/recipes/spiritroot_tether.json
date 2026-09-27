@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "E": {
+      "item": "hexalia:earth_node"
+    },
+    "P": {
+      "item": "minecraft:ender_pearl"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "ES ",
+    "SP ",
+    "  S"
+  ],
+  "result": {
+    "item": "hexalia:spiritroot_tether"
+  },
+  "show_notification": true
+}

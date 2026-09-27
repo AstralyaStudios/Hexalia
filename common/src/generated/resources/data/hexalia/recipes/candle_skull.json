@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:candle"
+    },
+    "T": {
+      "item": "minecraft:skeleton_skull"
+    }
+  },
+  "pattern": [
+    "S",
+    "T"
+  ],
+  "result": {
+    "item": "hexalia:candle_skull"
+  },
+  "show_notification": true
+}

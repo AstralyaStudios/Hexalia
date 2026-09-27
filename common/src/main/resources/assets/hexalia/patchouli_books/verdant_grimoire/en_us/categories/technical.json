@@ -1,0 +1,6 @@
+{
+  "name": "Technical",
+  "description": "Technical entries cover advanced systems such as automation and configuration. These pages explain how Hexalia mechanics interact with redstone, item transport, and customizable settings, allowing players to optimize and fine-tune their experience.",
+  "icon": "hexalia:candle_skull",
+  "sortnum": 4
+}

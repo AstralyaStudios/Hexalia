@@ -1,0 +1,38 @@
+{
+  "criteria": {
+    "has_hex_focus": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:hex_focus"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "hexalia:textures/block/willow_log.png",
+    "description": {
+      "translate": "advancements.hexalia.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:hex_focus"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_hex_focus"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

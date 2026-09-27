@@ -1,0 +1,39 @@
+{
+  "parent": "hexalia:table_manners",
+  "criteria": {
+    "has_sage_pendant": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:sage_pendant"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.wise_investment.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:sage_pendant",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.wise_investment.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_sage_pendant"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

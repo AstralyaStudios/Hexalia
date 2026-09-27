@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "minecraft:coals"
+    },
+    "P": {
+      "item": "minecraft:brick"
+    },
+    "S": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    " P ",
+    "PAP",
+    "SSS"
+  ],
+  "result": {
+    "item": "hexalia:censer"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,9 @@
+{
+  "type": "hexalia:mutation",
+  "input": {
+    "item": "minecraft:snow_block"
+  },
+  "output": {
+    "item": "minecraft:packed_ice"
+  }
+}

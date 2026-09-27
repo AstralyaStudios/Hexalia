@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:dirt"
+    },
+    "S": {
+      "item": "hexalia:siren_kelp"
+    }
+  },
+  "pattern": [
+    "SP",
+    "PS"
+  ],
+  "result": {
+    "count": 2,
+    "item": "hexalia:infused_dirt"
+  },
+  "show_notification": true
+}

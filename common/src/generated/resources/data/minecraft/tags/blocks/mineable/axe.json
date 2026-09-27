@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "hexalia:shelf",
+    "hexalia:censer",
+    "hexalia:ritual_brazier",
+    "hexalia:nesting_block",
+    "hexalia:mortar_and_pestle",
+    "hexalia:lotus_flower"
+  ]
+}

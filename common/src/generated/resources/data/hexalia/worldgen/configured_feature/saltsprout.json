@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:wild_crop",
+  "config": {
+    "ground_predicate": {
+      "type": "minecraft:matching_block_tag",
+      "tag": "minecraft:sand"
+    },
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hexalia:saltsprout",
+        "Properties": {
+          "age": "2"
+        }
+      }
+    },
+    "tries": 8,
+    "xz_spread": 7,
+    "y_spread": 3
+  }
+}

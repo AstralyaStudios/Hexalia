@@ -1,0 +1,17 @@
+{
+  "type": "hexalia:mortar_and_pestle",
+  "ingredients": [
+    {
+      "tag": "minecraft:small_flowers"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "tag": "hexalia:crushed_herbs"
+    }
+  ],
+  "output": {
+    "item": "hexalia:fragrant_nectar"
+  }
+}

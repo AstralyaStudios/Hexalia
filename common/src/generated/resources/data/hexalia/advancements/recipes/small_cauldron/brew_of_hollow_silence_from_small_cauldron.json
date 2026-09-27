@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rustic_bottle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:rustic_bottle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hexalia:brew_of_hollow_silence_from_small_cauldron"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rustic_bottle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hexalia:brew_of_hollow_silence_from_small_cauldron"
+    ]
+  },
+  "sends_telemetry_event": true
+}

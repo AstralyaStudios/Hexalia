@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:small_cauldron",
+  "duration": 120,
+  "ingredients": [
+    {
+      "item": "minecraft:spider_eye"
+    },
+    {
+      "item": "hexalia:ghost_powder"
+    },
+    {
+      "item": "minecraft:black_dye"
+    },
+    {
+      "item": "minecraft:string"
+    }
+  ],
+  "result": {
+    "item": "hexalia:brew_of_arachnid_grace"
+  }
+}

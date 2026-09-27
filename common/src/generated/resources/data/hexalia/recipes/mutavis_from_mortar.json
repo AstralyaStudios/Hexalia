@@ -1,0 +1,17 @@
+{
+  "type": "hexalia:mortar_and_pestle",
+  "ingredients": [
+    {
+      "item": "hexalia:tree_resin"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "tag": "hexalia:crushed_herbs"
+    }
+  ],
+  "output": {
+    "item": "hexalia:mutavis"
+  }
+}

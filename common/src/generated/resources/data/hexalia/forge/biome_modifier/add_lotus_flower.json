@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hexalia:has_swamp_vegetation",
+  "features": "hexalia:lotus_flower_placed",
+  "step": "vegetal_decoration"
+}

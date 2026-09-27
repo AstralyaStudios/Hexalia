@@ -1,0 +1,66 @@
+{
+  "name": "Crops",
+  "icon": "hexalia:mandrake",
+  "category": "hexalia:resources",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Crops",
+      "text": "Hexalia introduces unique crops found across the world, each tied to specific environments and uses. They are essential for crafting foods, supporting rituals, and unlocking specialized effects."
+    },
+    {
+      "type": "text",
+      "title": "Types of Crops",
+      "anchor": "types",
+      "text": "Crops fall into two broad groups.$(br2)$(li)Wild Crops are discovered in nature and cultivated from seeds.$(li)Specialized Crops require unique methods such as infusion or ritual transformation."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:mandrake",
+      "title": "Mandrake",
+      "anchor": "mandrake",
+      "text": "A volatile root found in forest regions. Its cry can be dangerous without protection, but it is valued for hearty meals such as Mandrake Stew."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:sunfire_tomato",
+      "title": "Sunfire Tomato",
+      "anchor": "sunfire_tomato",
+      "text": "A warm-climate crop discovered in savannas. Often used in spiced meals that grant bursts of speed and vitality."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:chillberries",
+      "title": "Chillberries",
+      "anchor": "chillberries",
+      "text": "Cold-grown berries found in taigas. They can be harvested and replanted, and are commonly used in meals that protect against heat."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:saltsprout",
+      "title": "Saltsprout",
+      "anchor": "saltsprout",
+      "text": "A desert plant that can be processed into Salt, a key material for rituals and magical workings."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:galeberries",
+      "title": "Galeberries",
+      "anchor": "galeberries",
+      "text": "Not found naturally, Galeberries are created through $(l:hexalia:core_mechanics/celestial_infusion)Celestial Infusion$(/l). They are used in crafted foods tied to enhanced perception."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:rabbage",
+      "title": "Rabbage",
+      "anchor": "rabbage",
+      "text": "Formed through $(l:hexalia:core_mechanics/natures_ritual)Nature's Ritual$(/l), Rabbage is both a resource and a tool, capable of being used in unconventional ways beyond simple nourishment."
+    },
+    {
+      "type": "text",
+      "title": "On Cultivation",
+      "text": "Many crops begin in the wild, but their true value comes from cultivation. With the right knowledge, they can be grown, processed, and integrated into more advanced Hexalia systems."
+    }
+  ]
+}

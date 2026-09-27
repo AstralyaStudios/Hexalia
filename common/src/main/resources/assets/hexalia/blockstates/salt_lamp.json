@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "hexalia:block/salt_lamp"
+    },
+    "hanging=true": {
+      "model": "hexalia:block/hanging_salt_lamp"
+    }
+  }
+}

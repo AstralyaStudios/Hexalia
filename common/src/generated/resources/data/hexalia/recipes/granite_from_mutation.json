@@ -1,0 +1,9 @@
+{
+  "type": "hexalia:mutation",
+  "input": {
+    "item": "minecraft:diorite"
+  },
+  "output": {
+    "item": "minecraft:granite"
+  }
+}

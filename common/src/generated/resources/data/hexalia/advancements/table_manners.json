@@ -1,0 +1,38 @@
+{
+  "parent": "hexalia:salt_of_the_craft",
+  "criteria": {
+    "has_ritual_table": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:ritual_table"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.table_manners.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:ritual_table"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.table_manners.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_ritual_table"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,38 @@
+{
+  "parent": "hexalia:table_manners",
+  "criteria": {
+    "has_celestial_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:celestial_crystal"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.star_power.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:celestial_crystal"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.star_power.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_celestial_crystal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

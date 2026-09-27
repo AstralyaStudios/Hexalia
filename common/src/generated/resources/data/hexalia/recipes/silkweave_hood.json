@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "minecraft:leather_helmet"
+    },
+    "S": {
+      "item": "hexalia:silk_fiber"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SLS",
+    " W "
+  ],
+  "result": {
+    "item": "hexalia:silkweave_hood"
+  },
+  "show_notification": true
+}

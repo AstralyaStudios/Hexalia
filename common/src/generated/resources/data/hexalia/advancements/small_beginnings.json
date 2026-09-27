@@ -1,0 +1,38 @@
+{
+  "parent": "hexalia:root",
+  "criteria": {
+    "has_small_cauldron": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:small_cauldron"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.small_beginnings.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:small_cauldron"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.small_beginnings.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_small_cauldron"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

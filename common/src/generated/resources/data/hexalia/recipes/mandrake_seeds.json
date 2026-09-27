@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hexalia:mandrake"
+    }
+  ],
+  "result": {
+    "item": "hexalia:mandrake_seeds"
+  }
+}

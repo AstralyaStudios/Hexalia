@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:wild_crop",
+  "config": {
+    "ground_predicate": {
+      "type": "minecraft:matching_blocks",
+      "blocks": "minecraft:water"
+    },
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hexalia:lotus_flower",
+        "Properties": {
+          "facing": "north"
+        }
+      }
+    },
+    "tries": 64,
+    "xz_spread": 6,
+    "y_spread": 2
+  }
+}

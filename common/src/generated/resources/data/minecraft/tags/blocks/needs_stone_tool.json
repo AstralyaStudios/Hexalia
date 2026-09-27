@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "hexalia:salt_lamp",
+    "hexalia:rustic_oven",
+    "hexalia:small_cauldron",
+    "hexalia:shelf",
+    "hexalia:censer",
+    "hexalia:lotus_flower",
+    "hexalia:ritual_table",
+    "hexalia:salt_block",
+    "hexalia:ritual_brazier",
+    "hexalia:nesting_block",
+    "hexalia:mortar_and_pestle",
+    "hexalia:celestial_crystal_block"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hexalia:sunfire_tomato"
+    }
+  ],
+  "result": {
+    "item": "hexalia:sunfire_tomato_seeds"
+  }
+}

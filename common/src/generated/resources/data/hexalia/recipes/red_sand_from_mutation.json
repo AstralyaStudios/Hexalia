@@ -1,0 +1,9 @@
+{
+  "type": "hexalia:mutation",
+  "input": {
+    "item": "minecraft:sand"
+  },
+  "output": {
+    "item": "minecraft:red_sand"
+  }
+}

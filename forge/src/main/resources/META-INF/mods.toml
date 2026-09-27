@@ -1,0 +1,39 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="hexalia"
+version="${mod_version}"
+displayName="Hexalia"
+authors="Grape Studios"
+
+description='''A magical mod focused on herbology and potion brewing.'''
+
+[[dependencies.hexalia]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.hexalia]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.hexalia]]
+    modId="geckolib"
+    mandatory=true
+    versionRange="${geckolib_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.hexalia]]
+    modId="patchouli"
+    mandatory=false
+    versionRange="${patchouli_version_range}"
+    ordering="NONE"
+    side="BOTH"

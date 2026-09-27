@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "S": {
+      "item": "minecraft:oak_slab"
+    }
+  },
+  "pattern": [
+    " S ",
+    "G G",
+    "GGG"
+  ],
+  "result": {
+    "item": "hexalia:herb_jar",
+    "count": 2
+  }
+}

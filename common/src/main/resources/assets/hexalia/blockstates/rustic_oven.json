@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hexalia:block/rustic_oven",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hexalia:block/rustic_oven"
+    },
+    "facing=south": {
+      "model": "hexalia:block/rustic_oven",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hexalia:block/rustic_oven",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "berries=false": {
+      "model": "hexalia:block/galeberries_vine"
+    },
+    "berries=true": {
+      "model": "hexalia:block/galeberries_vine_lit"
+    }
+  }
+}

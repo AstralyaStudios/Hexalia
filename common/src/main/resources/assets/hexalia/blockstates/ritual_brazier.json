@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "facing=north,salted=false": { "model": "hexalia:block/ritual_brazier" },
+    "facing=east,salted=false": { "model": "hexalia:block/ritual_brazier", "y": 90 },
+    "facing=south,salted=false": { "model": "hexalia:block/ritual_brazier", "y": 180 },
+    "facing=west,salted=false": { "model": "hexalia:block/ritual_brazier", "y": 270 },
+
+    "facing=north,salted=true": { "model": "hexalia:block/salted_ritual_brazier" },
+    "facing=east,salted=true": { "model": "hexalia:block/salted_ritual_brazier", "y": 90 },
+    "facing=south,salted=true": { "model": "hexalia:block/salted_ritual_brazier", "y": 180 },
+    "facing=west,salted=true": { "model": "hexalia:block/salted_ritual_brazier", "y": 270 }
+  }
+}

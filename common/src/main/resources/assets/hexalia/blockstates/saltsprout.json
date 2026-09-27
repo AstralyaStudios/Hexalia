@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "hexalia:block/saltsprout_stage0"
+    },
+    "age=1": {
+      "model": "hexalia:block/saltsprout_stage1"
+    },
+    "age=2": {
+      "model": "hexalia:block/saltsprout_stage2"
+    }
+  }
+}

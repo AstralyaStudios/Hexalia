@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:wild_crop",
+  "config": {
+    "ground_predicate": {
+      "type": "minecraft:matching_block_tag",
+      "tag": "minecraft:dirt"
+    },
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hexalia:chillberry_bush",
+        "Properties": {
+          "age": "3"
+        }
+      }
+    },
+    "tries": 30,
+    "xz_spread": 8,
+    "y_spread": 4
+  }
+}

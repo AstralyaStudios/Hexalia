@@ -1,0 +1,38 @@
+{
+  "parent": "hexalia:change_of_plans",
+  "criteria": {
+    "has_morphora": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:morphora"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.ring_of_change.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:morphora"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.ring_of_change.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_morphora"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

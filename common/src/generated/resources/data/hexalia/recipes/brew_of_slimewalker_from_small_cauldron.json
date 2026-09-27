@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:small_cauldron",
+  "duration": 4800,
+  "ingredients": [
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "hexalia:chillberries"
+    },
+    {
+      "item": "hexalia:tree_resin"
+    },
+    {
+      "item": "minecraft:feather"
+    }
+  ],
+  "result": {
+    "item": "hexalia:brew_of_slimewalker"
+  }
+}

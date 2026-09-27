@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "tag": "minecraft:leaves"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "PNP",
+    "PPP"
+  ],
+  "result": {
+    "item": "hexalia:nesting_block"
+  },
+  "show_notification": true
+}

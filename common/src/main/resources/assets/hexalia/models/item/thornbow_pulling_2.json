@@ -1,0 +1,6 @@
+{
+  "parent": "hexalia:item/thornbow",
+  "textures": {
+    "layer0": "hexalia:item/thornbow_pulling_2"
+  }
+}

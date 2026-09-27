@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:small_cauldron",
+  "duration": 4800,
+  "ingredients": [
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "item": "hexalia:ghost_powder"
+    },
+    {
+      "item": "hexalia:chillberries"
+    },
+    {
+      "item": "minecraft:sculk"
+    }
+  ],
+  "result": {
+    "item": "hexalia:brew_of_hollow_silence"
+  }
+}

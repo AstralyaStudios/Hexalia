@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hexalia:block/lotus_flower",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hexalia:block/lotus_flower"
+    },
+    "facing=south": {
+      "model": "hexalia:block/lotus_flower",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hexalia:block/lotus_flower",
+      "y": 270
+    }
+  }
+}

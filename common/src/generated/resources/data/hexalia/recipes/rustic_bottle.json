@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:clay_ball"
+    },
+    "S": {
+      "item": "minecraft:glass"
+    }
+  },
+  "pattern": [
+    "S S",
+    " P "
+  ],
+  "result": {
+    "count": 3,
+    "item": "hexalia:rustic_bottle"
+  },
+  "show_notification": true
+}

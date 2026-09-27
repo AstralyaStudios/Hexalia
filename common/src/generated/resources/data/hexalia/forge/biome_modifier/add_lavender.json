@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hexalia:has_cool_biome_vegetation",
+  "features": "hexalia:lavender_placed",
+  "step": "vegetal_decoration"
+}

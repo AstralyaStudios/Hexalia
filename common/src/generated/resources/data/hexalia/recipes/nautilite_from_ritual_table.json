@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:natures_ritual",
+  "center": {
+    "item": "minecraft:kelp"
+  },
+  "offerings": [
+    {
+      "item": "hexalia:siren_paste"
+    },
+    {
+      "item": "hexalia:water_node"
+    },
+    {
+      "item": "minecraft:nautilus_shell"
+    },
+    {
+      "item": "minecraft:prismarine_crystals"
+    }
+  ],
+  "output": "hexalia:nautilite"
+}

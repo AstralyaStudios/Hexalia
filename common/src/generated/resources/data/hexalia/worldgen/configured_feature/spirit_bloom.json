@@ -1,0 +1,18 @@
+{
+  "type": "hexalia:wild_crop",
+  "config": {
+    "ground_predicate": {
+      "type": "minecraft:matching_block_tag",
+      "tag": "minecraft:dirt"
+    },
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hexalia:spirit_bloom"
+      }
+    },
+    "tries": 2,
+    "xz_spread": 3,
+    "y_spread": 1
+  }
+}

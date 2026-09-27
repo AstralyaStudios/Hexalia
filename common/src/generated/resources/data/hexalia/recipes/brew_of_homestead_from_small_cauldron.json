@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:small_cauldron",
+  "duration": 4800,
+  "ingredients": [
+    {
+      "item": "hexalia:tree_resin"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "hexalia:spirit_powder"
+    },
+    {
+      "item": "hexalia:galeberries"
+    }
+  ],
+  "result": {
+    "item": "hexalia:brew_of_homestead"
+  }
+}

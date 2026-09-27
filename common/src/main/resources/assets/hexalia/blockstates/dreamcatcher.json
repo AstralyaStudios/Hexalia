@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hexalia:block/dreamcatcher",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hexalia:block/dreamcatcher"
+    },
+    "facing=south": {
+      "model": "hexalia:block/dreamcatcher",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hexalia:block/dreamcatcher",
+      "y": 270
+    }
+  }
+}

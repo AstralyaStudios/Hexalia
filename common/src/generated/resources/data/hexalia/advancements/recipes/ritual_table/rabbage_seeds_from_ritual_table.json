@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_beetroot_seeds": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:beetroot_seeds"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hexalia:rabbage_seeds_from_ritual_table"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_beetroot_seeds"
+    ],
+    [
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hexalia:rabbage_seeds_from_ritual_table"
+    ]
+  },
+  "sends_telemetry_event": true
+}

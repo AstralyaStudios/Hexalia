@@ -1,0 +1,10 @@
+{
+  "type": "hexalia:add_table",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/jungle_temple"
+    }
+  ],
+  "table": "hexalia:inject/jungle_temple"
+}

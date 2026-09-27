@@ -1,0 +1,11 @@
+{
+  "type": "hexalia:mortar_and_pestle",
+  "ingredients": [
+    {
+      "item": "hexalia:dreamshroom"
+    }
+  ],
+  "output": {
+    "item": "hexalia:dream_paste"
+  }
+}

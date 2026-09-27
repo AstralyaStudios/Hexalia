@@ -1,0 +1,109 @@
+plugins {
+    id 'com.github.johnrengelman.shadow'
+}
+
+architectury {
+    platformSetupLoomIde()
+    forge()
+}
+
+configurations {
+    common {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+
+    shadowBundle {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+}
+
+loom {
+    forge {
+        mixinConfig "mixins.hexalia.effects.json"
+        mixinConfig "mixins.hexalia.armor.json"
+    }
+
+    runs {
+        data {
+            data()
+            configName = "Forge Data"
+            ideConfigGenerated = true
+            runDir = "run"
+
+            programArg "--mod"
+            programArg "hexalia"
+
+            programArg "--output"
+            programArg project(":common").file("src/generated/resources").absolutePath
+
+            programArg "--existing"
+            programArg file("src/main/resources").absolutePath
+
+            programArg "--existing"
+            programArg project(":common").file("src/main/resources").absolutePath
+        }
+    }
+}
+
+tasks.named("runData", JavaExec).configure {
+    classpath = classpath.filter { file ->
+        def name = file.name.toLowerCase(Locale.ROOT)
+        !name.contains("emi") && !name.contains("patchouli")
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir "src/generated/resources"
+        }
+    }
+}
+
+dependencies {
+    forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
+    modImplementation "dev.architectury:architectury-forge:$rootProject.architectury_api_version"
+    modImplementation "software.bernie.geckolib:geckolib-forge-${rootProject.minecraft_version}:$rootProject.geckolib_forge_version"
+    forgeRuntimeLibrary "com.eliotlash.mclib:mclib:20"
+    modImplementation "me.shedaniel.cloth:cloth-config-forge:11.1.106"
+    modCompileOnly "mezz.jei:jei-${rootProject.minecraft_version}-common-api:$rootProject.jei_version"
+    modCompileOnly "mezz.jei:jei-${rootProject.minecraft_version}-forge-api:$rootProject.jei_version"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-forge:$rootProject.rei_version"
+    modCompileOnly "dev.emi:emi-forge:${rootProject.emi_version}:api"
+    modRuntimeOnly "dev.emi:emi-forge:${rootProject.emi_version}"
+    modCompileOnly "top.theillusivec4.curios:curios-forge:5.14.1+1.20.1:api"
+    modRuntimeOnly "top.theillusivec4.curios:curios-forge:5.14.1+1.20.1"
+    modCompileOnly "vazkii.patchouli:Patchouli:${rootProject.patchouli_version}-FORGE:api"
+    modRuntimeOnly "vazkii.patchouli:Patchouli:${rootProject.patchouli_version}-FORGE"
+
+    common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
+    developmentForge(project(path: ':common', configuration: 'namedElements')) { transitive = false }
+    shadowBundle(project(path: ':common', configuration: 'transformProductionForge')) { transitive = false }
+}
+
+processResources {
+    inputs.property 'mod_version', project.version
+    inputs.property 'geckolib_version_range', "[${rootProject.geckolib_forge_version},)"
+    inputs.property 'patchouli_version_range', "[${rootProject.patchouli_version}-FORGE,)"
+
+    filesMatching('META-INF/mods.toml') {
+        expand inputs.properties
+    }
+
+    from(project(":common").file("src/main/resources/data/hexalia/patchouli_books")) {
+        into "data/hexalia/patchouli_books"
+    }
+}
+
+shadowJar {
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = 'dev-shadow'
+}
+
+remapJar {
+    inputFile.set shadowJar.archiveFile
+}

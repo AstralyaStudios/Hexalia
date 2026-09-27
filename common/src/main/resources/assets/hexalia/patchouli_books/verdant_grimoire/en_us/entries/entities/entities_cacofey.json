@@ -1,0 +1,52 @@
+{
+  "name": "Cacofey",
+  "icon": "hexalia:cacofey_spawn_egg",
+  "category": "hexalia:entities",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Cacofey",
+      "text": "The Cacofey is a mischievous jungle creature, known for stealing food and assisting with farming once tamed. It can also be summoned through $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Nature's Ritual$(/l), which requires a soul sacrifice."
+    },
+    {
+      "type": "text",
+      "title": "Wild Behavior",
+      "anchor": "wild",
+      "text": "Wild Cacofey are drawn to edible items. They will approach players, steal food, and quickly flee before consuming it. After each attempt, they rest before trying again."
+    },
+    {
+      "type": "text",
+      "title": "Taming",
+      "anchor": "taming",
+      "text": "Cacofey can be tamed using a Galeberries Cookie. Once tamed, their behavior changes entirely, becoming cooperative rather than mischievous."
+    },
+    {
+      "type": "text",
+      "title": "Anchoring",
+      "anchor": "anchor",
+      "text": "A tamed Cacofey can be bound to a container using a Hex Focus. Once anchored, it treats that location as its home and returns to it after working."
+    },
+    {
+      "type": "text",
+      "title": "Harvesting",
+      "anchor": "harvesting",
+      "text": "When set to wander, a tamed Cacofey searches for mature crops, harvests them, and returns to its anchor to deposit the collected items."
+    },
+    {
+      "type": "text",
+      "title": "Modes",
+      "text": "Cacofey can switch between behaviors: following their owner, staying in place, or wandering freely. Wandering is required for farming."
+    },
+    {
+      "type": "text",
+      "title": "On Use",
+      "text": "Cacofey provide early automation for farming. With the right setup, they can maintain crops and gather resources while you focus on other tasks."
+    },
+    {
+      "type": "text",
+      "title": "Binding",
+      "text": "Bind a Cacofey by first attuning a Hex Focus to it, then using the focus on a container. The creature will treat that container as its home."
+    }
+  ]
+}

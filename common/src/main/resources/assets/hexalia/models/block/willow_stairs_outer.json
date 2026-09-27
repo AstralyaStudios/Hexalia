@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "hexalia:block/willow_planks",
+    "side": "hexalia:block/willow_planks",
+    "top": "hexalia:block/willow_planks"
+  }
+}

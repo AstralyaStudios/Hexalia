@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hexalia:block/stripped_cottonwood_log_top",
+    "side": "hexalia:block/stripped_cottonwood_log"
+  }
+}

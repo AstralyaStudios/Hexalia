@@ -1,0 +1,47 @@
+{
+  "name": "Configuration",
+  "icon": "minecraft:redstone",
+  "category": "hexalia:technical",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Configuration",
+      "text": "Hexalia provides configurable settings for gameplay balance, block behavior, enchanted plants, and visual effects."
+    },
+
+    {
+      "type": "text",
+      "title": "Functional Blocks",
+      "anchor": "blocks",
+      "text": "Several blocks can be adjusted to control their range, duration, and behavior.$(br2)$(li)Censer: effect radius and duration$(li)Small Cauldron: brewing and overcooking time$(li)Dreamcatcher: detection radius and burn duration$(li)Egg Cluster: hatch time"
+    },
+
+    {
+      "type": "text",
+      "title": "Tools & Effects",
+      "anchor": "tools",
+      "text": "Item behavior and combat effects can be adjusted for balance and playstyle.$(br2)$(li)Mutation: item drop or block replacement$(li)Mandrake: scream radius and stun duration$(li)Throwable Sacs: effect duration$(li)Combat Effects: siphon radius and bleeding damage$(li)Cacofey: harvest radius"
+    },
+
+    {
+      "type": "text",
+      "title": "Enchanted Plants",
+      "anchor": "plants",
+      "text": "All enchanted plants have configurable duration, radius, or intervals.$(br2)$(li)Nautilite, Windsong, Grimshade: duration and radius$(li)Astrylis: duration and growth interval$(li)Morphora: mutation radius$(li)Lourdes: duration and effect radius"
+    },
+
+    {
+      "type": "text",
+      "title": "Client Settings",
+      "anchor": "client",
+      "text": "Visual effects can be toggled independently on the client.$(br2)$(li)Ghost Fern particles$(li)Celestial Bloom particles$(li)Dreamshroom particles"
+    },
+
+    {
+      "type": "text",
+      "title": "Notes",
+      "text": "Most settings apply server-side. 20 ticks equal 1 second. Back up your world before making major changes."
+    }
+  ]
+}

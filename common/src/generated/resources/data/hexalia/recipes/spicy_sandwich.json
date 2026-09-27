@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:foods/breads"
+    },
+    {
+      "item": "hexalia:sunfire_tomato"
+    },
+    {
+      "tag": "c:foods/cooked_meats"
+    }
+  ],
+  "result": {
+    "item": "hexalia:spicy_sandwich"
+  }
+}

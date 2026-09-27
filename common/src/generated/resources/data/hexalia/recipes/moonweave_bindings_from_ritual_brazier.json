@@ -1,0 +1,9 @@
+{
+  "type": "hexalia:ritual_brazier",
+  "input": {
+    "item": "hexalia:silkweave_bindings"
+  },
+  "output": {
+    "item": "hexalia:moonweave_bindings"
+  }
+}

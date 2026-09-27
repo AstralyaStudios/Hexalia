@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:feather"
+    },
+    "P": {
+      "item": "minecraft:string"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "T": {
+      "item": "hexalia:fire_node"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SPS",
+    "ATA"
+  ],
+  "result": {
+    "item": "hexalia:dreamcatcher"
+  },
+  "show_notification": true
+}

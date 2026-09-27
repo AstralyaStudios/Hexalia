@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hexalia:has_siren_kelp",
+  "features": "hexalia:siren_kelp_placed",
+  "step": "vegetal_decoration"
+}

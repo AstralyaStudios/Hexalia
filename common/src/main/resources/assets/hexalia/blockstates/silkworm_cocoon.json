@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hexalia:block/silkworm_cocoon",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hexalia:block/silkworm_cocoon"
+    },
+    "facing=south": {
+      "model": "hexalia:block/silkworm_cocoon",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hexalia:block/silkworm_cocoon",
+      "y": 270
+    }
+  }
+}

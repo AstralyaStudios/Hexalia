@@ -1,0 +1,84 @@
+{
+  "name": "Censer Auras",
+  "icon": "hexalia:censer",
+  "category": "hexalia:core_mechanics",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Censer Auras",
+      "text": "A Censer binds the virtues of two $(l:hexalia:resources/herbs)Herbs$(/l) into an aura. Place one herb at a time into an unlit Censer, then ignite a valid pair with a fire starter. Both herbs are consumed as the aura begins."
+    },
+    {
+      "type": "text",
+      "title": "Tending the Smoke",
+      "anchor": "use",
+      "text": "The Censer burns for a time and carries its effect through the surrounding area. Before lighting, remove the last herb with an empty hand. Extinguish a burning Censer with a shovel."
+    },
+    {
+      "type": "text",
+      "title": "Tidewarden",
+      "anchor": "tidewarden",
+      "text": "$(l:hexalia:resources/herbs#siren_kelp)Siren Kelp$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Spirit Bloom$(/l)$(br2)Creates a protective aura that grants Resistance and Slow Falling."
+    },
+    {
+      "type": "text",
+      "title": "Undead Veil",
+      "anchor": "undead_veil",
+      "text": "$(l:hexalia:resources/herbs#ghost_fern)Ghost Fern$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Spirit Bloom$(/l)$(br2)Pacifies undead creatures within the area."
+    },
+    {
+      "type": "text",
+      "title": "Ethereal Grazing",
+      "anchor": "ethereal_grazing",
+      "text": "$(l:hexalia:resources/herbs#ghost_fern)Ghost Fern$(/l) + $(l:hexalia:resources/herbs#siren_kelp)Siren Kelp$(/l)$(br2)Encourages nearby animals of the same species to breed."
+    },
+    {
+      "type": "text",
+      "title": "Miner's Respite",
+      "anchor": "miners_respite",
+      "text": "$(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Spirit Bloom$(/l)$(br2)Grants Night Vision and Haste, and may restore damaged anvils."
+    },
+    {
+      "type": "text",
+      "title": "Tide's Memory",
+      "anchor": "tides_memory",
+      "text": "$(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l) + $(l:hexalia:resources/herbs#siren_kelp)Siren Kelp$(/l)$(br2)Releases aquatic loot in large bodies of water and may summon a Guardian."
+    },
+    {
+      "type": "text",
+      "title": "Phantom Drift",
+      "anchor": "phantom_drift",
+      "text": "$(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l) + $(l:hexalia:resources/herbs#ghost_fern)Ghost Fern$(/l)$(br2)Moves nearby items into surrounding containers."
+    },
+    {
+      "type": "text",
+      "title": "Blighted Bloom",
+      "anchor": "blighted_bloom",
+      "text": "$(l:hexalia:resources/herbs#witchweed)Witchweed$(/l) + $(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l)$(br2)Spreads mycelium, grows mushrooms, and may transform cows into mooshrooms."
+    },
+    {
+      "type": "text",
+      "title": "Tidal Pull",
+      "anchor": "tidal_pull",
+      "text": "$(l:hexalia:resources/herbs#witchweed)Witchweed$(/l) + $(l:hexalia:resources/herbs#siren_kelp)Siren Kelp$(/l)$(br2)Pulls nearby mobs and items toward the censer."
+    },
+    {
+      "type": "text",
+      "title": "Withering Calm",
+      "anchor": "withering_calm",
+      "text": "$(l:hexalia:resources/herbs#witchweed)Witchweed$(/l) + $(l:hexalia:resources/herbs#ghost_fern)Ghost Fern$(/l)$(br2)Applies Wither while suppressing aggression from affected mobs."
+    },
+    {
+      "type": "text",
+      "title": "Hollow Aura",
+      "anchor": "hollow_aura",
+      "text": "$(l:hexalia:resources/herbs#witchweed)Witchweed$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Spirit Bloom$(/l)$(br2)Periodically removes beneficial effects from those within its range."
+    },
+    {
+      "type": "text",
+      "title": "On Pairing",
+      "text": "Each herb contributes its own nature to the resulting aura. Understanding how they combine allows for precise control over the effects created by the censer."
+    }
+  ]
+}

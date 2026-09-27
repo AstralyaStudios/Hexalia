@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:natures_ritual",
+  "center": {
+    "item": "minecraft:beetroot_seeds"
+  },
+  "offerings": [
+    {
+      "item": "hexalia:dream_paste"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "minecraft:sweet_berries"
+    },
+    {
+      "item": "minecraft:poppy"
+    }
+  ],
+  "output": "hexalia:rabbage_seeds"
+}

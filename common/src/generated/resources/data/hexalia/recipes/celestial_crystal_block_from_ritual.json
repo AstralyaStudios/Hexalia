@@ -1,0 +1,9 @@
+{
+  "type": "hexalia:ritual_brazier",
+  "input": {
+    "item": "minecraft:amethyst_block"
+  },
+  "output": {
+    "item": "hexalia:celestial_crystal_block"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "Throwable Sacs",
+  "icon": "hexalia:purifying_sac",
+  "category": "hexalia:content",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Throwable Sacs",
+      "text": "Throwable sacs release contained mixtures on impact, applying effects to enemies, allies, or the environment."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:purifying_sac",
+      "title": "Purifying Sac",
+      "text": "Cleanses negative effects from affected entities, making it useful for recovery and support."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:foul_sac",
+      "title": "Foul Sac",
+      "text": "Releases a harmful mixture that poisons and slows targets while dealing damage."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:frost_sac",
+      "title": "Frost Sac",
+      "text": "Weakens and immobilizes targets caught in its impact."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:searing_sac",
+      "title": "Searing Sac",
+      "text": "Applies burning and bleeding in an area, making it effective for aggressive engagements."
+    }
+  ]
+}

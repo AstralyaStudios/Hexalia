@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hexalia:block/cottonwood_slab"
+    },
+    "type=double": {
+      "model": "hexalia:block/cottonwood_planks"
+    },
+    "type=top": {
+      "model": "hexalia:block/cottonwood_slab_top"
+    }
+  }
+}

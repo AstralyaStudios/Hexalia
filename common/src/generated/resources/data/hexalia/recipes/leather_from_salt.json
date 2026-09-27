@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "tag": "c:dusts/salt"
+    },
+    "T": {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "pattern": [
+    " S ",
+    "STS",
+    " S "
+  ],
+  "result": {
+    "item": "minecraft:leather"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "minecraft:coals"
+    },
+    "D": {
+      "item": "minecraft:cobbled_deepslate"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    "D D",
+    "DCD",
+    "LLL"
+  ],
+  "result": {
+    "item": "hexalia:small_cauldron"
+  },
+  "show_notification": true
+}

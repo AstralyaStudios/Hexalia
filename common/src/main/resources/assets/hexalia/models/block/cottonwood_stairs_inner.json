@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "hexalia:block/cottonwood_planks",
+    "side": "hexalia:block/cottonwood_planks",
+    "top": "hexalia:block/cottonwood_planks"
+  }
+}

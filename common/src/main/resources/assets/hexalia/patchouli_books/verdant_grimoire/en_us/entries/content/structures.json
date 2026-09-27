@@ -1,0 +1,31 @@
+{
+  "name": "Structures",
+  "icon": "minecraft:map",
+  "category": "hexalia:content",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "image",
+      "images": ["hexalia:textures/gui/patchouli/herbalist_hut.png"],
+      "title": "Herbalist Hut",
+      "text": "A secluded workshop found in $(bold)Swamp$() and $(bold)Mangrove Swamp$() biomes. An early source of herbs, crops, and farming materials for aspiring witches."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:map",
+      "title": "Where to Find",
+      "anchor": "herbalist_hut",
+      "text": "Look for a small, weathered cabin partially hidden by vegetation in Swamps. Infused soil nearby supports the growth of herbs and crops."
+    },
+    {
+      "type": "text",
+      "title": "Contents",
+      "text": "The hut contains a variety of magical flora and early resources, including herbs and cultivated crops ready for harvesting."
+    },
+    {
+      "type": "text",
+      "title": "On Discovery",
+      "text": "Herbalist Huts provide a natural introduction to Hexalia's systems, offering enough materials to begin experimenting with rituals, brewing, and cultivation."
+    }
+  ]
+}

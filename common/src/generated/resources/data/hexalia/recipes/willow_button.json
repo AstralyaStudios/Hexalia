@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hexalia:willow_planks"
+    }
+  ],
+  "result": {
+    "item": "hexalia:willow_button"
+  }
+}

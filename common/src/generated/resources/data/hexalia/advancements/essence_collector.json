@@ -1,0 +1,53 @@
+{
+  "parent": "hexalia:table_manners",
+  "criteria": {
+    "has_any_node": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:water_node"
+            ]
+          },
+          {
+            "items": [
+              "hexalia:air_node"
+            ]
+          },
+          {
+            "items": [
+              "hexalia:earth_node"
+            ]
+          },
+          {
+            "items": [
+              "hexalia:fire_node"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.essence_collector.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:water_node"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.essence_collector.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_any_node"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

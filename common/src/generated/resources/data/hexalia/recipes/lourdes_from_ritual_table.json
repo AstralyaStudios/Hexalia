@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:natures_ritual",
+  "center": {
+    "item": "minecraft:blue_orchid"
+  },
+  "offerings": [
+    {
+      "item": "hexalia:air_node"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:glistering_melon_slice"
+    },
+    {
+      "item": "hexalia:dream_paste"
+    }
+  ],
+  "output": "hexalia:lourdes"
+}

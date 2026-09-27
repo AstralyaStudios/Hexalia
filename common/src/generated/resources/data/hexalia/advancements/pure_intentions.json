@@ -1,0 +1,36 @@
+{
+  "parent": "hexalia:silken_beginnings",
+  "criteria": {
+    "use_purity_idol": {
+      "conditions": {
+        "item": {
+          "items": [
+            "hexalia:purity_idol"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.pure_intentions.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:purity_idol"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.pure_intentions.title"
+    }
+  },
+  "requirements": [
+    [
+      "use_purity_idol"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hexalia:block/nesting_block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hexalia:block/nesting_block"
+    },
+    "facing=south": {
+      "model": "hexalia:block/nesting_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hexalia:block/nesting_block",
+      "y": 270
+    }
+  }
+}

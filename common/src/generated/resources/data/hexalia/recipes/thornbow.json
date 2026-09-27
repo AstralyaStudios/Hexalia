@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "E": {
+      "item": "hexalia:earth_node"
+    },
+    "F": {
+      "item": "minecraft:string"
+    },
+    "R": {
+      "item": "hexalia:rabbage"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " SF",
+    "REF",
+    " SF"
+  ],
+  "result": {
+    "item": "hexalia:thornbow"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,9 @@
+{
+  "type": "hexalia:mutation",
+  "input": {
+    "tag": "hexalia:tulips"
+  },
+  "output": {
+    "item": "hexalia:celestial_bloom"
+  }
+}

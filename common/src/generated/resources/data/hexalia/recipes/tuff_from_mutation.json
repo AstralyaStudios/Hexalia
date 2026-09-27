@@ -1,0 +1,9 @@
+{
+  "type": "hexalia:mutation",
+  "input": {
+    "item": "minecraft:dripstone_block"
+  },
+  "output": {
+    "item": "minecraft:tuff"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "parent": "hexalia:root",
+  "criteria": {
+    "has_mortar": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:mortar_and_pestle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.crush_course.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:mortar_and_pestle"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.crush_course.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_mortar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

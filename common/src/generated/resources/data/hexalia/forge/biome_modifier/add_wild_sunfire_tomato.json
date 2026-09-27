@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hexalia:has_dry_biome_vegetation",
+  "features": "hexalia:wild_sunfire_tomato_placed",
+  "step": "vegetal_decoration"
+}

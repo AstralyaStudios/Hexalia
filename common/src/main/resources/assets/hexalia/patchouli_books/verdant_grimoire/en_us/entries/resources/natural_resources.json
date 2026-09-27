@@ -1,0 +1,71 @@
+{
+  "name": "Natural Resources",
+  "icon": "hexalia:tree_resin",
+  "category": "hexalia:resources",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Elemental Nodes",
+      "text": "Elemental Nodes embody the four classical elements—Water, Air, Fire, and Earth. They are created through $(l:hexalia:core_mechanics/natures_ritual)Nature's Ritual$(/l) and serve as fundamental components in many Hexalia systems."
+    },
+    {
+      "type": "text",
+      "title": "On Creation",
+      "anchor": "creation",
+      "text": "Each node is formed by transmuting an Amethyst Shard alongside natural materials aligned with a specific element. The combination determines the resulting elemental aspect."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:water_node",
+      "title": "Water Node",
+      "anchor": "water",
+      "text": "Represents fluidity and life. Water Nodes are often used in effects tied to restoration, flow, and aquatic influence."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:air_node",
+      "title": "Air Node",
+      "anchor": "air",
+      "text": "Represents motion and lightness. Air Nodes are associated with speed, movement, and elevated effects."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:fire_node",
+      "title": "Fire Node",
+      "anchor": "fire",
+      "text": "Represents heat and transformation. Fire Nodes are tied to energy, combustion, and aggressive reactions."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:earth_node",
+      "title": "Earth Node",
+      "anchor": "earth",
+      "text": "Represents stability and growth. Earth Nodes are commonly linked to resilience, grounding, and natural strength."
+    },
+    {
+      "type": "text",
+      "title": "Tree Resin",
+      "anchor": "resin",
+      "text": "Tree Resin is a sticky substance harvested from certain trees using an $(l:hexalia:content/tools#athame)Athame$(/l). Extracting it will strip the log in the process."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:tree_resin",
+      "title": "Uses of Resin",
+      "text": "Resin is used in brews, rituals, and crafting. It often acts as a binding or stabilizing component in more complex processes."
+    },
+    {
+      "type": "text",
+      "title": "Ancient Seed",
+      "anchor": "ancient_seed",
+      "text": "The Ancient Seed is a rare relic containing dormant life energy. It can be discovered within jungle structures and holds significant potential when used in ritual work."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:ancient_seed",
+      "title": "Potential",
+      "text": "Through $(l:hexalia:core_mechanics/natures_ritual)Nature's Ritual$(/l), the Ancient Seed can be transformed into powerful outcomes, making it a valuable find for those who uncover it."
+    }
+  ]
+}

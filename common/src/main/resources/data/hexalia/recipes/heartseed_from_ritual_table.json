@@ -1,0 +1,27 @@
+{
+  "type": "hexalia:natures_ritual",
+  "center": {
+    "item": "minecraft:golden_apple"
+  },
+  "offerings": [
+    {
+      "item": "hexalia:fragrant_nectar"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "hexalia:spirit_powder"
+    },
+    {
+      "item": "hexalia:lotus_flower"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:poppy"
+    }
+  ],
+  "output": "hexalia:heartseed"
+}

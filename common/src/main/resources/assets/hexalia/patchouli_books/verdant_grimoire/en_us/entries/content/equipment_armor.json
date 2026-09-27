@@ -1,0 +1,108 @@
+{
+  "name": "Armor & Wearables",
+  "icon": "hexalia:ghostveil",
+  "category": "hexalia:content",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Armor & Wearables",
+      "text": "Hexalia armor provides situational advantages rather than raw strength, enhancing mobility, resistance, and interaction with the world."
+    },
+
+    {
+      "type": "spotlight",
+      "item": "hexalia:ghostveil",
+      "title": "Ghost Veil",
+      "text": "A spectral chestpiece that reduces how easily creatures detect you, making it useful for stealth and escape."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:bogshade_boots",
+      "title": "Bogshade Boots",
+      "text": "Improves movement through wetlands, greatly increasing swim speed and granting additional speed on mud."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:earplugs",
+      "title": "Earplugs",
+      "text": "Protects the wearer from the harmful cries of Mandrakes, making them essential for safe harvesting."
+    },
+    {
+      "type": "text",
+      "title": "Talismans & Charms",
+      "anchor": "accessories",
+      "text": "These small relics grant their gift while worn. Their shapes suggest where they rest, but no special knowledge of the fastening is needed."
+    },
+    {
+      "type": "spotlight",
+      "item": [{"item": "hexalia:seafoam_talisman"}, {"item": "hexalia:moonward_ring"}],
+      "title": "Seafoam & Moonward",
+      "text": "The Seafoam Talisman steadily restores breath underwater. The Moonward Ring continually clears Blindness and Darkness."
+    },
+    {
+      "type": "spotlight",
+      "item": [{"item": "hexalia:witchheart_cluster"}, {"item": "hexalia:wyrd_feather"}],
+      "title": "Heart & Feather",
+      "text": "The Witchheart Cluster grants two extra hearts. The Wyrd Feather gives a small chance to slip unharmed from a direct melee or projectile strike."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:green_omen",
+      "title": "Green Omen",
+      "text": "When you harvest a mature crop, the Green Omen sometimes doubles everything the crop would have dropped."
+    },
+
+    {
+      "type": "spotlight",
+      "item": [
+        {"item": "hexalia:silkweave_hood"},
+        {"item": "hexalia:silkweave_mantle"},
+        {"item": "hexalia:silkweave_bindings"},
+        {"item": "hexalia:silkweave_footwraps"}
+      ],
+      "title": "Silkweave Set",
+      "anchor": "silkweave",
+      "text": "A lightweight set offering moderate protection while increasing resistance to magical damage per piece. Wearing the full set grants an additional bonus."
+    },
+
+    {
+      "type": "spotlight",
+      "item": [
+        {"item": "hexalia:moonweave_hood"},
+        {"item": "hexalia:moonweave_mantle"},
+        {"item": "hexalia:moonweave_bindings"},
+        {"item": "hexalia:moonweave_footwraps"}
+      ],
+      "title": "Moonweave Set",
+      "anchor": "moonweave",
+      "text": "A refined set that provides strong protection against magical damage. Wearing the full set extends the duration of brews."
+    },
+
+    {
+      "type": "text",
+      "title": "Bloomwrap Set",
+      "anchor": "bloomwrap",
+      "text": "A nature-bound set where each piece grants a unique effect, rewarding flexible use rather than relying only on full-set bonuses."
+    },
+
+    {
+      "type": "spotlight",
+      "item": [
+        {"item": "hexalia:bloomwrap_hat"},
+        {"item": "hexalia:bloomwrap_robes"}
+      ],
+      "title": "Upper Garments",
+      "text": "The Hat reduces knockback and grants resistance to stuns, while the Robes reflect a portion of incoming damage back to attackers."
+    },
+    {
+      "type": "spotlight",
+      "item": [
+        {"item": "hexalia:bloomwrap_leggings"},
+        {"item": "hexalia:bloomwrap_boots"}
+      ],
+      "title": "Lower Garments",
+      "text": "The Leggings grant regeneration when near flowers, and the Boots increase movement speed on leaves."
+    }
+  ]
+}

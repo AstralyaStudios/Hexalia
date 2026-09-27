@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:small_cauldron",
+  "duration": 4800,
+  "ingredients": [
+    {
+      "item": "hexalia:celestial_crystal"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "minecraft:sweet_berries"
+    },
+    {
+      "item": "hexalia:tree_resin"
+    }
+  ],
+  "result": {
+    "item": "hexalia:brew_of_spikeskin"
+  }
+}

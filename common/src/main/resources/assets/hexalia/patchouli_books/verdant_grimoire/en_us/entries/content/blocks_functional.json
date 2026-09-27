@@ -1,0 +1,47 @@
+{
+  "name": "Functional Blocks",
+  "icon": "hexalia:dreamcatcher",
+  "category": "hexalia:content",
+  "sortnum": 9,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Functional Blocks",
+      "text": "These blocks provide utility and interact directly with Hexalia's systems, from protection to storage and farming."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:dreamcatcher",
+      "title": "Dreamcatcher",
+      "anchor": "dreamcatcher",
+      "text": "A defensive block that protects against phantoms. When fueled with a Fire Node, it becomes active at night, weakening and burning nearby phantoms."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:shelf",
+      "title": "Shelf",
+      "anchor": "shelf",
+      "text": "A storage block designed for brews and potions, allowing organized placement of multiple bottles."
+    },
+    {
+      "type": "text",
+      "title": "Infused Soil",
+      "anchor": "infused_soil",
+      "text": "Infused Dirt and Farmland enhance plant growth and simplify farming. They allow herbs to be cultivated and remove the need for water or careful maintenance."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:herb_jar",
+      "title": "Herb Jar",
+      "anchor": "herb_jar",
+      "text": "Stores up to 8 valid ingredients of one kind. Right-click with a matching item to insert it; use an empty hand to take one out. The jar keeps its contents when broken and carried."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:nesting_block",
+      "title": "Nesting Block",
+      "anchor": "nesting_block",
+      "text": "A block used in Silk Moth farming. It attracts egg laying and stores hatched silkworms for later extraction."
+    }
+  ]
+}

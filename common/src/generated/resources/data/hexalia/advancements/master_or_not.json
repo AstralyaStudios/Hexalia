@@ -1,0 +1,62 @@
+{
+  "parent": "hexalia:silken_beginnings",
+  "criteria": {
+    "use_clear": {
+      "conditions": {
+        "item": {
+          "items": [
+            "hexalia:clarity_idol"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "use_rain": {
+      "conditions": {
+        "item": {
+          "items": [
+            "hexalia:rainfall_idol"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "use_storm": {
+      "conditions": {
+        "item": {
+          "items": [
+            "hexalia:tempest_idol"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.master_or_not.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:tempest_idol"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.master_or_not.title"
+    }
+  },
+  "requirements": [
+    [
+      "use_rain"
+    ],
+    [
+      "use_clear"
+    ],
+    [
+      "use_storm"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

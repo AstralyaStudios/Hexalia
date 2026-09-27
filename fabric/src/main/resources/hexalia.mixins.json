@@ -1,0 +1,27 @@
+{
+  "required": true,
+  "package": "net.astralya.hexalia.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "CobwebMixin",
+    "CropBlockMixin",
+    "ExperienceOrbMixin",
+    "ExplosionMixin",
+    "FoodDataMixin",
+    "fabric.GreenOmenBlockMixin",
+    "LivingEntityMixin",
+    "MobMixin",
+    "PlayerTickMixin",
+    "ServerLevelMixin",
+    "ServerPlayerMixin",
+    "StemBlockMixin",
+    "SugarCaneBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+		"client.ClientPlayerMixin",
+		"client.HexaliaGeoArmorItemMixin"
+	]
+}

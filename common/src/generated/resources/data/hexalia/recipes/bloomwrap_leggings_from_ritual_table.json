@@ -1,0 +1,21 @@
+{
+  "type": "hexalia:natures_ritual",
+  "center": {
+    "item": "minecraft:leather_leggings"
+  },
+  "offerings": [
+    {
+      "item": "minecraft:peony"
+    },
+    {
+      "item": "hexalia:spirit_bloom"
+    },
+    {
+      "item": "hexalia:silk_fiber"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "output": "hexalia:bloomwrap_leggings"
+}

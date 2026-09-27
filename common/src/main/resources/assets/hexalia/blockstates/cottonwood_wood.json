@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "hexalia:block/cottonwood_wood_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "hexalia:block/cottonwood_wood"
+    },
+    "axis=z": {
+      "model": "hexalia:block/cottonwood_wood_horizontal",
+      "x": 90
+    }
+  }
+}

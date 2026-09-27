@@ -1,0 +1,52 @@
+{
+  "name": "Idols",
+  "icon": "hexalia:silk_idol",
+  "category": "hexalia:content",
+  "sortnum": 8,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Idols",
+      "text": "Idols are magical artifacts used to influence the world in focused ways, from shifting the weather to cleansing cursed items. All idols are formed from a Silk Idol and refined herbal materials."
+    },
+    {
+      "type": "text",
+      "title": "Weather Idols",
+      "anchor": "weather",
+      "text": "Weather idols are activated by holding their power for a moment, allowing them to alter the skies and surrounding atmosphere."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:rainfall_idol",
+      "title": "Rainfall Idol",
+      "anchor": "rainfall_idol",
+      "text": "Calls rain upon the world for a time, making it useful for crops, ambience, and weather-dependent effects."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:clarity_idol",
+      "title": "Clarity Idol",
+      "anchor": "clarity_idol",
+      "text": "Dispels rain and storms, restoring clear skies."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:tempest_idol",
+      "title": "Tempest Idol",
+      "anchor": "tempest_idol",
+      "text": "Summons a thunderstorm for a time, calling down a darker and more volatile sky."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:purity_idol",
+      "title": "Purity Idol",
+      "anchor": "purity_idol",
+      "text": "Removes curses from enchanted items when used alongside them, cleansing afflictions such as Binding and Vanishing."
+    },
+    {
+      "type": "text",
+      "title": "On Use",
+      "text": "Idols offer direct control over forces that are otherwise difficult to influence, making them valuable tools for both utility and preparation."
+    }
+  ]
+}

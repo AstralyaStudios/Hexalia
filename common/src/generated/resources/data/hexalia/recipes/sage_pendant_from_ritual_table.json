@@ -1,0 +1,24 @@
+{
+  "type": "hexalia:natures_ritual",
+  "center": {
+    "item": "hexalia:celestial_crystal"
+  },
+  "offerings": [
+    {
+      "item": "minecraft:gold_nugget"
+    },
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "minecraft:experience_bottle"
+    },
+    {
+      "item": "hexalia:spirit_powder"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    }
+  ],
+  "output": "hexalia:sage_pendant"
+}

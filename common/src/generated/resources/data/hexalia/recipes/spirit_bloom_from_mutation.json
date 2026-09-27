@@ -1,0 +1,9 @@
+{
+  "type": "hexalia:mutation",
+  "input": {
+    "item": "minecraft:blue_orchid"
+  },
+  "output": {
+    "item": "hexalia:spirit_bloom"
+  }
+}

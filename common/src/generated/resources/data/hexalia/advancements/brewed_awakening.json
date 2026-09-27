@@ -1,0 +1,114 @@
+{
+  "parent": "hexalia:brewbie_award",
+  "criteria": {
+    "arachnid_grace": {
+      "conditions": {
+        "item": {
+          "items": [
+            "hexalia:brew_of_arachnid_grace"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "bloodlust": {
+      "conditions": {
+        "item": {
+          "items": [
+            "hexalia:brew_of_bloodlust"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "daybloom": {
+      "conditions": {
+        "item": {
+          "items": [
+            "hexalia:brew_of_daybloom"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "homestead": {
+      "conditions": {
+        "item": {
+          "items": [
+            "hexalia:brew_of_homestead"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "siphoning": {
+      "conditions": {
+        "item": {
+          "items": [
+            "hexalia:brew_of_siphon"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "slimewalker": {
+      "conditions": {
+        "item": {
+          "items": [
+            "hexalia:brew_of_slimewalker"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "spikeskin": {
+      "conditions": {
+        "item": {
+          "items": [
+            "hexalia:brew_of_spikeskin"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.brewed_awakening.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:brew_of_daybloom"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.brewed_awakening.title"
+    }
+  },
+  "requirements": [
+    [
+      "slimewalker"
+    ],
+    [
+      "bloodlust"
+    ],
+    [
+      "spikeskin"
+    ],
+    [
+      "homestead"
+    ],
+    [
+      "siphoning"
+    ],
+    [
+      "daybloom"
+    ],
+    [
+      "arachnid_grace"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,113 @@
+{
+	"credit": "Made with Blockbench",
+	"render_type": "cutout",
+	"textures": {
+		"0": "hexalia:block/mandrake_leaves_stage3",
+		"1": "hexalia:block/mandrake_root_stage3",
+		"4": "hexalia:block/mandrake_root_stage2",
+		"particle": "hexalia:block/mandrake_leaves_stage3"
+	},
+	"elements": [
+		{
+			"name": "leaves",
+			"from": [8.5, 1, 5],
+			"to": [8.5, 7, 10],
+			"rotation": {"angle": 45, "axis": "z", "origin": [8.5, 1, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 3], "texture": "#0"},
+				"east": {"uv": [0, 0, 5, 6], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 3], "texture": "#0"},
+				"west": {"uv": [0, 0, 5, 4], "texture": "#0"},
+				"up": {"uv": [0, 0, 0, 3], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 3], "texture": "#0"}
+			}
+		},
+		{
+			"name": "leaves",
+			"from": [8.5, 1, 5],
+			"to": [14.5, 1, 10],
+			"rotation": {"angle": 45, "axis": "z", "origin": [8.5, 1, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 4], "rotation": 270, "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 5], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 4], "rotation": 90, "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 5], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [0, 0, 5, 6], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [0, 0, 5, 4], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"name": "leaves",
+			"from": [6, 1, 7.5],
+			"to": [11, 7, 7.5],
+			"rotation": {"angle": 45, "axis": "x", "origin": [8, 1, 7.5]},
+			"faces": {
+				"north": {"uv": [0, 0, 5, 6], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 4], "texture": "#0"},
+				"south": {"uv": [0, 0, 5, 4], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 4], "texture": "#0"},
+				"up": {"uv": [0, 0, 5, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 5, 0], "texture": "#0"}
+			}
+		},
+		{
+			"name": "leaves",
+			"from": [6, 1, 7.5],
+			"to": [11, 7, 7.5],
+			"rotation": {"angle": -45, "axis": "x", "origin": [8, 1, 7.5]},
+			"faces": {
+				"north": {"uv": [0, 0, 5, 6], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 4], "texture": "#0"},
+				"south": {"uv": [0, 0, 5, 4], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 4], "texture": "#0"},
+				"up": {"uv": [0, 0, 5, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 5, 0], "texture": "#0"}
+			}
+		},
+		{
+			"name": "bottom_root",
+			"from": [6, -1, 5],
+			"to": [11, 0, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 6]},
+			"faces": {
+				"north": {"uv": [5, 0, 10, 1], "texture": "#1"},
+				"east": {"uv": [5, 1, 10, 2], "texture": "#1"},
+				"south": {"uv": [5, 2, 10, 3], "texture": "#1"},
+				"west": {"uv": [5, 3, 10, 4], "texture": "#1"},
+				"up": {"uv": [5, 5, 0, 0], "texture": "#1"},
+				"down": {"uv": [5, 5, 0, 10], "texture": "#1"}
+			}
+		},
+		{
+			"name": "top_root",
+			"from": [7, 0, 6],
+			"to": [10, 1, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 1, 6]},
+			"faces": {
+				"north": {"uv": [3, 0, 6, 1], "texture": "#4"},
+				"east": {"uv": [3, 1, 6, 2], "texture": "#4"},
+				"south": {"uv": [3, 2, 6, 3], "texture": "#4"},
+				"west": {"uv": [3, 3, 6, 4], "texture": "#4"},
+				"up": {"uv": [3, 3, 0, 0], "texture": "#4"},
+				"down": {"uv": [3, 3, 0, 6], "texture": "#4"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "mandrake",
+			"origin": [7, 0, 7],
+			"color": 0,
+			"children": [
+				{
+					"name": "leaves",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [0, 1, 2, 3]
+				},
+				4
+			]
+		},
+		5
+	]
+}

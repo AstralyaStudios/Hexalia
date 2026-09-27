@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "K": {
+      "item": "minecraft:kelp"
+    },
+    "S": {
+      "item": "hexalia:silk_fiber"
+    },
+    "W": {
+      "item": "hexalia:water_node"
+    }
+  },
+  "pattern": [
+    "SWS",
+    "K K"
+  ],
+  "result": {
+    "item": "hexalia:bogshade_boots"
+  },
+  "show_notification": true
+}

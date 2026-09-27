@@ -1,0 +1,15 @@
+{
+  "type": "hexalia:natures_ritual",
+  "center": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "offerings": [
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "minecraft:brown_mushroom"
+    }
+  ],
+  "output": "hexalia:earth_node"
+}

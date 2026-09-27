@@ -1,0 +1,98 @@
+{
+  "parent": "hexalia:crush_course",
+  "criteria": {
+    "chillberries": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:chillberries"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "galeberries": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:galeberries"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "mandrake": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:mandrake"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "saltsprout": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:saltsprout"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "sunfire_tomato": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexalia:sunfire_tomato"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.hexalia.seasoned_farmer.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "hexalia:mandrake"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hexalia.seasoned_farmer.title"
+    }
+  },
+  "requirements": [
+    [
+      "mandrake"
+    ],
+    [
+      "sunfire_tomato"
+    ],
+    [
+      "galeberries"
+    ],
+    [
+      "saltsprout"
+    ],
+    [
+      "chillberries"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

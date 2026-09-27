@@ -1,0 +1,46 @@
+{
+	"schemaVersion": 1,
+	"id": "hexalia",
+	"version": "${version}",
+	"name": "Hexalia",
+	"description": "Hexalia is a magical mod centered on plant-based magic and rustic applications. It adds witchery, rituals, brewing new potions, and more.",
+	"authors": [
+		"Astralya Studios"
+	],
+	"contact": {
+		"homepage": "https://github.com/AstralyaStudios/",
+		"sources": "https://github.com/AstralyaStudios/Hexalia"
+	},
+	"license": "MIT",
+	"icon": "assets/hexalia/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.astralya.hexalia.HexaliaFabric"
+		],
+		"client": [
+			"net.astralya.hexalia.HexaliaModClient"
+		],
+		"rei_client": [
+			"net.astralya.hexalia.compat.rei.HexaliaREIClientPlugin"
+		],
+		"jei_mod_plugin": [
+			"net.astralya.hexalia.compat.jei.JEIPlugin"
+		],
+		"emi": [
+			"net.astralya.hexalia.compat.emi.HexaliaEmiPlugin"
+		]
+	},
+	"mixins": [
+		"hexalia.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.6",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

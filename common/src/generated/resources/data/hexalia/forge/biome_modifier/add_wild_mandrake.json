@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hexalia:has_floral_vegetation",
+  "features": "hexalia:wild_mandrake_placed",
+  "step": "vegetal_decoration"
+}

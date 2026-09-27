@@ -1,0 +1,22 @@
+{
+  "type": "hexalia:wild_crop",
+  "config": {
+    "ground_predicate": {
+      "type": "minecraft:matching_blocks",
+      "blocks": "minecraft:mycelium"
+    },
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hexalia:pale_mushroom",
+        "Properties": {
+          "facing": "north",
+          "flower_amount": "1"
+        }
+      }
+    },
+    "tries": 2,
+    "xz_spread": 2,
+    "y_spread": 3
+  }
+}

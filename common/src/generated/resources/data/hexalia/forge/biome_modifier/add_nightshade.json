@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hexalia:has_shade_vegetation",
+  "features": "hexalia:nightshade_bush_placed",
+  "step": "vegetal_decoration"
+}

@@ -1,0 +1,27 @@
+{
+  "type": "hexalia:natures_ritual",
+  "center": {
+    "item": "minecraft:lily_of_the_valley"
+  },
+  "offerings": [
+    {
+      "item": "hexalia:celestial_crystal"
+    },
+    {
+      "item": "hexalia:earth_node"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:sunflower"
+    }
+  ],
+  "output": "hexalia:astrylis"
+}

@@ -1,0 +1,67 @@
+{
+  "name": "Enchanted Plants",
+  "icon": "hexalia:morphora",
+  "category": "hexalia:core_mechanics",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Enchanted Plants",
+      "text": "Each Enchanted Plant carries a distinct ability that influences the world around it. Their effects vary from transformation and growth to protection and manipulation."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:morphora",
+      "title": "Morphora",
+      "anchor": "morphora",
+      "text": "Activated with $(l:hexalia:core_mechanics/mutation)Mutavis$(/l), Morphora spreads mutation across nearby blocks, allowing multiple transformations at once."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:grimshade",
+      "title": "Grimshade",
+      "anchor": "grimshade",
+      "text": "Activated with a Hex Focus, Grimshade transforms Skeletons into Wither Skeletons and converts nearby skulls into withered variants. It also emits an aura that inflicts Wither and Weakness on nearby non-player creatures."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:nautilite",
+      "title": "Nautilite",
+      "anchor": "nautilite",
+      "text": "Activate Nautilite with a Hex Focus to receive Conduit Power and shed Mining Fatigue. The awakening also harms nearby Guardians and Drowned, and Mining Fatigue is kept at bay while the blessing lasts."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:windsong",
+      "title": "Windsong",
+      "anchor": "windsong",
+      "text": "Activated with a Hex Focus, Windsong creates a barrier that blocks incoming projectiles within its area of influence."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:astrylis",
+      "title": "Astrylis",
+      "anchor": "astrylis",
+      "text": "Activated with a Celestial Crystal, Astrylis accelerates nearby crops and saplings, acting as a sustained source of natural growth."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:lourdes",
+      "title": "Lourdes",
+      "anchor": "lourdes",
+      "text": "When fed a $(l:hexalia:resources/herbs#lotus_blossom)Lotus Blossom$(/l), Lourdes releases a restorative aura that grants Regeneration and removes negative effects. Its influence is stronger on animals."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:aegiflora",
+      "title": "Aegiflora",
+      "anchor": "aegiflora",
+      "text": "Aegiflora prevents creeper explosions within its area. After triggering its effect, it withers away and becomes a dead bush."
+    },
+    {
+      "type": "text",
+      "title": "On Mastery",
+      "text": "Each plant serves a different purpose, from shaping terrain to protecting life. Understanding their effects allows for powerful environmental control when used with intent."
+    }
+  ]
+}
