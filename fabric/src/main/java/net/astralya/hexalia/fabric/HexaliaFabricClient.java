@@ -24,6 +24,7 @@ import net.astralya.hexalia.menu.ModMenuTypes;
 import net.astralya.hexalia.particle.ModParticleTypes;
 import net.astralya.hexalia.particle.custom.CacofeyDustHeldParticle;
 import net.astralya.hexalia.particle.custom.CacofeyDustParticle;
+import net.astralya.hexalia.particle.custom.HexMoteParticle;
 import net.astralya.hexalia.particle.custom.InfusedBubbleParticle;
 import net.astralya.hexalia.particle.custom.LeavesParticle;
 import net.astralya.hexalia.particle.custom.SparkleParticle;
@@ -103,6 +104,7 @@ public final class HexaliaFabricClient implements ClientModInitializer {
         ModParticleTypes.CACOFEY_DUST.get(), CacofeyDustParticle.Factory::new);
     particleFactories.register(
         ModParticleTypes.CACOFEY_DUST_HELD.get(), CacofeyDustHeldParticle.Factory::new);
+    particleFactories.register(ModParticleTypes.HEX_MOTE.get(), HexMoteParticle.Factory::new);
     ModItemProperties.register();
     registerTooltips();
     registerBoatLayers();

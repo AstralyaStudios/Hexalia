@@ -26,6 +26,7 @@ import net.astralya.hexalia.menu.ModMenuTypes;
 import net.astralya.hexalia.particle.ModParticleTypes;
 import net.astralya.hexalia.particle.custom.CacofeyDustHeldParticle;
 import net.astralya.hexalia.particle.custom.CacofeyDustParticle;
+import net.astralya.hexalia.particle.custom.HexMoteParticle;
 import net.astralya.hexalia.particle.custom.InfusedBubbleParticle;
 import net.astralya.hexalia.particle.custom.LeavesParticle;
 import net.astralya.hexalia.particle.custom.SparkleParticle;
@@ -125,6 +126,7 @@ public final class HexaliaNeoForgeClient {
     event.registerSpriteSet(ModParticleTypes.CACOFEY_DUST.get(), CacofeyDustParticle.Factory::new);
     event.registerSpriteSet(
         ModParticleTypes.CACOFEY_DUST_HELD.get(), CacofeyDustHeldParticle.Factory::new);
+    event.registerSpriteSet(ModParticleTypes.HEX_MOTE.get(), HexMoteParticle.Factory::new);
   }
 
   private static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

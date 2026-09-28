@@ -47,6 +47,9 @@ public final class ModParticleTypes {
   public static final RegistrySupplier<SimpleParticleType> CACOFEY_DUST_HELD =
       PARTICLE_TYPES.register("cacofey_dust_held", () -> new SimpleParticleType(true) {});
 
+  public static final RegistrySupplier<SimpleParticleType> HEX_MOTE =
+      PARTICLE_TYPES.register("hex_mote", () -> new SimpleParticleType(true) {});
+
   private ModParticleTypes() {}
 
   public static void init() {

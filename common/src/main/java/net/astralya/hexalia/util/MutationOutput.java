@@ -10,16 +10,15 @@ import net.minecraft.world.level.block.Block;
 public final class MutationOutput {
   private MutationOutput() {}
 
-  public static void apply(ServerLevel level, BlockPos pos, ItemStack result) {
+  public static boolean apply(ServerLevel level, BlockPos pos, ItemStack result) {
     if (result.isEmpty()) {
-      return;
+      return false;
     }
     if (result.getItem() instanceof BlockItem) {
       Block block = Block.byItem(result.getItem());
-      level.setBlock(pos, block.defaultBlockState(), Block.UPDATE_ALL);
-      return;
+      return level.setBlock(pos, block.defaultBlockState(), Block.UPDATE_ALL);
     }
-    level.addFreshEntity(
+    return level.addFreshEntity(
         new ItemEntity(
             level, pos.getX() + 0.5, pos.getY() + 0.25, pos.getZ() + 0.5, result.copy()));
   }
