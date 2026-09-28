@@ -313,11 +313,10 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
     ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.DREAMCATCHER.get())
             .pattern(" S ")
             .pattern("SPS")
-            .pattern("ATA")
+            .pattern("A A")
             .define('S', Items.STICK)
             .define('A', Items.FEATHER)
             .define('P', Items.STRING)
-            .define('T', ModItems.FIRE_NODE.get())
             .unlockedBy("has_stick", inventoryTrigger(ItemPredicate.Builder.item().of(Items.STICK).build()))
             .save(recipeOutput);
 

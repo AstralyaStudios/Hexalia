@@ -129,6 +129,7 @@ public class ShelfBlockEntity extends BlockEntity implements WorldlyContainer, C
   @Override
   protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
     super.loadAdditional(tag, registries);
+    items.clear();
     ContainerHelper.loadAllItems(tag, items, registries);
     for (ItemStack stack : items) {
       if (!stack.isEmpty()) {

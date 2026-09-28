@@ -157,7 +157,6 @@ public final class ModItemTagProvider extends ItemTagsProvider {
         .add(ModItems.CINDERHEW.get())
         .add(ModItems.BRIAR_SICKLE.get())
         .add(ModItems.SPIRITROOT_TETHER.get())
-        .add(ModItems.SAGE_PENDANT.get())
         .add(ModItems.PURIFYING_SAC.get())
         .add(ModItems.THORNBOW.get())
         .add(ModItems.EARPLUGS.get())

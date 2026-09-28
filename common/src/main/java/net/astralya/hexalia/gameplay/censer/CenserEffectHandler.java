@@ -11,6 +11,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
@@ -124,7 +126,6 @@ public final class CenserEffectHandler {
     for (ItemEntity item : level.getEntitiesOfClass(ItemEntity.class, area(pos))) {
       insertIntoContainers(level, item, containers);
     }
-    particles(level, pos, ParticleTypes.PORTAL, 12, 0.55, 0.3, 0.55, 0.08);
   }
 
   static void applyUndeadVeil(ServerLevel level, BlockPos pos) {
@@ -340,7 +341,17 @@ public final class CenserEffectHandler {
       if (remaining.isEmpty()) break;
     }
     if (remaining.getCount() < item.getItem().getCount()) {
-      particles(level, item.blockPosition(), ParticleTypes.PORTAL, 8, 0.2, 0.2, 0.2, 0.03);
+      level.sendParticles(
+          ParticleTypes.WITCH, item.getX(), item.getY(), item.getZ(), 6, 0.12, 0.12, 0.12, 0.01);
+      level.playSound(
+          null,
+          item.getX(),
+          item.getY(),
+          item.getZ(),
+          SoundEvents.CHORUS_FRUIT_TELEPORT,
+          SoundSource.BLOCKS,
+          0.2F,
+          1.25F);
       if (remaining.isEmpty()) item.discard();
       else item.setItem(remaining);
     }

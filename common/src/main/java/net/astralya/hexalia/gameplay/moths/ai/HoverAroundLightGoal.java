@@ -19,6 +19,7 @@ public class HoverAroundLightGoal extends Goal {
   private static final int SCAN_COOLDOWN_MAX = 80;
 
   private static final int HOVER_REPATH_INTERVAL = 20;
+  private static final int SAME_LIGHT_COOLDOWN_TICKS = 20 * 5;
 
   private static final int LIGHT_SEARCH_XZ = 10;
   private static final int LIGHT_SEARCH_Y = 5;
@@ -38,11 +39,13 @@ public class HoverAroundLightGoal extends Goal {
   private final double speed;
 
   private BlockPos lightPos;
+  private BlockPos lastLightPos;
   private Vec3 hoverTarget;
 
   private int scanCooldown;
   private int orbitTicksRemaining;
   private int repathCooldown;
+  private int sameLightCooldown;
 
   public HoverAroundLightGoal(Mob mob, double speed) {
     this.mob = mob;
@@ -58,6 +61,10 @@ public class HoverAroundLightGoal extends Goal {
 
     if (this.mob instanceof SilkMothEntity moth && moth.isEggReady()) {
       return false;
+    }
+
+    if (this.sameLightCooldown > 0) {
+      this.sameLightCooldown--;
     }
 
     if (this.scanCooldown > 0) {
@@ -103,6 +110,11 @@ public class HoverAroundLightGoal extends Goal {
 
   @Override
   public void stop() {
+    this.mob.getNavigation().stop();
+    if (this.lightPos != null) {
+      this.lastLightPos = this.lightPos;
+      this.sameLightCooldown = SAME_LIGHT_COOLDOWN_TICKS;
+    }
     this.lightPos = null;
     this.hoverTarget = null;
     this.orbitTicksRemaining = 0;
@@ -181,6 +193,10 @@ public class HoverAroundLightGoal extends Goal {
 
           BlockState state = level.getBlockState(cursor);
           if (!state.is(ModTags.Blocks.ATTRACTS_MOTH)) {
+            continue;
+          }
+
+          if (this.sameLightCooldown > 0 && cursor.equals(this.lastLightPos)) {
             continue;
           }
 

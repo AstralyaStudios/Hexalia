@@ -1,6 +1,7 @@
 package net.astralya.hexalia.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import net.astralya.hexalia.entity.custom.CacofeyEntity;
 import net.astralya.hexalia.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -59,6 +60,7 @@ public class ChillberryBushBlock extends BushBlock implements BonemealableBlock 
   @Override
   protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
     if (entity instanceof LivingEntity
+        && !(entity instanceof CacofeyEntity)
         && entity.getType() != EntityType.FOX
         && entity.getType() != EntityType.BEE
         && state.getValue(AGE) >= 2) {

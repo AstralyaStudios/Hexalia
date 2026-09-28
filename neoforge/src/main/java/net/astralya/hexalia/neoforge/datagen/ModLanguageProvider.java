@@ -361,7 +361,9 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("tooltip.hexalia.hold_shift", "Hold SHIFT for more information");
 
     add("tooltip.hexalia.accessory.earplugs", "Protects against a Mandrake's stunning cry.");
-    add("tooltip.hexalia.accessory.sage_pendant", "Increases experience gained.");
+    add("tooltip.hexalia.accessory.sage_pendant", "Stores 25% extra Experience gained.");
+    add("tooltip.hexalia.sage_pendant.stored_experience", "Stored Experience: %s / %s");
+    add("tooltip.hexalia.sage_pendant.release", "Shift + Right-click to absorb stored Experience");
     add("tooltip.hexalia.accessory.seafoam_talisman", "Helps you breathe while underwater.");
     add("tooltip.hexalia.accessory.moonward_ring", "Protects against Darkness and Blindness.");
     add("tooltip.hexalia.accessory.witchheart_cluster", "Grants two extra hearts.");
@@ -395,8 +397,15 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("tooltip.hexalia.magic_resist_piece", "Magic Resistance: +%s");
     add("tooltip.hexalia.magic_resist_full_set", "Full Set: +%s Magic Resistance");
 
-    add("tooltip.hexalia.spiritroot_tether", "Bound Spirit: %s");
-    add("tooltip.hexalia.spiritroot_tether.bound", "Bound to: %s, %s, %s");
+    add("tooltip.hexalia.spiritroot_tether", "Contains: %s");
+    add("tooltip.hexalia.spiritroot_tether.bound", "Bound to: %s");
+    add("tooltip.hexalia.spiritroot_tether.dimension.end", "The End");
+    add("tooltip.hexalia.spiritroot_tether.dimension.nether", "The Nether");
+    add("tooltip.hexalia.spiritroot_tether.dimension.overworld", "Overworld");
+    add("tooltip.hexalia.spiritroot_tether.flavor", "A thread for binding wandering souls");
+    add("tooltip.hexalia.spiritroot_tether.position", "%s (%s)");
+    add("tooltip.hexalia.spiritroot_tether.release", "Right-click to release %s");
+    add("tooltip.hexalia.spiritroot_tether.remote_release", "Shift + Right-click to release %s at %s");
     add("tooltip.hexalia.spiritroot_tether.unknown", "Unknown");
 
     add("tooltip.hexalia.rootshaper.mode_3x3_active", "3×3 Mining: Active");
@@ -662,7 +671,7 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("advancements.hexalia.wise_investment.title", "Pendant Pending");
     add(
             "advancements.hexalia.wise_investment.description",
-            "Obtain the Sage Pendant and profit in XP.");
+            "Obtain a Sage Pendant that stores Experience.");
 
     add("advancements.hexalia.herb_nerd.title", "Leaf It to Me");
     add(

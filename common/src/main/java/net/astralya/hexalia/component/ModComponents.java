@@ -79,6 +79,24 @@ public final class ModComponents {
                   .networkSynchronized(ByteBufCodecs.FLOAT)
                   .build());
 
+  public static final RegistrySupplier<DataComponentType<Integer>> SAGE_PENDANT_EXPERIENCE =
+      COMPONENT_TYPES.register(
+          "sage_pendant_experience",
+          () ->
+              DataComponentType.<Integer>builder()
+                  .persistent(Codec.INT)
+                  .networkSynchronized(ByteBufCodecs.VAR_INT)
+                  .build());
+
+  public static final RegistrySupplier<DataComponentType<Integer>> SAGE_PENDANT_REMAINDER =
+      COMPONENT_TYPES.register(
+          "sage_pendant_remainder",
+          () ->
+              DataComponentType.<Integer>builder()
+                  .persistent(Codec.INT)
+                  .networkSynchronized(ByteBufCodecs.VAR_INT)
+                  .build());
+
   private ModComponents() {}
 
   public static void init() {

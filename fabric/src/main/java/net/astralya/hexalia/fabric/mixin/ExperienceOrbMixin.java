@@ -11,15 +11,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ExperienceOrb.class)
 public class ExperienceOrbMixin {
-  @Shadow public int value;
+  @Shadow private int value;
 
-  @Inject(method = "playerTouch", at = @At("HEAD"))
+  @Inject(
+      method = "playerTouch",
+      at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;take(Lnet/minecraft/world/entity/Entity;I)V"))
   private void hexalia$sagePendantXpBonus(Player player, CallbackInfo callbackInfo) {
-    if (!SagePendantEvents.hasSagePendant(player)) {
-      return;
-    }
-
-    value = SagePendantEvents.boostedExperience(value);
-    SagePendantEvents.damagePendant(player);
+    SagePendantEvents.storeExperience(player, value);
   }
 }

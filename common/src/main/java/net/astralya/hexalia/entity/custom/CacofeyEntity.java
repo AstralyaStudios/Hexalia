@@ -1,6 +1,7 @@
 package net.astralya.hexalia.entity.custom;
 
 import net.astralya.hexalia.gameplay.cacofey.ai.CacofeyAnchorHoverGoal;
+import net.astralya.hexalia.gameplay.cacofey.ai.CacofeyAmbientGoal;
 import net.astralya.hexalia.gameplay.cacofey.ai.CacofeyHarvestGoal;
 import net.astralya.hexalia.gameplay.cacofey.ai.CacofeyStealGoal;
 import net.astralya.hexalia.gameplay.moths.ai.DriftFlyGoal;
@@ -8,6 +9,7 @@ import net.astralya.hexalia.gameplay.moths.ai.UnstuckNudgeGoal;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.item.custom.HexFocusItem;
 import net.astralya.hexalia.particle.ModParticleTypes;
+import net.astralya.hexalia.sound.ModSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -15,9 +17,11 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.TamableAnimal;
@@ -34,6 +38,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
@@ -59,6 +64,7 @@ public class CacofeyEntity extends TamableAnimal implements GeoEntity {
       SynchedEntityData.defineId(CacofeyEntity.class, EntityDataSerializers.BYTE);
 
   private static final String TAG_STEAL_COOLDOWN = "StealCooldown";
+  private static final String TAG_STOLEN_FOOD_TICKS = "StolenFoodTicks";
   private static final String TAG_HELD_ITEM = "HeldItem";
   private static final String TAG_MODE = "CacofeyMode";
   private static final String TAG_ANCHOR_X = "AnchorX";
@@ -66,6 +72,8 @@ public class CacofeyEntity extends TamableAnimal implements GeoEntity {
   private static final String TAG_ANCHOR_Z = "AnchorZ";
 
   public int stealCooldown = 0;
+  private int stolenFoodTicks = -1;
+  private CacofeyStealGoal stealGoal;
   private @Nullable BlockPos anchorPos = null;
 
   private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
@@ -88,29 +96,67 @@ public class CacofeyEntity extends TamableAnimal implements GeoEntity {
   }
 
   @Override
+  protected SoundEvent getAmbientSound() {
+    return ModSoundEvents.CACOFEY_IDLE.get();
+  }
+
+  @Override
+  public boolean hurt(DamageSource source, float amount) {
+    return !source.is(DamageTypes.CACTUS)
+        && !source.is(DamageTypes.SWEET_BERRY_BUSH)
+        && super.hurt(source, amount);
+  }
+
+  @Override
+  public void makeStuckInBlock(BlockState state, Vec3 motionMultiplier) {
+    if (!state.is(Blocks.SWEET_BERRY_BUSH)) {
+      super.makeStuckInBlock(state, motionMultiplier);
+    }
+  }
+
+  @Override
   protected void registerGoals() {
+    this.stealGoal = new CacofeyStealGoal(this);
     this.goalSelector.addGoal(0, new FloatGoal(this));
     this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
+    this.goalSelector.addGoal(2, this.stealGoal);
     this.goalSelector.addGoal(
-        2, new TemptGoal(this, 1.1D, Ingredient.of(ModItems.GALEBERRIES_COOKIE.get()), false));
-    this.goalSelector.addGoal(3, new CacofeyStealGoal(this));
-    this.goalSelector.addGoal(4, new CacofeyHarvestGoal(this));
-    this.goalSelector.addGoal(5, new CacofeyAnchorHoverGoal(this));
-    this.goalSelector.addGoal(
-        6,
-        new FollowOwnerGoal(this, 1.0D, 5.0F, 2.0F) {
+        3,
+        new TemptGoal(this, 1.1D, Ingredient.of(ModItems.GALEBERRIES_COOKIE.get()), false) {
           @Override
           public boolean canUse() {
-            return getMode() == CacofeyMode.FOLLOW && super.canUse();
+            return !isHoldingItem() && super.canUse();
           }
 
           @Override
           public boolean canContinueToUse() {
-            return getMode() == CacofeyMode.FOLLOW && super.canContinueToUse();
+            return !isHoldingItem() && super.canContinueToUse();
           }
         });
+    this.goalSelector.addGoal(4, new CacofeyHarvestGoal(this));
     this.goalSelector.addGoal(
-        7,
+        5,
+        new FollowOwnerGoal(this, 1.35D, 12.0F, 6.0F) {
+          @Override
+          public boolean canUse() {
+            return getAnchorPos() == null
+                && getMode() != CacofeyMode.STAY
+                && !isTheftTimerActive()
+                && super.canUse();
+          }
+
+          @Override
+          public boolean canContinueToUse() {
+            return getAnchorPos() == null
+                && getMode() != CacofeyMode.STAY
+                && !isTheftTimerActive()
+                && super.canContinueToUse();
+          }
+        });
+    this.goalSelector.addGoal(6, new CacofeyAmbientGoal(this));
+    this.goalSelector.addGoal(7, new CacofeyAnchorHoverGoal(this));
+    this.goalSelector.addGoal(
+        8,
         new DriftFlyGoal(this, 0.6D) {
           @Override
           public boolean canUse() {
@@ -136,7 +182,7 @@ public class CacofeyEntity extends TamableAnimal implements GeoEntity {
           }
         });
     this.goalSelector.addGoal(
-        8,
+        9,
         new UnstuckNudgeGoal(this) {
           @Override
           public boolean canUse() {
@@ -220,6 +266,18 @@ public class CacofeyEntity extends TamableAnimal implements GeoEntity {
 
   public boolean isHoldingItem() {
     return !this.getHeldItem().isEmpty();
+  }
+
+  public void startTheftTimer() {
+    this.stolenFoodTicks = 0;
+  }
+
+  public boolean isTheftTimerActive() {
+    return this.stolenFoodTicks >= 0;
+  }
+
+  public void stopTheftTimer() {
+    this.stolenFoodTicks = -1;
   }
 
   public boolean isInspecting() {
@@ -310,6 +368,11 @@ public class CacofeyEntity extends TamableAnimal implements GeoEntity {
       this.stealCooldown--;
     }
 
+    if (!this.level().isClientSide && this.isTheftTimerActive()
+        && (!this.isHoldingItem() || ++this.stolenFoodTicks >= 100)) {
+      this.stealGoal.completeTheft();
+    }
+
     if (this.level().isClientSide && this.tickCount % 3 == 0) {
       Vec3 motion = this.getDeltaMovement();
       if (motion.horizontalDistanceSqr() > 0.001D || Math.abs(motion.y) > 0.001D) {
@@ -350,6 +413,9 @@ public class CacofeyEntity extends TamableAnimal implements GeoEntity {
   public void addAdditionalSaveData(CompoundTag tag) {
     super.addAdditionalSaveData(tag);
     tag.putInt(TAG_STEAL_COOLDOWN, this.stealCooldown);
+    if (this.isTheftTimerActive()) {
+      tag.putInt(TAG_STOLEN_FOOD_TICKS, this.stolenFoodTicks);
+    }
     tag.putByte(TAG_MODE, (byte) getMode().ordinal());
     if (this.isHoldingItem()) {
       tag.put(TAG_HELD_ITEM, this.getHeldItem().save(this.registryAccess()));
@@ -379,6 +445,12 @@ public class CacofeyEntity extends TamableAnimal implements GeoEntity {
     if (tag.contains(TAG_HELD_ITEM)) {
       this.setHeldItem(
           ItemStack.parseOptional(this.registryAccess(), tag.getCompound(TAG_HELD_ITEM)));
+    }
+
+    if (tag.contains(TAG_STOLEN_FOOD_TICKS)) {
+      this.stolenFoodTicks = tag.getInt(TAG_STOLEN_FOOD_TICKS);
+    } else if (this.isHoldingItem() && !this.isTame()) {
+      this.stolenFoodTicks = 0;
     }
 
     if (tag.contains(TAG_ANCHOR_X) && tag.contains(TAG_ANCHOR_Y) && tag.contains(TAG_ANCHOR_Z)) {

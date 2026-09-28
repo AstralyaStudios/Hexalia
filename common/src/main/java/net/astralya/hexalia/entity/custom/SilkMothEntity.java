@@ -5,9 +5,9 @@ import net.astralya.hexalia.component.ModComponents;
 import net.astralya.hexalia.component.item.MothData;
 import net.astralya.hexalia.entity.ModEntities;
 import net.astralya.hexalia.entity.custom.variant.SilkMothVariant;
-import net.astralya.hexalia.gameplay.moths.ai.DriftFlyGoal;
 import net.astralya.hexalia.gameplay.moths.ai.HoverAroundLightGoal;
 import net.astralya.hexalia.gameplay.moths.ai.LayEggOnLeavesGoal;
+import net.astralya.hexalia.gameplay.moths.ai.SilkMothAmbientGoal;
 import net.astralya.hexalia.gameplay.moths.ai.UnstuckNudgeGoal;
 import net.astralya.hexalia.item.ModItems;
 import net.minecraft.Util;
@@ -35,6 +35,8 @@ import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.goal.FleeSunGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -97,15 +99,17 @@ public class SilkMothEntity extends Animal implements GeoEntity {
 
   @Override
   protected void registerGoals() {
-    this.goalSelector.addGoal(0, new FleeSunGoal(this, 1.25D));
+    this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
+    this.goalSelector.addGoal(1, new FleeSunGoal(this, 1.25D));
     this.goalSelector.addGoal(1, new FloatGoal(this));
     this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
     this.goalSelector.addGoal(3, new LayEggOnLeavesGoal(this, 1.0D));
     this.goalSelector.addGoal(
         4, new TemptGoal(this, 1.1D, Ingredient.of(ModItems.FRAGRANT_NECTAR.get()), false));
     this.goalSelector.addGoal(5, new HoverAroundLightGoal(this, 1.0D));
-    this.goalSelector.addGoal(6, new DriftFlyGoal(this, 0.55D));
+    this.goalSelector.addGoal(6, new SilkMothAmbientGoal(this, 0.55D));
     this.goalSelector.addGoal(7, new UnstuckNudgeGoal(this));
+    this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
   }
 
   @Override

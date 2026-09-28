@@ -25,10 +25,11 @@ public class CacofeyStealGoal extends Goal {
   private static final double SCAN_RADIUS = 12.0;
   private static final double STEAL_RADIUS = 1.8;
   private static final int SCAN_INTERVAL = 40;
-  private static final int FLEE_TICKS = 80;
+  private static final int FLEE_TICKS = 100;
+  private static final double EAT_DISTANCE = 9.0;
   private static final int STEAL_COOLDOWN = 1200;
   private static final float APPROACH_SPEED = 1.0F;
-  private static final float FLEE_SPEED = 2.4F;
+  private static final float FLEE_SPEED = 1.5F;
 
   private final CacofeyEntity cacofey;
   private Phase phase = Phase.SCAN;
@@ -44,6 +45,10 @@ public class CacofeyStealGoal extends Goal {
 
   @Override
   public boolean canUse() {
+    if (cacofey.isHoldingItem()) {
+      if (phase == Phase.SCAN) phase = Phase.FLEE;
+      return true;
+    }
     if (cacofey.isTame()) return false;
     if (cacofey.stealCooldown > 0) return false;
     if (phase != Phase.SCAN) return true;
@@ -58,13 +63,14 @@ public class CacofeyStealGoal extends Goal {
 
   @Override
   public boolean canContinueToUse() {
+    if (cacofey.isHoldingItem()) return true;
     if (cacofey.isTame()) return false;
-    if (phase == Phase.FLEE || phase == Phase.CONSUME) return true;
     return target != null && target.isAlive() && !target.isCreative();
   }
 
   @Override
   public void start() {
+    if (cacofey.isHoldingItem()) return;
     phaseTimer = 0;
     cacofey.setInspecting(true);
     cacofey
@@ -83,6 +89,7 @@ public class CacofeyStealGoal extends Goal {
   @Override
   public void stop() {
     cacofey.setInspecting(false);
+    if (cacofey.isHoldingItem()) return;
     phase = Phase.SCAN;
     target = null;
     phaseTimer = 0;
@@ -127,6 +134,7 @@ public class CacofeyStealGoal extends Goal {
     }
     ItemStack display = stolen.copyWithCount(1);
     stolen.shrink(1);
+    cacofey.startTheftTimer();
     cacofey.setHeldItem(display);
     fleeOriginY = cacofey.getY();
     phase = Phase.FLEE;
@@ -152,7 +160,8 @@ public class CacofeyStealGoal extends Goal {
 
     cacofey.getNavigation().moveTo(fleeTarget.x, fleeTarget.y, fleeTarget.z, FLEE_SPEED);
 
-    if (++phaseTimer >= FLEE_TICKS) {
+    if (++phaseTimer >= FLEE_TICKS
+        || (target != null && cacofey.distanceToSqr(target) >= EAT_DISTANCE * EAT_DISTANCE)) {
       cacofey.getNavigation().stop();
       phase = Phase.CONSUME;
       phaseTimer = 0;
@@ -161,12 +170,21 @@ public class CacofeyStealGoal extends Goal {
 
   private void tickConsume() {
     if (++phaseTimer >= 20) {
-      cacofey.setHeldItem(ItemStack.EMPTY);
-      cacofey.stealCooldown = STEAL_COOLDOWN;
-      phase = Phase.SCAN;
-      target = null;
-      phaseTimer = 0;
+      completeTheft();
     }
+  }
+
+  public void completeTheft() {
+    if (!cacofey.isTheftTimerActive()) return;
+    cacofey.setHeldItem(ItemStack.EMPTY);
+    cacofey.stopTheftTimer();
+    cacofey.stealCooldown = STEAL_COOLDOWN;
+    cacofey.getNavigation().stop();
+    cacofey.setInspecting(false);
+    phase = Phase.SCAN;
+    target = null;
+    phaseTimer = 0;
+    scanTimer = 0;
   }
 
   private boolean findTarget() {

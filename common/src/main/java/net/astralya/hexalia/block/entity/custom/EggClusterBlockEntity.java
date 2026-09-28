@@ -40,7 +40,7 @@ public class EggClusterBlockEntity extends BlockEntity {
   }
 
   private void hatch(Level level, BlockPos pos) {
-    ItemStack stack = new ItemStack(ModItems.SILKWORM.get(), 4);
+    ItemStack stack = new ItemStack(ModItems.SILKWORM.get(), 2);
 
     BlockPos belowPos = pos.below();
     BlockEntity belowEntity = level.getBlockEntity(belowPos);

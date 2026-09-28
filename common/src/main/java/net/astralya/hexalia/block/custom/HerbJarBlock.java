@@ -182,9 +182,18 @@ public class HerbJarBlock extends BaseEntityBlock {
     }
     if (level instanceof ServerLevel && blockEntity instanceof HerbJarBlockEntity herbJar) {
       ItemStack drop = new ItemStack(this);
-      HerbJarData data = herbJar.createData();
-      if (!data.isEmpty()) {
-        drop.set(ModComponents.HERB_JAR.get(), data);
+      if (player.isShiftKeyDown()) {
+        for (int slot = 0; slot < herbJar.getContainerSize(); slot++) {
+          ItemStack stored = herbJar.getItem(slot);
+          if (!stored.isEmpty()) {
+            popResource(level, pos, stored.copy());
+          }
+        }
+      } else {
+        HerbJarData data = herbJar.createData();
+        if (!data.isEmpty()) {
+          drop.set(ModComponents.HERB_JAR.get(), data);
+        }
       }
       popResource(level, pos, drop);
       return;

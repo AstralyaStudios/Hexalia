@@ -268,6 +268,9 @@ public final class ModBlockTagProvider extends BlockTagsProvider {
         .add(net.minecraft.world.level.block.Blocks.TORCH);
 
     tag(BlockTags.DIRT).add(ModBlocks.INFUSED_DIRT.get());
+    tag(BlockTags.MINEABLE_WITH_SHOVEL)
+        .add(ModBlocks.INFUSED_DIRT.get())
+        .add(ModBlocks.INFUSED_FARMLAND.get());
     tag(BlockTags.MUSHROOM_GROW_BLOCK).add(ModBlocks.INFUSED_DIRT.get());
     tag(BlockTags.CLIMBABLE)
         .add(ModBlocks.GALEBERRIES_VINE.get())

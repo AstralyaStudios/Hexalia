@@ -23,6 +23,10 @@ public final class ModSoundEvents {
       SOUND_EVENTS.register(
           "cacofey_giggle", () -> SoundEvent.createVariableRangeEvent(id("cacofey_giggle")));
 
+  public static final RegistrySupplier<SoundEvent> CACOFEY_IDLE =
+      SOUND_EVENTS.register(
+          "cacofey_idle", () -> SoundEvent.createVariableRangeEvent(id("cacofey_idle")));
+
   private ModSoundEvents() {}
 
   public static void init() {

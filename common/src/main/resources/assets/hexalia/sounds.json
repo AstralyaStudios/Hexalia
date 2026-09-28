@@ -25,5 +25,14 @@
     "sounds": [
       "hexalia:cacofey_giggle"
     ]
+  },
+
+  "cacofey_idle": {
+    "sounds": [
+      {
+        "name": "hexalia:cacofey_idle",
+        "volume": 0.6
+      }
+    ]
   }
 }

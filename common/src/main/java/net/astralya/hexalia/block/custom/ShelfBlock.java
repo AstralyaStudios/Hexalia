@@ -89,6 +89,9 @@ public class ShelfBlock extends BaseEntityBlock {
     ItemStack shelfItem = shelf.getItem(slot);
 
     if (!shelfItem.isEmpty()) {
+      if (level.isClientSide()) {
+        return ItemInteractionResult.SUCCESS;
+      }
       ItemStack removedItem = shelf.removeItemNoUpdate(slot);
       level.playSound(
           null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -100,6 +103,9 @@ public class ShelfBlock extends BaseEntityBlock {
     }
 
     if (isValidItem(heldItem)) {
+      if (level.isClientSide()) {
+        return ItemInteractionResult.SUCCESS;
+      }
       ItemStack toPlace = heldItem.copy();
       toPlace.setCount(1);
       if (!player.isCreative()) {

@@ -12,11 +12,6 @@ public final class NeoForgeSagePendantEvents {
   }
 
   public static void onExperiencePickup(PlayerXpEvent.PickupXp event) {
-    if (!SagePendantEvents.hasSagePendant(event.getEntity())) {
-      return;
-    }
-
-    event.getOrb().value = SagePendantEvents.boostedExperience(event.getOrb().value);
-    SagePendantEvents.damagePendant(event.getEntity());
+    SagePendantEvents.storeExperience(event.getEntity(), event.getOrb().value);
   }
 }

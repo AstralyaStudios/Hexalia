@@ -217,30 +217,73 @@ public class SpiritrootTetherItem extends Item {
   }
 
   @Override
+  public boolean isFoil(ItemStack stack) {
+    SpiritrootTetherData data = stack.get(componentType());
+    return data != null && data.hasMob();
+  }
+
+  @Override
   public void appendHoverText(
       ItemStack stack,
       TooltipContext context,
       List<Component> tooltipComponents,
       TooltipFlag tooltipFlag) {
-    SpiritrootTetherData data = ensureData(stack);
-    if (!data.hasMob()) {
+    tooltipComponents.add(
+        Component.translatable("tooltip.hexalia.spiritroot_tether.flavor")
+            .withStyle(ChatFormatting.GOLD));
+    SpiritrootTetherData data = stack.get(componentType());
+    if (data == null) {
       return;
     }
-    tooltipComponents.add(
-        Component.translatable("tooltip.hexalia.spiritroot_tether", getCapturedMobName(data))
-            .withStyle(ChatFormatting.AQUA));
+    Component mobName = data.hasMob() ? getCapturedMobName(data) : null;
+    if (mobName != null) {
+      tooltipComponents.add(
+          Component.translatable("tooltip.hexalia.spiritroot_tether", mobName)
+              .withStyle(ChatFormatting.AQUA));
+    }
     data.bound()
         .ifPresent(
             bound -> {
-              BlockPos pos = bound.pos();
+              Component destination = boundPositionName(bound);
               tooltipComponents.add(
-                  Component.translatable(
-                          "tooltip.hexalia.spiritroot_tether.bound",
-                          pos.getX(),
-                          pos.getY(),
-                          pos.getZ())
+                  Component.translatable("tooltip.hexalia.spiritroot_tether.bound", destination)
                       .withStyle(ChatFormatting.BLUE));
             });
+    if (mobName != null) {
+      tooltipComponents.add(
+          Component.translatable("tooltip.hexalia.spiritroot_tether.release", mobName)
+              .withStyle(ChatFormatting.GRAY));
+      data.bound()
+          .ifPresent(
+              bound ->
+                  tooltipComponents.add(
+                      Component.translatable(
+                              "tooltip.hexalia.spiritroot_tether.remote_release",
+                              mobName,
+                              boundPositionName(bound))
+                          .withStyle(ChatFormatting.BLUE)));
+    }
+  }
+
+  private static Component boundPositionName(SpiritrootTetherData.BoundLocation bound) {
+    BlockPos pos = bound.pos();
+    String coords = pos.getX() + ", " + pos.getY() + ", " + pos.getZ();
+    return Component.translatable(
+        "tooltip.hexalia.spiritroot_tether.position",
+        coords,
+        boundDimensionName(bound.dimensionId()));
+  }
+
+  private static Component boundDimensionName(String dimensionId) {
+    return switch (dimensionId) {
+      case "minecraft:overworld" ->
+          Component.translatable("tooltip.hexalia.spiritroot_tether.dimension.overworld");
+      case "minecraft:the_nether" ->
+          Component.translatable("tooltip.hexalia.spiritroot_tether.dimension.nether");
+      case "minecraft:the_end" ->
+          Component.translatable("tooltip.hexalia.spiritroot_tether.dimension.end");
+      default -> Component.literal(dimensionId);
+    };
   }
 
   private static boolean canCapture(Player player, Mob mob) {
