@@ -1,0 +1,11 @@
+// 1.20.1	2026-05-13T07:25:03.9626631	Tags for minecraft:worldgen/biome mod id hexalia
+c3d4e55bd4ed5d178abb10df76626eccdab7c209 data/hexalia/tags/worldgen/biome/cacofey_spawns.json
+a98d7d0ca1bdef5682a1928aaee7ce724227c8c0 data/hexalia/tags/worldgen/biome/has_cool_biome_vegetation.json
+27b5c61d0bd6297d6f29b5f49d7a3a7d52b5e029 data/hexalia/tags/worldgen/biome/has_decorative_flowers.json
+f3da22dde9ab58a75ef89f5f43dcadc698e760f5 data/hexalia/tags/worldgen/biome/has_dry_biome_vegetation.json
+41fa040d0fb54e6268ac13a1ca75a845fa1824d0 data/hexalia/tags/worldgen/biome/has_floral_vegetation.json
+5f176659fa27569cc678ddae4a306c2055a89a16 data/hexalia/tags/worldgen/biome/has_shade_vegetation.json
+6b5b6188dc8d42fef0fbcbba6e03e9cd3a3a88d7 data/hexalia/tags/worldgen/biome/has_shrooms.json
+afd9da16b8e57511d3b12c69ccd4555d71ebb29f data/hexalia/tags/worldgen/biome/has_siren_kelp.json
+3e00d0ecf4c9744bbf1b1c80ff5270a55488fc87 data/hexalia/tags/worldgen/biome/has_swamp_vegetation.json
+6b35771c8d400b0921c04386d79e88b834c282ad data/hexalia/tags/worldgen/biome/silk_moth_spawns.json

@@ -10,15 +10,16 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public class AccessoryItem extends Item {
-    private final String loreKey;
+  private final String loreKey;
 
-    public AccessoryItem(Properties properties, String id) {
-        super(properties.stacksTo(1));
-        loreKey = "tooltip.hexalia.accessory." + id;
-    }
+  public AccessoryItem(Properties properties, String id) {
+    super(properties.stacksTo(1));
+    loreKey = "tooltip.hexalia.accessory." + id;
+  }
 
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.translatable(loreKey).withStyle(ChatFormatting.GRAY));
-    }
+  @Override
+  public void appendHoverText(
+      ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+    tooltip.add(Component.translatable(loreKey).withStyle(ChatFormatting.GRAY));
+  }
 }

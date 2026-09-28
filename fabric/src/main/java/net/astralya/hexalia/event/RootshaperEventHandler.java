@@ -4,9 +4,7 @@ import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.item.custom.RootshaperItem;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -53,16 +51,13 @@ public class RootshaperEventHandler {
                         continue;
                     }
 
-                    if (!canRootshaperBreak(adjacentState)) {
+                    if (!((RootshaperItem) stack.getItem()).isCorrectToolForDrops(stack, adjacentState)) {
                         continue;
                     }
 
-                    boolean broke = serverPlayer.gameMode.destroyBlock(adjacent);
-                    if (broke && !serverPlayer.isCreative()) {
-                        stack.hurtAndBreak(1, serverPlayer, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
-                        if (stack.isEmpty()) {
-                            break;
-                        }
+                    serverPlayer.gameMode.destroyBlock(adjacent);
+                    if (stack.isEmpty()) {
+                        break;
                     }
                 }
             } finally {
@@ -71,10 +66,6 @@ public class RootshaperEventHandler {
 
             return true;
         });
-    }
-
-    private static boolean canRootshaperBreak(BlockState state) {
-        return state.is(BlockTags.MINEABLE_WITH_PICKAXE) || state.is(BlockTags.MINEABLE_WITH_SHOVEL);
     }
 
     public static void onLeftClickBlock(ServerPlayer player, BlockPos pos, Level world) {

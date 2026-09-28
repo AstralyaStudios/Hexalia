@@ -1,0 +1,61 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "MIT"
+
+[[mixins]]
+config = "hexalia-neoforge.mixins.json"
+
+[[mods]]
+modId = "hexalia"
+version = "${version}"
+displayName = "Hexalia"
+authors = "Astralya Studios"
+description = '''
+An empty Architectury environment for Hexalia.
+'''
+
+[[dependencies.hexalia]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.hexalia]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.hexalia]]
+modId = "architectury"
+type = "required"
+versionRange = "[13.0.8,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexalia]]
+modId = "geckolib"
+type = "required"
+versionRange = "[4.7.6,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexalia]]
+modId = "patchouli"
+type = "optional"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexalia]]
+modId = "emi"
+type = "optional"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexalia]]
+modId = "roughlyenoughitems"
+type = "optional"
+ordering = "AFTER"
+side = "BOTH"

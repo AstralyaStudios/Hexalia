@@ -8,47 +8,44 @@ import net.minecraft.world.item.ItemStack;
 
 public final class MagicResistanceUtil {
 
-    public static final ResourceLocation WOVEN_GROUP_ID = new ResourceLocation("hexalia", "woven");
-    public static final float FULL_SET_BONUS = 0.10f;
+  public static final ResourceLocation WOVEN_GROUP_ID = new ResourceLocation("hexalia", "woven");
+  public static final float FULL_SET_BONUS = 0.10f;
 
-    private static final EquipmentSlot[] ARMOR_SLOTS = new EquipmentSlot[]{
-            EquipmentSlot.HEAD,
-            EquipmentSlot.CHEST,
-            EquipmentSlot.LEGS,
-            EquipmentSlot.FEET
-    };
+  private static final EquipmentSlot[] ARMOR_SLOTS =
+      new EquipmentSlot[] {
+        EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET
+      };
 
-    private MagicResistanceUtil() {
+  private MagicResistanceUtil() {}
+
+  public static float getTotalMagicResistance(LivingEntity entity) {
+    float total = 0.0f;
+
+    for (EquipmentSlot slot : ARMOR_SLOTS) {
+      ItemStack stack = entity.getItemBySlot(slot);
+      if (stack.getItem() instanceof MagicResistanceArmor armor) {
+        total += armor.getMagicResistanceBonus();
+      }
     }
 
-    public static float getTotalMagicResistance(LivingEntity entity) {
-        float total = 0.0f;
-
-        for (EquipmentSlot slot : ARMOR_SLOTS) {
-            ItemStack stack = entity.getItemBySlot(slot);
-            if (stack.getItem() instanceof MagicResistanceArmor armor) {
-                total += armor.getMagicResistanceBonus();
-            }
-        }
-
-        if (isWearingFullSetGroup(entity, WOVEN_GROUP_ID)) {
-            total += FULL_SET_BONUS;
-        }
-
-        return total;
+    if (isWearingFullSetGroup(entity, WOVEN_GROUP_ID)) {
+      total += FULL_SET_BONUS;
     }
 
-    public static boolean isWearingFullSetGroup(LivingEntity entity, ResourceLocation groupId) {
-        for (EquipmentSlot slot : ARMOR_SLOTS) {
-            ItemStack stack = entity.getItemBySlot(slot);
-            if (!(stack.getItem() instanceof MagicResistanceArmor armor)) {
-                return false;
-            }
-            if (!groupId.equals(armor.getArmorSetGroupId())) {
-                return false;
-            }
-        }
+    return total;
+  }
 
-        return true;
+  public static boolean isWearingFullSetGroup(LivingEntity entity, ResourceLocation groupId) {
+    for (EquipmentSlot slot : ARMOR_SLOTS) {
+      ItemStack stack = entity.getItemBySlot(slot);
+      if (!(stack.getItem() instanceof MagicResistanceArmor armor)) {
+        return false;
+      }
+      if (!groupId.equals(armor.getArmorSetGroupId())) {
+        return false;
+      }
     }
+
+    return true;
+  }
 }

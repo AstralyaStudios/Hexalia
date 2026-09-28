@@ -16,28 +16,27 @@ import net.astralya.hexalia.worldgen.gen.decorator.ModTreeDecorators;
 import org.slf4j.Logger;
 
 public final class HexaliaMod {
-    public static final String MODID = "hexalia";
-    public static final Logger LOGGER = LogUtils.getLogger();
+  public static final String MODID = "hexalia";
+  public static final Logger LOGGER = LogUtils.getLogger();
 
-    private HexaliaMod() {}
+  private HexaliaMod() {}
 
-    public static void init() {
-        // Loading blocks also queues their BlockItems before the item registry is attached.
-        var ignored = ModBlocks.BLOCKS;
-        ModMobEffects.register();
-        ModBlocks.register();
-        ModItems.register();
-        ModSoundEvents.register();
-        ModParticleType.register();
-        ModBlockEntityTypes.register();
-        ModMenuTypes.register();
-        ModRecipes.register();
-        ModEntities.register();
-        NaturesRitualSoulEvents.register();
-        net.astralya.hexalia.event.AccessoryEffects.register();
-        net.astralya.hexalia.event.GravebloomEvents.register();
-        net.astralya.hexalia.event.CinderhewEvents.register();
-        ModTreeDecorators.register();
-        ModFeatures.register();
-    }
+  public static void init() {
+    var ignored = ModBlocks.BLOCKS;
+    ModMobEffects.register();
+    ModBlocks.register();
+    ModItems.register();
+    ModSoundEvents.register();
+    ModParticleType.register();
+    ModBlockEntityTypes.register();
+    ModMenuTypes.register();
+    ModRecipes.register();
+    ModEntities.register();
+    NaturesRitualSoulEvents.register();
+    net.astralya.hexalia.event.AccessoryEffects.register();
+    net.astralya.hexalia.event.GravebloomEvents.register();
+    net.astralya.hexalia.event.CinderhewEvents.register();
+    ModTreeDecorators.register();
+    ModFeatures.register();
+  }
 }

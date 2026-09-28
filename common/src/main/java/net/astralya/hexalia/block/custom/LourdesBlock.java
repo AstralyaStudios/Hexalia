@@ -21,74 +21,83 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public class LourdesBlock extends EnchantedPlantBlock implements EntityBlock {
 
-    public LourdesBlock(Properties properties) {
-        super(properties);
+  public LourdesBlock(Properties properties) {
+    super(properties);
+  }
+
+  @Override
+  public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+    if (!level.isClientSide()) {
+      return;
     }
 
-    @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (!level.isClientSide()) {
-            return;
-        }
+    BlockEntity be = level.getBlockEntity(pos);
+    if (be instanceof LourdesBlockEntity lourdes && lourdes.isActive()) {
+      lourdes.spawnActiveParticles(level, pos, random);
+    }
+  }
 
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof LourdesBlockEntity lourdes && lourdes.isActive()) {
-            lourdes.spawnActiveParticles(level, pos, random);
-        }
+  @Override
+  public InteractionResult use(
+      BlockState state,
+      Level level,
+      BlockPos pos,
+      Player player,
+      InteractionHand hand,
+      BlockHitResult hitResult) {
+    ItemStack held = player.getItemInHand(hand);
+    BlockEntity be = level.getBlockEntity(pos);
+
+    if (!(be instanceof LourdesBlockEntity lourdes)) {
+      return InteractionResult.PASS;
     }
 
-    @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        ItemStack held = player.getItemInHand(hand);
-        BlockEntity be = level.getBlockEntity(pos);
-
-        if (!(be instanceof LourdesBlockEntity lourdes)) {
-            return InteractionResult.PASS;
-        }
-
-        if (held.isEmpty()) {
-            if (!lourdes.isActive()) {
-                player.displayClientMessage(Component.translatable("message.hexalia.lourdes.inactive"), true);
-            }
-            return InteractionResult.sidedSuccess(level.isClientSide());
-        }
-
-        if (!held.is(ModItems.LOTUS_BLOSSOM.get())) {
-            return InteractionResult.PASS;
-        }
-
-        if (lourdes.isActive()) {
-            return InteractionResult.sidedSuccess(level.isClientSide());
-        }
-
-        if (!level.isClientSide()) {
-            lourdes.activate(level.getGameTime());
-            level.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.BLOCKS, 1.0F, 1.0F);
-
-            if (!player.getAbilities().instabuild) {
-                held.shrink(1);
-            }
-
-            player.displayClientMessage(Component.translatable("message.hexalia.lourdes.activation"), true);
-        }
-
-        return InteractionResult.sidedSuccess(level.isClientSide());
+    if (held.isEmpty()) {
+      if (!lourdes.isActive()) {
+        player.displayClientMessage(
+            Component.translatable("message.hexalia.lourdes.inactive"), true);
+      }
+      return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new LourdesBlockEntity(pos, state);
+    if (!held.is(ModItems.LOTUS_BLOSSOM.get())) {
+      return InteractionResult.PASS;
     }
 
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        if (level.isClientSide()) {
-            return null;
-        }
-        return (lvl, blockPos, blockState, blockEntity) -> {
-            if (blockEntity instanceof LourdesBlockEntity lourdes) {
-                LourdesBlockEntity.tick(lvl, blockPos, blockState, lourdes);
-            }
-        };
+    if (lourdes.isActive()) {
+      return InteractionResult.sidedSuccess(level.isClientSide());
     }
+
+    if (!level.isClientSide()) {
+      lourdes.activate(level.getGameTime());
+      level.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+      if (!player.getAbilities().instabuild) {
+        held.shrink(1);
+      }
+
+      player.displayClientMessage(
+          Component.translatable("message.hexalia.lourdes.activation"), true);
+    }
+
+    return InteractionResult.sidedSuccess(level.isClientSide());
+  }
+
+  @Override
+  public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    return new LourdesBlockEntity(pos, state);
+  }
+
+  @Override
+  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+      Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+    if (level.isClientSide()) {
+      return null;
+    }
+    return (lvl, blockPos, blockState, blockEntity) -> {
+      if (blockEntity instanceof LourdesBlockEntity lourdes) {
+        LourdesBlockEntity.tick(lvl, blockPos, blockState, lourdes);
+      }
+    };
+  }
 }

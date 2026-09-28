@@ -17,51 +17,52 @@ import net.minecraft.world.level.Level;
 
 public class WeatherIdolItem extends Item {
 
-    public WeatherIdolItem(Properties pProperties) {
-        super(pProperties);
-    }
+  public WeatherIdolItem(Properties pProperties) {
+    super(pProperties);
+  }
 
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        player.startUsingItem(hand);
-        return InteractionResultHolder.consume(player.getItemInHand(hand));
-    }
+  @Override
+  public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    player.startUsingItem(hand);
+    return InteractionResultHolder.consume(player.getItemInHand(hand));
+  }
 
-    @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
-        if (!level.isClientSide && livingEntity instanceof Player player) {
-            if (level instanceof ServerLevel serverLevel) {
-                if (stack.getItem() == ModItems.RAINFALL_IDOL.get()) {
-                    serverLevel.setWeatherParameters(0, 6000, true, false);
-                    player.displayClientMessage(Component.translatable("message.hexalia.rainfall_idol"), true);
-                } else if (stack.getItem() == ModItems.CLARITY_IDOL.get()) {
-                    serverLevel.setWeatherParameters(6000, 0, false, false);
-                    player.displayClientMessage(Component.translatable("message.hexalia.clarity_idol"), true);
-                } else if (stack.getItem() == ModItems.TEMPEST_IDOL.get()) {
-                    serverLevel.setWeatherParameters(0, 6000, true, true);
-                    player.displayClientMessage(Component.translatable("message.hexalia.tempest_idol"), true);
-                }
-            }
-            if (!player.isCreative()) {
-                stack.shrink(1);
-            }
+  @Override
+  public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
+    if (!level.isClientSide && livingEntity instanceof Player player) {
+      if (level instanceof ServerLevel serverLevel) {
+        if (stack.getItem() == ModItems.RAINFALL_IDOL.get()) {
+          serverLevel.setWeatherParameters(0, 6000, true, false);
+          player.displayClientMessage(
+              Component.translatable("message.hexalia.rainfall_idol"), true);
+        } else if (stack.getItem() == ModItems.CLARITY_IDOL.get()) {
+          serverLevel.setWeatherParameters(6000, 0, false, false);
+          player.displayClientMessage(Component.translatable("message.hexalia.clarity_idol"), true);
+        } else if (stack.getItem() == ModItems.TEMPEST_IDOL.get()) {
+          serverLevel.setWeatherParameters(0, 6000, true, true);
+          player.displayClientMessage(Component.translatable("message.hexalia.tempest_idol"), true);
         }
-
-        if (livingEntity instanceof ServerPlayer serverPlayer) {
-            serverPlayer.awardStat(Stats.ITEM_USED.get(this));
-            CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
-        }
-
-        return stack.isEmpty() ? ItemStack.EMPTY : stack;
+      }
+      if (!player.isCreative()) {
+        stack.shrink(1);
+      }
     }
 
-    @Override
-    public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.BOW;
+    if (livingEntity instanceof ServerPlayer serverPlayer) {
+      serverPlayer.awardStat(Stats.ITEM_USED.get(this));
+      CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
     }
 
-    @Override
-    public int getUseDuration(ItemStack pStack) {
-        return 32;
-    }
+    return stack.isEmpty() ? ItemStack.EMPTY : stack;
+  }
+
+  @Override
+  public UseAnim getUseAnimation(ItemStack pStack) {
+    return UseAnim.BOW;
+  }
+
+  @Override
+  public int getUseDuration(ItemStack pStack) {
+    return 32;
+  }
 }

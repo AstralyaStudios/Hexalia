@@ -1,5 +1,8 @@
 package net.astralya.hexalia.block.custom;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import net.astralya.hexalia.block.entity.custom.ShelfBlockEntity;
 import net.astralya.hexalia.util.ModTags;
 import net.minecraft.ChatFormatting;
@@ -40,223 +43,238 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class ShelfBlock extends BaseEntityBlock {
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    private static final Map<Direction, VoxelShape> SHAPES = createShapes();
+  public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+  private static final Map<Direction, VoxelShape> SHAPES = createShapes();
 
-    public ShelfBlock(Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+  public ShelfBlock(Properties properties) {
+    super(properties);
+    this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+  }
+
+  private static VoxelShape createShape() {
+    VoxelShape shape = Shapes.empty();
+
+    shape = Shapes.join(shape, Shapes.box(0, 0.25, 0.5, 1, 0.3125, 1), BooleanOp.OR);
+
+    shape = Shapes.join(shape, Shapes.box(0, 0.125, 0.875, 1, 0.25, 1), BooleanOp.OR);
+
+    return shape;
+  }
+
+  private static Map<Direction, VoxelShape> createShapes() {
+    Map<Direction, VoxelShape> shapes = new HashMap<>();
+    VoxelShape baseShape = createShape();
+    for (Direction direction : Direction.Plane.HORIZONTAL) {
+      shapes.put(direction, rotateShape(Direction.NORTH, direction, baseShape));
+    }
+    return shapes;
+  }
+
+  private static VoxelShape rotateShape(Direction from, Direction to, VoxelShape shape) {
+    VoxelShape[] buffer = new VoxelShape[] {shape, Shapes.empty()};
+    int times = (to.get2DDataValue() - from.get2DDataValue() + 4) % 4;
+    for (int i = 0; i < times; i++) {
+      buffer[0].forAllBoxes(
+          (minX, minY, minZ, maxX, maxY, maxZ) ->
+              buffer[1] =
+                  Shapes.or(buffer[1], Shapes.box(1.0 - maxZ, minY, minX, 1.0 - minZ, maxY, maxX)));
+      buffer[0] = buffer[1];
+      buffer[1] = Shapes.empty();
+    }
+    return buffer[0];
+  }
+
+  @Override
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    builder.add(FACING);
+  }
+
+  @Nullable @Override
+  public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+    Direction face = ctx.getClickedFace();
+
+    if (face.getAxis().isHorizontal()) {
+      return this.defaultBlockState().setValue(FACING, face);
     }
 
-    private static VoxelShape createShape() {
-        VoxelShape shape = Shapes.empty();
+    return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
+  }
 
-        shape = Shapes.join(shape, Shapes.box(0, 0.25, 0.5, 1, 0.3125, 1), BooleanOp.OR);
+  @Override
+  public @NotNull VoxelShape getShape(
+      BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    return SHAPES.get(state.getValue(FACING));
+  }
 
-        shape = Shapes.join(shape, Shapes.box(0, 0.125, 0.875, 1, 0.25, 1), BooleanOp.OR);
+  @Override
+  public @NotNull InteractionResult use(
+      BlockState state,
+      Level level,
+      BlockPos pos,
+      Player player,
+      InteractionHand hand,
+      BlockHitResult hit) {
+    BlockEntity blockEntity = level.getBlockEntity(pos);
+    if (blockEntity instanceof ShelfBlockEntity shelf) {
+      Vec3 hitPos = hit.getLocation();
+      Direction facing = state.getValue(FACING);
 
-        return shape;
-    }
+      double x = hitPos.x() - pos.getX();
+      double y = hitPos.y() - pos.getY();
+      double z = hitPos.z() - pos.getZ();
 
-    private static Map<Direction, VoxelShape> createShapes() {
-        Map<Direction, VoxelShape> shapes = new HashMap<>();
-        VoxelShape baseShape = createShape();
-        for (Direction direction : Direction.Plane.HORIZONTAL) {
-            shapes.put(direction, rotateShape(Direction.NORTH, direction, baseShape));
-        }
-        return shapes;
-    }
+      double relativeX, relativeZ;
 
-    private static VoxelShape rotateShape(Direction from, Direction to, VoxelShape shape) {
-        VoxelShape[] buffer = new VoxelShape[]{shape, Shapes.empty()};
-        int times = (to.get2DDataValue() - from.get2DDataValue() + 4) % 4;
-        for (int i = 0; i < times; i++) {
-            buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
-                    buffer[1] = Shapes.or(buffer[1],
-                            Shapes.box(1.0 - maxZ, minY, minX,
-                                    1.0 - minZ, maxY, maxX))
-            );
-            buffer[0] = buffer[1];
-            buffer[1] = Shapes.empty();
-        }
-        return buffer[0];
-    }
+      switch (facing) {
+        case NORTH:
+          relativeX = 1.0 - x;
+          relativeZ = z;
+          break;
+        case SOUTH:
+          relativeX = x;
+          relativeZ = 1.0 - z;
+          break;
+        case EAST:
+          relativeX = 1.0 - z;
+          relativeZ = 1.0 - x;
+          break;
+        case WEST:
+          relativeX = z;
+          relativeZ = x;
+          break;
+        default:
+          return InteractionResult.PASS;
+      }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
-    }
-
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        Direction face = ctx.getClickedFace();
-
-        if (face.getAxis().isHorizontal()) {
-            return this.defaultBlockState().setValue(FACING, face);
-        }
-
-        return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
-    }
-
-    @Override
-    public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPES.get(state.getValue(FACING));
-    }
-
-    @Override
-    public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
-                                          InteractionHand hand, BlockHitResult hit) {
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof ShelfBlockEntity shelf) {
-            Vec3 hitPos = hit.getLocation();
-            Direction facing = state.getValue(FACING);
-
-            double x = hitPos.x() - pos.getX();
-            double y = hitPos.y() - pos.getY();
-            double z = hitPos.z() - pos.getZ();
-
-            double relativeX, relativeZ;
-
-            switch (facing) {
-                case NORTH:
-                    relativeX = 1.0 - x;
-                    relativeZ = z;
-                    break;
-                case SOUTH:
-                    relativeX = x;
-                    relativeZ = 1.0 - z;
-                    break;
-                case EAST:
-                    relativeX = 1.0 - z;
-                    relativeZ = 1.0 - x;
-                    break;
-                case WEST:
-                    relativeX = z;
-                    relativeZ = x;
-                    break;
-                default:
-                    return InteractionResult.PASS;
-            }
-
-            if (relativeZ < 0.5 || relativeZ > 1.0 || y < 0.25 || y > 0.75) {
-                return InteractionResult.PASS;
-            }
-
-            int row;
-            if (relativeZ < 0.75) {
-                row = 1;
-            } else {
-                row = 0;
-            }
-
-            int column;
-            if (relativeX < 0.33) {
-                column = 0;
-            } else if (relativeX < 0.67) {
-                column = 1;
-            } else {
-                column = 2;
-            }
-
-            int slot = column + (row * 3);
-
-            ItemStack heldItem = player.getItemInHand(hand);
-            ItemStack shelfItem = shelf.getItem(slot);
-
-            if (!shelfItem.isEmpty()) {
-                ItemStack removedItem = shelf.removeStack(slot);
-                level.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
-
-                if (!player.getInventory().add(removedItem)) {
-                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), removedItem);
-                }
-
-                level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-                return InteractionResult.sidedSuccess(level.isClientSide);
-            } else if (isValidItem(heldItem)) {
-                ItemStack toPlace;
-                if (player.isCreative()) {
-                    toPlace = heldItem.copy();
-                    toPlace.setCount(1);
-                } else {
-                    toPlace = heldItem.split(1);
-                }
-                shelf.setItem(slot, toPlace);
-                level.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
-                level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-                return InteractionResult.sidedSuccess(level.isClientSide);
-            }
-        }
+      if (relativeZ < 0.5 || relativeZ > 1.0 || y < 0.25 || y > 0.75) {
         return InteractionResult.PASS;
-    }
+      }
 
-    private boolean isValidItem(ItemStack stack) {
-        return !stack.isEmpty() && stack.is(ModTags.Items.BREWS) || stack.is(Items.POTION)
-                || stack.is(Items.LINGERING_POTION) || stack.is(Items.SPLASH_POTION);
-    }
+      int row;
+      if (relativeZ < 0.75) {
+        row = 1;
+      } else {
+        row = 0;
+      }
 
-    @Override
-    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        Direction direction = state.getValue(FACING).getOpposite();
-        BlockPos supportPos = pos.relative(direction);
-        BlockState supportState = level.getBlockState(supportPos);
-        return supportState.isFaceSturdy(level, supportPos, direction.getOpposite());
-    }
+      int column;
+      if (relativeX < 0.33) {
+        column = 0;
+      } else if (relativeX < 0.67) {
+        column = 1;
+      } else {
+        column = 2;
+      }
 
-    @Override
-    public @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
-                                           LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        if (!state.canSurvive(level, pos)) {
-            level.scheduleTick(pos, this, 1);
+      int slot = column + (row * 3);
+
+      ItemStack heldItem = player.getItemInHand(hand);
+      ItemStack shelfItem = shelf.getItem(slot);
+
+      if (!shelfItem.isEmpty()) {
+        if (level.isClientSide) {
+          return InteractionResult.SUCCESS;
         }
-        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
-    }
+        ItemStack removedItem = shelf.removeStack(slot);
+        level.playSound(
+            null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-    @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!state.canSurvive(level, pos)) {
-            level.destroyBlock(pos, true);
+        if (!player.getInventory().add(removedItem)) {
+          Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), removedItem);
         }
-    }
 
-    @Override
-    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
-        if (!state.is(newState.getBlock())) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof ShelfBlockEntity shelf) {
-                if (world instanceof ServerLevel) {
-                    for (int i = 0; i < 6; i++) {
-                        ItemStack stack = shelf.getItem(i);
-                        if (!stack.isEmpty()) {
-                            Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
-                        }
-                    }
-                }
-                world.updateNeighbourForOutputSignal(pos, this);
+        level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+        return InteractionResult.sidedSuccess(level.isClientSide);
+      } else if (isValidItem(heldItem)) {
+        if (level.isClientSide) {
+          return InteractionResult.SUCCESS;
+        }
+        ItemStack toPlace;
+        if (player.isCreative()) {
+          toPlace = heldItem.copy();
+          toPlace.setCount(1);
+        } else {
+          toPlace = heldItem.split(1);
+        }
+        shelf.setItem(slot, toPlace);
+        level.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
+        level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+        return InteractionResult.sidedSuccess(level.isClientSide);
+      }
+    }
+    return InteractionResult.PASS;
+  }
+
+  private boolean isValidItem(ItemStack stack) {
+    return !stack.isEmpty() && stack.is(ModTags.Items.BREWS)
+        || stack.is(Items.POTION)
+        || stack.is(Items.LINGERING_POTION)
+        || stack.is(Items.SPLASH_POTION);
+  }
+
+  @Override
+  public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    Direction direction = state.getValue(FACING).getOpposite();
+    BlockPos supportPos = pos.relative(direction);
+    BlockState supportState = level.getBlockState(supportPos);
+    return supportState.isFaceSturdy(level, supportPos, direction.getOpposite());
+  }
+
+  @Override
+  public @NotNull BlockState updateShape(
+      BlockState state,
+      Direction direction,
+      BlockState neighborState,
+      LevelAccessor level,
+      BlockPos pos,
+      BlockPos neighborPos) {
+    if (!state.canSurvive(level, pos)) {
+      level.scheduleTick(pos, this, 1);
+    }
+    return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+  }
+
+  @Override
+  public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    if (!state.canSurvive(level, pos)) {
+      level.destroyBlock(pos, true);
+    }
+  }
+
+  @Override
+  public void onRemove(
+      BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
+    if (!state.is(newState.getBlock())) {
+      BlockEntity blockEntity = world.getBlockEntity(pos);
+      if (blockEntity instanceof ShelfBlockEntity shelf) {
+        if (world instanceof ServerLevel) {
+          for (int i = 0; i < 6; i++) {
+            ItemStack stack = shelf.getItem(i);
+            if (!stack.isEmpty()) {
+              Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
             }
-            super.onRemove(state, world, pos, newState, moved);
+          }
         }
+        world.updateNeighbourForOutputSignal(pos, this);
+      }
+      super.onRemove(state, world, pos, newState, moved);
     }
+  }
 
-    @Override
-    public @NotNull RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
-    }
+  @Override
+  public @NotNull RenderShape getRenderShape(BlockState state) {
+    return RenderShape.MODEL;
+  }
 
-    @Override
-    public void appendHoverText(ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
-        pTooltip.add(Component.translatable("tooltip.hexalia.shelf").withStyle(ChatFormatting.GRAY));
-    }
+  @Override
+  public void appendHoverText(
+      ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
+    pTooltip.add(Component.translatable("tooltip.hexalia.shelf").withStyle(ChatFormatting.GRAY));
+  }
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ShelfBlockEntity(pos, state);
-    }
+  @Nullable @Override
+  public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    return new ShelfBlockEntity(pos, state);
+  }
 }

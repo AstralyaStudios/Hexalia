@@ -7,18 +7,20 @@ import software.bernie.geckolib.model.DefaultedItemGeoModel;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class BloomwrapLeggingsRenderer extends GeoArmorRenderer<BloomwrapLeggingsItem> {
-    public BloomwrapLeggingsRenderer() {
-        super(new DefaultedItemGeoModel<>(new ResourceLocation(HexaliaMod.MODID, "armor/bloomwrap_leggings")) {
-            @Override
-            public ResourceLocation getTextureResource(BloomwrapLeggingsItem animatable) {
-                return new ResourceLocation(HexaliaMod.MODID, "textures/armor/bloomwrap.png");
-            }
+  public BloomwrapLeggingsRenderer() {
+    super(
+        new DefaultedItemGeoModel<>(
+            new ResourceLocation(HexaliaMod.MODID, "armor/bloomwrap_leggings")) {
+          @Override
+          public ResourceLocation getTextureResource(BloomwrapLeggingsItem animatable) {
+            return new ResourceLocation(HexaliaMod.MODID, "textures/armor/bloomwrap.png");
+          }
 
-            @Override
-            public ResourceLocation getAnimationResource(BloomwrapLeggingsItem animatable) {
-                return new ResourceLocation(HexaliaMod.MODID, "animations/bloomwrap_leggings.animation.json");
-            }
+          @Override
+          public ResourceLocation getAnimationResource(BloomwrapLeggingsItem animatable) {
+            return new ResourceLocation(
+                HexaliaMod.MODID, "animations/bloomwrap_leggings.animation.json");
+          }
         });
-    }
+  }
 }
-

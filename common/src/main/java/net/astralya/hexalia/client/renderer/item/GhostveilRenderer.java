@@ -8,19 +8,18 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class GhostveilRenderer extends GeoArmorRenderer<GhostveilItem> {
 
-    public GhostveilRenderer() {
-        super(new DefaultedItemGeoModel<>(new ResourceLocation(HexaliaMod.MODID, "armor/ghostveil")) {
-                  @Override
-                  public ResourceLocation getTextureResource(GhostveilItem animatable) {
-                      return new ResourceLocation(HexaliaMod.MODID, "textures/armor/ghostveil.png");
-                  }
+  public GhostveilRenderer() {
+    super(
+        new DefaultedItemGeoModel<>(new ResourceLocation(HexaliaMod.MODID, "armor/ghostveil")) {
+          @Override
+          public ResourceLocation getTextureResource(GhostveilItem animatable) {
+            return new ResourceLocation(HexaliaMod.MODID, "textures/armor/ghostveil.png");
+          }
 
-                  @Override
-                  public ResourceLocation getAnimationResource(GhostveilItem animatable) {
-                      return new ResourceLocation(HexaliaMod.MODID, "animations/ghostveil.animation.json");
-                  }
-              }
-        );
-    }
+          @Override
+          public ResourceLocation getAnimationResource(GhostveilItem animatable) {
+            return new ResourceLocation(HexaliaMod.MODID, "animations/ghostveil.animation.json");
+          }
+        });
+  }
 }
-

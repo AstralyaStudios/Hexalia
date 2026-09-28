@@ -1,5 +1,6 @@
 package net.astralya.hexalia.effect.custom;
 
+import java.util.UUID;
 import net.astralya.hexalia.util.SunlightCheck;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -9,60 +10,65 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.UUID;
-
 public class DaybloomEffect extends MobEffect {
 
-    private static final int COOLDOWN = 100;
-    private static final UUID SPEED_MODIFIER_UUID = UUID.fromString("e1234567-89ab-cdef-0123-456789abcdef");
+  private static final int COOLDOWN = 100;
+  private static final UUID SPEED_MODIFIER_UUID =
+      UUID.fromString("e1234567-89ab-cdef-0123-456789abcdef");
 
-    public DaybloomEffect(MobEffectCategory category, int color) {
-        super(category, color);
+  public DaybloomEffect(MobEffectCategory category, int color) {
+    super(category, color);
+  }
+
+  @Override
+  public void applyEffectTick(LivingEntity entity, int amplifier) {
+    if (!(entity instanceof Player player)) return;
+    if (player.level().isClientSide()) return;
+
+    SunlightCheck sc = new SunlightCheck(player.level(), player.blockPosition());
+    sc.recheckCanSeeSun();
+    float gen = sc.getGenerationMultiplier();
+
+    if (gen <= 0.0F) {
+      player.hurt(player.damageSources().magic(), 1.5F);
+      removeSpeedModifier(player);
+      return;
     }
 
-    @Override
-    public void applyEffectTick(LivingEntity entity, int amplifier) {
-        if (!(entity instanceof Player player)) return;
-        if (player.level().isClientSide()) return;
+    float heal = 2.0F * gen;
+    if (heal > 0.0F) player.heal(heal);
 
-        SunlightCheck sc = new SunlightCheck(player.level(), player.blockPosition());
-        sc.recheckCanSeeSun();
-        float gen = sc.getGenerationMultiplier();
+    double speedBoost = 0.05D * (amplifier + 1) * gen;
+    applySpeedModifier(player, speedBoost);
+  }
 
-        if (gen <= 0.0F) {
-            player.hurt(player.damageSources().magic(), 1.5F);
-            removeSpeedModifier(player);
-            return;
-        }
+  private void applySpeedModifier(Player player, double amount) {
+    var attr = player.getAttribute(Attributes.MOVEMENT_SPEED);
+    if (attr == null) return;
+    removeSpeedModifier(player);
+    if (amount == 0.0D) return;
+    attr.addTransientModifier(
+        new AttributeModifier(
+            SPEED_MODIFIER_UUID,
+            "Daybloom Speed Boost",
+            amount,
+            AttributeModifier.Operation.ADDITION));
+  }
 
-        float heal = 2.0F * gen;
-        if (heal > 0.0F) player.heal(heal);
+  private void removeSpeedModifier(Player player) {
+    var attr = player.getAttribute(Attributes.MOVEMENT_SPEED);
+    if (attr != null) attr.removeModifier(SPEED_MODIFIER_UUID);
+  }
 
-        double speedBoost = 0.05D * (amplifier + 1) * gen;
-        applySpeedModifier(player, speedBoost);
-    }
+  @Override
+  public void removeAttributeModifiers(
+      LivingEntity entity, AttributeMap attributeMap, int amplifier) {
+    super.removeAttributeModifiers(entity, attributeMap, amplifier);
+    if (entity instanceof Player player) removeSpeedModifier(player);
+  }
 
-    private void applySpeedModifier(Player player, double amount) {
-        var attr = player.getAttribute(Attributes.MOVEMENT_SPEED);
-        if (attr == null) return;
-        removeSpeedModifier(player);
-        if (amount == 0.0D) return;
-        attr.addTransientModifier(new AttributeModifier(SPEED_MODIFIER_UUID, "Daybloom Speed Boost", amount, AttributeModifier.Operation.ADDITION));
-    }
-
-    private void removeSpeedModifier(Player player) {
-        var attr = player.getAttribute(Attributes.MOVEMENT_SPEED);
-        if (attr != null) attr.removeModifier(SPEED_MODIFIER_UUID);
-    }
-
-    @Override
-    public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributeMap, int amplifier) {
-        super.removeAttributeModifiers(entity, attributeMap, amplifier);
-        if (entity instanceof Player player) removeSpeedModifier(player);
-    }
-
-    @Override
-    public boolean isDurationEffectTick(int duration, int amplifier) {
-        return duration % COOLDOWN == 0;
-    }
+  @Override
+  public boolean isDurationEffectTick(int duration, int amplifier) {
+    return duration % COOLDOWN == 0;
+  }
 }

@@ -3,13 +3,10 @@ package net.astralya.hexalia.event;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.EntityEvent;
 import dev.architectury.event.events.common.TickEvent;
-import net.astralya.hexalia.HexaliaMod;
 import net.astralya.hexalia.integration.accessories.AccessoriesIntegration;
 import net.astralya.hexalia.item.ModItems;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,7 +22,11 @@ public final class AccessoryEffects {
   private static final java.util.UUID WITCHHEART_HEALTH_ID =
       java.util.UUID.fromString("adcdfaaa-c377-4b58-a31e-c478c692ca2f");
   private static final AttributeModifier WITCHHEART_HEALTH =
-      new AttributeModifier(WITCHHEART_HEALTH_ID, "hexalia:witchheart_cluster", 4.0, AttributeModifier.Operation.ADDITION);
+      new AttributeModifier(
+          WITCHHEART_HEALTH_ID,
+          "hexalia:witchheart_cluster",
+          4.0,
+          AttributeModifier.Operation.ADDITION);
   private static final float WYRD_DODGE_CHANCE = 0.1F;
   private static final int SEAFOAM_AIR_RESTORE_INTERVAL = 200;
   private static final int SEAFOAM_AIR_RESTORE_AMOUNT = 20;

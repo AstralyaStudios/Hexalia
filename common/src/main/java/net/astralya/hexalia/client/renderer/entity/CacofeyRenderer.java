@@ -10,27 +10,26 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class CacofeyRenderer extends GeoEntityRenderer<CacofeyEntity> {
 
-    public CacofeyRenderer(EntityRendererProvider.Context context) {
-        super(context, new CacofeyModel());
-        this.addRenderLayer(new CacofeyHeldItemLayer(this));
+  public CacofeyRenderer(EntityRendererProvider.Context context) {
+    super(context, new CacofeyModel());
+    this.addRenderLayer(new CacofeyHeldItemLayer(this));
+  }
+
+  public static class CacofeyModel extends GeoModel<CacofeyEntity> {
+
+    @Override
+    public ResourceLocation getModelResource(CacofeyEntity entity) {
+      return new ResourceLocation(HexaliaMod.MODID, "geo/entity/cacofey.geo.json");
     }
 
-    public static class CacofeyModel extends GeoModel<CacofeyEntity> {
-
-        @Override
-        public ResourceLocation getModelResource(CacofeyEntity entity) {
-            return new ResourceLocation(HexaliaMod.MODID, "geo/entity/cacofey.geo.json");
-        }
-
-        @Override
-        public ResourceLocation getTextureResource(CacofeyEntity entity) {
-            return new ResourceLocation(HexaliaMod.MODID, "textures/entity/cacofey.png");
-        }
-
-        @Override
-        public ResourceLocation getAnimationResource(CacofeyEntity entity) {
-            return new ResourceLocation(HexaliaMod.MODID, "animations/entity/cacofey.animation.json");
-        }
+    @Override
+    public ResourceLocation getTextureResource(CacofeyEntity entity) {
+      return new ResourceLocation(HexaliaMod.MODID, "textures/entity/cacofey.png");
     }
+
+    @Override
+    public ResourceLocation getAnimationResource(CacofeyEntity entity) {
+      return new ResourceLocation(HexaliaMod.MODID, "animations/entity/cacofey.animation.json");
+    }
+  }
 }
-

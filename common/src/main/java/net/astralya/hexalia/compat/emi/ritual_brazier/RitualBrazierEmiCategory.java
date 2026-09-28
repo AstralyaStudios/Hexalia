@@ -7,9 +7,10 @@ import net.astralya.hexalia.block.ModBlocks;
 import net.minecraft.resources.ResourceLocation;
 
 public final class RitualBrazierEmiCategory {
-    public static final ResourceLocation ID = new ResourceLocation(HexaliaMod.MODID, "ritual_brazier");
-    public static final EmiRecipeCategory CATEGORY = new EmiRecipeCategory(ID, EmiStack.of(ModBlocks.RITUAL_BRAZIER.get()));
+  public static final ResourceLocation ID =
+      new ResourceLocation(HexaliaMod.MODID, "ritual_brazier");
+  public static final EmiRecipeCategory CATEGORY =
+      new EmiRecipeCategory(ID, EmiStack.of(ModBlocks.RITUAL_BRAZIER.get()));
 
-    private RitualBrazierEmiCategory() {
-    }
+  private RitualBrazierEmiCategory() {}
 }

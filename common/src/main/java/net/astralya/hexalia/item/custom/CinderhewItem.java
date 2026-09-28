@@ -73,10 +73,7 @@ public class CinderhewItem extends AxeItem {
 
   @Override
   public void appendHoverText(
-      ItemStack stack,
-      Level level,
-      List<Component> tooltipComponents,
-      TooltipFlag flag) {
+      ItemStack stack, Level level, List<Component> tooltipComponents, TooltipFlag flag) {
     tooltipComponents.add(
         Component.translatable("tooltip.hexalia.cinderhew.fire_damage")
             .withStyle(ChatFormatting.GOLD));

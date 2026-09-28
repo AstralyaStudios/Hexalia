@@ -19,57 +19,57 @@ import net.minecraft.world.phys.HitResult;
 
 public class RabbageProjectile extends ThrowableItemProjectile {
 
-    public RabbageProjectile(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
-    }
+  public RabbageProjectile(
+      EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
+    super(pEntityType, pLevel);
+  }
 
-    public RabbageProjectile(Level pLevel) {
-        super(ModEntities.RABBAGE.get(), pLevel);
-    }
+  public RabbageProjectile(Level pLevel) {
+    super(ModEntities.RABBAGE.get(), pLevel);
+  }
 
-    public RabbageProjectile(Level pLevel, LivingEntity livingEntity) {
-        super(ModEntities.RABBAGE.get(), livingEntity, pLevel);
-    }
+  public RabbageProjectile(Level pLevel, LivingEntity livingEntity) {
+    super(ModEntities.RABBAGE.get(), livingEntity, pLevel);
+  }
 
-    @Override
-    protected Item getDefaultItem() {
-        return ModItems.RABBAGE.get();
-    }
+  @Override
+  protected Item getDefaultItem() {
+    return ModItems.RABBAGE.get();
+  }
 
-    private ParticleOptions getParticle() {
-        ItemStack itemStack = new ItemStack(ModItems.RABBAGE.get());
-        return new ItemParticleOption(ParticleTypes.ITEM, itemStack);
-    }
+  private ParticleOptions getParticle() {
+    ItemStack itemStack = new ItemStack(ModItems.RABBAGE.get());
+    return new ItemParticleOption(ParticleTypes.ITEM, itemStack);
+  }
 
-    @Override
-    public void handleEntityEvent(byte pId) {
-        if (pId == 3) {
-            ParticleOptions particleoptions = this.getParticle();
-            for(int i = 0; i < 8; ++i) {
-                this.level().addParticle(particleoptions, this.getX(),
-                        this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
-            }
-        }
-
+  @Override
+  public void handleEntityEvent(byte pId) {
+    if (pId == 3) {
+      ParticleOptions particleoptions = this.getParticle();
+      for (int i = 0; i < 8; ++i) {
+        this.level()
+            .addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+      }
     }
+  }
 
-    @Override
-    protected void onHitEntity(EntityHitResult pResult) {
-        super.onHitEntity(pResult);
-        Entity entity = pResult.getEntity();
-        if (entity instanceof LivingEntity livingEntity) {
-            int damage = 1;
-            entity.hurt(this.damageSources().thrown(this, this.getOwner()), damage);
-            livingEntity.addEffect(new MobEffectInstance(ModMobEffects.BLEEDING.get(), 100, 0));
-        }
+  @Override
+  protected void onHitEntity(EntityHitResult pResult) {
+    super.onHitEntity(pResult);
+    Entity entity = pResult.getEntity();
+    if (entity instanceof LivingEntity livingEntity) {
+      int damage = 1;
+      entity.hurt(this.damageSources().thrown(this, this.getOwner()), damage);
+      livingEntity.addEffect(new MobEffectInstance(ModMobEffects.BLEEDING.get(), 100, 0));
     }
+  }
 
-    @Override
-    protected void onHit(HitResult hitResult) {
-        super.onHit(hitResult);
-        if (!this.level().isClientSide) {
-            this.level().broadcastEntityEvent(this, (byte) 3);
-            this.discard();
-        }
+  @Override
+  protected void onHit(HitResult hitResult) {
+    super.onHit(hitResult);
+    if (!this.level().isClientSide) {
+      this.level().broadcastEntityEvent(this, (byte) 3);
+      this.discard();
     }
+  }
 }

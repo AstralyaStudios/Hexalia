@@ -10,17 +10,17 @@ import org.jetbrains.annotations.Nullable;
 
 public class AegifloraBlock extends EnchantedPlantBlock implements EntityBlock {
 
-    public AegifloraBlock(Properties pProperties) {
-        super(pProperties);
-    }
+  public AegifloraBlock(Properties pProperties) {
+    super(pProperties);
+  }
 
-    @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
-    }
+  @Override
+  public RenderShape getRenderShape(BlockState pState) {
+    return RenderShape.MODEL;
+  }
 
-    @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new AegifloraBlockEntity(pPos, pState);
-    }
+  @Override
+  public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    return new AegifloraBlockEntity(pPos, pState);
+  }
 }

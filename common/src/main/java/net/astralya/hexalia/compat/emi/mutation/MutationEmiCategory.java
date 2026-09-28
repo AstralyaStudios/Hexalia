@@ -7,9 +7,9 @@ import net.astralya.hexalia.item.ModItems;
 import net.minecraft.resources.ResourceLocation;
 
 public final class MutationEmiCategory {
-    public static final ResourceLocation ID = new ResourceLocation(HexaliaMod.MODID, "mutation");
-    public static final EmiRecipeCategory CATEGORY = new EmiRecipeCategory(ID, EmiStack.of(ModItems.MUTAVIS.get()));
+  public static final ResourceLocation ID = new ResourceLocation(HexaliaMod.MODID, "mutation");
+  public static final EmiRecipeCategory CATEGORY =
+      new EmiRecipeCategory(ID, EmiStack.of(ModItems.MUTAVIS.get()));
 
-    private MutationEmiCategory() {
-    }
+  private MutationEmiCategory() {}
 }

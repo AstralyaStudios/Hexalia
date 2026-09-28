@@ -8,18 +8,20 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class MoonweaveHoodRenderer extends GeoArmorRenderer<MoonweaveHoodItem> {
 
-    public MoonweaveHoodRenderer() {
-        super(new DefaultedItemGeoModel<>(new ResourceLocation(HexaliaMod.MODID, "armor/moonweave_hood")) {
-            @Override
-            public ResourceLocation getTextureResource(MoonweaveHoodItem animatable) {
-                return new ResourceLocation(HexaliaMod.MODID, "textures/armor/moonweave.png");
-            }
+  public MoonweaveHoodRenderer() {
+    super(
+        new DefaultedItemGeoModel<>(
+            new ResourceLocation(HexaliaMod.MODID, "armor/moonweave_hood")) {
+          @Override
+          public ResourceLocation getTextureResource(MoonweaveHoodItem animatable) {
+            return new ResourceLocation(HexaliaMod.MODID, "textures/armor/moonweave.png");
+          }
 
-            @Override
-            public ResourceLocation getAnimationResource(MoonweaveHoodItem animatable) {
-                return new ResourceLocation(HexaliaMod.MODID, "animations/moonweave_hood.animation.json");
-            }
+          @Override
+          public ResourceLocation getAnimationResource(MoonweaveHoodItem animatable) {
+            return new ResourceLocation(
+                HexaliaMod.MODID, "animations/moonweave_hood.animation.json");
+          }
         });
-    }
+  }
 }
-

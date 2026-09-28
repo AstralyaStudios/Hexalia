@@ -8,10 +8,9 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import org.jetbrains.annotations.Nullable;
 
 public class CottonwoodTreeGrower extends AbstractTreeGrower {
-    @Nullable
-    @Override
-    protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource pRandom, boolean pHasFlowers) {
-        return ModConfiguredFeatures.COTTONWOOD;
-    }
+  @Nullable @Override
+  protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(
+      RandomSource pRandom, boolean pHasFlowers) {
+    return ModConfiguredFeatures.COTTONWOOD;
+  }
 }
-

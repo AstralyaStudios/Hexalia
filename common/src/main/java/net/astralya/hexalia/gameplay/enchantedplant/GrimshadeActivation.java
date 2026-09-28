@@ -43,12 +43,7 @@ final class GrimshadeActivation {
       player.displayClientMessage(
           Component.translatable("message.hexalia.grimshade.peaceful"), true);
       level.playSound(
-          null,
-          player.blockPosition(),
-          SoundEvents.SOUL_ESCAPE,
-          SoundSource.PLAYERS,
-          0.35F,
-          0.65F);
+          null, player.blockPosition(), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 0.35F, 0.65F);
       return false;
     }
 

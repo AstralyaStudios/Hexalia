@@ -19,148 +19,181 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class HerbJarBlockEntity extends BlockEntity implements WorldlyContainer, Clearable {
-    public static final int SIZE = 8;
-    private static final int[] SLOTS = {0, 1, 2, 3, 4, 5, 6, 7};
-    private final NonNullList<ItemStack> items = NonNullList.withSize(SIZE, ItemStack.EMPTY);
+  public static final int SIZE = 8;
+  private static final int[] SLOTS = {0, 1, 2, 3, 4, 5, 6, 7};
+  private final NonNullList<ItemStack> items = NonNullList.withSize(SIZE, ItemStack.EMPTY);
 
-    public HerbJarBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityTypes.HERB_JAR.get(), pos, state);
-    }
+  public HerbJarBlockEntity(BlockPos pos, BlockState state) {
+    super(ModBlockEntityTypes.HERB_JAR.get(), pos, state);
+  }
 
-    public CompoundTag createData() {
-        return ContainerHelper.saveAllItems(new CompoundTag(), items);
-    }
+  public CompoundTag createData() {
+    return ContainerHelper.saveAllItems(new CompoundTag(), items);
+  }
 
-    public void restoreData(CompoundTag data) {
-        NonNullList<ItemStack> restored = NonNullList.withSize(SIZE, ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(data, restored);
-        restoreItems(restored);
+  public void restoreData(CompoundTag data) {
+    NonNullList<ItemStack> restored = NonNullList.withSize(SIZE, ItemStack.EMPTY);
+    ContainerHelper.loadAllItems(data, restored);
+    restoreItems(restored);
+    setChangedAndSync();
+  }
+
+  public boolean canInsert(ItemStack stack) {
+    if (!canStore(stack)) return false;
+    for (ItemStack stored : items) if (stored.isEmpty()) return true;
+    return false;
+  }
+
+  public int insert(ItemStack stack) {
+    if (!canInsert(stack)) return 0;
+    for (int slot = 0; slot < SIZE; slot++) {
+      if (items.get(slot).isEmpty()) {
+        items.set(slot, stack.copyWithCount(1));
         setChangedAndSync();
+        return 1;
+      }
     }
+    return 0;
+  }
 
-    public boolean canInsert(ItemStack stack) {
-        if (!canStore(stack)) return false;
-        for (ItemStack stored : items) if (stored.isEmpty()) return true;
-        return false;
+  public ItemStack extractLastStack() {
+    for (int slot = SIZE - 1; slot >= 0; slot--) {
+      if (!items.get(slot).isEmpty()) return removeItemNoUpdate(slot);
     }
+    return ItemStack.EMPTY;
+  }
 
-    public int insert(ItemStack stack) {
-        if (!canInsert(stack)) return 0;
-        for (int slot = 0; slot < SIZE; slot++) {
-            if (items.get(slot).isEmpty()) {
-                items.set(slot, stack.copyWithCount(1));
-                setChangedAndSync();
-                return 1;
-            }
-        }
-        return 0;
+  @Override
+  public int getContainerSize() {
+    return SIZE;
+  }
+
+  @Override
+  public int getMaxStackSize() {
+    return 1;
+  }
+
+  @Override
+  public boolean isEmpty() {
+    return items.stream().allMatch(ItemStack::isEmpty);
+  }
+
+  @Override
+  public ItemStack getItem(int slot) {
+    return slot >= 0 && slot < SIZE ? items.get(slot) : ItemStack.EMPTY;
+  }
+
+  @Override
+  public ItemStack removeItem(int slot, int amount) {
+    ItemStack removed = ContainerHelper.removeItem(items, slot, amount);
+    if (!removed.isEmpty()) setChangedAndSync();
+    return removed;
+  }
+
+  @Override
+  public ItemStack removeItemNoUpdate(int slot) {
+    if (slot < 0 || slot >= SIZE) return ItemStack.EMPTY;
+    ItemStack removed = ContainerHelper.takeItem(items, slot);
+    if (!removed.isEmpty()) setChangedAndSync();
+    return removed;
+  }
+
+  @Override
+  public void setItem(int slot, ItemStack stack) {
+    if (slot < 0 || slot >= SIZE || (!stack.isEmpty() && !canPlaceItem(slot, stack))) return;
+    ItemStack stored = stack.copy();
+    if (!stored.isEmpty()) stored.setCount(1);
+    items.set(slot, stored);
+    setChangedAndSync();
+  }
+
+  @Override
+  public boolean canPlaceItem(int slot, ItemStack stack) {
+    return slot >= 0 && slot < SIZE && items.get(slot).isEmpty() && canStore(stack);
+  }
+
+  private boolean canStore(ItemStack stack) {
+    if (stack.isEmpty() || !stack.is(ModTags.Items.HERB_JAR_STORABLE)) return false;
+    ItemStack locked = getLockedItem();
+    return locked.isEmpty() || ItemStack.isSameItemSameTags(locked, stack);
+  }
+
+  private ItemStack getLockedItem() {
+    for (ItemStack stack : items) if (!stack.isEmpty()) return stack;
+    return ItemStack.EMPTY;
+  }
+
+  private void restoreItems(NonNullList<ItemStack> restored) {
+    for (int slot = 0; slot < SIZE; slot++) items.set(slot, ItemStack.EMPTY);
+    int target = 0;
+    for (ItemStack stack : restored) {
+      for (int count = 0; count < stack.getCount() && target < SIZE; count++) {
+        if (!canPlaceItem(target, stack)) break;
+        items.set(target++, stack.copyWithCount(1));
+      }
     }
+  }
 
-    public ItemStack extractLastStack() {
-        for (int slot = SIZE - 1; slot >= 0; slot--) {
-            if (!items.get(slot).isEmpty()) return removeItemNoUpdate(slot);
-        }
-        return ItemStack.EMPTY;
+  @Override
+  public int[] getSlotsForFace(Direction side) {
+    return SLOTS;
+  }
+
+  @Override
+  public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction side) {
+    return side != Direction.DOWN && canPlaceItem(slot, stack);
+  }
+
+  @Override
+  public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction side) {
+    return side == Direction.DOWN && slot >= 0 && slot < SIZE && !items.get(slot).isEmpty();
+  }
+
+  @Override
+  public boolean stillValid(Player player) {
+    return Container.stillValidBlockEntity(this, player);
+  }
+
+  @Override
+  public void clearContent() {
+    for (int slot = 0; slot < SIZE; slot++) items.set(slot, ItemStack.EMPTY);
+    setChangedAndSync();
+  }
+
+  private void setChangedAndSync() {
+    setChanged();
+    if (level != null && !level.isClientSide) {
+      BlockState state = getBlockState();
+      boolean hasContents = !isEmpty();
+      if (state.getValue(HerbJarBlock.HAS_CONTENTS) != hasContents) {
+        level.setBlock(worldPosition, state.setValue(HerbJarBlock.HAS_CONTENTS, hasContents), 3);
+      } else {
+        level.sendBlockUpdated(worldPosition, state, state, 3);
+      }
     }
+  }
 
-    @Override public int getContainerSize() { return SIZE; }
-    @Override public int getMaxStackSize() { return 1; }
-    @Override public boolean isEmpty() { return items.stream().allMatch(ItemStack::isEmpty); }
-    @Override public ItemStack getItem(int slot) { return slot >= 0 && slot < SIZE ? items.get(slot) : ItemStack.EMPTY; }
+  @Override
+  public void load(CompoundTag tag) {
+    super.load(tag);
+    NonNullList<ItemStack> restored = NonNullList.withSize(SIZE, ItemStack.EMPTY);
+    ContainerHelper.loadAllItems(tag, restored);
+    restoreItems(restored);
+  }
 
-    @Override
-    public ItemStack removeItem(int slot, int amount) {
-        ItemStack removed = ContainerHelper.removeItem(items, slot, amount);
-        if (!removed.isEmpty()) setChangedAndSync();
-        return removed;
-    }
+  @Override
+  protected void saveAdditional(CompoundTag tag) {
+    super.saveAdditional(tag);
+    ContainerHelper.saveAllItems(tag, items);
+  }
 
-    @Override
-    public ItemStack removeItemNoUpdate(int slot) {
-        if (slot < 0 || slot >= SIZE) return ItemStack.EMPTY;
-        ItemStack removed = ContainerHelper.takeItem(items, slot);
-        if (!removed.isEmpty()) setChangedAndSync();
-        return removed;
-    }
+  @Override
+  public CompoundTag getUpdateTag() {
+    return saveWithoutMetadata();
+  }
 
-    @Override
-    public void setItem(int slot, ItemStack stack) {
-        if (slot < 0 || slot >= SIZE || (!stack.isEmpty() && !canPlaceItem(slot, stack))) return;
-        ItemStack stored = stack.copy();
-        if (!stored.isEmpty()) stored.setCount(1);
-        items.set(slot, stored);
-        setChangedAndSync();
-    }
-
-    @Override
-    public boolean canPlaceItem(int slot, ItemStack stack) {
-        return slot >= 0 && slot < SIZE && items.get(slot).isEmpty() && canStore(stack);
-    }
-
-    private boolean canStore(ItemStack stack) {
-        if (stack.isEmpty() || !stack.is(ModTags.Items.HERB_JAR_STORABLE)) return false;
-        ItemStack locked = getLockedItem();
-        return locked.isEmpty() || ItemStack.isSameItemSameTags(locked, stack);
-    }
-
-    private ItemStack getLockedItem() {
-        for (ItemStack stack : items) if (!stack.isEmpty()) return stack;
-        return ItemStack.EMPTY;
-    }
-
-    private void restoreItems(NonNullList<ItemStack> restored) {
-        for (int slot = 0; slot < SIZE; slot++) items.set(slot, ItemStack.EMPTY);
-        int target = 0;
-        for (ItemStack stack : restored) {
-            for (int count = 0; count < stack.getCount() && target < SIZE; count++) {
-                if (!canPlaceItem(target, stack)) break;
-                items.set(target++, stack.copyWithCount(1));
-            }
-        }
-    }
-
-    @Override public int[] getSlotsForFace(Direction side) { return SLOTS; }
-    @Override public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction side) {
-        return side != Direction.DOWN && canPlaceItem(slot, stack);
-    }
-    @Override public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction side) {
-        return side == Direction.DOWN && slot >= 0 && slot < SIZE && !items.get(slot).isEmpty();
-    }
-    @Override public boolean stillValid(Player player) { return Container.stillValidBlockEntity(this, player); }
-
-    @Override
-    public void clearContent() {
-        for (int slot = 0; slot < SIZE; slot++) items.set(slot, ItemStack.EMPTY);
-        setChangedAndSync();
-    }
-
-    private void setChangedAndSync() {
-        setChanged();
-        if (level != null && !level.isClientSide) {
-            BlockState state = getBlockState();
-            boolean hasContents = !isEmpty();
-            if (state.getValue(HerbJarBlock.HAS_CONTENTS) != hasContents) {
-                level.setBlock(worldPosition, state.setValue(HerbJarBlock.HAS_CONTENTS, hasContents), 3);
-            } else {
-                level.sendBlockUpdated(worldPosition, state, state, 3);
-            }
-        }
-    }
-
-    @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
-        NonNullList<ItemStack> restored = NonNullList.withSize(SIZE, ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(tag, restored);
-        restoreItems(restored);
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
-        ContainerHelper.saveAllItems(tag, items);
-    }
-
-    @Override public CompoundTag getUpdateTag() { return saveWithoutMetadata(); }
-    @Override public ClientboundBlockEntityDataPacket getUpdatePacket() { return ClientboundBlockEntityDataPacket.create(this); }
+  @Override
+  public ClientboundBlockEntityDataPacket getUpdatePacket() {
+    return ClientboundBlockEntityDataPacket.create(this);
+  }
 }

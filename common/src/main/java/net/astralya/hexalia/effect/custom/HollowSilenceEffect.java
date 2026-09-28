@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 
 public class HollowSilenceEffect extends MobEffect {
 
-    public HollowSilenceEffect(MobEffectCategory category, int color) {
-        super(category, color);
-    }
+  public HollowSilenceEffect(MobEffectCategory category, int color) {
+    super(category, color);
+  }
 }

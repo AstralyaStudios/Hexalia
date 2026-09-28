@@ -16,64 +16,65 @@ import org.joml.Vector3f;
 
 public class WitheringCalmEffect implements ICenserEffect {
 
-    private static final int PULSE_INTERVAL = 32;
-    private static final int WITHER_DURATION = 140;
-    private static final int WITHER_AMPLIFIER = 1;
+  private static final int PULSE_INTERVAL = 32;
+  private static final int WITHER_DURATION = 140;
+  private static final int WITHER_AMPLIFIER = 1;
 
-    private static final DustParticleOptions CALM_PARTICLE =
-            new DustParticleOptions(new Vector3f(0.08f, 0.0f, 0.12f), 1.0f);
+  private static final DustParticleOptions CALM_PARTICLE =
+      new DustParticleOptions(new Vector3f(0.08f, 0.0f, 0.12f), 1.0f);
 
-    private int tickCounter = 0;
+  private int tickCounter = 0;
 
-    @Override
-    public String getMessageKey() {
-        return "message.hexalia.censer.withering_calm";
+  @Override
+  public String getMessageKey() {
+    return "message.hexalia.censer.withering_calm";
+  }
+
+  @Override
+  public void onTick(ServerLevel level, BlockPos pos) {
+    spawnAmbientParticles(level, pos);
+
+    tickCounter++;
+    boolean pulse = tickCounter >= PULSE_INTERVAL;
+    if (pulse) tickCounter = 0;
+
+    int radius = Configuration.CENSER_EFFECT_RADIUS.get();
+    AABB area = new AABB(pos).inflate(radius);
+
+    for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, area)) {
+      if (entity.getMobType() == MobType.UNDEAD) continue;
+      if (pulse) applyWither(entity);
+      if (entity instanceof Mob mob) stripAggression(mob);
     }
+  }
 
-    @Override
-    public void onTick(ServerLevel level, BlockPos pos) {
-        spawnAmbientParticles(level, pos);
+  private static void applyWither(LivingEntity entity) {
+    entity.addEffect(
+        new MobEffectInstance(
+            MobEffects.WITHER, WITHER_DURATION, WITHER_AMPLIFIER, false, false, true));
+  }
 
-        tickCounter++;
-        boolean pulse = tickCounter >= PULSE_INTERVAL;
-        if (pulse) tickCounter = 0;
-
-        int radius = Configuration.CENSER_EFFECT_RADIUS.get();
-        AABB area = new AABB(pos).inflate(radius);
-
-        for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, area)) {
-            if (entity.getMobType() == MobType.UNDEAD) continue;
-            if (pulse) applyWither(entity);
-            if (entity instanceof Mob mob) stripAggression(mob);
-        }
+  private static void stripAggression(Mob mob) {
+    mob.setTarget(null);
+    mob.setLastHurtByMob(null);
+    mob.setLastHurtByPlayer(null);
+    mob.setNoActionTime(60);
+    if (mob instanceof Creeper creeper && !creeper.isIgnited()) {
+      creeper.setSwellDir(-1);
     }
-
-    private static void applyWither(LivingEntity entity) {
-        entity.addEffect(new MobEffectInstance(
-                MobEffects.WITHER, WITHER_DURATION, WITHER_AMPLIFIER, false, false, true));
+    if (mob instanceof NeutralMob neutral) {
+      neutral.setPersistentAngerTarget(null);
+      neutral.stopBeingAngry();
     }
+  }
 
-    private static void stripAggression(Mob mob) {
-        mob.setTarget(null);
-        mob.setLastHurtByMob(null);
-        mob.setLastHurtByPlayer(null);
-        mob.setNoActionTime(60);
-        if (mob instanceof Creeper creeper && !creeper.isIgnited()) {
-            creeper.setSwellDir(-1);
-        }
-        if (mob instanceof NeutralMob neutral) {
-            neutral.setPersistentAngerTarget(null);
-            neutral.stopBeingAngry();
-        }
+  private static void spawnAmbientParticles(ServerLevel level, BlockPos pos) {
+    int radius = Configuration.CENSER_EFFECT_RADIUS.get();
+    for (int i = 0; i < 3; i++) {
+      double x = pos.getX() + (level.random.nextDouble() * 2 - 1) * radius;
+      double y = pos.getY() + level.random.nextDouble() * 2.5;
+      double z = pos.getZ() + (level.random.nextDouble() * 2 - 1) * radius;
+      level.sendParticles(CALM_PARTICLE, x, y, z, 1, 0, 0, 0, 0);
     }
-
-    private static void spawnAmbientParticles(ServerLevel level, BlockPos pos) {
-        int radius = Configuration.CENSER_EFFECT_RADIUS.get();
-        for (int i = 0; i < 3; i++) {
-            double x = pos.getX() + (level.random.nextDouble() * 2 - 1) * radius;
-            double y = pos.getY() + level.random.nextDouble() * 2.5;
-            double z = pos.getZ() + (level.random.nextDouble() * 2 - 1) * radius;
-            level.sendParticles(CALM_PARTICLE, x, y, z, 1, 0, 0, 0, 0);
-        }
-    }
+  }
 }

@@ -33,10 +33,8 @@ public class ModGameEvents {
     @SubscribeEvent
     public static void onExperiencePickup(PlayerXpEvent.PickupXp event) {
         Player player = event.getEntity();
-        if (!net.astralya.hexalia.event.SagePendantEvents.hasSagePendant(player)) return;
         ExperienceOrb orb = event.getOrb();
-        orb.value = net.astralya.hexalia.event.SagePendantEvents.boostedExperience(orb.value);
-        net.astralya.hexalia.event.SagePendantEvents.damagePendant(player);
+        net.astralya.hexalia.event.SagePendantEvents.storeExperience(player, orb.value);
     }
 
     @SubscribeEvent

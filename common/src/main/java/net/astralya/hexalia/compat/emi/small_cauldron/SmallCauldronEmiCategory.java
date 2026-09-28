@@ -7,9 +7,10 @@ import net.astralya.hexalia.item.ModItems;
 import net.minecraft.resources.ResourceLocation;
 
 public final class SmallCauldronEmiCategory {
-    public static final ResourceLocation ID = new ResourceLocation(HexaliaMod.MODID, "small_cauldron");
-    public static final EmiRecipeCategory CATEGORY = new EmiRecipeCategory(ID, EmiStack.of(ModItems.SMALL_CAULDRON.get()));
+  public static final ResourceLocation ID =
+      new ResourceLocation(HexaliaMod.MODID, "small_cauldron");
+  public static final EmiRecipeCategory CATEGORY =
+      new EmiRecipeCategory(ID, EmiStack.of(ModItems.SMALL_CAULDRON.get()));
 
-    private SmallCauldronEmiCategory() {
-    }
+  private SmallCauldronEmiCategory() {}
 }

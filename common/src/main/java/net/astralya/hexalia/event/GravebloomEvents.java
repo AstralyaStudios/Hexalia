@@ -112,7 +112,9 @@ public final class GravebloomEvents {
       return 0;
     }
     List<Block> plants = new ArrayList<>();
-    level.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.BLOCK)
+    level
+        .registryAccess()
+        .registryOrThrow(net.minecraft.core.registries.Registries.BLOCK)
         .getTag(ModTags.Blocks.GRAVEBLOOM_PLANTS)
         .ifPresent(tag -> tag.forEach(holder -> plants.add(holder.value())));
     if (plants.isEmpty()) return 0;

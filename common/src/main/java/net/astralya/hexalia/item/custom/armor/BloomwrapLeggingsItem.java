@@ -1,16 +1,7 @@
 package net.astralya.hexalia.item.custom.armor;
 
 import net.astralya.hexalia.client.renderer.item.BloomwrapLeggingsRenderer;
-import net.minecraft.client.model.HumanoidModel;
-import java.util.function.Consumer;
-
-import java.util.function.Supplier;
-
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
@@ -21,30 +12,36 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
-
 public class BloomwrapLeggingsItem extends HexaliaGeoArmorItem {
-    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+  private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public BloomwrapLeggingsItem(ArmorMaterial material, Type type, Properties properties) {
-        super(material, type, properties);
-        SingletonGeoAnimatable.registerSyncedAnimatable(this);
-    }
+  public BloomwrapLeggingsItem(ArmorMaterial material, Type type, Properties properties) {
+    super(material, type, properties);
+    SingletonGeoAnimatable.registerSyncedAnimatable(this);
+  }
 
-    @Override
-    public GeoArmorRenderer<?> createGeoArmorRenderer() {
-        return new BloomwrapLeggingsRenderer();
-    }
+  @Override
+  public GeoArmorRenderer<?> createGeoArmorRenderer() {
+    return new BloomwrapLeggingsRenderer();
+  }
 
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 0, state -> {
-            state.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }));
-    }
+  @Override
+  public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+    controllers.add(
+        new AnimationController<>(
+            this,
+            "controller",
+            0,
+            state -> {
+              state
+                  .getController()
+                  .setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+              return PlayState.CONTINUE;
+            }));
+  }
 
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
+  @Override
+  public AnimatableInstanceCache getAnimatableInstanceCache() {
+    return cache;
+  }
 }

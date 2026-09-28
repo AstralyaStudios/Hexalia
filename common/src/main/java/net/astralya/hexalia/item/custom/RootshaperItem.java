@@ -2,218 +2,187 @@ package net.astralya.hexalia.item.custom;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import java.util.List;
+import java.util.UUID;
+import net.astralya.hexalia.util.ModToolTiers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.UUID;
+public class RootshaperItem extends ShovelItem {
+  public static final int MODE_PICKAXE = 0;
+  public static final int MODE_SHOVEL = 1;
+  public static final float MINING_SPEED = 9.0F;
+  public static final int DAMAGE_PER_BLOCK = 1;
+  public static final float ATTACK_DAMAGE_BONUS = 4.0F;
+  public static final float ATTACK_SPEED = -2.8F;
 
-public class RootshaperItem extends Item {
-    public static final int MODE_PICKAXE = 0;
-    public static final int MODE_SHOVEL = 1;
-    public static final float MINING_SPEED = 9.0F;
-    public static final int DAMAGE_PER_BLOCK = 1;
-    public static final float ATTACK_DAMAGE_BONUS = 4.0F;
-    public static final float ATTACK_SPEED = -2.8F;
+  private static final String TAG_MODE = "Mode";
+  private static final UUID BASE_ATTACK_DAMAGE_UUID =
+      UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
+  private static final UUID BASE_ATTACK_SPEED_UUID =
+      UUID.fromString("FA233E1C-4180-4865-B01B-BCCE9785ACA3");
 
-    private static final String TAG_MODE = "Mode";
-    private static final UUID BASE_ATTACK_DAMAGE_UUID = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
-    private static final UUID BASE_ATTACK_SPEED_UUID = UUID.fromString("FA233E1C-4180-4865-B01B-BCCE9785ACA3");
+  private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
-    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
+  public RootshaperItem(Properties properties) {
+    super(ModToolTiers.ANCIENT, 1.0F, ATTACK_SPEED, properties);
+    this.defaultModifiers = createAttributes();
+  }
 
-    public RootshaperItem(Properties properties) {
-        super(properties);
-        this.defaultModifiers = createAttributes();
+  @Override
+  public void appendHoverText(
+      ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag flag) {
+    boolean sneaking =
+        Minecraft.getInstance().player != null && Minecraft.getInstance().player.isShiftKeyDown();
+
+    if (sneaking) {
+      tooltipComponents.add(
+          Component.translatable("tooltip.hexalia.rootshaper.mode_3x3_active")
+              .withStyle(ChatFormatting.GRAY));
+    } else {
+      tooltipComponents.add(
+          Component.translatable("tooltip.hexalia.rootshaper.mode_3x3_hint")
+              .withStyle(ChatFormatting.GRAY));
+    }
+  }
+
+  @Override
+  public float getDestroySpeed(ItemStack stack, BlockState state) {
+    int mode = getMode(stack);
+
+    if (mode == MODE_PICKAXE && state.is(BlockTags.MINEABLE_WITH_PICKAXE)) {
+      return MINING_SPEED;
     }
 
-    @Override
-    public InteractionResult useOn(UseOnContext context) {
-        Level level = context.getLevel();
-        BlockPos pos = context.getClickedPos();
-        BlockState state = level.getBlockState(pos);
-
-        if (context.getClickedFace() == Direction.DOWN) {
-            return InteractionResult.PASS;
-        }
-
-        Player player = context.getPlayer();
-        BlockState result = (state.is(Blocks.GRASS_BLOCK)
-                || state.is(Blocks.DIRT)
-                || state.is(Blocks.PODZOL)
-                || state.is(Blocks.COARSE_DIRT)
-                || state.is(Blocks.MYCELIUM)
-                || state.is(Blocks.ROOTED_DIRT))
-                ? Blocks.DIRT_PATH.defaultBlockState() : null;
-
-        if (result != null && !level.getBlockState(pos.above()).isAir()) {
-            result = null;
-        }
-
-        if (result == null) {
-            return InteractionResult.PASS;
-        }
-
-        if (!level.isClientSide) {
-            ItemStack stack = context.getItemInHand();
-            int oldMode = getMode(stack);
-
-            if (oldMode != MODE_SHOVEL) {
-                setMode(stack, MODE_SHOVEL);
-                playMorphSound(level, player);
-            }
-
-            if (level.setBlock(pos, result, 11)) {
-                level.playSound(null, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
-            }
-            level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, result));
-
-            if (player != null) {
-                stack.hurtAndBreak(1, player, living -> living.broadcastBreakEvent(context.getHand()));
-            }
-        }
-
-        return InteractionResult.sidedSuccess(level.isClientSide);
+    if (mode == MODE_SHOVEL && state.is(BlockTags.MINEABLE_WITH_SHOVEL)) {
+      return MINING_SPEED;
     }
 
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag flag) {
-        boolean sneaking = Minecraft.getInstance().player != null && Minecraft.getInstance().player.isShiftKeyDown();
+    return 1.0F;
+  }
 
-        if (sneaking) {
-            tooltipComponents.add(Component.translatable("tooltip.hexalia.rootshaper.mode_3x3_active").withStyle(ChatFormatting.GRAY));
-        } else {
-            tooltipComponents.add(Component.translatable("tooltip.hexalia.rootshaper.mode_3x3_hint").withStyle(ChatFormatting.GRAY));
-        }
+  @Override
+  public boolean isCorrectToolForDrops(BlockState state) {
+    return (state.is(BlockTags.MINEABLE_WITH_PICKAXE) || state.is(BlockTags.MINEABLE_WITH_SHOVEL))
+        && !state.is(BlockTags.NEEDS_DIAMOND_TOOL);
+  }
+
+  public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
+    int mode = getMode(stack);
+
+    if (mode == MODE_PICKAXE) {
+      return state.is(BlockTags.MINEABLE_WITH_PICKAXE);
     }
 
-    @Override
-    public float getDestroySpeed(ItemStack stack, BlockState state) {
-        int mode = getMode(stack);
-
-        if (mode == MODE_PICKAXE && state.is(BlockTags.MINEABLE_WITH_PICKAXE)) {
-            return MINING_SPEED;
-        }
-
-        if (mode == MODE_SHOVEL && state.is(BlockTags.MINEABLE_WITH_SHOVEL)) {
-            return MINING_SPEED;
-        }
-
-        return 1.0F;
+    if (mode == MODE_SHOVEL) {
+      return state.is(BlockTags.MINEABLE_WITH_SHOVEL);
     }
 
-    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
-        int mode = getMode(stack);
+    return false;
+  }
 
-        if (mode == MODE_PICKAXE) {
-            return state.is(BlockTags.MINEABLE_WITH_PICKAXE);
-        }
+  @Override
+  public boolean mineBlock(
+      ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miner) {
+    if (!level.isClientSide && state.getDestroySpeed(level, pos) != 0.0F) {
+      stack.hurtAndBreak(
+          DAMAGE_PER_BLOCK, miner, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+    }
+    return true;
+  }
 
-        if (mode == MODE_SHOVEL) {
-            return state.is(BlockTags.MINEABLE_WITH_SHOVEL);
-        }
+  @Override
+  public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    stack.hurtAndBreak(2, attacker, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+    return true;
+  }
 
-        return false;
+  @Override
+  public int getEnchantmentValue() {
+    return 14;
+  }
+
+  public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+    return enchantment.category == EnchantmentCategory.DIGGER
+        || enchantment.category == EnchantmentCategory.BREAKABLE;
+  }
+
+  @Override
+  public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+    return slot == EquipmentSlot.MAINHAND
+        ? this.defaultModifiers
+        : super.getDefaultAttributeModifiers(slot);
+  }
+
+  public static Multimap<Attribute, AttributeModifier> createAttributes() {
+    ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+    builder.put(
+        Attributes.ATTACK_DAMAGE,
+        new AttributeModifier(
+            BASE_ATTACK_DAMAGE_UUID,
+            "Tool modifier",
+            ATTACK_DAMAGE_BONUS,
+            AttributeModifier.Operation.ADDITION));
+    builder.put(
+        Attributes.ATTACK_SPEED,
+        new AttributeModifier(
+            BASE_ATTACK_SPEED_UUID,
+            "Tool modifier",
+            ATTACK_SPEED,
+            AttributeModifier.Operation.ADDITION));
+    return builder.build();
+  }
+
+  public static int computeMode(BlockState state) {
+    if (state.is(BlockTags.MINEABLE_WITH_PICKAXE)) {
+      return MODE_PICKAXE;
     }
 
-    @Override
-    public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miner) {
-        if (!level.isClientSide && state.getDestroySpeed(level, pos) != 0.0F) {
-            stack.hurtAndBreak(DAMAGE_PER_BLOCK, miner, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
-        }
-        return true;
+    if (state.is(BlockTags.MINEABLE_WITH_SHOVEL)) {
+      return MODE_SHOVEL;
     }
 
-    @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.hurtAndBreak(2, attacker, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
-        return true;
-    }
+    return MODE_PICKAXE;
+  }
 
-    @Override
-    public int getEnchantmentValue() {
-        return 14;
-    }
+  public static int getMode(ItemStack stack) {
+    CompoundTag tag = stack.getTag();
+    return tag != null ? tag.getInt(TAG_MODE) : MODE_PICKAXE;
+  }
 
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment.category == EnchantmentCategory.DIGGER
-                || enchantment.category == EnchantmentCategory.BREAKABLE;
-    }
+  public static void setMode(ItemStack stack, int mode) {
+    CompoundTag tag = stack.getOrCreateTag();
+    tag.putInt(TAG_MODE, mode);
+    tag.putInt("CustomModelData", mode);
+  }
 
-    @Override
-    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
-        return slot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(slot);
-    }
-
-    public static Multimap<Attribute, AttributeModifier> createAttributes() {
-        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(
-                Attributes.ATTACK_DAMAGE,
-                new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", ATTACK_DAMAGE_BONUS, AttributeModifier.Operation.ADDITION)
-        );
-        builder.put(
-                Attributes.ATTACK_SPEED,
-                new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", ATTACK_SPEED, AttributeModifier.Operation.ADDITION)
-        );
-        return builder.build();
-    }
-
-    public static int computeMode(BlockState state) {
-        if (state.is(BlockTags.MINEABLE_WITH_PICKAXE)) {
-            return MODE_PICKAXE;
-        }
-
-        if (state.is(BlockTags.MINEABLE_WITH_SHOVEL)) {
-            return MODE_SHOVEL;
-        }
-
-        return MODE_PICKAXE;
-    }
-
-    public static int getMode(ItemStack stack) {
-        CompoundTag tag = stack.getTag();
-        return tag != null ? tag.getInt(TAG_MODE) : MODE_PICKAXE;
-    }
-
-    public static void setMode(ItemStack stack, int mode) {
-        CompoundTag tag = stack.getOrCreateTag();
-        tag.putInt(TAG_MODE, mode);
-        tag.putInt("CustomModelData", mode);
-    }
-
-    public static void playMorphSound(Level level, Player player) {
-        level.playSound(
-                null,
-                player != null ? player.blockPosition() : BlockPos.ZERO,
-                SoundEvents.AMETHYST_BLOCK_CHIME,
-                SoundSource.PLAYERS,
-                0.6F,
-                1.2F
-        );
-    }
+  public static void playMorphSound(Level level, Player player) {
+    level.playSound(
+        null,
+        player != null ? player.blockPosition() : BlockPos.ZERO,
+        SoundEvents.AMETHYST_BLOCK_CHIME,
+        SoundSource.PLAYERS,
+        0.6F,
+        1.2F);
+  }
 }

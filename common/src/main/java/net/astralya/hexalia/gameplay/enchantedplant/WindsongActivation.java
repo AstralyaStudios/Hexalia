@@ -122,5 +122,4 @@ public final class WindsongActivation {
           ParticleTypes.CLOUD, point.x, point.y, point.z, 1, 0.04, 0.04, 0.04, 0.01);
     }
   }
-
 }

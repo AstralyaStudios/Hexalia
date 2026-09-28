@@ -18,89 +18,86 @@ import org.jetbrains.annotations.NotNull;
 
 public class ShelfBlockEntityRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
 
-    private final ItemRenderer itemRenderer;
+  private final ItemRenderer itemRenderer;
 
-    public ShelfBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
-        this.itemRenderer = context.getItemRenderer();
-    }
+  public ShelfBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+    this.itemRenderer = context.getItemRenderer();
+  }
 
-    @Override
-    public void render(@NotNull ShelfBlockEntity shelf, float partialTick, PoseStack poseStack,
-                       @NotNull MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        Level level = shelf.getLevel();
-        if (level == null) return;
-        NonNullList<ItemStack> items = shelf.getItems();
-        BlockState state = shelf.getBlockState();
-        Direction facing = state.getValue(ShelfBlock.FACING);
+  @Override
+  public void render(
+      @NotNull ShelfBlockEntity shelf,
+      float partialTick,
+      PoseStack poseStack,
+      @NotNull MultiBufferSource buffer,
+      int packedLight,
+      int packedOverlay) {
+    Level level = shelf.getLevel();
+    if (level == null) return;
+    NonNullList<ItemStack> items = shelf.getItems();
+    BlockState state = shelf.getBlockState();
+    Direction facing = state.getValue(ShelfBlock.FACING);
 
-        poseStack.pushPose();
+    poseStack.pushPose();
 
-        poseStack.translate(0.5, 0.0, 0.5);
+    poseStack.translate(0.5, 0.0, 0.5);
 
-        poseStack.mulPose(Axis.YP.rotationDegrees(-facing.toYRot()));
+    poseStack.mulPose(Axis.YP.rotationDegrees(-facing.toYRot()));
 
-        for (int slot = 0; slot < items.size(); slot++) {
-            ItemStack stack = items.get(slot);
-            if (stack.isEmpty()) continue;
+    for (int slot = 0; slot < items.size(); slot++) {
+      ItemStack stack = items.get(slot);
+      if (stack.isEmpty()) continue;
 
-            poseStack.pushPose();
+      poseStack.pushPose();
 
-            double xOffset;
-            double yOffset = 0.45;
-            double zOffset;
+      double xOffset;
+      double yOffset = 0.45;
+      double zOffset;
 
-            int column = slot % 3;
-            int row = slot / 3;
+      int column = slot % 3;
+      int row = slot / 3;
 
-            if (row == 0) {
-                zOffset = -0.375;
+      if (row == 0) {
+        zOffset = -0.375;
 
-                if (column == 0) {
-                    xOffset = -0.34375;
-                } else if (column == 1) {
-                    xOffset = 0;
-                } else {
-                    xOffset = 0.34375;
-                }
-            } else {
-                zOffset = -0.125;
-
-                if (column == 0) {
-                    xOffset = -0.34375;
-                } else if (column == 1) {
-                    xOffset = 0;
-                } else {
-                    xOffset = 0.34375;
-                }
-            }
-
-            poseStack.translate(xOffset, yOffset, zOffset);
-
-            float angleVariation = (column * 5) - 5;
-            poseStack.mulPose(Axis.YP.rotationDegrees(angleVariation));
-
-            float scale = 0.3f;
-            poseStack.scale(scale, scale, scale);
-
-            itemRenderer.renderStatic(
-                    stack,
-                    ItemDisplayContext.FIXED,
-                    packedLight,
-                    packedOverlay,
-                    poseStack,
-                    buffer,
-                    level,
-                    0
-            );
-
-            poseStack.popPose();
+        if (column == 0) {
+          xOffset = -0.34375;
+        } else if (column == 1) {
+          xOffset = 0;
+        } else {
+          xOffset = 0.34375;
         }
+      } else {
+        zOffset = -0.125;
 
-        poseStack.popPose();
+        if (column == 0) {
+          xOffset = -0.34375;
+        } else if (column == 1) {
+          xOffset = 0;
+        } else {
+          xOffset = 0.34375;
+        }
+      }
+
+      poseStack.translate(xOffset, yOffset, zOffset);
+
+      float angleVariation = (column * 5) - 5;
+      poseStack.mulPose(Axis.YP.rotationDegrees(angleVariation));
+
+      float scale = 0.3f;
+      poseStack.scale(scale, scale, scale);
+
+      itemRenderer.renderStatic(
+          stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, level, 0);
+
+      poseStack.popPose();
     }
 
-    @Override
-    public boolean shouldRenderOffScreen(ShelfBlockEntity blockEntity) {
-        return true;
-    }
+    poseStack.popPose();
+  }
+
+  @Override
+  public boolean shouldRenderOffScreen(ShelfBlockEntity blockEntity) {
+    return true;
+  }
 }

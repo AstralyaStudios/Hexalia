@@ -52,7 +52,7 @@ public class RootshaperEventHandler {
                 if (pos.equals(center)) continue;
                 BlockState state = level.getBlockState(pos);
                 if (state.isAir() || state.getDestroySpeed(level, pos) < 0) continue;
-                if (!stack.isCorrectToolForDrops(state)) continue;
+                if (!((RootshaperItem) stack.getItem()).isCorrectToolForDrops(stack, state)) continue;
                 player.gameMode.destroyBlock(pos);
             }
         } finally {

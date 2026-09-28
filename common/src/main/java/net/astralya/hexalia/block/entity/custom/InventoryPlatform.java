@@ -7,15 +7,15 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public final class InventoryPlatform {
-    private InventoryPlatform() {}
+  private InventoryPlatform() {}
 
-    @ExpectPlatform
-    public static @Nullable ItemStack insertAbove(Level level, BlockPos pos, ItemStack stack) {
-        throw new AssertionError();
-    }
+  @ExpectPlatform
+  public static @Nullable ItemStack insertAbove(Level level, BlockPos pos, ItemStack stack) {
+    throw new AssertionError();
+  }
 
-    @ExpectPlatform
-    public static @Nullable ItemStack insertAny(Level level, BlockPos pos, ItemStack stack) {
-        throw new AssertionError();
-    }
+  @ExpectPlatform
+  public static @Nullable ItemStack insertAny(Level level, BlockPos pos, ItemStack stack) {
+    throw new AssertionError();
+  }
 }

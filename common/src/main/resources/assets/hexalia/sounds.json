@@ -27,6 +27,15 @@
     ]
   },
 
+  "cacofey_idle": {
+    "sounds": [
+      {
+        "name": "hexalia:cacofey_idle",
+        "volume": 0.6
+      }
+    ]
+  },
+
   "wind_burst": {
     "subtitle": "sounds.hexalia.wind_burst",
     "sounds": [

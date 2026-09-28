@@ -19,46 +19,49 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class EggClusterBlock extends BaseEntityBlock {
-    private static final VoxelShape SHAPE = Block.box(1.0F, 0.0F, 1.0F, 15.0F, 7.0F, 15.0F);
+  private static final VoxelShape SHAPE = Block.box(1.0F, 0.0F, 1.0F, 15.0F, 7.0F, 15.0F);
 
-    public EggClusterBlock(Properties properties) {
-        super(properties);
-    }
+  public EggClusterBlock(Properties properties) {
+    super(properties);
+  }
 
-    @Override
-    public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
-    }
+  @Override
+  public RenderShape getRenderShape(BlockState state) {
+    return RenderShape.MODEL;
+  }
 
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
-    }
+  @Override
+  public VoxelShape getShape(
+      BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    return SHAPE;
+  }
 
-    @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
-    }
+  @Override
+  public VoxelShape getCollisionShape(
+      BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    return SHAPE;
+  }
 
-    @Override
-    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        super.fallOn(level, state, pos, entity, fallDistance);
-        if (level.isClientSide) return;
-        if (!(entity instanceof Player)) return;
-        if (fallDistance < 0.5F) return;
-        level.destroyBlock(pos, false);
-    }
+  @Override
+  public void fallOn(
+      Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+    super.fallOn(level, state, pos, entity, fallDistance);
+    if (level.isClientSide) return;
+    if (!(entity instanceof Player)) return;
+    if (fallDistance < 0.5F) return;
+    level.destroyBlock(pos, false);
+  }
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new EggClusterBlockEntity(pos, state);
-    }
+  @Nullable @Override
+  public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    return new EggClusterBlockEntity(pos, state);
+  }
 
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        if (level.isClientSide) return null;
-        return createTickerHelper(type, ModBlockEntityTypes.EGG_CLUSTER.get(), EggClusterBlockEntity::tick);
-    }
+  @Nullable @Override
+  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+      Level level, BlockState state, BlockEntityType<T> type) {
+    if (level.isClientSide) return null;
+    return createTickerHelper(
+        type, ModBlockEntityTypes.EGG_CLUSTER.get(), EggClusterBlockEntity::tick);
+  }
 }

@@ -25,52 +25,61 @@ import org.jetbrains.annotations.Nullable;
 
 public class WindsongBlock extends EnchantedPlantBlock implements EntityBlock {
 
-    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
+  public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
-    public WindsongBlock(Properties pProperties) {
-        super(pProperties);
-        this.registerDefaultState(this.defaultBlockState().setValue(ACTIVE, false));
-    }
+  public WindsongBlock(Properties pProperties) {
+    super(pProperties);
+    this.registerDefaultState(this.defaultBlockState().setValue(ACTIVE, false));
+  }
 
-    @Override
-    protected boolean mayPlaceOn(BlockState pState, BlockGetter pGetter, BlockPos pPos) {
-        return (pState.isFaceSturdy(pGetter, pPos, Direction.UP) && !pState.is(Blocks.MAGMA_BLOCK));
-    }
+  @Override
+  protected boolean mayPlaceOn(BlockState pState, BlockGetter pGetter, BlockPos pPos) {
+    return (pState.isFaceSturdy(pGetter, pPos, Direction.UP) && !pState.is(Blocks.MAGMA_BLOCK));
+  }
 
-    @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pPlayer.getItemInHand(pHand).getItem() == ModItems.HEX_FOCUS.get()) {
-            if (!pLevel.isClientSide) {
-                BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-                if (blockEntity instanceof WindsongBlockEntity windsongBlockEntity && !windsongBlockEntity.isActive()) {
-                    windsongBlockEntity.activateDetached((net.minecraft.server.level.ServerLevel) pLevel);
-                    pLevel.removeBlock(pPos, false);
-                    pLevel.playSound(null, pPos, ModSoundEvents.WIND_BURST.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-                }
-            }
-            return InteractionResult.SUCCESS;
+  @Override
+  public InteractionResult use(
+      BlockState pState,
+      Level pLevel,
+      BlockPos pPos,
+      Player pPlayer,
+      InteractionHand pHand,
+      BlockHitResult pHit) {
+    if (pPlayer.getItemInHand(pHand).getItem() == ModItems.HEX_FOCUS.get()) {
+      if (!pLevel.isClientSide) {
+        BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+        if (blockEntity instanceof WindsongBlockEntity windsongBlockEntity
+            && !windsongBlockEntity.isActive()) {
+          windsongBlockEntity.activateDetached((net.minecraft.server.level.ServerLevel) pLevel);
+          pLevel.removeBlock(pPos, false);
+          pLevel.playSound(
+              null, pPos, ModSoundEvents.WIND_BURST.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
         }
-        return InteractionResult.PASS;
+      }
+      return InteractionResult.SUCCESS;
     }
+    return InteractionResult.PASS;
+  }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(ACTIVE);
-    }
+  @Override
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+    pBuilder.add(ACTIVE);
+  }
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new WindsongBlockEntity(pPos, pState);
-    }
+  @Nullable @Override
+  public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    return new WindsongBlockEntity(pPos, pState);
+  }
 
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? null : (level, pos, state, blockEntity) -> {
-            if (blockEntity instanceof WindsongBlockEntity windsong) {
-                windsong.tick(level, pos, state);
-            }
+  @Nullable @Override
+  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+      Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+    return pLevel.isClientSide
+        ? null
+        : (level, pos, state, blockEntity) -> {
+          if (blockEntity instanceof WindsongBlockEntity windsong) {
+            windsong.tick(level, pos, state);
+          }
         };
-    }
+  }
 }

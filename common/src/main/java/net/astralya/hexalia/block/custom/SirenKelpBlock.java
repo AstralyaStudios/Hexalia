@@ -17,36 +17,40 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class SirenKelpBlock extends SeagrassBlock {
 
-    protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 10.0D, 11.0D);
+  protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 10.0D, 11.0D);
 
-    public SirenKelpBlock(Properties pProperties) {
-        super(pProperties);
-    }
+  public SirenKelpBlock(Properties pProperties) {
+    super(pProperties);
+  }
 
-    @Override
-    public VoxelShape getShape(BlockState p_154525_, BlockGetter p_154526_, BlockPos p_154527_, CollisionContext p_154528_) {
-        return SHAPE;
-    }
+  @Override
+  public VoxelShape getShape(
+      BlockState p_154525_, BlockGetter p_154526_, BlockPos p_154527_, CollisionContext p_154528_) {
+    return SHAPE;
+  }
 
-    @Override
-    protected boolean mayPlaceOn(BlockState state, BlockGetter pGetter, BlockPos pos) {
-        return (state.isFaceSturdy(pGetter, pos, Direction.UP) || state.is(ModBlocks.INFUSED_DIRT.get())
-                && !state.is(Blocks.MAGMA_BLOCK));
-    }
+  @Override
+  protected boolean mayPlaceOn(BlockState state, BlockGetter pGetter, BlockPos pos) {
+    return (state.isFaceSturdy(pGetter, pos, Direction.UP)
+        || state.is(ModBlocks.INFUSED_DIRT.get()) && !state.is(Blocks.MAGMA_BLOCK));
+  }
 
-    @Override
-    public boolean isValidBonemealTarget(LevelReader pReader, BlockPos pos, BlockState state, boolean isClient) {
-        BlockState blockBelow = pReader.getBlockState(pos.below());
-        return blockBelow.is(ModBlocks.INFUSED_DIRT.get()) && state.canSurvive(pReader, pos);
-    }
+  @Override
+  public boolean isValidBonemealTarget(
+      LevelReader pReader, BlockPos pos, BlockState state, boolean isClient) {
+    BlockState blockBelow = pReader.getBlockState(pos.below());
+    return blockBelow.is(ModBlocks.INFUSED_DIRT.get()) && state.canSurvive(pReader, pos);
+  }
 
-    @Override
-    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
-        return random.nextFloat() < 0.6F;
-    }
+  @Override
+  public boolean isBonemealSuccess(
+      Level level, RandomSource random, BlockPos pos, BlockState state) {
+    return random.nextFloat() < 0.6F;
+  }
 
-    @Override
-    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        HerbSpreading.spread(level, random, pos, state, true);
-    }
+  @Override
+  public void performBonemeal(
+      ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+    HerbSpreading.spread(level, random, pos, state, true);
+  }
 }

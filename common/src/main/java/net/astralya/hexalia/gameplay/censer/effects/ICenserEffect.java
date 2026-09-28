@@ -5,13 +5,15 @@ import net.minecraft.server.level.ServerLevel;
 
 public interface ICenserEffect {
 
-    String getMessageKey();
+  String getMessageKey();
 
-    default boolean usesSpatialCache() { return false; }
+  default boolean usesSpatialCache() {
+    return false;
+  }
 
-    default void onStart(ServerLevel level, BlockPos pos) {}
+  default void onStart(ServerLevel level, BlockPos pos) {}
 
-    void onTick(ServerLevel level, BlockPos pos);
+  void onTick(ServerLevel level, BlockPos pos);
 
-    default void onStop(ServerLevel level, BlockPos pos) {}
+  default void onStop(ServerLevel level, BlockPos pos) {}
 }

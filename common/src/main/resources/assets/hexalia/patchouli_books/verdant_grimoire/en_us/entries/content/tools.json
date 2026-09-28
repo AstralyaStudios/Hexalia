@@ -56,7 +56,7 @@
       "item": "hexalia:sage_pendant",
       "title": "Sage Pendant",
       "anchor": "sage_pendant",
-      "text": "When worn or held in the off hand, the Sage Pendant triples experience gained. Each gain wears upon the pendant, so its wisdom is finite."
+      "text": "When worn or held in the off hand, the Sage Pendant stores 25% extra Experience gained, up to 300. Shift + Right-click with it to absorb the stored Experience."
     },
     {
       "type": "spotlight",

@@ -7,12 +7,12 @@ import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class ModHangingSignBlockEntity extends SignBlockEntity {
-    public ModHangingSignBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntityTypes.MOD_HANGING_SIGN.get(), blockPos, blockState);
-    }
+  public ModHangingSignBlockEntity(BlockPos blockPos, BlockState blockState) {
+    super(ModBlockEntityTypes.MOD_HANGING_SIGN.get(), blockPos, blockState);
+  }
 
-    @Override
-    public BlockEntityType<?> getType() {
-        return ModBlockEntityTypes.MOD_HANGING_SIGN.get();
-    }
+  @Override
+  public BlockEntityType<?> getType() {
+    return ModBlockEntityTypes.MOD_HANGING_SIGN.get();
+  }
 }

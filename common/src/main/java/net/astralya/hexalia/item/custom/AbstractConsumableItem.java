@@ -1,5 +1,7 @@
 package net.astralya.hexalia.item.custom;
 
+import java.util.List;
+import javax.annotation.Nullable;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,73 +17,70 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
-import javax.annotation.Nullable;
-import java.util.List;
-
 public abstract class AbstractConsumableItem extends Item {
 
-    public AbstractConsumableItem(Properties properties) {
-        super(properties);
+  public AbstractConsumableItem(Properties properties) {
+    super(properties);
+  }
+
+  @Override
+  public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
+    ItemStack original = stack.copy();
+    ItemStack current = super.finishUsingItem(stack, level, user);
+
+    if (user instanceof ServerPlayer sp) {
+      CriteriaTriggers.CONSUME_ITEM.trigger(sp, original);
+      sp.awardStat(Stats.ITEM_USED.get(this));
     }
 
-    @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
-        ItemStack original = stack.copy();
-        ItemStack current = super.finishUsingItem(stack, level, user);
+    handleEffects(level, user, original);
 
-        if (user instanceof ServerPlayer sp) {
-            CriteriaTriggers.CONSUME_ITEM.trigger(sp, original);
-            sp.awardStat(Stats.ITEM_USED.get(this));
+    ItemStack container = getReturnContainer(original);
+
+    if (!level.isClientSide && user instanceof Player player && !player.getAbilities().instabuild) {
+      boolean isFood = original.isEdible();
+      if (!isFood) current.shrink(1);
+
+      if (current.isEmpty()) {
+        return container;
+      }
+      if (!container.isEmpty()) {
+        if (!player.getInventory().add(container)) {
+          player.drop(container, false);
         }
-
-        handleEffects(level, user, original);
-
-        ItemStack container = getReturnContainer(original);
-
-        if (!level.isClientSide && user instanceof Player player && !player.getAbilities().instabuild) {
-            boolean isFood = original.isEdible();
-            if (!isFood) current.shrink(1);
-
-            if (current.isEmpty()) {
-                return container;
-            }
-            if (!container.isEmpty()) {
-                if (!player.getInventory().add(container)) {
-                    player.drop(container, false);
-                }
-            }
-        }
-
-        return current;
+      }
     }
 
-    protected abstract void handleEffects(Level level, LivingEntity user, ItemStack consumedStack);
+    return current;
+  }
 
-    protected abstract ItemStack getReturnContainer(ItemStack consumedStack);
+  protected abstract void handleEffects(Level level, LivingEntity user, ItemStack consumedStack);
 
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        return ItemUtils.startUsingInstantly(level, player, hand);
-    }
+  protected abstract ItemStack getReturnContainer(ItemStack consumedStack);
 
-    @Override
-    public int getUseDuration(ItemStack stack) {
-        return 32;
-    }
+  @Override
+  public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    return ItemUtils.startUsingInstantly(level, player, hand);
+  }
 
-    @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.DRINK;
-    }
+  @Override
+  public int getUseDuration(ItemStack stack) {
+    return 32;
+  }
 
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        Component line = getTooltip(stack);
-        if (line != null) tooltip.add(line);
-    }
+  @Override
+  public UseAnim getUseAnimation(ItemStack stack) {
+    return UseAnim.DRINK;
+  }
 
-    @Nullable
-    protected Component getTooltip(ItemStack stack) {
-        return null;
-    }
+  @Override
+  public void appendHoverText(
+      ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+    Component line = getTooltip(stack);
+    if (line != null) tooltip.add(line);
+  }
+
+  @Nullable protected Component getTooltip(ItemStack stack) {
+    return null;
+  }
 }

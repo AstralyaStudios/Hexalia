@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.astralya.hexalia.neoforge.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "CropBlockMixin",
+    "StemBlockMixin",
+    "SugarCaneBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

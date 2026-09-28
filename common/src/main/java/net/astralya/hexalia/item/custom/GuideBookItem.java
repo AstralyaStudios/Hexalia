@@ -1,7 +1,6 @@
 package net.astralya.hexalia.item.custom;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -15,19 +14,19 @@ import vazkii.patchouli.api.PatchouliAPI;
 
 public class GuideBookItem extends Item {
 
-    public GuideBookItem(Properties pProperties) {
-        super(pProperties);
+  public GuideBookItem(Properties pProperties) {
+    super(pProperties);
+  }
+
+  @Override
+  public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    ItemStack stack = player.getItemInHand(hand);
+
+    if (player instanceof ServerPlayer) {
+      PatchouliAPI.get().openBookGUI((ServerPlayer) player, BuiltInRegistries.ITEM.getKey(this));
+      player.playSound(SoundEvents.BOOK_PAGE_TURN, 1F, (float) (0.7 + Math.random() * 0.4));
     }
 
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-
-        if (player instanceof ServerPlayer) {
-            PatchouliAPI.get().openBookGUI((ServerPlayer) player, BuiltInRegistries.ITEM.getKey(this));
-            player.playSound(SoundEvents.BOOK_PAGE_TURN, 1F, (float) (0.7 + Math.random() * 0.4));
-        }
-
-        return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
-    }
+    return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
+  }
 }

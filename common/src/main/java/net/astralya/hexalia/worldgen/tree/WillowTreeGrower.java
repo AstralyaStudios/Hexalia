@@ -8,10 +8,9 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import org.jetbrains.annotations.Nullable;
 
 public class WillowTreeGrower extends AbstractTreeGrower {
-    @Nullable
-    @Override
-    protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource pRandom, boolean pHasFlowers) {
-        return ModConfiguredFeatures.WILLOW;
-    }
+  @Nullable @Override
+  protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(
+      RandomSource pRandom, boolean pHasFlowers) {
+    return ModConfiguredFeatures.WILLOW;
+  }
 }
-

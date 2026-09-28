@@ -7,16 +7,15 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
 public class ThornArrowRenderer extends ArrowRenderer<ThornArrowEntity> {
-    private static final ResourceLocation TEXTURE =
-            new ResourceLocation(HexaliaMod.MODID, "textures/entity/projectiles/thorn_arrow.png");
+  private static final ResourceLocation TEXTURE =
+      new ResourceLocation(HexaliaMod.MODID, "textures/entity/projectiles/thorn_arrow.png");
 
-    public ThornArrowRenderer(EntityRendererProvider.Context context) {
-        super(context);
-    }
+  public ThornArrowRenderer(EntityRendererProvider.Context context) {
+    super(context);
+  }
 
-    @Override
-    public ResourceLocation getTextureLocation(ThornArrowEntity entity) {
-        return TEXTURE;
-    }
+  @Override
+  public ResourceLocation getTextureLocation(ThornArrowEntity entity) {
+    return TEXTURE;
+  }
 }
-

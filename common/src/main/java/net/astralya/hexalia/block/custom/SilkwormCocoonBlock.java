@@ -37,112 +37,132 @@ import org.jetbrains.annotations.Nullable;
 
 public class SilkwormCocoonBlock extends Block {
 
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+  public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    private static final VoxelShape NORTH_SHAPE = Shapes.create(new AABB(5.0 / 16.0, 5.0 / 16.0, 11.0 / 16.0, 11.0 / 16.0, 12.0 / 16.0, 1.0));
-    private static final VoxelShape SOUTH_SHAPE = Shapes.create(new AABB(5.0 / 16.0, 5.0 / 16.0, 0.0, 11.0 / 16.0, 12.0 / 16.0, 5.0 / 16.0));
-    private static final VoxelShape WEST_SHAPE = Shapes.create(new AABB(11.0 / 16.0, 5.0 / 16.0, 5.0 / 16.0, 1.0, 12.0 / 16.0, 11.0 / 16.0));
-    private static final VoxelShape EAST_SHAPE = Shapes.create(new AABB(0.0, 5.0 / 16.0, 5.0 / 16.0, 5.0 / 16.0, 12.0 / 16.0, 11.0 / 16.0));
+  private static final VoxelShape NORTH_SHAPE =
+      Shapes.create(new AABB(5.0 / 16.0, 5.0 / 16.0, 11.0 / 16.0, 11.0 / 16.0, 12.0 / 16.0, 1.0));
+  private static final VoxelShape SOUTH_SHAPE =
+      Shapes.create(new AABB(5.0 / 16.0, 5.0 / 16.0, 0.0, 11.0 / 16.0, 12.0 / 16.0, 5.0 / 16.0));
+  private static final VoxelShape WEST_SHAPE =
+      Shapes.create(new AABB(11.0 / 16.0, 5.0 / 16.0, 5.0 / 16.0, 1.0, 12.0 / 16.0, 11.0 / 16.0));
+  private static final VoxelShape EAST_SHAPE =
+      Shapes.create(new AABB(0.0, 5.0 / 16.0, 5.0 / 16.0, 5.0 / 16.0, 12.0 / 16.0, 11.0 / 16.0));
 
-    public SilkwormCocoonBlock(Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH));
+  public SilkwormCocoonBlock(Properties properties) {
+    super(properties);
+    this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH));
+  }
+
+  @Override
+  public InteractionResult use(
+      BlockState state,
+      Level level,
+      BlockPos pos,
+      Player player,
+      InteractionHand hand,
+      BlockHitResult hitResult) {
+    if (level.isClientSide()) {
+      return InteractionResult.SUCCESS;
     }
 
-    @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (level.isClientSide()) {
-            return InteractionResult.SUCCESS;
-        }
-
-        ItemStack itemStack = player.getItemInHand(hand);
-        if (itemStack.getItem() instanceof BlockItem blockItem) {
-            Block block = blockItem.getBlock();
-            if (block.defaultBlockState().getLightEmission() > 8) {
-                level.scheduleTick(pos, this, 200);
-                return InteractionResult.CONSUME;
-            }
-        }
-
-        return InteractionResult.PASS;
+    ItemStack itemStack = player.getItemInHand(hand);
+    if (itemStack.getItem() instanceof BlockItem blockItem) {
+      Block block = blockItem.getBlock();
+      if (block.defaultBlockState().getLightEmission() > 8) {
+        level.scheduleTick(pos, this, 200);
+        return InteractionResult.CONSUME;
+      }
     }
 
-    @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        level.removeBlock(pos, false);
-        SilkMothEntity silkMoth = ModEntities.SILK_MOTH_ENTITY.get().create(level);
-        if (silkMoth != null) {
-            silkMoth.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.0F, 0.0F);
-            SilkMothVariant variant = SilkMothVariant.byId(random.nextInt(SilkMothVariant.values().length));
-            silkMoth.setVariant(variant);
-            level.addFreshEntity(silkMoth);
-        }
-        level.gameEvent(null, GameEvent.BLOCK_DESTROY, pos);
-    }
+    return InteractionResult.PASS;
+  }
 
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return switch (state.getValue(FACING)) {
-            case SOUTH -> SOUTH_SHAPE;
-            case WEST -> WEST_SHAPE;
-            case EAST -> EAST_SHAPE;
-            default -> NORTH_SHAPE;
-        };
+  @Override
+  public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    level.removeBlock(pos, false);
+    SilkMothEntity silkMoth = ModEntities.SILK_MOTH_ENTITY.get().create(level);
+    if (silkMoth != null) {
+      silkMoth.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.0F, 0.0F);
+      SilkMothVariant variant =
+          SilkMothVariant.byId(random.nextInt(SilkMothVariant.values().length));
+      silkMoth.setVariant(variant);
+      level.addFreshEntity(silkMoth);
     }
+    level.gameEvent(null, GameEvent.BLOCK_DESTROY, pos);
+  }
 
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        Direction face = context.getClickedFace();
-        if (face.getAxis().isVertical()) {
-            return null;
-        }
-        return this.defaultBlockState().setValue(FACING, face);
-    }
+  @Override
+  public VoxelShape getShape(
+      BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    return switch (state.getValue(FACING)) {
+      case SOUTH -> SOUTH_SHAPE;
+      case WEST -> WEST_SHAPE;
+      case EAST -> EAST_SHAPE;
+      default -> NORTH_SHAPE;
+    };
+  }
 
-    @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor levelAccessor, BlockPos pos, BlockPos neighborPos) {
-        if (direction == state.getValue(FACING).getOpposite() && !state.canSurvive(levelAccessor, pos)) {
-            return Blocks.AIR.defaultBlockState();
-        }
-        return super.updateShape(state, direction, neighborState, levelAccessor, pos, neighborPos);
+  @Nullable @Override
+  public BlockState getStateForPlacement(BlockPlaceContext context) {
+    Direction face = context.getClickedFace();
+    if (face.getAxis().isVertical()) {
+      return null;
     }
+    return this.defaultBlockState().setValue(FACING, face);
+  }
 
-    @Override
-    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        Direction facing = state.getValue(FACING);
-        BlockPos attachedPos = pos.relative(facing.getOpposite());
-        return level.getBlockState(attachedPos).is(BlockTags.LOGS)
-                && !hasOtherCocoonAttached(level, attachedPos, pos);
+  @Override
+  public BlockState updateShape(
+      BlockState state,
+      Direction direction,
+      BlockState neighborState,
+      LevelAccessor levelAccessor,
+      BlockPos pos,
+      BlockPos neighborPos) {
+    if (direction == state.getValue(FACING).getOpposite()
+        && !state.canSurvive(levelAccessor, pos)) {
+      return Blocks.AIR.defaultBlockState();
     }
+    return super.updateShape(state, direction, neighborState, levelAccessor, pos, neighborPos);
+  }
 
-    private static boolean hasOtherCocoonAttached(LevelReader level, BlockPos attachedPos, BlockPos pos) {
-        for (Direction direction : Direction.Plane.HORIZONTAL) {
-            BlockPos neighborPos = attachedPos.relative(direction);
-            if (!neighborPos.equals(pos) && level.getBlockState(neighborPos).getBlock() instanceof SilkwormCocoonBlock) {
-                return true;
-            }
-        }
-        return false;
-    }
+  @Override
+  public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    Direction facing = state.getValue(FACING);
+    BlockPos attachedPos = pos.relative(facing.getOpposite());
+    return level.getBlockState(attachedPos).is(BlockTags.LOGS)
+        && !hasOtherCocoonAttached(level, attachedPos, pos);
+  }
 
-    @Override
-    public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
+  private static boolean hasOtherCocoonAttached(
+      LevelReader level, BlockPos attachedPos, BlockPos pos) {
+    for (Direction direction : Direction.Plane.HORIZONTAL) {
+      BlockPos neighborPos = attachedPos.relative(direction);
+      if (!neighborPos.equals(pos)
+          && level.getBlockState(neighborPos).getBlock() instanceof SilkwormCocoonBlock) {
+        return true;
+      }
     }
+    return false;
+  }
 
-    @Override
-    public BlockState rotate(BlockState state, Rotation rotation) {
-        return state;
-    }
+  @Override
+  public RenderShape getRenderShape(BlockState state) {
+    return RenderShape.MODEL;
+  }
 
-    @Override
-    public BlockState mirror(BlockState state, Mirror mirror) {
-        return state;
-    }
+  @Override
+  public BlockState rotate(BlockState state, Rotation rotation) {
+    return state;
+  }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
-    }
+  @Override
+  public BlockState mirror(BlockState state, Mirror mirror) {
+    return state;
+  }
+
+  @Override
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    builder.add(FACING);
+  }
 }
