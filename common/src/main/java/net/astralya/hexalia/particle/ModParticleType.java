@@ -22,6 +22,8 @@ public class ModParticleType {
       PARTICLE_TYPES.register("infused_bubbles", () -> new SimpleParticleType(true) {});
   public static final RegistrySupplier<SimpleParticleType> SPARKLE =
       PARTICLE_TYPES.register("sparkle", () -> new SimpleParticleType(true) {});
+  public static final RegistrySupplier<SimpleParticleType> HEX_MOTE =
+      PARTICLE_TYPES.register("hex_mote", () -> new SimpleParticleType(true) {});
   public static final RegistrySupplier<SimpleParticleType> CACOFEY_DUST =
       PARTICLE_TYPES.register("cacofey_dust", () -> new SimpleParticleType(true) {});
   public static final RegistrySupplier<SimpleParticleType> CACOFEY_DUST_HELD =

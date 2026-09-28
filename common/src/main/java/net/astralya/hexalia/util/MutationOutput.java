@@ -13,21 +13,20 @@ public final class MutationOutput {
 
   private MutationOutput() {}
 
-  public static void apply(ServerLevel level, BlockPos pos, ItemStack result) {
+  public static boolean apply(ServerLevel level, BlockPos pos, ItemStack result) {
     if (result.isEmpty()) {
-      return;
+      return false;
     }
 
     if (!Configuration.MUTATION_SPAWNS_ITEM_ENTITY.get()) {
       if (result.getItem() instanceof BlockItem blockItem) {
         Block block = blockItem.getBlock();
         BlockState placed = block.defaultBlockState();
-        level.setBlock(pos, placed, Block.UPDATE_ALL);
-        return;
+        return level.setBlock(pos, placed, Block.UPDATE_ALL);
       }
     }
 
-    level.addFreshEntity(
+    return level.addFreshEntity(
         new ItemEntity(
             level, pos.getX() + 0.5D, pos.getY() + 0.25D, pos.getZ() + 0.5D, result.copy()));
   }
