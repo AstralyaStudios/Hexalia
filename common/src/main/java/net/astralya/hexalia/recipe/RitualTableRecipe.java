@@ -2,6 +2,9 @@ package net.astralya.hexalia.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import java.util.Locale;
+import java.util.Optional;
+import net.astralya.hexalia.Configuration;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
@@ -26,8 +29,16 @@ public class RitualTableRecipe implements Recipe<SimpleContainer> {
   private final int entityCount;
   private final boolean requiresSoul;
   private final boolean naturesRitualSerializer;
+  private final RitualKind ritualKind;
+  private final Optional<Integer> energyCost;
 
-  public static final int INPUT_SLOTS = 4;
+  public static final int INPUT_SLOTS = 8;
+
+  public enum RitualKind {
+    NATURE,
+    CELESTIAL,
+    SUMMONING
+  }
 
   public RitualTableRecipe(
       ResourceLocation id, NonNullList<Ingredient> ingredients, ItemStack output) {
@@ -42,6 +53,22 @@ public class RitualTableRecipe implements Recipe<SimpleContainer> {
       int entityCount,
       boolean requiresSoul,
       boolean naturesRitualSerializer) {
+    this(id, ingredients, output, entityResult, entityCount, requiresSoul,
+        naturesRitualSerializer,
+        requiresSoul || entityResult != null ? RitualKind.SUMMONING : RitualKind.NATURE,
+        Optional.empty());
+  }
+
+  public RitualTableRecipe(
+      ResourceLocation id,
+      NonNullList<Ingredient> ingredients,
+      ItemStack output,
+      @Nullable ResourceLocation entityResult,
+      int entityCount,
+      boolean requiresSoul,
+      boolean naturesRitualSerializer,
+      RitualKind ritualKind,
+      Optional<Integer> energyCost) {
     this.id = id;
     this.ingredients = ingredients;
     this.output = output;
@@ -49,6 +76,8 @@ public class RitualTableRecipe implements Recipe<SimpleContainer> {
     this.entityCount = entityCount;
     this.requiresSoul = requiresSoul;
     this.naturesRitualSerializer = naturesRitualSerializer;
+    this.ritualKind = ritualKind;
+    this.energyCost = energyCost;
   }
 
   public Ingredient centerIngredient() {
@@ -63,6 +92,18 @@ public class RitualTableRecipe implements Recipe<SimpleContainer> {
 
   public boolean requiresSoul() {
     return requiresSoul;
+  }
+
+  public RitualKind ritualKind() {
+    return ritualKind;
+  }
+
+  public Optional<Integer> energyCost() {
+    return energyCost;
+  }
+
+  public int resolvedEnergyCost() {
+    return energyCost.orElseGet(() -> Configuration.NATURES_RITUAL_CROP_REQUIREMENT.get());
   }
 
   public boolean isEntityResult() {
@@ -184,14 +225,30 @@ public class RitualTableRecipe implements Recipe<SimpleContainer> {
           throw new IllegalArgumentException("Invalid Nature's Ritual entity result: " + entity);
         }
       }
+      boolean requiresSoul = GsonHelper.getAsBoolean(json, "requires_soul", false);
+      RitualKind ritualKind;
+      try {
+        ritualKind = RitualKind.valueOf(GsonHelper.getAsString(json, "ritual_kind",
+            requiresSoul || entity != null ? "summoning" : "nature").toUpperCase(Locale.ROOT));
+      } catch (IllegalArgumentException exception) {
+        throw new IllegalArgumentException("Invalid Nature's Ritual ritual_kind", exception);
+      }
+      Optional<Integer> energyCost = json.has("energy_cost")
+          ? Optional.of(GsonHelper.getAsInt(json, "energy_cost")) : Optional.empty();
+      if (energyCost.isPresent() && energyCost.get() < 0)
+        throw new IllegalArgumentException("Nature's Ritual energy_cost must be nonnegative");
+      if (ritualKind == RitualKind.CELESTIAL && energyCost.isEmpty())
+        throw new IllegalArgumentException("Celestial rituals require energy_cost");
       return new RitualTableRecipe(
           id,
           list,
           out,
           entity,
           entityCount,
-          GsonHelper.getAsBoolean(json, "requires_soul", false),
-          naturesRitual);
+          requiresSoul,
+          naturesRitual,
+          ritualKind,
+          energyCost);
     }
 
     @Override
@@ -203,8 +260,13 @@ public class RitualTableRecipe implements Recipe<SimpleContainer> {
       ItemStack out = item ? buf.readItem() : ItemStack.EMPTY;
       ResourceLocation entity = item ? null : buf.readResourceLocation();
       int entityCount = item ? 0 : buf.readVarInt();
+      boolean requiresSoul = buf.readBoolean();
+      RitualKind ritualKind = buf.readEnum(RitualKind.class);
+      Optional<Integer> energyCost = buf.readBoolean()
+          ? Optional.of(buf.readVarInt()) : Optional.empty();
       return new RitualTableRecipe(
-          id, list, out, entity, entityCount, buf.readBoolean(), naturesRitual);
+          id, list, out, entity, entityCount, requiresSoul, naturesRitual,
+          ritualKind, energyCost);
     }
 
     @Override
@@ -219,6 +281,9 @@ public class RitualTableRecipe implements Recipe<SimpleContainer> {
         buf.writeItem(recipe.output);
       }
       buf.writeBoolean(recipe.requiresSoul);
+      buf.writeEnum(recipe.ritualKind);
+      buf.writeBoolean(recipe.energyCost.isPresent());
+      recipe.energyCost.ifPresent(buf::writeVarInt);
     }
   }
 }

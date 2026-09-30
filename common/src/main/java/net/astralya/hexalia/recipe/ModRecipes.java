@@ -23,10 +23,6 @@ public class ModRecipes {
           SERIALIZERS.register(
               "natures_ritual", () -> RitualTableRecipe.Serializer.NATURES_RITUAL_INSTANCE);
 
-  public static final RegistrySupplier<RecipeSerializer<RitualBrazierRecipe>>
-      RITUAL_BRAZIER_SERIALIZER =
-          SERIALIZERS.register("ritual_brazier", () -> RitualBrazierRecipe.Serializer.INSTANCE);
-
   public static final RegistrySupplier<RecipeSerializer<MutationRecipe>> MUTATION_SERIALIZER =
       SERIALIZERS.register("mutation", () -> MutationRecipe.Serializer.INSTANCE);
 

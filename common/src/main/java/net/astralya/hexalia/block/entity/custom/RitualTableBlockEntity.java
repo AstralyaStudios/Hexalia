@@ -2,15 +2,22 @@ package net.astralya.hexalia.block.entity.custom;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 import net.astralya.hexalia.HexaliaMod;
+import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.block.custom.RitualBrazierBlock;
 import net.astralya.hexalia.block.entity.ModBlockEntityTypes;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.particle.ModParticleType;
+import net.astralya.hexalia.gameplay.naturesritual.NatureRitualVisuals;
+import net.astralya.hexalia.gameplay.naturesritual.CelestialRitualVisuals;
+import net.astralya.hexalia.gameplay.naturesritual.SummoningRitualVisuals;
 import net.astralya.hexalia.recipe.RitualTableRecipe;
 import net.astralya.hexalia.sound.ModSoundEvents;
+import net.astralya.hexalia.util.ModTags;
+import net.astralya.hexalia.util.CelestialTime;
 import net.astralya.hexalia.util.ItemHandler;
 import net.astralya.hexalia.util.ItemStackHandler;
 import net.astralya.hexalia.util.SidedItemHandlers;
@@ -34,7 +41,9 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -81,6 +90,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
   private ItemStack pendingOutput = ItemStack.EMPTY;
   private RitualState ritualState = RitualState.IDLE;
   private @Nullable ResourceLocation pendingRecipeId;
+  private RitualTableRecipe.RitualKind ritualKind = RitualTableRecipe.RitualKind.NATURE;
   private @Nullable UUID activatingPlayerId;
   private boolean requiresSoul;
   private int manifestationTicksRemaining;
@@ -188,7 +198,8 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
       List<RitualBrazierBlockEntity> braziers,
       ResourceLocation recipeId,
       boolean requiresSoul,
-      Player activatingPlayer) {
+      Player activatingPlayer,
+      RitualTableRecipe.RitualKind ritualKind) {
     if (this.ritualState != RitualState.IDLE) {
       return;
     }
@@ -199,6 +210,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
     this.activeBrazierPositions = braziers.stream().map(BlockEntity::getBlockPos).toList();
     this.nextBrazierIndex = 0;
     this.pendingRecipeId = recipeId;
+    this.ritualKind = ritualKind;
     this.requiresSoul = requiresSoul;
     this.activatingPlayerId = activatingPlayer.getUUID();
     this.ritualState = RitualState.PROCESSING_OFFERINGS;
@@ -206,11 +218,14 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
   }
 
   public boolean tryCaptureSoul(BlockPos sacrificeOrigin) {
-    if (!(level instanceof ServerLevel server) || !isAwaitingSoul()) return false;
+    if (!(level instanceof ServerLevel server) || !isAwaitingSoul()
+        || ritualKind != RitualTableRecipe.RitualKind.SUMMONING
+        || !hasValidSummoningCrops(server, this)) return false;
     capturedSoulOrigin = sacrificeOrigin.immutable();
     manifestationTicksRemaining = MANIFESTATION_DURATION;
     manifestationAnimationStart = server.getGameTime();
     ritualState = RitualState.SOUL_MANIFESTATION;
+    SummoningRitualVisuals.spawnSoulBindingParticles(server, getBlockPos());
     syncVisualState();
     return true;
   }
@@ -234,15 +249,35 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
       cancelRitual(level, pos, blockEntity);
       return;
     }
+    if (blockEntity.ritualKind == RitualTableRecipe.RitualKind.NATURE
+        && !hasValidNatureCrops(level, blockEntity)) {
+      cancelRitual(level, pos, blockEntity);
+      return;
+    }
+    if (blockEntity.ritualKind == RitualTableRecipe.RitualKind.CELESTIAL
+        && !hasValidCelestialBlooms(level, blockEntity)) {
+      cancelRitual(level, pos, blockEntity);
+      return;
+    }
+    if (blockEntity.ritualKind == RitualTableRecipe.RitualKind.SUMMONING
+        && !hasValidSummoningCrops(level, blockEntity)) {
+      cancelRitual(level, pos, blockEntity);
+      return;
+    }
     if (blockEntity.ritualState == RitualState.AWAITING_SOUL) {
-      if (level instanceof ServerLevel server) spawnAwaitingSoulParticles(server, pos);
+      if (level instanceof ServerLevel server) {
+        SummoningRitualVisuals.spawnAwaitingSoulParticles(server, pos);
+      }
       return;
     }
     if (blockEntity.ritualState == RitualState.SOUL_MANIFESTATION) {
       if (level instanceof ServerLevel server)
-        spawnManifestationParticles(server, pos, blockEntity);
+        SummoningRitualVisuals.spawnManifestationParticles(server, pos,
+            blockEntity.capturedSoulOrigin, blockEntity.manifestationTicksRemaining,
+            MANIFESTATION_DURATION);
       if (--blockEntity.manifestationTicksRemaining <= 0)
         completeManifestation(level, pos, blockEntity);
+      else blockEntity.setChanged();
       return;
     }
     if (blockEntity.activeBraziers.isEmpty() && !blockEntity.activeBrazierPositions.isEmpty()) {
@@ -256,7 +291,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
       }
       blockEntity.activeBraziers = restored;
     }
-    if (hasMissingBrazierItems(blockEntity)) {
+    if (!hasValidSelectedBraziers(level, blockEntity)) {
       cancelRitual(level, pos, blockEntity);
       return;
     }
@@ -266,16 +301,27 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
 
     handleActiveBraziers(level, pos, blockEntity, elapsed);
     if (level instanceof ServerLevel server) {
-      spawnEnvironmentalParticles(server, pos, blockEntity, elapsed);
-      if (!blockEntity.requiresSoul && blockEntity.transformTicksRemaining <= 6) {
-        spawnOrdinaryFinaleConvergence(server, pos, blockEntity.transformTicksRemaining);
-      }
+      if (blockEntity.ritualKind == RitualTableRecipe.RitualKind.NATURE)
+        NatureRitualVisuals.onTick(server, pos, blockEntity.grownCrops,
+            blockEntity.activeBrazierPositions, blockEntity.nextBrazierIndex,
+            blockEntity.cachedBrazierPos, elapsed,
+            elapsed - blockEntity.activeBrazierPositions.size() * 40,
+            blockEntity.transformTicksRemaining);
+      else if (blockEntity.ritualKind == RitualTableRecipe.RitualKind.CELESTIAL)
+        CelestialRitualVisuals.onTick(server, pos, blockEntity.grownCrops,
+            elapsed, blockEntity.transformTicksRemaining,
+            true, false);
+      else SummoningRitualVisuals.onTick(server, pos, elapsed,
+          blockEntity.transformTicksRemaining);
     }
     blockEntity.transformTicksRemaining--;
+    blockEntity.setChanged();
 
     if (blockEntity.transformTicksRemaining == 0) {
       if (blockEntity.requiresSoul) {
         blockEntity.ritualState = RitualState.AWAITING_SOUL;
+        if (level instanceof ServerLevel server)
+          SummoningRitualVisuals.onPrepared(server, pos);
         if (level instanceof ServerLevel server && blockEntity.activatingPlayerId != null) {
           Player player =
               server.getServer().getPlayerList().getPlayer(blockEntity.activatingPlayerId);
@@ -288,36 +334,96 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
         blockEntity.activeBrazierPositions = Collections.emptyList();
         blockEntity.nextBrazierIndex = 0;
         blockEntity.syncVisualState();
-      } else if (blockEntity.pendingRecipeId != null
-          && level
-              .getRecipeManager()
-              .byKey(blockEntity.pendingRecipeId)
-              .filter(
-                  recipe ->
-                      recipe instanceof RitualTableRecipe tableRecipe
-                          && tableRecipe.isEntityResult())
-              .isPresent()) {
-        blockEntity.manifestationTicksRemaining = MANIFESTATION_DURATION;
-        blockEntity.manifestationAnimationStart = level.getGameTime();
-        blockEntity.ritualState = RitualState.SOUL_MANIFESTATION;
-        blockEntity.syncVisualState();
       } else {
         completeRitual(level, pos, blockEntity);
       }
     }
   }
 
-  private static boolean hasMissingBrazierItems(RitualTableBlockEntity blockEntity) {
-    for (int i = blockEntity.nextBrazierIndex; i < blockEntity.activeBraziers.size(); i++) {
-      RitualBrazierBlockEntity brazier = blockEntity.activeBraziers.get(i);
-      if (i == blockEntity.nextBrazierIndex && !blockEntity.cachedParticleItem.isEmpty()) {
-        continue;
-      }
-      if (brazier == null || brazier.isRemoved() || brazier.isEmpty()) {
-        return true;
-      }
+  private static boolean hasValidSelectedBraziers(Level level, RitualTableBlockEntity table) {
+    if (table.pendingRecipeId == null) return false;
+    var loaded = level.getRecipeManager().byKey(table.pendingRecipeId);
+    if (loaded.isEmpty() || !(loaded.get() instanceof RitualTableRecipe recipe)
+        || recipe.ritualKind() != table.ritualKind
+        || recipe.getIngredients().size() != table.activeBrazierPositions.size() + 1
+        || table.nextBrazierIndex < 0
+        || table.nextBrazierIndex > table.activeBrazierPositions.size()
+        || new HashSet<>(table.activeBrazierPositions).size() != table.activeBrazierPositions.size())
+      return false;
+    for (int i = table.nextBrazierIndex; i < table.activeBrazierPositions.size(); i++) {
+      BlockPos brazierPos = table.activeBrazierPositions.get(i);
+      if (!(level.getBlockEntity(brazierPos) instanceof RitualBrazierBlockEntity brazier)
+          || brazier.isRemoved() || brazier.isChanneling()) return false;
+      if (i == table.nextBrazierIndex && !table.cachedParticleItem.isEmpty()) continue;
+      BlockState state = level.getBlockState(brazierPos);
+      if (!(state.getBlock() instanceof RitualBrazierBlock)
+          || !state.getValue(RitualBrazierBlock.SALTED)
+          || !recipe.getIngredients().get(i + 1).test(brazier.getStoredItem())) return false;
     }
-    return false;
+    return true;
+  }
+
+  public static boolean isFullyGrownCrop(BlockState state) {
+    if (!state.is(BlockTags.CROPS) && !state.is(ModTags.Blocks.CROPS)) return false;
+    IntegerProperty age = cropAgeProperty(state);
+    return age != null
+        && state.getValue(age) == age.getPossibleValues().stream().mapToInt(Integer::intValue).max().orElse(-1);
+  }
+
+  private static @Nullable IntegerProperty cropAgeProperty(BlockState state) {
+    for (var property : state.getProperties()) {
+      if (property instanceof IntegerProperty age && "age".equals(age.getName())) return age;
+    }
+    return null;
+  }
+
+  private static boolean hasValidNatureCrops(Level level, RitualTableBlockEntity table) {
+    if (table.pendingRecipeId == null || table.pendingOutput.isEmpty()) return false;
+    var loaded = level.getRecipeManager().byKey(table.pendingRecipeId);
+    if (loaded.isEmpty()
+        || !(loaded.get() instanceof RitualTableRecipe recipe)
+        || recipe.ritualKind() != RitualTableRecipe.RitualKind.NATURE
+        || recipe.resolvedEnergyCost() != table.grownCrops.size()
+        || !recipe.centerIngredient().test(table.getItem(0))
+        || new HashSet<>(table.grownCrops).size() != table.grownCrops.size()) return false;
+    for (BlockPos cropPos : table.grownCrops) {
+      BlockState cropState = level.getBlockState(cropPos);
+      if (!isFullyGrownCrop(cropState))
+        return false;
+    }
+    return true;
+  }
+
+  private static boolean hasValidCelestialBlooms(Level level, RitualTableBlockEntity table) {
+    if (!CelestialTime.isNight(level) || table.pendingRecipeId == null
+        || table.pendingOutput.isEmpty()) return false;
+    var loaded = level.getRecipeManager().byKey(table.pendingRecipeId);
+    if (loaded.isEmpty() || !(loaded.get() instanceof RitualTableRecipe recipe)
+        || recipe.ritualKind() != RitualTableRecipe.RitualKind.CELESTIAL
+        || recipe.resolvedEnergyCost() != table.grownCrops.size()
+        || !recipe.centerIngredient().test(table.getItem(0))
+        || new HashSet<>(table.grownCrops).size() != table.grownCrops.size()) return false;
+    for (BlockPos bloomPos : table.grownCrops) {
+      BlockState bloom = level.getBlockState(bloomPos);
+      if (!bloom.is(ModBlocks.CELESTIAL_BLOOM.get())
+          && !bloom.is(ModBlocks.WITHERED_CELESTIAL_BLOOM.get())) return false;
+    }
+    return true;
+  }
+
+  private static boolean hasValidSummoningCrops(Level level, RitualTableBlockEntity table) {
+    if (table.pendingRecipeId == null) return false;
+    var loaded = level.getRecipeManager().byKey(table.pendingRecipeId);
+    if (loaded.isEmpty() || !(loaded.get() instanceof RitualTableRecipe recipe)
+        || recipe.ritualKind() != RitualTableRecipe.RitualKind.SUMMONING
+        || !recipe.requiresSoul() || !recipe.isEntityResult()
+        || recipe.resolvedEnergyCost() != table.grownCrops.size()
+        || !recipe.centerIngredient().test(table.getItem(0))
+        || new HashSet<>(table.grownCrops).size() != table.grownCrops.size()) return false;
+    for (BlockPos cropPos : table.grownCrops) {
+      if (!isFullyGrownCrop(level.getBlockState(cropPos))) return false;
+    }
+    return true;
   }
 
   private static void handleActiveBraziers(
@@ -339,6 +445,8 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
       blockEntity.cachedBrazierPos = brazier.getBlockPos().immutable();
       blockEntity.offeringAnimationStart = level.getGameTime();
       brazier.removeItem();
+      level.playSound(null, brazier.getBlockPos(), SoundEvents.AMETHYST_BLOCK_CHIME,
+          SoundSource.BLOCKS, 0.3F, 0.9F + blockEntity.nextBrazierIndex * 0.04F);
 
       BlockState brazierState = level.getBlockState(brazier.getBlockPos());
       if (brazierState.getBlock() instanceof RitualBrazierBlock
@@ -419,7 +527,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
     double centerY = pos.getY() + 1.1D;
     double centerZ = pos.getZ() + 0.5D;
 
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 5; i++) {
       double offsetX = (serverLevel.random.nextDouble() - 0.5D) * 0.5D;
       double offsetY = serverLevel.random.nextDouble() * 0.3D;
       double offsetZ = (serverLevel.random.nextDouble() - 0.5D) * 0.5D;
@@ -427,7 +535,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
       double velocityY = 0.04D + serverLevel.random.nextDouble() * 0.02D;
       double velocityZ = (serverLevel.random.nextDouble() - 0.5D) * 0.02D;
       serverLevel.sendParticles(
-          ParticleTypes.WITCH,
+          ModParticleType.HEX_MOTES.get(),
           centerX + offsetX,
           centerY + offsetY,
           centerZ + offsetZ,
@@ -459,269 +567,59 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
       }
     }
 
-    serverLevel.playSound(
-        null,
-        pos,
-        SoundEvents.ENCHANTMENT_TABLE_USE,
-        SoundSource.BLOCKS,
-        0.4F,
-        1.2F + serverLevel.random.nextFloat() * 0.2F);
-  }
 
-  private static void spawnEnvironmentalParticles(
-      ServerLevel server, BlockPos center, RitualTableBlockEntity table, int elapsed) {
-    if (table.activeBraziers.isEmpty()) {
-      return;
-    }
-
-    float progress = Math.min(1.0F, elapsed / (table.activeBraziers.size() * 40.0F));
-    float intensity = 0.45F + progress * 0.55F;
-    long gameTime = server.getGameTime();
-
-    int groundInterval = 5 - (int) (intensity * 3.0F);
-    if (gameTime % groundInterval == 0) {
-      int count = 2 + (int) (progress * 3.0F);
-      for (int index = 0; index < count; index++) {
-        double angle = server.random.nextDouble() * Math.PI * 2.0;
-        double radius = 0.75 + server.random.nextDouble() * 5.75;
-        sendConvergingParticle(
-            server,
-            center,
-            center.getX() + 0.5 + Math.cos(angle) * radius,
-            center.getY() + 0.1 + server.random.nextDouble() * 0.3,
-            center.getZ() + 0.5 + Math.sin(angle) * radius,
-            0.008);
-      }
-    }
-
-    int brazierInterval = 7 - (int) (intensity * 5.0F);
-    if (gameTime % brazierInterval == 0) {
-      int count = progress >= 0.6F ? 2 : 1;
-      for (int index = 0; index < count; index++) {
-        RitualBrazierBlockEntity brazier =
-            table.activeBraziers.get(server.random.nextInt(table.activeBraziers.size()));
-        if (brazier != null && !brazier.isRemoved()) {
-          BlockPos source = brazier.getBlockPos();
-          sendConvergingParticle(
-              server,
-              center,
-              source.getX() + 0.38 + server.random.nextDouble() * 0.24,
-              source.getY() + 0.4 + server.random.nextDouble() * 0.2,
-              source.getZ() + 0.38 + server.random.nextDouble() * 0.24,
-              0.01);
-        }
-      }
-    }
-
-    int cropInterval = 9 - (int) (intensity * 6.0F);
-    if (!table.grownCrops.isEmpty() && gameTime % cropInterval == 0) {
-      int count = progress >= 0.55F ? 2 : 1;
-      for (int index = 0; index < count; index++) {
-        BlockPos crop = table.grownCrops.get(server.random.nextInt(table.grownCrops.size()));
-        sendConvergingParticle(
-            server,
-            center,
-            crop.getX() + 0.4 + server.random.nextDouble() * 0.2,
-            crop.getY() + 0.4 + server.random.nextDouble() * 0.25,
-            crop.getZ() + 0.4 + server.random.nextDouble() * 0.2,
-            0.012);
-      }
-    }
-
-    int catalystInterval = 5 - (int) (intensity * 3.0F);
-    if (gameTime % catalystInterval == 0) {
-      int count = 1 + (int) (intensity * 2.0F);
-      server.sendParticles(
-          ModParticleType.CACOFEY_DUST_HELD.get(),
-          center.getX() + 0.5,
-          center.getY() + 1.05,
-          center.getZ() + 0.5,
-          count,
-          0.18,
-          0.12,
-          0.18,
-          0.0);
-    }
-  }
-
-  private static void sendConvergingParticle(
-      ServerLevel server,
-      BlockPos center,
-      double sourceX,
-      double sourceY,
-      double sourceZ,
-      double speed) {
-    double targetX = center.getX() + 0.5 + (server.random.nextDouble() - 0.5) * 1.5;
-    double targetZ = center.getZ() + 0.5 + (server.random.nextDouble() - 0.5) * 1.5;
-    server.sendParticles(
-        ModParticleType.CACOFEY_DUST.get(),
-        sourceX,
-        sourceY,
-        sourceZ,
-        0,
-        (targetX - sourceX) * speed,
-        0.01,
-        (targetZ - sourceZ) * speed,
-        1.0);
-  }
-
-  private static void spawnOrdinaryFinaleConvergence(
-      ServerLevel server, BlockPos center, int ticksRemaining) {
-    for (int index = 0; index < 3; index++) {
-      double angle = server.random.nextDouble() * Math.PI * 2.0;
-      double radius = 2.0 + server.random.nextDouble() * 3.0;
-      sendConvergingParticle(
-          server,
-          center,
-          center.getX() + 0.5 + Math.cos(angle) * radius,
-          center.getY() + 0.25 + server.random.nextDouble() * 0.5,
-          center.getZ() + 0.5 + Math.sin(angle) * radius,
-          0.018);
-    }
-    if (ticksRemaining == 1) {
-      server.sendParticles(
-          ModParticleType.CACOFEY_DUST_HELD.get(),
-          center.getX() + 0.5,
-          center.getY() + 1.1,
-          center.getZ() + 0.5,
-          6,
-          0.18,
-          0.16,
-          0.18,
-          0.01);
-    }
-  }
-
-  private static void spawnAwaitingSoulParticles(ServerLevel server, BlockPos center) {
-    long gameTime = server.getGameTime();
-    if (gameTime % 16 == 0) {
-      double angle = server.random.nextDouble() * Math.PI * 2.0;
-      double radius = 1.0 + server.random.nextDouble() * 1.5;
-      sendConvergingParticle(
-          server,
-          center,
-          center.getX() + 0.5 + Math.cos(angle) * radius,
-          center.getY() + 0.25 + server.random.nextDouble() * 0.35,
-          center.getZ() + 0.5 + Math.sin(angle) * radius,
-          0.006);
-    }
-    if (gameTime % 20 == 0) {
-      server.sendParticles(
-          ParticleTypes.SOUL,
-          center.getX() + 0.5,
-          center.getY() + 1.1,
-          center.getZ() + 0.5,
-          2,
-          0.25,
-          0.2,
-          0.25,
-          0.0);
-    }
-  }
-
-  private static void spawnManifestationParticles(
-      ServerLevel server, BlockPos center, RitualTableBlockEntity table) {
-    int elapsed = MANIFESTATION_DURATION - table.manifestationTicksRemaining;
-    float progress = Math.min(1.0F, elapsed / (float) MANIFESTATION_DURATION);
-
-    if (table.capturedSoulOrigin != null && elapsed < 12) {
-      double pathProgress = (elapsed + 1.0) / 12.0;
-      for (int index = 0; index < 2; index++) {
-        double adjustedProgress = Math.min(1.0, pathProgress + index * 0.025);
-        double sourceX = table.capturedSoulOrigin.getX() + 0.5;
-        double sourceY = table.capturedSoulOrigin.getY() + 0.75;
-        double sourceZ = table.capturedSoulOrigin.getZ() + 0.5;
-        double x = sourceX + (center.getX() + 0.5 - sourceX) * adjustedProgress;
-        double y =
-            sourceY
-                + (center.getY() + 1.1 - sourceY) * adjustedProgress
-                + Math.sin(adjustedProgress * Math.PI) * 0.65;
-        double z = sourceZ + (center.getZ() + 0.5 - sourceZ) * adjustedProgress;
-        server.sendParticles(
-            ParticleTypes.SOUL,
-            x + (server.random.nextDouble() - 0.5) * 0.18,
-            y + (server.random.nextDouble() - 0.5) * 0.12,
-            z + (server.random.nextDouble() - 0.5) * 0.18,
-            1,
-            0.0,
-            0.0,
-            0.0,
-            0.0);
-      }
-    }
-
-    int soulInterval = 4 - (int) (progress * 2.0F);
-    if (elapsed % soulInterval == 0) {
-      int count = 2 + (int) (progress * 3.0F);
-      server.sendParticles(
-          ParticleTypes.SOUL,
-          center.getX() + 0.5,
-          center.getY() + 1.1,
-          center.getZ() + 0.5,
-          count,
-          0.25 + progress * 0.15,
-          0.2 + progress * 0.12,
-          0.25 + progress * 0.15,
-          0.01);
-    }
-
-    int naturalInterval = 5 - (int) (progress * 3.0F);
-    if (elapsed % naturalInterval == 0) {
-      int count = progress >= 0.6F ? 3 : progress >= 0.25F ? 2 : 1;
-      for (int index = 0; index < count; index++) {
-        double angle = server.random.nextDouble() * Math.PI * 2.0;
-        double radius = 1.5 + server.random.nextDouble() * 3.5;
-        sendConvergingParticle(
-            server,
-            center,
-            center.getX() + 0.5 + Math.cos(angle) * radius,
-            center.getY() + 0.2 + server.random.nextDouble() * 0.55,
-            center.getZ() + 0.5 + Math.sin(angle) * radius,
-            0.012 + progress * 0.008);
-      }
-    }
-
-    int enchantInterval = 8 - (int) (progress * 5.0F);
-    if (elapsed % enchantInterval == 0) {
-      int count = progress >= 0.7F ? 3 : progress >= 0.35F ? 2 : 1;
-      server.sendParticles(
-          ParticleTypes.ENCHANT,
-          center.getX() + 0.5,
-          center.getY() + 1.05,
-          center.getZ() + 0.5,
-          count,
-          0.2 + progress * 0.15,
-          0.15 + progress * 0.1,
-          0.2 + progress * 0.15,
-          0.02);
-    }
   }
 
   private static void completeRitual(
       Level level, BlockPos pos, RitualTableBlockEntity blockEntity) {
+    if (blockEntity.pendingOutput.isEmpty()
+        || (blockEntity.ritualKind == RitualTableRecipe.RitualKind.NATURE
+            && !hasValidNatureCrops(level, blockEntity))
+        || (blockEntity.ritualKind == RitualTableRecipe.RitualKind.CELESTIAL
+            && !hasValidCelestialBlooms(level, blockEntity))) {
+      cancelRitual(level, pos, blockEntity);
+      return;
+    }
+    RitualTableRecipe.RitualKind completedKind = blockEntity.ritualKind;
     blockEntity.setItem(0, blockEntity.pendingOutput);
     blockEntity.pendingOutput = ItemStack.EMPTY;
 
     for (BlockPos cropPos : blockEntity.grownCrops) {
       BlockState cropState = level.getBlockState(cropPos);
-      if (!(cropState.getBlock() instanceof CropBlock)) {
+      if (blockEntity.ritualKind == RitualTableRecipe.RitualKind.CELESTIAL) {
+        if (cropState.is(ModBlocks.CELESTIAL_BLOOM.get())) {
+          level.setBlock(cropPos, ModBlocks.WITHERED_CELESTIAL_BLOOM.get().defaultBlockState()
+              .setValue(net.astralya.hexalia.block.custom.CelestialBloomBlock.OPEN,
+                  cropState.getValue(net.astralya.hexalia.block.custom.CelestialBloomBlock.OPEN)), 3);
+        } else if (cropState.is(ModBlocks.WITHERED_CELESTIAL_BLOOM.get())) {
+          level.setBlock(cropPos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
+        }
+        if (level instanceof ServerLevel server) {
+          server.sendParticles(ModParticleType.SPARKLE.get(),
+              cropPos.getX() + 0.5, cropPos.getY() + 0.75, cropPos.getZ() + 0.5,
+              2, 0.18, 0.18, 0.18, 0.0);
+          server.sendParticles(ModParticleType.HEX_MOTES.get(),
+              cropPos.getX() + 0.5, cropPos.getY() + 0.75, cropPos.getZ() + 0.5,
+              2, 0.15, 0.15, 0.15, 0.01);
+        }
+        continue;
+      }
+      if (blockEntity.ritualKind == RitualTableRecipe.RitualKind.NATURE
+          ? !isFullyGrownCrop(cropState)
+          : !(cropState.getBlock() instanceof CropBlock)) {
         continue;
       }
 
-      IntegerProperty ageProperty = null;
-      for (Object property : cropState.getProperties()) {
-        if (property instanceof IntegerProperty integerProperty
-            && "age".equals(integerProperty.getName())) {
-          ageProperty = integerProperty;
-          break;
-        }
-      }
+      IntegerProperty ageProperty = cropAgeProperty(cropState);
 
       if (ageProperty == null || !cropState.hasProperty(ageProperty)) {
         continue;
       }
 
-      level.setBlock(cropPos, cropState.setValue(ageProperty, 0), 3);
+      int firstAge = blockEntity.ritualKind == RitualTableRecipe.RitualKind.NATURE
+          ? ageProperty.getPossibleValues().stream().mapToInt(Integer::intValue).min().orElse(0)
+          : 0;
+      level.setBlock(cropPos, cropState.setValue(ageProperty, firstAge), 3);
     }
 
     blockEntity.activeBraziers = Collections.emptyList();
@@ -729,28 +627,23 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
     blockEntity.nextBrazierIndex = 0;
     blockEntity.ritualState = RitualState.IDLE;
     blockEntity.pendingRecipeId = null;
+    blockEntity.ritualKind = RitualTableRecipe.RitualKind.NATURE;
     blockEntity.activatingPlayerId = null;
     blockEntity.requiresSoul = false;
     blockEntity.grownCrops = Collections.emptyList();
 
-    level.playSound(null, pos, ModSoundEvents.RITUAL_SUCCESS.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
-    if (level instanceof ServerLevel serverLevel) {
-      serverLevel.sendParticles(
-          ModParticleType.LEAVES.get(),
-          pos.getX() + 0.5D,
-          pos.getY() + 1.0D,
-          pos.getZ() + 0.5D,
-          15,
-          0.3D,
-          0.3D,
-          0.3D,
-          0.0D);
-    }
+    if (completedKind == RitualTableRecipe.RitualKind.NATURE)
+      NatureRitualVisuals.onComplete(level, pos);
+    else CelestialRitualVisuals.onComplete(level, pos);
     blockEntity.syncVisualState();
   }
 
   private static void completeManifestation(
       Level level, BlockPos pos, RitualTableBlockEntity table) {
+    if (!hasValidSummoningCrops(level, table)) {
+      cancelRitual(level, pos, table);
+      return;
+    }
     if (!(level instanceof ServerLevel server) || table.pendingRecipeId == null) {
       manifestationFailed(table, "missing pending recipe");
       return;
@@ -807,48 +700,17 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
     }
     table.clearContent();
     for (BlockPos cropPos : table.grownCrops) resetCrop(level, cropPos);
-    server.sendParticles(
-        ParticleTypes.SOUL,
-        pos.getX() + 0.5D,
-        pos.getY() + 1.25D,
-        pos.getZ() + 0.5D,
-        12,
-        0.45D,
-        0.4D,
-        0.45D,
-        0.04D);
-    server.sendParticles(
-        ParticleTypes.ENCHANT,
-        pos.getX() + 0.5D,
-        pos.getY() + 1.1D,
-        pos.getZ() + 0.5D,
-        8,
-        0.4D,
-        0.3D,
-        0.4D,
-        0.08D);
-    server.sendParticles(
-        ModParticleType.CACOFEY_DUST_HELD.get(),
-        pos.getX() + 0.5D,
-        pos.getY() + 1.1D,
-        pos.getZ() + 0.5D,
-        8,
-        0.35D,
-        0.3D,
-        0.35D,
-        0.02D);
-    server.playSound(null, pos, SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 0.8F, 0.85F);
+    SummoningRitualVisuals.onComplete(server, pos);
     resetManifestation(table);
   }
 
   private static void resetCrop(Level level, BlockPos cropPos) {
     BlockState state = level.getBlockState(cropPos);
-    for (var property : state.getProperties()) {
-      if (property instanceof IntegerProperty age && "age".equals(age.getName())) {
-        level.setBlock(cropPos, state.setValue(age, 0), 3);
-        return;
-      }
-    }
+    if (!isFullyGrownCrop(state)) return;
+    IntegerProperty age = cropAgeProperty(state);
+    if (age != null)
+      level.setBlock(cropPos,
+          state.setValue(age, age.getPossibleValues().stream().mapToInt(Integer::intValue).min().orElse(0)), 3);
   }
 
   private static void manifestationFailed(RitualTableBlockEntity table, String reason) {
@@ -860,6 +722,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
   private static void resetManifestation(RitualTableBlockEntity table) {
     table.ritualState = RitualState.IDLE;
     table.pendingRecipeId = null;
+    table.ritualKind = RitualTableRecipe.RitualKind.NATURE;
     table.activatingPlayerId = null;
     table.manifestationTicksRemaining = 0;
     table.manifestationAnimationStart = 0L;
@@ -879,6 +742,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
   }
 
   private static void cancelRitual(Level level, BlockPos pos, RitualTableBlockEntity blockEntity) {
+    RitualTableRecipe.RitualKind failedKind = blockEntity.ritualKind;
     blockEntity.transformTicksRemaining = 0;
     blockEntity.totalTransformTicks = 0;
     blockEntity.pendingOutput = ItemStack.EMPTY;
@@ -890,6 +754,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
     blockEntity.offeringAnimationStart = 0L;
     blockEntity.ritualState = RitualState.IDLE;
     blockEntity.pendingRecipeId = null;
+    blockEntity.ritualKind = RitualTableRecipe.RitualKind.NATURE;
     blockEntity.activatingPlayerId = null;
     blockEntity.manifestationTicksRemaining = 0;
     blockEntity.manifestationAnimationStart = 0L;
@@ -916,6 +781,9 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
       }
     }
 
+    if (failedKind == RitualTableRecipe.RitualKind.NATURE
+        && level instanceof ServerLevel server)
+      NatureRitualVisuals.onFailure(server, pos);
     level.playSound(null, pos, SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, 0.4F, 0.6F);
     blockEntity.syncVisualState();
   }
@@ -932,6 +800,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
     tag.putInt("TicksLeft", this.transformTicksRemaining);
     tag.putInt("TotalTicks", this.totalTransformTicks);
     tag.putString("RitualState", this.ritualState.name());
+    tag.putString("RitualKind", ritualKind.name());
     if (pendingRecipeId != null) tag.putString("PendingRecipe", pendingRecipeId.toString());
     if (activatingPlayerId != null) tag.putUUID("ActivatingPlayer", activatingPlayerId);
     tag.putBoolean("RequiresSoul", requiresSoul);
@@ -977,6 +846,15 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
     this.activatingPlayerId =
         tag.hasUUID("ActivatingPlayer") ? tag.getUUID("ActivatingPlayer") : null;
     this.requiresSoul = tag.getBoolean("RequiresSoul");
+    try {
+      this.ritualKind = tag.contains("RitualKind")
+          ? RitualTableRecipe.RitualKind.valueOf(tag.getString("RitualKind"))
+          : this.requiresSoul ? RitualTableRecipe.RitualKind.SUMMONING
+              : RitualTableRecipe.RitualKind.NATURE;
+    } catch (IllegalArgumentException ignored) {
+      this.ritualKind = this.requiresSoul ? RitualTableRecipe.RitualKind.SUMMONING
+          : RitualTableRecipe.RitualKind.NATURE;
+    }
     this.manifestationTicksRemaining = tag.getInt("ManifestationTicks");
     this.manifestationAnimationStart = tag.getLong("ManifestationAnimationStart");
     this.capturedSoulOrigin =

@@ -106,7 +106,7 @@ public class ModBlocks {
                   6,
                   BlockBehaviour.Properties.copy(Blocks.POPPY)
                       .noCollission()
-                      .lightLevel(state -> 6)));
+                      .randomTicks()));
   public static final RegistrySupplier<Block> POTTED_CELESTIAL_BLOOM =
       BLOCKS.register(
           "potted_celestial_bloom",
@@ -122,7 +122,7 @@ public class ModBlocks {
                   3,
                   BlockBehaviour.Properties.copy(Blocks.POPPY)
                       .noCollission()
-                      .lightLevel(state -> 6)));
+                      .randomTicks()));
   public static final RegistrySupplier<Block> POTTED_WITHERED_CELESTIAL_BLOOM =
       BLOCKS.register(
           "potted_withered_celestial_bloom",

@@ -22,17 +22,20 @@ public final class RitualTableCategory implements DisplayCategory<RitualTableDis
 
   public static final ResourceLocation TEXTURE =
       new ResourceLocation(HexaliaMod.MODID, "textures/gui/ritual_table_gui.png");
-  public static final CategoryIdentifier<RitualTableDisplay> RITUAL_TABLE =
-      CategoryIdentifier.of(HexaliaMod.MODID, "ritual_table");
+  private final net.astralya.hexalia.recipe.RitualTableRecipe.RitualKind kind;
+
+  public RitualTableCategory(net.astralya.hexalia.recipe.RitualTableRecipe.RitualKind kind) {
+    this.kind = kind;
+  }
 
   @Override
   public CategoryIdentifier<? extends RitualTableDisplay> getCategoryIdentifier() {
-    return RITUAL_TABLE;
+    return CategoryIdentifier.of(NaturesRitualViewer.categoryId(kind));
   }
 
   @Override
   public Component getTitle() {
-    return Component.translatable("block.hexalia.ritual_table");
+    return NaturesRitualViewer.categoryTitle(kind);
   }
 
   @Override
@@ -84,6 +87,15 @@ public final class RitualTableCategory implements DisplayCategory<RitualTableDis
               .disableBackground());
     }
 
+    widgets.add(Widgets.createSlot(new Point(startPoint.x + 4, startPoint.y + NaturesRitualViewer.ENERGY_Y + 2))
+        .entries(display.energyEntries()).disableBackground());
+    widgets.add(Widgets.createLabel(new Point(startPoint.x + 24, startPoint.y + 86), display.energyFirstLine())
+        .color(0xA9A29C).noShadow());
+    widgets.add(Widgets.createLabel(new Point(startPoint.x + 24, startPoint.y + 97), display.energySecondLine())
+        .color(0xA9A29C).noShadow());
+    widgets.add(Widgets.createTooltip(new Rectangle(startPoint.x + 4,
+        startPoint.y + NaturesRitualViewer.ENERGY_Y, 110, 28), display.energyTooltip()));
+
     if (display.requiresSoul()) {
       widgets.add(
           Widgets.createTexturedWidget(
@@ -109,6 +121,6 @@ public final class RitualTableCategory implements DisplayCategory<RitualTableDis
 
   @Override
   public int getDisplayHeight() {
-    return NaturesRitualViewer.HEIGHT;
+    return NaturesRitualViewer.ENERGY_Y + NaturesRitualViewer.ENERGY_HEIGHT;
   }
 }

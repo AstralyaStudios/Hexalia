@@ -1,5 +1,7 @@
 {
   "type": "hexalia:natures_ritual",
+  "ritual_kind": "nature",
+  "energy_cost": 5,
   "center": {
     "item": "minecraft:azure_bluet"
   },

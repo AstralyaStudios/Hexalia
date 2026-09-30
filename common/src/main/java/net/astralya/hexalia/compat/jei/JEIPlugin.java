@@ -13,13 +13,11 @@ import net.astralya.hexalia.HexaliaMod;
 import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.compat.jei.category.MortarAndPestleRecipeCategory;
 import net.astralya.hexalia.compat.jei.category.MutationRecipeCategory;
-import net.astralya.hexalia.compat.jei.category.RitualBrazierRecipeCategory;
 import net.astralya.hexalia.compat.jei.category.RitualTableRecipeCategory;
 import net.astralya.hexalia.compat.jei.category.SmallCauldronRecipeCategory;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.recipe.MortarAndPestleRecipe;
 import net.astralya.hexalia.recipe.MutationRecipe;
-import net.astralya.hexalia.recipe.RitualBrazierRecipe;
 import net.astralya.hexalia.recipe.RitualTableRecipe;
 import net.astralya.hexalia.recipe.SmallCauldronRecipe;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -41,10 +39,9 @@ public class JEIPlugin implements IModPlugin {
   public void registerCategories(IRecipeCategoryRegistration registration) {
     registration.addRecipeCategories(
         new SmallCauldronRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-    registration.addRecipeCategories(
-        new RitualBrazierRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-    registration.addRecipeCategories(
-        new RitualTableRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+    for (RitualTableRecipe.RitualKind kind : RitualTableRecipe.RitualKind.values())
+      registration.addRecipeCategories(
+          new RitualTableRecipeCategory(registration.getJeiHelpers().getGuiHelper(), kind));
     registration.addRecipeCategories(
         new MutationRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     registration.addRecipeCategories(
@@ -56,12 +53,12 @@ public class JEIPlugin implements IModPlugin {
     registration.addRecipeCatalyst(
         new ItemStack(ModBlocks.SMALL_CAULDRON.get()),
         SmallCauldronRecipeCategory.SMALL_CAULDRON_RECIPE_TYPE);
-    registration.addRecipeCatalyst(
-        new ItemStack(ModBlocks.RITUAL_BRAZIER.get()),
-        RitualBrazierRecipeCategory.RITUAL_BRAZIER_RECIPE_TYPE);
-    registration.addRecipeCatalyst(
-        new ItemStack(ModBlocks.RITUAL_TABLE.get()),
-        RitualTableRecipeCategory.RITUAL_TABLE_RECIPE_TYPE);
+    for (RitualTableRecipe.RitualKind kind : RitualTableRecipe.RitualKind.values()) {
+      var type = new mezz.jei.api.recipe.RecipeType<>(
+          net.astralya.hexalia.compat.NaturesRitualViewer.categoryId(kind), RitualTableRecipe.class);
+      registration.addRecipeCatalyst(new ItemStack(ModBlocks.RITUAL_TABLE.get()), type);
+      registration.addRecipeCatalyst(new ItemStack(ModBlocks.RITUAL_BRAZIER.get()), type);
+    }
     registration.addRecipeCatalyst(
         new ItemStack(ModItems.MUTAVIS.get()), MutationRecipeCategory.MUTATION_RECIPE_RECIPE_TYPE);
     registration.addRecipeCatalyst(
@@ -82,14 +79,13 @@ public class JEIPlugin implements IModPlugin {
     registration.addRecipes(
         SmallCauldronRecipeCategory.SMALL_CAULDRON_RECIPE_TYPE, smallCauldronRecipes);
 
-    List<RitualBrazierRecipe> ritualBrazierRecipes =
-        recipeManager.getAllRecipesFor(RitualBrazierRecipe.Type.INSTANCE);
-    registration.addRecipes(
-        RitualBrazierRecipeCategory.RITUAL_BRAZIER_RECIPE_TYPE, ritualBrazierRecipes);
-
     List<RitualTableRecipe> ritualTableRecipes =
         recipeManager.getAllRecipesFor(RitualTableRecipe.Type.INSTANCE);
-    registration.addRecipes(RitualTableRecipeCategory.RITUAL_TABLE_RECIPE_TYPE, ritualTableRecipes);
+    for (RitualTableRecipe.RitualKind kind : RitualTableRecipe.RitualKind.values())
+      registration.addRecipes(
+          new mezz.jei.api.recipe.RecipeType<>(
+              net.astralya.hexalia.compat.NaturesRitualViewer.categoryId(kind), RitualTableRecipe.class),
+          ritualTableRecipes.stream().filter(recipe -> recipe.ritualKind() == kind).toList());
 
     List<MutationRecipe> mutationRecipes =
         recipeManager.getAllRecipesFor(MutationRecipe.Type.INSTANCE);

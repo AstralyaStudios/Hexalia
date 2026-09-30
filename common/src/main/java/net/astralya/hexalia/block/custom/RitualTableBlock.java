@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import net.astralya.hexalia.Configuration;
+import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.block.entity.ModBlockEntityTypes;
 import net.astralya.hexalia.block.entity.custom.RitualBrazierBlockEntity;
 import net.astralya.hexalia.block.entity.custom.RitualTableBlockEntity;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.recipe.RitualTableRecipe;
+import net.astralya.hexalia.gameplay.naturesritual.NatureRitualVisuals;
+import net.astralya.hexalia.gameplay.naturesritual.CelestialRitualVisuals;
+import net.astralya.hexalia.gameplay.naturesritual.SummoningRitualVisuals;
+import net.astralya.hexalia.util.CelestialTime;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -28,7 +32,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -148,6 +151,8 @@ public class RitualTableBlock extends BaseEntityBlock {
 
   private boolean tryStartRitual(
       Level level, BlockPos pos, Player player, RitualTableBlockEntity tableBE) {
+    if (tableBE.isProcessingOfferings() || tableBE.isAwaitingSoul()
+        || tableBE.isManifestingSoul()) return true;
     ItemStack tableItem = tableBE.getItem(0);
     if (tableItem.isEmpty()) {
       fail(level, pos, player, "message.hexalia.ritual.missing_ingredients");
@@ -175,6 +180,11 @@ public class RitualTableBlock extends BaseEntityBlock {
       fail(level, pos, player, "message.hexalia.ritual.wrong_recipe");
       return true;
     }
+    if (match.recipe.ritualKind() == RitualTableRecipe.RitualKind.CELESTIAL
+        && !CelestialTime.isNight(level)) {
+      fail(level, pos, player, "message.hexalia.ritual.wrong_recipe");
+      return true;
+    }
 
     for (RitualBrazierBlockEntity brazier : match.usedBraziers) {
       BlockState brazierState = level.getBlockState(brazier.getBlockPos());
@@ -185,15 +195,24 @@ public class RitualTableBlock extends BaseEntityBlock {
       }
     }
 
-    int cropRequirement = Configuration.NATURES_RITUAL_CROP_REQUIREMENT.get();
+    int cropRequirement = match.recipe.resolvedEnergyCost();
     List<BlockPos> grownCrops =
-        cropRequirement == 0 ? List.of() : findFullyGrownCrops(level, pos, cropRequirement, 8);
+        cropRequirement == 0 ? List.of()
+            : match.recipe.ritualKind() == RitualTableRecipe.RitualKind.CELESTIAL
+                ? findCelestialBlooms(level, pos, cropRequirement)
+                : findFullyGrownCrops(level, pos, cropRequirement, 8);
     if (grownCrops.size() < cropRequirement) {
-      fail(level, pos, player, "message.hexalia.ritual.invalid_crops");
+      fail(level, pos, player,
+          match.recipe.ritualKind() == RitualTableRecipe.RitualKind.CELESTIAL
+              ? "message.hexalia.ritual_brazier.no_celestial_blooms"
+              : "message.hexalia.ritual.invalid_crops");
       return true;
     }
 
     int duration = match.usedBraziers.size() * 40;
+    if (match.recipe.ritualKind() == RitualTableRecipe.RitualKind.NATURE) {
+      duration += Math.max(24, grownCrops.size() * 3 + 12) + 6;
+    }
 
     tableBE.startTransformation(
         match.recipe.getResultItem(level.registryAccess()).copy(),
@@ -201,11 +220,17 @@ public class RitualTableBlock extends BaseEntityBlock {
         match.usedBraziers,
         match.recipe.getId(),
         match.recipe.requiresSoul(),
-        player);
+        player,
+        match.recipe.ritualKind());
     tableBE.setGrownCropPositions(grownCrops);
 
-    play(level, pos);
-    puff(level, pos, ParticleTypes.POOF, 5, 10);
+    if (level instanceof ServerLevel server) {
+      if (match.recipe.ritualKind() == RitualTableRecipe.RitualKind.NATURE)
+        NatureRitualVisuals.onStart(server, pos, match.usedBraziers);
+      else if (match.recipe.ritualKind() == RitualTableRecipe.RitualKind.CELESTIAL)
+        CelestialRitualVisuals.onStart(server, pos);
+      else SummoningRitualVisuals.onStart(server, pos);
+    }
     return true;
   }
 
@@ -263,7 +288,7 @@ public class RitualTableBlock extends BaseEntityBlock {
         BlockPos checkPos = center.offset(dx, 0, dz);
         BlockState state = level.getBlockState(checkPos);
 
-        if (state.getBlock() instanceof CropBlock crop && crop.isMaxAge(state)) {
+        if (RitualTableBlockEntity.isFullyGrownCrop(state)) {
           found.add(checkPos);
           if (found.size() >= required) {
             return found;
@@ -272,6 +297,22 @@ public class RitualTableBlock extends BaseEntityBlock {
       }
     }
 
+    return found;
+  }
+
+  private List<BlockPos> findCelestialBlooms(Level level, BlockPos center, int required) {
+    List<BlockPos> found = new ArrayList<>();
+    for (int dx = -8; dx <= 8; dx++) {
+      for (int dz = -8; dz <= 8; dz++) {
+        BlockPos checkPos = center.offset(dx, 0, dz);
+        BlockState state = level.getBlockState(checkPos);
+        if (state.is(ModBlocks.CELESTIAL_BLOOM.get())
+            || state.is(ModBlocks.WITHERED_CELESTIAL_BLOOM.get())) {
+          found.add(checkPos);
+          if (found.size() >= required) return found;
+        }
+      }
+    }
     return found;
   }
 

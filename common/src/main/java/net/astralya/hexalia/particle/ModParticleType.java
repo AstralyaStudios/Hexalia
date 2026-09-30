@@ -22,8 +22,14 @@ public class ModParticleType {
       PARTICLE_TYPES.register("infused_bubbles", () -> new SimpleParticleType(true) {});
   public static final RegistrySupplier<SimpleParticleType> SPARKLE =
       PARTICLE_TYPES.register("sparkle", () -> new SimpleParticleType(true) {});
-  public static final RegistrySupplier<SimpleParticleType> HEX_MOTE =
-      PARTICLE_TYPES.register("hex_mote", () -> new SimpleParticleType(true) {});
+  public static final RegistrySupplier<SimpleParticleType> HEX_MOTES =
+      PARTICLE_TYPES.register("hex_motes", () -> new SimpleParticleType(true) {});
+  public static final RegistrySupplier<SimpleParticleType> RITUAL_GLYPH =
+      PARTICLE_TYPES.register("ritual_glyph", () -> new SimpleParticleType(true) {});
+  public static final RegistrySupplier<SimpleParticleType> CELESTIAL_GLYPH =
+      PARTICLE_TYPES.register("celestial_glyph", () -> new SimpleParticleType(true) {});
+  public static final RegistrySupplier<SimpleParticleType> SUMMONING_GLYPH =
+      PARTICLE_TYPES.register("summoning_glyph", () -> new SimpleParticleType(true) {});
   public static final RegistrySupplier<SimpleParticleType> CACOFEY_DUST =
       PARTICLE_TYPES.register("cacofey_dust", () -> new SimpleParticleType(true) {});
   public static final RegistrySupplier<SimpleParticleType> CACOFEY_DUST_HELD =

@@ -10,11 +10,9 @@ import net.minecraft.util.Mth;
 
 public class SparkleParticle extends SimpleAnimatedParticle {
   private final float baseSize;
-  private final float shimmerSpeed;
-  private final float shimmerStrength;
-  private final float yBoost;
-  private final double startX;
-  private final double startZ;
+  private final float driftPhase;
+  private final float driftSpeed;
+  private final float driftStrength;
 
   protected SparkleParticle(
       ClientLevel level,
@@ -26,68 +24,53 @@ public class SparkleParticle extends SimpleAnimatedParticle {
       double velocityZ,
       SpriteSet sprites) {
     super(level, x, y, z, sprites, 0.01F);
-
-    this.hasPhysics = false;
-    this.friction = 0.96F;
-    this.gravity = 0.0F;
-
-    this.startX = x;
-    this.startZ = z;
+    hasPhysics = false;
+    friction = 0.94F;
+    gravity = 0.0F;
 
     if (velocityX == 0.0D && velocityY == 0.0D && velocityZ == 0.0D) {
-      this.xd = (random.nextDouble() - 0.5D) * 0.004D;
-      this.yd = 0.008D + random.nextDouble() * 0.010D;
-      this.zd = (random.nextDouble() - 0.5D) * 0.004D;
+      xd = (random.nextDouble() - 0.5D) * 0.004D;
+      yd = 0.008D + random.nextDouble() * 0.010D;
+      zd = (random.nextDouble() - 0.5D) * 0.004D;
     } else {
-      this.xd = velocityX;
-      this.yd = velocityY;
-      this.zd = velocityZ;
+      xd = velocityX;
+      yd = velocityY;
+      zd = velocityZ;
     }
 
-    this.baseSize = 0.08F + random.nextFloat() * 0.08F;
-    this.quadSize *= this.baseSize;
-
-    this.lifetime = 18 + random.nextInt(14);
-
-    this.shimmerSpeed = 0.18F + random.nextFloat() * 0.25F;
-    this.shimmerStrength = 0.010F + random.nextFloat() * 0.010F;
-    this.yBoost = 0.002F + random.nextFloat() * 0.004F;
-
-    this.setColor(15916745);
-    this.alpha = 0.0F;
-
-    this.setSpriteFromAge(sprites);
+    baseSize = 0.08F + random.nextFloat() * 0.08F;
+    quadSize = baseSize;
+    lifetime = 18 + random.nextInt(14);
+    driftPhase = random.nextFloat() * Mth.TWO_PI;
+    driftSpeed = 0.12F + random.nextFloat() * 0.08F;
+    driftStrength = 0.0002F + random.nextFloat() * 0.0002F;
+    setColor(15916745);
+    alpha = 0.0F;
+    setSpriteFromAge(sprites);
   }
 
   @Override
   public void tick() {
+    xd += Mth.sin(age * driftSpeed + driftPhase) * driftStrength;
+    zd += Mth.cos(age * driftSpeed + driftPhase) * driftStrength;
+    yd = Math.min(yd + 0.00015D, 0.014D);
     super.tick();
-
-    if (this.removed) {
+    if (removed) {
       return;
     }
 
-    float t = (float) this.age / (float) this.lifetime;
-
-    float fadeIn = Mth.clamp(t / 0.15F, 0.0F, 1.0F);
-    float fadeOut = Mth.clamp((1.0F - t) / 0.35F, 0.0F, 1.0F);
-    this.alpha = Math.min(fadeIn, fadeOut);
-
-    float pulse = 0.85F + 0.25F * Mth.sin((this.age + this.random.nextFloat()) * 0.35F);
-    this.quadSize = this.baseSize * pulse;
-
-    double wobble =
-        Mth.sin((this.age + this.random.nextFloat()) * this.shimmerSpeed) * this.shimmerStrength;
-    this.x = this.startX + wobble + (this.x - this.startX) * 0.98D;
-    this.z = this.startZ + wobble + (this.z - this.startZ) * 0.98D;
-
-    this.yd += this.yBoost;
+    float ageProgress = (float) age / (float) lifetime;
+    float fadeIn = Mth.clamp(ageProgress / 0.15F, 0.0F, 1.0F);
+    float fadeOut = Mth.clamp((1.0F - ageProgress) / 0.45F, 0.0F, 1.0F);
+    alpha = Math.min(fadeIn, fadeOut) * 0.8F;
+    quadSize = baseSize * (0.96F + 0.06F * Mth.sin(age * 0.24F + driftPhase))
+        * (1.0F - ageProgress * 0.15F);
   }
 
   @Override
   public void move(double x, double y, double z) {
-    this.setBoundingBox(this.getBoundingBox().move(x, y, z));
-    this.setLocationFromBoundingbox();
+    setBoundingBox(getBoundingBox().move(x, y, z));
+    setLocationFromBoundingbox();
   }
 
   public static class Factory implements ParticleProvider<SimpleParticleType> {
@@ -107,7 +90,7 @@ public class SparkleParticle extends SimpleAnimatedParticle {
         double velocityX,
         double velocityY,
         double velocityZ) {
-      return new SparkleParticle(level, x, y, z, velocityX, velocityY, velocityZ, this.spriteSet);
+      return new SparkleParticle(level, x, y, z, velocityX, velocityY, velocityZ, spriteSet);
     }
   }
 }

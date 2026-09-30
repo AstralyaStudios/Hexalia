@@ -12,8 +12,6 @@ import net.astralya.hexalia.compat.rei.mortar_and_pestle.MortarAndPestleCategory
 import net.astralya.hexalia.compat.rei.mortar_and_pestle.MortarAndPestleDisplay;
 import net.astralya.hexalia.compat.rei.mutation.MutationCategory;
 import net.astralya.hexalia.compat.rei.mutation.MutationDisplay;
-import net.astralya.hexalia.compat.rei.ritual_brazier.RitualBrazierCategory;
-import net.astralya.hexalia.compat.rei.ritual_brazier.RitualBrazierDisplay;
 import net.astralya.hexalia.compat.rei.ritual_table.RitualTableCategory;
 import net.astralya.hexalia.compat.rei.ritual_table.RitualTableDisplay;
 import net.astralya.hexalia.compat.rei.small_cauldron.SmallCauldronCategory;
@@ -33,13 +31,12 @@ public class HexaliaREIClientPlugin implements REIClientPlugin {
     registry.add(new MutationCategory());
     registry.addWorkstations(MutationCategory.MUTATION, EntryStacks.of(ModItems.MUTAVIS.get()));
 
-    registry.add(new RitualBrazierCategory());
-    registry.addWorkstations(
-        RitualBrazierCategory.RITUAL_BRAZIER, EntryStacks.of(ModBlocks.RITUAL_BRAZIER.get()));
-
-    registry.add(new RitualTableCategory());
-    registry.addWorkstations(
-        RitualTableCategory.RITUAL_TABLE, EntryStacks.of(ModBlocks.RITUAL_TABLE.get()));
+    for (RitualTableRecipe.RitualKind kind : RitualTableRecipe.RitualKind.values()) {
+      RitualTableCategory category = new RitualTableCategory(kind);
+      registry.add(category);
+      registry.addWorkstations(category.getCategoryIdentifier(), EntryStacks.of(ModBlocks.RITUAL_TABLE.get()));
+      registry.addWorkstations(category.getCategoryIdentifier(), EntryStacks.of(ModBlocks.RITUAL_BRAZIER.get()));
+    }
 
     registry.add(new SmallCauldronCategory());
     registry.addWorkstations(
@@ -55,9 +52,6 @@ public class HexaliaREIClientPlugin implements REIClientPlugin {
 
     registry.registerRecipeFiller(
         MutationRecipe.class, MutationRecipe.Type.INSTANCE, MutationDisplay::new);
-
-    registry.registerRecipeFiller(
-        RitualBrazierRecipe.class, RitualBrazierRecipe.Type.INSTANCE, RitualBrazierDisplay::new);
 
     registry.registerRecipeFiller(
         RitualTableRecipe.class, RitualTableRecipe.Type.INSTANCE, RitualTableDisplay::new);

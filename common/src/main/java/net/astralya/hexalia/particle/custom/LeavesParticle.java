@@ -6,8 +6,11 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SimpleAnimatedParticle;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.Mth;
 
 public class LeavesParticle extends SimpleAnimatedParticle {
+  private final float tumbleSpeed;
+  private final double swayOffset;
 
   protected LeavesParticle(
       ClientLevel level,
@@ -17,41 +20,54 @@ public class LeavesParticle extends SimpleAnimatedParticle {
       double velocityX,
       double velocityY,
       double velocityZ,
-      SpriteSet spriteSet) {
-    super(level, x, y, z, spriteSet, 0.01F);
+      SpriteSet sprites) {
+    super(level, x, y, z, sprites, 0.01F);
+    hasPhysics = false;
+    friction = 0.93F;
+    gravity = 0.0F;
+    tumbleSpeed = (random.nextBoolean() ? 1.0F : -1.0F)
+        * (0.035F + random.nextFloat() * 0.025F);
+    swayOffset = random.nextDouble() * Math.PI * 2.0;
+    roll = random.nextFloat() * Mth.TWO_PI;
+    oRoll = roll;
 
-    this.hasPhysics = false;
-    this.friction = 0.96F;
-    this.gravity = 0.0F;
-
-    if (velocityX == 0 && velocityY == 0 && velocityZ == 0) {
-      this.xd = (random.nextDouble() - 0.5D) * 0.02D;
-      this.yd = random.nextDouble() * 0.02D;
-      this.zd = (random.nextDouble() - 0.5D) * 0.02D;
+    if (velocityX == 0.0D && velocityY == 0.0D && velocityZ == 0.0D) {
+      xd = (random.nextDouble() - 0.5D) * 0.02D;
+      yd = random.nextDouble() * 0.02D;
+      zd = (random.nextDouble() - 0.5D) * 0.02D;
     } else {
-      this.xd = velocityX;
-      this.yd = velocityY;
-      this.zd = velocityZ;
+      xd = velocityX;
+      yd = velocityY;
+      zd = velocityZ;
     }
 
-    this.quadSize *= (0.2F + random.nextFloat() * 0.4F);
-    this.lifetime = 14 + random.nextInt(6);
-
-    this.setColor(15916745);
-
-    this.setSpriteFromAge(sprites);
+    quadSize *= 0.2F + random.nextFloat() * 0.4F;
+    lifetime = 14 + random.nextInt(6);
+    setColor(15916745);
+    setSpriteFromAge(sprites);
   }
 
   @Override
-  public void move(double dx, double dy, double dz) {
-    this.setBoundingBox(this.getBoundingBox().move(dx, dy, dz));
-    this.setLocationFromBoundingbox();
+  public void tick() {
+    oRoll = roll;
+    super.tick();
+    if (!isAlive()) return;
+    roll += tumbleSpeed;
+    xd += Math.sin(age * 0.2 + swayOffset) * 0.0007;
+    zd += Math.cos(age * 0.2 + swayOffset) * 0.0007;
+    alpha = Mth.clamp((1.0F - (float) age / lifetime) / 0.35F, 0.0F, 1.0F);
   }
 
-  public static class Provider implements ParticleProvider<SimpleParticleType> {
+  @Override
+  public void move(double x, double y, double z) {
+    setBoundingBox(getBoundingBox().move(x, y, z));
+    setLocationFromBoundingbox();
+  }
+
+  public static class Factory implements ParticleProvider<SimpleParticleType> {
     private final SpriteSet spriteSet;
 
-    public Provider(SpriteSet spriteSet) {
+    public Factory(SpriteSet spriteSet) {
       this.spriteSet = spriteSet;
     }
 
@@ -65,7 +81,7 @@ public class LeavesParticle extends SimpleAnimatedParticle {
         double velocityX,
         double velocityY,
         double velocityZ) {
-      return new LeavesParticle(level, x, y, z, velocityX, velocityY, velocityZ, this.spriteSet);
+      return new LeavesParticle(level, x, y, z, velocityX, velocityY, velocityZ, spriteSet);
     }
   }
 }

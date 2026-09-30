@@ -26,7 +26,11 @@ public final class RitualTableEmiRecipe implements EmiRecipe {
 
   @Override
   public EmiRecipeCategory getCategory() {
-    return RitualTableEmiCategory.CATEGORY;
+    return switch (recipe.ritualKind()) {
+      case NATURE -> RitualTableEmiCategory.NATURE;
+      case CELESTIAL -> RitualTableEmiCategory.CELESTIAL;
+      case SUMMONING -> RitualTableEmiCategory.SUMMONING;
+    };
   }
 
   @Override
@@ -51,7 +55,7 @@ public final class RitualTableEmiRecipe implements EmiRecipe {
 
   @Override
   public int getDisplayHeight() {
-    return NaturesRitualViewer.HEIGHT;
+    return NaturesRitualViewer.ENERGY_Y + NaturesRitualViewer.ENERGY_HEIGHT;
   }
 
   @Override
@@ -91,6 +95,13 @@ public final class RitualTableEmiRecipe implements EmiRecipe {
           NaturesRitualViewer.SOUL_SIZE,
           NaturesRitualViewer.SOUL_SIZE);
     }
+
+    widgets.addSlot(EmiIngredient.of(NaturesRitualViewer.energyIcons(recipe).stream()
+            .map(EmiStack::of).toList()), 4, NaturesRitualViewer.ENERGY_Y + 2).drawBack(false);
+    widgets.addText(NaturesRitualViewer.energyFirstLine(recipe), 24, 86, 0xA9A29C, false);
+    widgets.addText(NaturesRitualViewer.energySecondLine(recipe), 24, 97, 0xA9A29C, false);
+    widgets.addTooltipText(NaturesRitualViewer.energyTooltip(recipe),
+        4, NaturesRitualViewer.ENERGY_Y, 110, 28);
 
     widgets
         .addSlot(this.outputs.get(0), NaturesRitualViewer.OUTPUT_X, NaturesRitualViewer.OUTPUT_Y)

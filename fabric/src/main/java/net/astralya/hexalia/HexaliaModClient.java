@@ -27,6 +27,7 @@ import net.astralya.hexalia.particle.custom.HexMoteParticle;
 import net.astralya.hexalia.particle.custom.InfusedBubbleParticle;
 import net.astralya.hexalia.particle.custom.LeavesParticle;
 import net.astralya.hexalia.particle.custom.SparkleParticle;
+import net.astralya.hexalia.particle.custom.RitualGlyphParticle;
 import net.astralya.hexalia.particle.custom.SporeParticle;
 import net.astralya.hexalia.util.MagicResistanceTooltip;
 import net.astralya.hexalia.util.ModItemProperties;
@@ -146,10 +147,13 @@ public class HexaliaModClient implements ClientModInitializer {
         registry.register(ModParticleType.SPORE.get(), SporeParticle.Factory::new);
         registry.register(ModParticleType.INFUSED_BUBBLES.get(), InfusedBubbleParticle.Provider::new);
         registry.register(ModParticleType.GHOST.get(), GhostParticle.Factory::new);
-        registry.register(ModParticleType.LEAVES.get(), LeavesParticle.Provider::new);
+        registry.register(ModParticleType.LEAVES.get(), LeavesParticle.Factory::new);
         registry.register(ModParticleType.SPARKLE.get(), SparkleParticle.Factory::new);
         registry.register(ModParticleType.CACOFEY_DUST.get(), CacofeyDustParticle.Factory::new);
-        registry.register(ModParticleType.HEX_MOTE.get(), HexMoteParticle.Factory::new);
+        registry.register(ModParticleType.HEX_MOTES.get(), HexMoteParticle.Factory::new);
+        registry.register(ModParticleType.RITUAL_GLYPH.get(), RitualGlyphParticle.Factory::new);
+        registry.register(ModParticleType.CELESTIAL_GLYPH.get(), RitualGlyphParticle.Factory::new);
+        registry.register(ModParticleType.SUMMONING_GLYPH.get(), RitualGlyphParticle.Factory::new);
         registry.register(ModParticleType.CACOFEY_DUST_HELD.get(), CacofeyDustHeldParticle.Factory::new);
     }
 

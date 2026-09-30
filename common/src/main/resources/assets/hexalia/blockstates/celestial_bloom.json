@@ -1,7 +1,28 @@
 {
-  "variants": {
-    "": {
-      "model": "hexalia:block/celestial_bloom"
+  "multipart": [
+    {
+      "apply": {
+        "model": "hexalia:block/celestial_bloom_closed"
+      },
+      "when": {
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "hexalia:block/celestial_bloom_open"
+      },
+      "when": {
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "hexalia:block/celestial_bloom_open_emissive"
+      },
+      "when": {
+        "open": "true"
+      }
     }
-  }
+  ]
 }

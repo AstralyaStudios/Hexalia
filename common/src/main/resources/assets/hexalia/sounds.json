@@ -6,6 +6,12 @@
     ]
   },
 
+  "ritual_whispers": {
+    "sounds": [
+      "hexalia:ritual_whispers"
+    ]
+  },
+
   "ritual_success": {
     "subtitle": "sounds.hexalia.ritual_success",
     "sounds": [

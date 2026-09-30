@@ -9,8 +9,6 @@ import net.astralya.hexalia.compat.emi.mortar_and_pestle.MortarAndPestleEmiCateg
 import net.astralya.hexalia.compat.emi.mortar_and_pestle.MortarAndPestleEmiRecipe;
 import net.astralya.hexalia.compat.emi.mutation.MutationEmiCategory;
 import net.astralya.hexalia.compat.emi.mutation.MutationEmiRecipe;
-import net.astralya.hexalia.compat.emi.ritual_brazier.RitualBrazierEmiCategory;
-import net.astralya.hexalia.compat.emi.ritual_brazier.RitualBrazierEmiRecipe;
 import net.astralya.hexalia.compat.emi.ritual_table.RitualTableEmiCategory;
 import net.astralya.hexalia.compat.emi.ritual_table.RitualTableEmiRecipe;
 import net.astralya.hexalia.compat.emi.small_cauldron.SmallCauldronEmiCategory;
@@ -18,7 +16,6 @@ import net.astralya.hexalia.compat.emi.small_cauldron.SmallCauldronEmiRecipe;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.recipe.MortarAndPestleRecipe;
 import net.astralya.hexalia.recipe.MutationRecipe;
-import net.astralya.hexalia.recipe.RitualBrazierRecipe;
 import net.astralya.hexalia.recipe.RitualTableRecipe;
 import net.astralya.hexalia.recipe.SmallCauldronRecipe;
 
@@ -45,25 +42,21 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
       registry.addRecipe(new MortarAndPestleEmiRecipe(recipe));
     }
 
-    registry.addCategory(RitualTableEmiCategory.CATEGORY);
-    registry.addWorkstation(
-        RitualTableEmiCategory.CATEGORY, EmiStack.of(ModBlocks.RITUAL_TABLE.get()));
-    registry.addWorkstation(
-        RitualTableEmiCategory.CATEGORY, EmiStack.of(ModBlocks.RITUAL_BRAZIER.get()));
-    registry.addWorkstation(RitualTableEmiCategory.CATEGORY, EmiStack.of(ModItems.HEX_FOCUS.get()));
+    for (RitualTableRecipe.RitualKind kind : RitualTableRecipe.RitualKind.values()) {
+      var category = switch (kind) {
+        case NATURE -> RitualTableEmiCategory.NATURE;
+        case CELESTIAL -> RitualTableEmiCategory.CELESTIAL;
+        case SUMMONING -> RitualTableEmiCategory.SUMMONING;
+      };
+      registry.addCategory(category);
+      registry.addWorkstation(category, EmiStack.of(ModBlocks.RITUAL_TABLE.get()));
+      registry.addWorkstation(category, EmiStack.of(ModBlocks.RITUAL_BRAZIER.get()));
+      registry.addWorkstation(category, EmiStack.of(ModItems.HEX_FOCUS.get()));
+    }
 
     for (RitualTableRecipe recipe :
         registry.getRecipeManager().getAllRecipesFor(RitualTableRecipe.Type.INSTANCE)) {
       registry.addRecipe(new RitualTableEmiRecipe(recipe));
-    }
-
-    registry.addCategory(RitualBrazierEmiCategory.CATEGORY);
-    registry.addWorkstation(
-        RitualBrazierEmiCategory.CATEGORY, EmiStack.of(ModBlocks.RITUAL_BRAZIER.get()));
-
-    for (RitualBrazierRecipe recipe :
-        registry.getRecipeManager().getAllRecipesFor(RitualBrazierRecipe.Type.INSTANCE)) {
-      registry.addRecipe(new RitualBrazierEmiRecipe(recipe));
     }
 
     registry.addCategory(SmallCauldronEmiCategory.CATEGORY);

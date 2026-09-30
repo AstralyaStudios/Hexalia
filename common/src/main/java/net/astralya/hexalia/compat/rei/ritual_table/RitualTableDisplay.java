@@ -13,11 +13,17 @@ import net.astralya.hexalia.recipe.RitualTableRecipe;
 
 public final class RitualTableDisplay extends BasicDisplay {
   private boolean requiresSoul;
+  private RitualTableRecipe.RitualKind kind;
+  private int energyCost;
+  private List<EntryIngredient> energyEntries;
 
   @SuppressWarnings("unused")
   public RitualTableDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
     super(inputs, outputs);
     this.requiresSoul = false;
+    this.kind = RitualTableRecipe.RitualKind.NATURE;
+    this.energyCost = 0;
+    this.energyEntries = List.of();
   }
 
   public RitualTableDisplay(RitualTableRecipe recipe) {
@@ -25,15 +31,46 @@ public final class RitualTableDisplay extends BasicDisplay {
         getInputList(recipe),
         List.of(EntryIngredient.of(EntryStacks.of(NaturesRitualViewer.result(recipe)))));
     this.requiresSoul = recipe.requiresSoul();
+    this.kind = recipe.ritualKind();
+    this.energyCost = recipe.resolvedEnergyCost();
+    this.energyEntries = List.of(EntryIngredient.of(
+        NaturesRitualViewer.energyIcons(recipe).stream().map(EntryStacks::of).toList()));
   }
 
   public boolean requiresSoul() {
     return requiresSoul;
   }
 
+  public EntryIngredient energyEntries() { return energyEntries.get(0); }
+
+  public net.minecraft.network.chat.Component energyLabel() {
+    return net.minecraft.network.chat.Component.translatable(
+        "jei.hexalia.energy." + (kind == RitualTableRecipe.RitualKind.CELESTIAL ? "bloom" : "crop")
+            + "_label", energyCost);
+  }
+
+  public net.minecraft.network.chat.Component energyFirstLine() {
+    return net.minecraft.network.chat.Component.translatable(
+        "jei.hexalia.energy." + (kind == RitualTableRecipe.RitualKind.CELESTIAL ? "bloom" : "crop")
+            + "_line_1", energyCost);
+  }
+
+  public net.minecraft.network.chat.Component energySecondLine() {
+    return net.minecraft.network.chat.Component.translatable(
+        "jei.hexalia.energy." + (kind == RitualTableRecipe.RitualKind.CELESTIAL ? "bloom" : "crop")
+            + "_line_2");
+  }
+
+  public List<net.minecraft.network.chat.Component> energyTooltip() {
+    String prefix = "jei.hexalia.energy." + (kind == RitualTableRecipe.RitualKind.CELESTIAL ? "bloom" : "crop");
+    return List.of(net.minecraft.network.chat.Component.translatable(prefix + "_title"),
+        net.minecraft.network.chat.Component.translatable(prefix + "_requirement", energyCost),
+        net.minecraft.network.chat.Component.translatable(prefix + "_effect"));
+  }
+
   @Override
   public CategoryIdentifier<?> getCategoryIdentifier() {
-    return RitualTableCategory.RITUAL_TABLE;
+    return CategoryIdentifier.of(NaturesRitualViewer.categoryId(kind));
   }
 
   private static List<EntryIngredient> getInputList(RitualTableRecipe recipe) {

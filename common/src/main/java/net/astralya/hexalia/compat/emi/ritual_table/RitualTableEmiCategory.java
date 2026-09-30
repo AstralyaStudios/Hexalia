@@ -7,9 +7,14 @@ import net.astralya.hexalia.block.ModBlocks;
 import net.minecraft.resources.ResourceLocation;
 
 public final class RitualTableEmiCategory {
-  public static final ResourceLocation ID = new ResourceLocation(HexaliaMod.MODID, "ritual_table");
-  public static final EmiRecipeCategory CATEGORY =
-      new EmiRecipeCategory(ID, EmiStack.of(ModBlocks.RITUAL_TABLE.get()));
+  public static final EmiRecipeCategory NATURE = category(net.astralya.hexalia.recipe.RitualTableRecipe.RitualKind.NATURE);
+  public static final EmiRecipeCategory CELESTIAL = category(net.astralya.hexalia.recipe.RitualTableRecipe.RitualKind.CELESTIAL);
+  public static final EmiRecipeCategory SUMMONING = category(net.astralya.hexalia.recipe.RitualTableRecipe.RitualKind.SUMMONING);
+
+  public static EmiRecipeCategory category(net.astralya.hexalia.recipe.RitualTableRecipe.RitualKind kind) {
+    return new EmiRecipeCategory(net.astralya.hexalia.compat.NaturesRitualViewer.categoryId(kind),
+        EmiStack.of(ModBlocks.RITUAL_TABLE.get()));
+  }
 
   private RitualTableEmiCategory() {}
 }

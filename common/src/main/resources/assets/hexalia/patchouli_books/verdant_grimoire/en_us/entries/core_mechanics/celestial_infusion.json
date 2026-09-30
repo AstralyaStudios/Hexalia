@@ -1,71 +1,66 @@
 {
-  "name": "Celestial Infusion",
-  "icon": "hexalia:ritual_brazier",
+  "name": "Celestial Ritual",
+  "icon": "hexalia:ritual_table",
   "category": "hexalia:core_mechanics",
   "sortnum": 1,
   "pages": [
     {
       "type": "text",
-      "title": "Celestial Infusion",
-      "text": "Celestial Infusion is a focused ritual process that channels energy from nearby Celestial Blooms through a Ritual Brazier. It offers a direct and immediate way to transform items using natural celestial forces."
+      "title": "Celestial Ritual",
+      "text": "Celestial Ritual channels energy from nearby Celestial Blooms through the Ritual Table. Each recipe requires a catalyst, salted offering Braziers, and nearby Blooms."
     },
     {
       "type": "text",
       "title": "Requirements",
       "anchor": "requirements",
-      "text": "Celestial Infusion requires a $(l:hexalia:blocks/ritual_brazier)Ritual Brazier$(/l) with open sky above it, along with at least three $(l:hexalia:resources/herbs#celestial_bloom)Celestial Blooms$(/l) placed within a short radius."
+      "text": "Celestial Ritual requires a $(l:hexalia:blocks/ritual_table)Ritual Table$(/l), selected salted Braziers, and the recipe's required number of nearby $(l:hexalia:resources/herbs#celestial_bloom)Celestial Blooms$(/l). It must be night; sky exposure is not required."
     },
     {
       "type": "text",
       "title": "Process",
       "anchor": "process",
-      "text": "Place the desired ingredient into the brazier, then activate it using a Hex Focus. If the surrounding conditions are met, the infusion begins immediately, drawing energy from the nearby blooms."
+      "text": "Place the catalyst on the Table and offerings on salted Braziers, then activate the ritual with a Hex Focus. The ritual draws energy from selected Blooms after the offerings move."
     },
     {
       "type": "text",
       "title": "Transformation",
       "anchor": "results",
-      "text": "During infusion, celestial energy is consumed from the blooms. They wither over time, eventually turning into dead remnants, while the inserted item is transformed within the brazier."
+      "text": "After the ritual succeeds, selected Celestial Blooms wither and selected Withered Blooms become dead bushes. The catalyst transforms at the Ritual Table."
     },
     {
       "type": "text",
       "title": "On Use",
-      "text": "Celestial Infusion provides a simpler alternative to more complex rituals, allowing quick transformations at the cost of natural resources gathered from the world."
+      "text": "Each Celestial recipe shows its Bloom requirement separately from Brazier offerings. The Blooms are charged only when the ritual succeeds."
     },
     {
       "type": "hexalia:recipe_page",
-      "recipe_id": "hexalia:celestial_crystal_block_from_ritual",
-      "layout": "ritual_brazier"
+      "recipe_id": "hexalia:celestial_crystal_from_celestial_infusion",
+      "layout": "ritual_table"
     },
     {
       "type": "hexalia:recipe_page",
-      "recipe_id": "hexalia:celestial_crystal_from_ritual",
-      "layout": "ritual_brazier"
+      "recipe_id": "hexalia:galeberries_from_celestial_infusion",
+      "layout": "ritual_table"
     },
     {
       "type": "hexalia:recipe_page",
-      "recipe_id": "hexalia:galeberries_from_ritual",
-      "layout": "ritual_brazier"
+      "recipe_id": "hexalia:moonweave_bindings_from_celestial_infusion",
+      "layout": "ritual_table"
     },
     {
       "type": "hexalia:recipe_page",
-      "recipe_id": "hexalia:moonweave_bindings_from_ritual",
-      "layout": "ritual_brazier"
+      "recipe_id": "hexalia:moonweave_footwraps_from_celestial_infusion",
+      "layout": "ritual_table"
     },
     {
       "type": "hexalia:recipe_page",
-      "recipe_id": "hexalia:moonweave_footwraps_from_ritual",
-      "layout": "ritual_brazier"
+      "recipe_id": "hexalia:moonweave_hood_from_celestial_infusion",
+      "layout": "ritual_table"
     },
     {
       "type": "hexalia:recipe_page",
-      "recipe_id": "hexalia:moonweave_hood_from_ritual",
-      "layout": "ritual_brazier"
-    },
-    {
-      "type": "hexalia:recipe_page",
-      "recipe_id": "hexalia:moonweave_mantle_from_ritual",
-      "layout": "ritual_brazier"
+      "recipe_id": "hexalia:moonweave_mantle_from_celestial_infusion",
+      "layout": "ritual_table"
     }
   ]
 }

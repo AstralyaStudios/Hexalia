@@ -6,7 +6,6 @@ import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -148,30 +147,7 @@ public class RitualBrazierBlock extends BaseEntityBlock {
               ? heldStack
               : offhandStack.is(ModItems.HEX_FOCUS.get()) ? offhandStack : ItemStack.EMPTY;
 
-      if (!focusStack.isEmpty()) {
-        if (!level.isClientSide()) {
-          RitualBrazierBlockEntity.RitualResult result = brazier.tryStartCelestialInfusion();
-          switch (result) {
-            case SUCCESS -> {
-              spawnPoofParticles(level, pos);
-              level.playSound(
-                  null, pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 0.25f, 0.25f);
-            }
-            case ALREADY_CHANNELING -> {}
-            case NO_CELESTIAL_BLOOMS ->
-                player.displayClientMessage(
-                    Component.translatable("message.hexalia.ritual_brazier.no_celestial_blooms"),
-                    true);
-            case NO_SKY ->
-                player.displayClientMessage(
-                    Component.translatable("message.hexalia.ritual_brazier.no_sky"), true);
-            case INVALID_ITEM ->
-                player.displayClientMessage(
-                    Component.translatable("message.hexalia.ritual_brazier.invalid_item"), true);
-          }
-        }
-        return InteractionResult.sidedSuccess(level.isClientSide());
-      }
+      if (!focusStack.isEmpty()) return InteractionResult.PASS;
     } else if (hand == InteractionHand.MAIN_HAND) {
       if (!level.isClientSide()) {
         ItemStack removed = brazier.removeItem();
@@ -186,21 +162,6 @@ public class RitualBrazierBlock extends BaseEntityBlock {
     }
 
     return InteractionResult.PASS;
-  }
-
-  private static void spawnPoofParticles(Level level, BlockPos pos) {
-    if (level instanceof ServerLevel server) {
-      server.sendParticles(
-          ParticleTypes.POOF,
-          pos.getX() + 0.5,
-          pos.getY() + 1.0,
-          pos.getZ() + 0.5,
-          10,
-          0.2,
-          0.2,
-          0.2,
-          0.02);
-    }
   }
 
   private void playItemSound(Level level, BlockPos pos) {

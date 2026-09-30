@@ -1,9 +1,0 @@
-{
-  "type": "hexalia:ritual_brazier",
-  "input": {
-    "item": "hexalia:silkweave_footwraps"
-  },
-  "output": {
-    "item": "hexalia:moonweave_footwraps"
-  }
-}

@@ -28,12 +28,11 @@ import org.jetbrains.annotations.Nullable;
 @MethodsReturnNonnullByDefault
 public class RitualTableRecipeCategory implements IRecipeCategory<RitualTableRecipe> {
 
-  public static final ResourceLocation UID = new ResourceLocation(HexaliaMod.MODID, "ritual_table");
+  private final RitualTableRecipe.RitualKind kind;
+  private final RecipeType<RitualTableRecipe> recipeType;
   public static final ResourceLocation TEXTURE =
       new ResourceLocation(HexaliaMod.MODID, "textures/gui/ritual_table_gui.png");
 
-  public static final RecipeType<RitualTableRecipe> RITUAL_TABLE_RECIPE_TYPE =
-      new RecipeType<>(UID, RitualTableRecipe.class);
 
   private final IDrawable background;
   private final IDrawable icon;
@@ -42,7 +41,9 @@ public class RitualTableRecipeCategory implements IRecipeCategory<RitualTableRec
   private static final int WIDTH = NaturesRitualViewer.WIDTH;
   private static final int HEIGHT = NaturesRitualViewer.HEIGHT;
 
-  public RitualTableRecipeCategory(IGuiHelper helper) {
+  public RitualTableRecipeCategory(IGuiHelper helper, RitualTableRecipe.RitualKind kind) {
+    this.kind = kind;
+    this.recipeType = new RecipeType<>(NaturesRitualViewer.categoryId(kind), RitualTableRecipe.class);
     this.background = helper.createDrawable(TEXTURE, 0, 0, WIDTH, HEIGHT);
     this.icon =
         helper.createDrawableIngredient(
@@ -58,12 +59,12 @@ public class RitualTableRecipeCategory implements IRecipeCategory<RitualTableRec
 
   @Override
   public RecipeType<RitualTableRecipe> getRecipeType() {
-    return RITUAL_TABLE_RECIPE_TYPE;
+    return recipeType;
   }
 
   @Override
   public Component getTitle() {
-    return Component.translatable("block.hexalia.ritual_table");
+    return NaturesRitualViewer.categoryTitle(kind);
   }
 
   @Override
@@ -78,7 +79,7 @@ public class RitualTableRecipeCategory implements IRecipeCategory<RitualTableRec
 
   @Override
   public int getHeight() {
-    return HEIGHT;
+    return NaturesRitualViewer.ENERGY_Y + NaturesRitualViewer.ENERGY_HEIGHT;
   }
 
   @Override
@@ -89,6 +90,11 @@ public class RitualTableRecipeCategory implements IRecipeCategory<RitualTableRec
       double mouseX,
       double mouseY) {
     background.draw(guiGraphics, 0, 0);
+    guiGraphics.fill(4, 81, 114, 82, 0xFF706C77);
+    guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font,
+        NaturesRitualViewer.energyFirstLine(recipe), 24, 86, 0xA9A29C, false);
+    guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font,
+        NaturesRitualViewer.energySecondLine(recipe), 24, 97, 0xA9A29C, false);
     if (recipe.requiresSoul())
       soulIcon.draw(guiGraphics, NaturesRitualViewer.SOUL_X, NaturesRitualViewer.SOUL_Y);
   }
@@ -116,6 +122,9 @@ public class RitualTableRecipeCategory implements IRecipeCategory<RitualTableRec
           .addIngredients(ingredients.get(i));
     }
 
+    builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 4, NaturesRitualViewer.ENERGY_Y + 2)
+        .addItemStacks(NaturesRitualViewer.energyIcons(recipe));
+
     builder
         .addSlot(
             RecipeIngredientRole.OUTPUT, NaturesRitualViewer.OUTPUT_X, NaturesRitualViewer.OUTPUT_Y)
@@ -129,6 +138,8 @@ public class RitualTableRecipeCategory implements IRecipeCategory<RitualTableRec
       IRecipeSlotsView recipeSlotsView,
       double mouseX,
       double mouseY) {
+    if (mouseY >= NaturesRitualViewer.ENERGY_Y)
+      NaturesRitualViewer.energyTooltip(recipe).forEach(tooltip::add);
     if (recipe.requiresSoul()
         && mouseX >= NaturesRitualViewer.SOUL_X
         && mouseX < NaturesRitualViewer.SOUL_X + NaturesRitualViewer.SOUL_SIZE
