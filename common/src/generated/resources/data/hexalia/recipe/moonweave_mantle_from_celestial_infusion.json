@@ -1,7 +1,23 @@
 {
-  "type": "hexalia:celestial_infusion",
-  "input": {
+  "type": "hexalia:natures_ritual",
+  "center": {
     "item": "hexalia:silkweave_mantle"
   },
-  "output": "hexalia:moonweave_mantle"
+  "energy_cost": 6,
+  "offerings": [
+    {
+      "item": "hexalia:celestial_crystal"
+    },
+    {
+      "item": "hexalia:silk_fiber"
+    },
+    {
+      "item": "minecraft:phantom_membrane"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    }
+  ],
+  "output": "hexalia:moonweave_mantle",
+  "ritual_kind": "celestial"
 }

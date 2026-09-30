@@ -3,6 +3,7 @@
   "center": {
     "item": "hexalia:celestial_crystal"
   },
+  "energy_cost": 7,
   "offerings": [
     {
       "item": "minecraft:gold_nugget"
@@ -20,5 +21,6 @@
       "item": "minecraft:amethyst_shard"
     }
   ],
-  "output": "hexalia:sage_pendant"
+  "output": "hexalia:sage_pendant",
+  "ritual_kind": "nature"
 }

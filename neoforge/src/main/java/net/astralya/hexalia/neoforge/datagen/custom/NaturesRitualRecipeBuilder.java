@@ -2,6 +2,7 @@ package net.astralya.hexalia.neoforge.datagen.custom;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 import net.astralya.hexalia.recipe.NaturesRitualRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -27,6 +28,8 @@ public final class NaturesRitualRecipeBuilder implements RecipeBuilder {
   private final Item result;
   private final NaturesRitualRecipe.RitualResult ritualResult;
   private boolean requiresSoul;
+  private NaturesRitualRecipe.RitualKind ritualKind = NaturesRitualRecipe.RitualKind.NATURE;
+  private int energyCost = -1;
   private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
   private String group;
 
@@ -51,6 +54,7 @@ public final class NaturesRitualRecipeBuilder implements RecipeBuilder {
     this.result = Items.AIR;
     this.ritualResult = new NaturesRitualRecipe.EntityResult(entity, count);
     this.requiresSoul = true;
+    this.ritualKind = NaturesRitualRecipe.RitualKind.SUMMONING;
   }
 
   public static NaturesRitualRecipeBuilder ritual(
@@ -85,6 +89,17 @@ public final class NaturesRitualRecipeBuilder implements RecipeBuilder {
     return this;
   }
 
+  public NaturesRitualRecipeBuilder celestial() {
+    ritualKind = NaturesRitualRecipe.RitualKind.CELESTIAL;
+    return this;
+  }
+
+  public NaturesRitualRecipeBuilder energyCost(int cost) {
+    if (cost < 0) throw new IllegalArgumentException("energy_cost must be nonnegative");
+    energyCost = cost;
+    return this;
+  }
+
   public NaturesRitualRecipeBuilder requiresBrazierIngredient(Ingredient ingredient) {
     offerings.add(ingredient);
     return this;
@@ -110,6 +125,7 @@ public final class NaturesRitualRecipeBuilder implements RecipeBuilder {
   @Override
   public void save(RecipeOutput recipeOutput, ResourceLocation recipeId) {
     ensureValid(recipeId);
+    if (energyCost < 0) throw new IllegalStateException("Missing energy_cost: " + recipeId);
 
     Advancement.Builder advancement =
         recipeOutput
@@ -120,7 +136,8 @@ public final class NaturesRitualRecipeBuilder implements RecipeBuilder {
 
     recipeOutput.accept(
         recipeId,
-        new NaturesRitualRecipe(centerIngredient, offerings, ritualResult, requiresSoul),
+        new NaturesRitualRecipe(centerIngredient, offerings, ritualResult, requiresSoul,
+            ritualKind, Optional.of(energyCost)),
         advancement.build(recipeId.withPrefix("recipes/" + category.getFolderName() + "/")));
   }
 

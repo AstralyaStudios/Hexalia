@@ -27,6 +27,10 @@ public final class ModSoundEvents {
       SOUND_EVENTS.register(
           "cacofey_idle", () -> SoundEvent.createVariableRangeEvent(id("cacofey_idle")));
 
+  public static final RegistrySupplier<SoundEvent> RITUAL_WHISPERS =
+      SOUND_EVENTS.register(
+          "ritual_whispers", () -> SoundEvent.createVariableRangeEvent(id("ritual_whispers")));
+
   private ModSoundEvents() {}
 
   public static void init() {

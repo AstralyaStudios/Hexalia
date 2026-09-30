@@ -450,10 +450,6 @@ public final class ModLanguageProvider extends LanguageProvider {
             "There are not enough Celestial Blooms nearby.");
 
     add(
-            "message.hexalia.ritual_brazier.no_sky",
-            "The infusion requires an open view of the sky.");
-
-    add(
             "message.hexalia.celestial_infusion.invalid_item",
             "The item placed on the brazier cannot be infused.");
 
@@ -461,9 +457,8 @@ public final class ModLanguageProvider extends LanguageProvider {
             "message.hexalia.celestial_infusion.no_celestial_blooms",
             "There are not enough Celestial Blooms nearby.");
 
-    add(
-            "message.hexalia.celestial_infusion.no_sky",
-            "The infusion requires an open view of the sky.");
+    add("message.hexalia.celestial_infusion.requires_night",
+            "Celestial Infusion requires nighttime.");
 
     add(
             "message.hexalia.censer_not_full",
@@ -783,12 +778,23 @@ public final class ModLanguageProvider extends LanguageProvider {
             "Requires nearby Celestial Blooms.");
 
     add(
-            "jei.hexalia.tooltip.requires_open_sky",
-            "Requires an open view of the sky.");
-
-    add(
             "jei.hexalia.tooltip.requires_mature_crops",
             "Requires mature crops nearby.");
+
+    add("jei.hexalia.energy.crop_short", "%s Mature Crops");
+    add("jei.hexalia.energy.bloom_short", "%s Celestial Blooms");
+    add("jei.hexalia.energy.nearby", "Nearby");
+    add("jei.hexalia.energy.crop_label", "%s Mature Crops Nearby");
+    add("jei.hexalia.energy.crop_title", "Ritual Energy");
+    add("jei.hexalia.energy.crop_requirement", "Requires %s fully grown crops nearby.");
+    add("jei.hexalia.energy.crop_effect", "Selected crops return to their first growth stage when the ritual succeeds.");
+    add("jei.hexalia.energy.bloom_label", "%s Celestial Blooms Nearby");
+    add("jei.hexalia.energy.bloom_title", "Celestial Energy");
+    add("jei.hexalia.energy.bloom_requirement", "Requires %s Celestial Blooms nearby.");
+    add("jei.hexalia.energy.bloom_effect", "Each selected Bloom loses one stage when the ritual succeeds.");
+
+    add("jei.hexalia.tooltip.crop_cost", "Requires %s mature crops.");
+    add("jei.hexalia.tooltip.bloom_cost", "Requires %s living Celestial Blooms.");
 
     add(
             "jei.info.wild_sunfire_tomatoes",
@@ -826,6 +832,7 @@ public final class ModLanguageProvider extends LanguageProvider {
   private void addEmiTranslations() {
     add("emi.category.hexalia.mutation", "Mutation");
     add("emi.category.hexalia.mortar_and_pestle", "Mortar and Pestle");
+    add("emi.category.hexalia.celestial_infusion", "Celestial Infusion");
     add("emi.category.hexalia.ritual_brazier", "Ritual Brazier");
     add("emi.category.hexalia.ritual_table", "Ritual Table");
     add("emi.category.hexalia.small_cauldron", "Small Cauldron");
@@ -903,5 +910,6 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("sounds.hexalia.conversion", "Block converted");
     add("sounds.hexalia.sac_impact", "Sac hits the ground");
     add("sounds.hexalia.cacofey_giggle", "Cacofey giggling");
+    add("sounds.hexalia.ritual_whispers", "Ritual whispers");
   }
 }

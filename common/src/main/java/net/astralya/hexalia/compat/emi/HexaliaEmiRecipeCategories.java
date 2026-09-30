@@ -14,7 +14,7 @@ public final class HexaliaEmiRecipeCategories {
   public static final EmiRecipeCategory NATURES_RITUAL =
       category("ritual_table", EmiStack.of(ModItems.RITUAL_TABLE.get()));
   public static final EmiRecipeCategory CELESTIAL_INFUSION =
-      category("ritual_brazier", EmiStack.of(ModItems.RITUAL_BRAZIER.get()));
+      category("celestial_infusion", EmiStack.of(ModItems.RITUAL_TABLE.get()));
   public static final EmiRecipeCategory MUTATION =
       category("mutation", EmiStack.of(ModItems.MUTAVIS.get()));
 

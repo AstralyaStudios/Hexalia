@@ -13,22 +13,6 @@ public final class ModRecipeTypes {
   public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES =
       DeferredRegister.create(Hexalia.MOD_ID, Registries.RECIPE_TYPE);
 
-  public static final RegistrySupplier<RecipeSerializer<CelestialInfusionRecipe>>
-      CELESTIAL_INFUSION_SERIALIZER =
-          RECIPE_SERIALIZERS.register(
-              "celestial_infusion", CelestialInfusionRecipe.Serializer::new);
-
-  public static final RegistrySupplier<RecipeType<CelestialInfusionRecipe>> CELESTIAL_INFUSION =
-      RECIPE_TYPES.register(
-          "celestial_infusion",
-          () ->
-              new RecipeType<>() {
-                @Override
-                public String toString() {
-                  return Hexalia.MOD_ID + ":celestial_infusion";
-                }
-              });
-
   public static final RegistrySupplier<RecipeSerializer<NaturesRitualRecipe>>
       NATURES_RITUAL_SERIALIZER =
           RECIPE_SERIALIZERS.register("natures_ritual", NaturesRitualRecipe.Serializer::new);

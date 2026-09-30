@@ -9,14 +9,14 @@ import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 
-public class HexMoteParticle extends TextureSheetParticle {
+public class HexMotesParticle extends TextureSheetParticle {
   private final SpriteSet sprites;
   private final int startingColor;
   private final int colorDirection;
   private final int colorInterval;
   private final double swayOffset;
 
-  public HexMoteParticle(
+  public HexMotesParticle(
       ClientLevel level,
       double x,
       double y,
@@ -84,7 +84,7 @@ public class HexMoteParticle extends TextureSheetParticle {
         double vx,
         double vy,
         double vz) {
-      return new HexMoteParticle(world, x, y, z, vx, vy, vz, this.spriteSet);
+      return new HexMotesParticle(world, x, y, z, vx, vy, vz, this.spriteSet);
     }
   }
 }

@@ -36,16 +36,6 @@ public enum HexaliaRecipeGuiLayout {
         {27, 30}, {3, 6}, {27, 6}, {51, 6}, {3, 30}, {51, 30}, {3, 54}, {27, 54}, {51, 54}
       },
       new int[] {88, 30}),
-  CELESTIAL_INFUSION(
-      texture("ritual_brazier_gui.png"),
-      118,
-      80,
-      0,
-      0,
-      118,
-      80,
-      new int[][] {{27, 30}},
-      new int[] {88, 30}),
   MUTATION(
       texture("mutation_gui.png"),
       118,

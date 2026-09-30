@@ -109,7 +109,9 @@ public final class ModBlocks {
           "ritual_table",
           () ->
               new RitualTableBlock(
-                  BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICKS).noOcclusion()));
+                  BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICKS)
+                      .noOcclusion()
+                      .lightLevel(state -> state.getValue(RitualTableBlock.ACTIVE) ? 7 : 0)));
 
   public static final RegistrySupplier<Block> RITUAL_BRAZIER =
       BLOCKS.register(
@@ -349,13 +351,15 @@ public final class ModBlocks {
               new CelestialBloomBlock(
                   MobEffects.NIGHT_VISION,
                   6,
-                  BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY).lightLevel(state -> 6)));
+                  BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)
+                      .randomTicks()
+                      .lightLevel(state -> 0)));
 
   public static final RegistrySupplier<Block> POTTED_CELESTIAL_BLOOM =
       potted(
           "potted_celestial_bloom",
           CELESTIAL_BLOOM,
-          BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).lightLevel(state -> 6));
+          BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).lightLevel(state -> 0));
 
   public static final RegistrySupplier<Block> WITHERED_CELESTIAL_BLOOM =
       BLOCKS.register(
@@ -364,13 +368,15 @@ public final class ModBlocks {
               new CelestialBloomBlock(
                   MobEffects.NIGHT_VISION,
                   3,
-                  BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY).lightLevel(state -> 6)));
+                  BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)
+                      .randomTicks()
+                      .lightLevel(state -> 0)));
 
   public static final RegistrySupplier<Block> POTTED_WITHERED_CELESTIAL_BLOOM =
       potted(
           "potted_withered_celestial_bloom",
           WITHERED_CELESTIAL_BLOOM,
-          BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).lightLevel(state -> 6));
+          BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).lightLevel(state -> 0));
 
   public static final RegistrySupplier<Block> LOTUS_FLOWER =
       BLOCKS.register(

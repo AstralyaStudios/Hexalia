@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.UnaryOperator;
 import net.astralya.hexalia.Hexalia;
-import net.astralya.hexalia.recipe.CelestialInfusionRecipe;
 import net.astralya.hexalia.recipe.MortarAndPestleRecipe;
 import net.astralya.hexalia.recipe.MutationRecipe;
 import net.astralya.hexalia.recipe.NaturesRitualRecipe;
@@ -28,8 +27,6 @@ public class RecipePageComponent implements ICustomComponent {
       ResourceLocation.fromNamespaceAndPath(Hexalia.MOD_ID, "textures/gui/mutation_gui.png");
   private static final ResourceLocation MORTAR_TEXTURE =
       ResourceLocation.fromNamespaceAndPath(Hexalia.MOD_ID, "textures/gui/mortar_gui.png");
-  private static final ResourceLocation RITUAL_BRAZIER_TEXTURE =
-      ResourceLocation.fromNamespaceAndPath(Hexalia.MOD_ID, "textures/gui/ritual_brazier_gui.png");
   private static final ResourceLocation RITUAL_TABLE_TEXTURE =
       ResourceLocation.fromNamespaceAndPath(Hexalia.MOD_ID, "textures/gui/ritual_table_gui.png");
   private static final ResourceLocation SMALL_CAULDRON_TEXTURE =
@@ -94,8 +91,7 @@ public class RecipePageComponent implements ICustomComponent {
       case "ritual_table" -> renderRitualTable(graphics, context, currentRecipe, mouseX, mouseY);
       case "mortar_and_pestle" -> renderMortar(graphics, context, currentRecipe, mouseX, mouseY);
       case "mutation" -> renderMutation(graphics, context, currentRecipe, mouseX, mouseY);
-      case "ritual_brazier" ->
-          renderRitualBrazier(graphics, context, currentRecipe, mouseX, mouseY);
+      case "ritual_brazier" -> renderRitualTable(graphics, context, currentRecipe, mouseX, mouseY);
       default ->
           graphics.drawString(
               Minecraft.getInstance().font,
@@ -169,25 +165,6 @@ public class RecipePageComponent implements ICustomComponent {
         graphics,
         left + 69 + ITEM_OFFSET_X,
         top + 11 + ITEM_OFFSET_Y,
-        mouseX,
-        mouseY,
-        currentRecipe.output);
-  }
-
-  private void renderRitualBrazier(
-      GuiGraphics graphics,
-      IComponentRenderContext context,
-      RecipeView currentRecipe,
-      int mouseX,
-      int mouseY) {
-    int left = centeredX(118);
-    int top = y + 18;
-    graphics.blit(RITUAL_BRAZIER_TEXTURE, left, top, 0, 0, 118, 80, 256, 256);
-    renderIngredient(graphics, context, currentRecipe, 0, left + 27, top + 30, mouseX, mouseY);
-    context.renderItemStack(
-        graphics,
-        left + 88 + ITEM_OFFSET_X,
-        top + 30 + ITEM_OFFSET_Y,
         mouseX,
         mouseY,
         currentRecipe.output);
@@ -281,13 +258,11 @@ public class RecipePageComponent implements ICustomComponent {
       case "ritual_brazier" ->
           manager
               .byKey(id)
-              .filter(holder -> holder.value() instanceof CelestialInfusionRecipe)
+              .filter(holder -> holder.value() instanceof NaturesRitualRecipe)
               .map(
                   holder -> {
-                    CelestialInfusionRecipe recipe = (CelestialInfusionRecipe) holder.value();
-                    return new RecipeView(
-                        List.copyOf(recipe.getIngredients()),
-                        recipe.getResultItem(client.level.registryAccess()).copy());
+                    NaturesRitualRecipe value = (NaturesRitualRecipe) holder.value();
+                    return new RecipeView(List.copyOf(value.ingredients()), value.itemResult());
                   });
       case "mutation" ->
           manager

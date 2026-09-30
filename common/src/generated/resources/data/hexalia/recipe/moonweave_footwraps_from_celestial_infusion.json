@@ -1,7 +1,20 @@
 {
-  "type": "hexalia:celestial_infusion",
-  "input": {
+  "type": "hexalia:natures_ritual",
+  "center": {
     "item": "hexalia:silkweave_footwraps"
   },
-  "output": "hexalia:moonweave_footwraps"
+  "energy_cost": 5,
+  "offerings": [
+    {
+      "item": "hexalia:celestial_crystal"
+    },
+    {
+      "item": "hexalia:silk_fiber"
+    },
+    {
+      "item": "minecraft:feather"
+    }
+  ],
+  "output": "hexalia:moonweave_footwraps",
+  "ritual_kind": "celestial"
 }

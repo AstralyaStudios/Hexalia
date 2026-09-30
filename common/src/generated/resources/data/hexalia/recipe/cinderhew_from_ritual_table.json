@@ -3,6 +3,7 @@
   "center": {
     "item": "hexalia:ancient_seed"
   },
+  "energy_cost": 8,
   "offerings": [
     {
       "item": "minecraft:wooden_axe"
@@ -23,5 +24,6 @@
       "item": "minecraft:flint"
     }
   ],
-  "output": "hexalia:cinderhew"
+  "output": "hexalia:cinderhew",
+  "ritual_kind": "nature"
 }

@@ -3,6 +3,7 @@
   "center": {
     "item": "minecraft:amethyst_shard"
   },
+  "energy_cost": 3,
   "offerings": [
     {
       "item": "minecraft:lily_pad"
@@ -11,5 +12,6 @@
       "item": "minecraft:ink_sac"
     }
   ],
-  "output": "hexalia:water_node"
+  "output": "hexalia:water_node",
+  "ritual_kind": "nature"
 }

@@ -3,6 +3,7 @@
   "center": {
     "item": "hexalia:ancient_seed"
   },
+  "energy_cost": 8,
   "offerings": [
     {
       "item": "hexalia:water_node"
@@ -23,5 +24,6 @@
       "item": "minecraft:nautilus_shell"
     }
   ],
-  "output": "hexalia:kelpweave_blade"
+  "output": "hexalia:kelpweave_blade",
+  "ritual_kind": "nature"
 }

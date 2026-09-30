@@ -5,7 +5,6 @@ import net.astralya.hexalia.Hexalia;
 import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.entity.ModEntities;
-import net.astralya.hexalia.neoforge.datagen.custom.CelestialInfusionRecipeBuilder;
 import net.astralya.hexalia.neoforge.datagen.custom.MortarAndPestleRecipeBuilder;
 import net.astralya.hexalia.neoforge.datagen.custom.MutationRecipeBuilder;
 import net.astralya.hexalia.neoforge.datagen.custom.NaturesRitualRecipeBuilder;
@@ -518,51 +517,81 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
   }
 
   private void buildCelestialInfusionRecipes(RecipeOutput recipeOutput) {
-    CelestialInfusionRecipeBuilder.infusion(
+    NaturesRitualRecipeBuilder.ritual(
                     RecipeCategory.FOOD, Ingredient.of(Items.GLOW_BERRIES), ModItems.GALEBERRIES.get())
             .unlockedBy(
                     "has_glow_berries",
                     inventoryTrigger(ItemPredicate.Builder.item().of(Items.GLOW_BERRIES).build()))
+            .celestial()
+            .energyCost(3)
+            .requiresBrazierIngredient(Ingredient.of(Items.GLOWSTONE_DUST))
+            .requiresBrazierIngredient(Ingredient.of(Items.FEATHER))
             .save(recipeOutput, id("galeberries_from_celestial_infusion"));
 
-    CelestialInfusionRecipeBuilder.infusion(
+    NaturesRitualRecipeBuilder.ritual(
                     RecipeCategory.MISC, Ingredient.of(Items.AMETHYST_SHARD), ModItems.CELESTIAL_CRYSTAL.get())
             .unlockedBy(
                     "has_amethyst_shard",
                     inventoryTrigger(ItemPredicate.Builder.item().of(Items.AMETHYST_SHARD).build()))
+            .celestial()
+            .energyCost(4)
+            .requiresBrazierIngredient(Ingredient.of(Items.GLOWSTONE_DUST))
+            .requiresBrazierIngredient(Ingredient.of(Items.QUARTZ))
+            .requiresBrazierIngredient(Ingredient.of(Items.LAPIS_LAZULI))
             .save(recipeOutput, id("celestial_crystal_from_celestial_infusion"));
 
-    CelestialInfusionRecipeBuilder.infusion(
+    NaturesRitualRecipeBuilder.ritual(
                     RecipeCategory.COMBAT,
                     Ingredient.of(ModItems.SILKWEAVE_HOOD.get()),
                     ModItems.MOONWEAVE_HOOD.get())
             .unlockedBy(
                     "has_silkweave_hood",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.SILKWEAVE_HOOD.get()).build()))
+            .celestial()
+            .energyCost(5)
+            .requiresBrazierIngredient(Ingredient.of(ModItems.CELESTIAL_CRYSTAL.get()))
+            .requiresBrazierIngredient(Ingredient.of(ModItems.SILK_FIBER.get()))
+            .requiresBrazierIngredient(Ingredient.of(Items.PHANTOM_MEMBRANE))
             .save(recipeOutput, id("moonweave_hood_from_celestial_infusion"));
-    CelestialInfusionRecipeBuilder.infusion(
+    NaturesRitualRecipeBuilder.ritual(
                     RecipeCategory.COMBAT,
                     Ingredient.of(ModItems.SILKWEAVE_MANTLE.get()),
                     ModItems.MOONWEAVE_MANTLE.get())
             .unlockedBy(
                     "has_silkweave_mantle",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.SILKWEAVE_MANTLE.get()).build()))
+            .celestial()
+            .energyCost(6)
+            .requiresBrazierIngredient(Ingredient.of(ModItems.CELESTIAL_CRYSTAL.get()))
+            .requiresBrazierIngredient(Ingredient.of(ModItems.SILK_FIBER.get()))
+            .requiresBrazierIngredient(Ingredient.of(Items.PHANTOM_MEMBRANE))
+            .requiresBrazierIngredient(Ingredient.of(Items.GLOWSTONE_DUST))
             .save(recipeOutput, id("moonweave_mantle_from_celestial_infusion"));
-    CelestialInfusionRecipeBuilder.infusion(
+    NaturesRitualRecipeBuilder.ritual(
                     RecipeCategory.COMBAT,
                     Ingredient.of(ModItems.SILKWEAVE_BINDINGS.get()),
                     ModItems.MOONWEAVE_BINDINGS.get())
             .unlockedBy(
                     "has_silkweave_bindings",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.SILKWEAVE_BINDINGS.get()).build()))
+            .celestial()
+            .energyCost(5)
+            .requiresBrazierIngredient(Ingredient.of(ModItems.CELESTIAL_CRYSTAL.get()))
+            .requiresBrazierIngredient(Ingredient.of(ModItems.SILK_FIBER.get()))
+            .requiresBrazierIngredient(Ingredient.of(Items.GLOWSTONE_DUST))
             .save(recipeOutput, id("moonweave_bindings_from_celestial_infusion"));
-    CelestialInfusionRecipeBuilder.infusion(
+    NaturesRitualRecipeBuilder.ritual(
                     RecipeCategory.COMBAT,
                     Ingredient.of(ModItems.SILKWEAVE_FOOTWRAPS.get()),
                     ModItems.MOONWEAVE_FOOTWRAPS.get())
             .unlockedBy(
                     "has_silkweave_footwraps",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.SILKWEAVE_FOOTWRAPS.get()).build()))
+            .celestial()
+            .energyCost(5)
+            .requiresBrazierIngredient(Ingredient.of(ModItems.CELESTIAL_CRYSTAL.get()))
+            .requiresBrazierIngredient(Ingredient.of(ModItems.SILK_FIBER.get()))
+            .requiresBrazierIngredient(Ingredient.of(Items.FEATHER))
             .save(recipeOutput, id("moonweave_footwraps_from_celestial_infusion"));
   }
 
@@ -574,6 +603,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(3)
             .save(recipeOutput, id("fire_node_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -583,6 +613,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(3)
             .save(recipeOutput, id("air_node_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -592,6 +623,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(3)
             .save(recipeOutput, id("water_node_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -601,6 +633,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(3)
             .save(recipeOutput, id("earth_node_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -614,6 +647,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(7)
             .save(recipeOutput, id("astrylis_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -629,6 +663,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(8)
             .save(recipeOutput, id("kelpweave_blade_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -644,6 +679,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(8)
             .save(recipeOutput, id("rootshaper_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -659,6 +695,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(8)
             .save(recipeOutput, id("cinderhew_from_ritual_table"));
 
     // --- Sage Pendant: updated to include spirit powder ---
@@ -674,6 +711,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_celestial_crystal",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.CELESTIAL_CRYSTAL.get()).build()))
+            .energyCost(7)
             .save(recipeOutput, id("sage_pendant_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -685,6 +723,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_silk_fiber",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.SILK_FIBER.get()).build()))
+            .energyCost(7)
             .save(recipeOutput, id("bloomwrap_hat_from_ritual_table"));
     NaturesRitualRecipeBuilder.ritual(
                     RecipeCategory.COMBAT,
@@ -697,6 +736,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_silk_fiber",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.SILK_FIBER.get()).build()))
+            .energyCost(8)
             .save(recipeOutput, id("bloomwrap_robes_from_ritual_table"));
     NaturesRitualRecipeBuilder.ritual(
                     RecipeCategory.COMBAT,
@@ -709,6 +749,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_silk_fiber",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.SILK_FIBER.get()).build()))
+            .energyCost(8)
             .save(recipeOutput, id("bloomwrap_leggings_from_ritual_table"));
     NaturesRitualRecipeBuilder.ritual(
                     RecipeCategory.COMBAT, Ingredient.of(Items.LEATHER_BOOTS), ModItems.BLOOMWRAP_BOOTS.get())
@@ -719,6 +760,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_silk_fiber",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.SILK_FIBER.get()).build()))
+            .energyCost(7)
             .save(recipeOutput, id("bloomwrap_boots_from_ritual_table"));
 
     // --- New ritual table recipes ---
@@ -731,6 +773,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(5)
             .save(recipeOutput, id("grimshade_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -742,6 +785,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(4)
             .save(recipeOutput, id("rabbage_seeds_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -753,6 +797,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(6)
             .save(recipeOutput, id("nautilite_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -764,6 +809,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(5)
             .save(recipeOutput, id("windsong_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -775,6 +821,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(5)
             .save(recipeOutput, id("lourdes_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -786,6 +833,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_hex_focus",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
+            .energyCost(5)
             .save(recipeOutput, id("aegiflora_from_ritual_table"));
 
     // --- Morphora: canonical ingredients ---
@@ -800,6 +848,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .unlockedBy(
                     "has_mutavis",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.MUTAVIS.get()).build()))
+            .energyCost(7)
             .save(recipeOutput, id("morphora_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.ritual(
@@ -815,7 +864,8 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
         .unlockedBy(
             "has_hex_focus",
             inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.HEX_FOCUS.get()).build()))
-        .save(recipeOutput, id("heartseed_from_ritual_table"));
+        .energyCost(7)
+            .save(recipeOutput, id("heartseed_from_ritual_table"));
 
     NaturesRitualRecipeBuilder.summoning(
             RecipeCategory.MISC,
@@ -832,7 +882,8 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             "has_fragrant_nectar",
             inventoryTrigger(
                 ItemPredicate.Builder.item().of(ModItems.FRAGRANT_NECTAR.get()).build()))
-        .save(recipeOutput, id("summon_silk_moth"));
+        .energyCost(9)
+            .save(recipeOutput, id("summon_silk_moth"));
 
     NaturesRitualRecipeBuilder.summoning(
             RecipeCategory.MISC,
@@ -851,7 +902,8 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             "has_galeberries_cookie",
             inventoryTrigger(
                 ItemPredicate.Builder.item().of(ModItems.GALEBERRIES_COOKIE.get()).build()))
-        .save(recipeOutput, id("summon_cacofey"));
+        .energyCost(11)
+            .save(recipeOutput, id("summon_cacofey"));
   }
 
   private void buildSmallCauldronRecipes(RecipeOutput recipeOutput) {

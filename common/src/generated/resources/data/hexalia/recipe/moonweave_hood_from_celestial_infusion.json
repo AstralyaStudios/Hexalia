@@ -1,7 +1,20 @@
 {
-  "type": "hexalia:celestial_infusion",
-  "input": {
+  "type": "hexalia:natures_ritual",
+  "center": {
     "item": "hexalia:silkweave_hood"
   },
-  "output": "hexalia:moonweave_hood"
+  "energy_cost": 5,
+  "offerings": [
+    {
+      "item": "hexalia:celestial_crystal"
+    },
+    {
+      "item": "hexalia:silk_fiber"
+    },
+    {
+      "item": "minecraft:phantom_membrane"
+    }
+  ],
+  "output": "hexalia:moonweave_hood",
+  "ritual_kind": "celestial"
 }

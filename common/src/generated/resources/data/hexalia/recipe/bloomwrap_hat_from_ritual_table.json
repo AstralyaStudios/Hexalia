@@ -3,6 +3,7 @@
   "center": {
     "item": "minecraft:leather_helmet"
   },
+  "energy_cost": 7,
   "offerings": [
     {
       "item": "minecraft:pink_tulip"
@@ -17,5 +18,6 @@
       "item": "minecraft:rooted_dirt"
     }
   ],
-  "output": "hexalia:bloomwrap_hat"
+  "output": "hexalia:bloomwrap_hat",
+  "ritual_kind": "nature"
 }

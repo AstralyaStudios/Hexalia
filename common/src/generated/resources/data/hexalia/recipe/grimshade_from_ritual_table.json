@@ -3,6 +3,7 @@
   "center": {
     "item": "minecraft:azure_bluet"
   },
+  "energy_cost": 5,
   "offerings": [
     {
       "item": "hexalia:ghost_powder"
@@ -17,5 +18,6 @@
       "item": "minecraft:black_dye"
     }
   ],
-  "output": "hexalia:grimshade"
+  "output": "hexalia:grimshade",
+  "ritual_kind": "nature"
 }

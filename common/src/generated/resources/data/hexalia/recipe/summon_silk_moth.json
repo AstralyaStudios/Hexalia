@@ -3,6 +3,7 @@
   "center": {
     "item": "hexalia:fragrant_nectar"
   },
+  "energy_cost": 9,
   "offerings": [
     {
       "item": "minecraft:string"
@@ -28,5 +29,6 @@
     "type": "entity",
     "count": 1,
     "entity": "hexalia:silk_moth"
-  }
+  },
+  "ritual_kind": "summoning"
 }

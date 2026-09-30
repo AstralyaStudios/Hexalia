@@ -1,7 +1,20 @@
 {
-  "type": "hexalia:celestial_infusion",
-  "input": {
+  "type": "hexalia:natures_ritual",
+  "center": {
     "item": "minecraft:amethyst_shard"
   },
-  "output": "hexalia:celestial_crystal"
+  "energy_cost": 4,
+  "offerings": [
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "output": "hexalia:celestial_crystal",
+  "ritual_kind": "celestial"
 }

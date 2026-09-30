@@ -3,6 +3,7 @@
   "center": {
     "item": "minecraft:leather_leggings"
   },
+  "energy_cost": 8,
   "offerings": [
     {
       "item": "minecraft:peony"
@@ -17,5 +18,6 @@
       "item": "minecraft:honeycomb"
     }
   ],
-  "output": "hexalia:bloomwrap_leggings"
+  "output": "hexalia:bloomwrap_leggings",
+  "ritual_kind": "nature"
 }

@@ -3,6 +3,7 @@
   "center": {
     "item": "hexalia:ancient_seed"
   },
+  "energy_cost": 8,
   "offerings": [
     {
       "item": "hexalia:earth_node"
@@ -23,5 +24,6 @@
       "item": "hexalia:tree_resin"
     }
   ],
-  "output": "hexalia:rootshaper"
+  "output": "hexalia:rootshaper",
+  "ritual_kind": "nature"
 }

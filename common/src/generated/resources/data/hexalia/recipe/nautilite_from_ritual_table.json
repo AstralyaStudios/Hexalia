@@ -3,6 +3,7 @@
   "center": {
     "item": "minecraft:kelp"
   },
+  "energy_cost": 6,
   "offerings": [
     {
       "item": "hexalia:siren_paste"
@@ -17,5 +18,6 @@
       "item": "minecraft:prismarine_crystals"
     }
   ],
-  "output": "hexalia:nautilite"
+  "output": "hexalia:nautilite",
+  "ritual_kind": "nature"
 }

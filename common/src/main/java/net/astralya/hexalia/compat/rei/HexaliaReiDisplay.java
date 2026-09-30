@@ -2,6 +2,7 @@ package net.astralya.hexalia.compat.rei;
 
 import java.util.List;
 import java.util.Optional;
+import net.astralya.hexalia.compat.RitualEnergyViewerIndicator;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
@@ -13,13 +14,14 @@ public final class HexaliaReiDisplay extends BasicDisplay {
   private final Layout layout;
   private final List<Component> recipeTooltips;
   private final boolean showSoulIndicator;
+  private final RitualEnergyViewerIndicator energy;
 
   public HexaliaReiDisplay(
       CategoryIdentifier<HexaliaReiDisplay> category,
       Layout layout,
       List<EntryIngredient> inputs,
       List<EntryIngredient> outputs) {
-    this(category, layout, inputs, outputs, List.of(), Optional.empty(), false);
+    this(category, layout, inputs, outputs, List.of(), Optional.empty(), false, null);
   }
 
   public HexaliaReiDisplay(
@@ -28,7 +30,7 @@ public final class HexaliaReiDisplay extends BasicDisplay {
       List<EntryIngredient> inputs,
       List<EntryIngredient> outputs,
       Optional<ResourceLocation> location) {
-    this(category, layout, inputs, outputs, List.of(), location, false);
+    this(category, layout, inputs, outputs, List.of(), location, false, null);
   }
 
   public HexaliaReiDisplay(
@@ -37,7 +39,7 @@ public final class HexaliaReiDisplay extends BasicDisplay {
       List<EntryIngredient> inputs,
       List<EntryIngredient> outputs,
       List<Component> recipeTooltips) {
-    this(category, layout, inputs, outputs, recipeTooltips, Optional.empty(), false);
+    this(category, layout, inputs, outputs, recipeTooltips, Optional.empty(), false, null);
   }
 
   public HexaliaReiDisplay(
@@ -47,7 +49,11 @@ public final class HexaliaReiDisplay extends BasicDisplay {
       List<EntryIngredient> outputs,
       List<Component> recipeTooltips,
       boolean showSoulIndicator) {
-    this(category, layout, inputs, outputs, recipeTooltips, Optional.empty(), showSoulIndicator);
+    this(category, layout, inputs, outputs, recipeTooltips, Optional.empty(), showSoulIndicator, null);
+  }
+
+  public HexaliaReiDisplay(CategoryIdentifier<HexaliaReiDisplay> category, Layout layout, List<EntryIngredient> inputs, List<EntryIngredient> outputs, List<Component> recipeTooltips, boolean showSoulIndicator, RitualEnergyViewerIndicator energy) {
+    this(category, layout, inputs, outputs, recipeTooltips, Optional.empty(), showSoulIndicator, energy);
   }
 
   private HexaliaReiDisplay(
@@ -57,12 +63,14 @@ public final class HexaliaReiDisplay extends BasicDisplay {
       List<EntryIngredient> outputs,
       List<Component> recipeTooltips,
       Optional<ResourceLocation> location,
-      boolean showSoulIndicator) {
+      boolean showSoulIndicator,
+      RitualEnergyViewerIndicator energy) {
     super(inputs, outputs, location);
     this.category = category;
     this.layout = layout;
     this.recipeTooltips = List.copyOf(recipeTooltips);
     this.showSoulIndicator = showSoulIndicator;
+    this.energy = energy;
   }
 
   @Override
@@ -78,6 +86,10 @@ public final class HexaliaReiDisplay extends BasicDisplay {
     return recipeTooltips;
   }
 
+  public RitualEnergyViewerIndicator energy() {
+    return energy;
+  }
+
   public boolean showSoulIndicator() {
     return showSoulIndicator;
   }
@@ -86,7 +98,6 @@ public final class HexaliaReiDisplay extends BasicDisplay {
     MORTAR_AND_PESTLE,
     SMALL_CAULDRON,
     NATURES_RITUAL,
-    CELESTIAL_INFUSION,
     MUTATION
   }
 }

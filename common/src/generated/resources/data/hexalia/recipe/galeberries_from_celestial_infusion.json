@@ -1,7 +1,17 @@
 {
-  "type": "hexalia:celestial_infusion",
-  "input": {
+  "type": "hexalia:natures_ritual",
+  "center": {
     "item": "minecraft:glow_berries"
   },
-  "output": "hexalia:galeberries"
+  "energy_cost": 3,
+  "offerings": [
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    {
+      "item": "minecraft:feather"
+    }
+  ],
+  "output": "hexalia:galeberries",
+  "ritual_kind": "celestial"
 }

@@ -3,6 +3,7 @@
   "center": {
     "item": "minecraft:amethyst_shard"
   },
+  "energy_cost": 3,
   "offerings": [
     {
       "item": "minecraft:coal"
@@ -11,5 +12,6 @@
       "item": "minecraft:sunflower"
     }
   ],
-  "output": "hexalia:fire_node"
+  "output": "hexalia:fire_node",
+  "ritual_kind": "nature"
 }

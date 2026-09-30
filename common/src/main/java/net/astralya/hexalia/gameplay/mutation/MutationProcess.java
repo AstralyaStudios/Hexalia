@@ -158,7 +158,7 @@ public final class MutationProcess {
           -Math.sin(angle) * 0.025 + Math.cos(angle) * 0.035);
     }
     if (progress > 0.7F && this.ticks % 3 == 0) {
-      level.sendParticles(ModParticleTypes.HEX_MOTE.get(),
+      level.sendParticles(ModParticleTypes.HEX_MOTES.get(),
           this.center.getX() + 0.5, this.center.getY() + 0.65, this.center.getZ() + 0.5,
           2, 0.2, 0.2, 0.2, 0.01);
     }
@@ -212,11 +212,11 @@ public final class MutationProcess {
   }
 
   private static void dust(ServerLevel level, double x, double y, double z, double vx, double vy, double vz) {
-    level.sendParticles(ModParticleTypes.HEX_MOTE.get(), x, y, z, 0, vx, vy, vz, 1.0);
+    level.sendParticles(ModParticleTypes.HEX_MOTES.get(), x, y, z, 0, vx, vy, vz, 1.0);
   }
 
   private static void burst(ServerLevel level, BlockPos pos, int count) {
-    level.sendParticles(ModParticleTypes.HEX_MOTE.get(),
+    level.sendParticles(ModParticleTypes.HEX_MOTES.get(),
         pos.getX() + 0.5, pos.getY() + 0.65, pos.getZ() + 0.5,
         count, 0.35, 0.3, 0.35, 0.04);
   }

@@ -3,6 +3,7 @@
   "center": {
     "item": "minecraft:lily_of_the_valley"
   },
+  "energy_cost": 7,
   "offerings": [
     {
       "item": "hexalia:celestial_crystal"
@@ -23,5 +24,6 @@
       "item": "minecraft:sunflower"
     }
   ],
-  "output": "hexalia:astrylis"
+  "output": "hexalia:astrylis",
+  "ritual_kind": "nature"
 }

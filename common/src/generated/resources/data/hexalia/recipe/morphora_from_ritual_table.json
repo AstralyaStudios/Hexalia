@@ -3,6 +3,7 @@
   "center": {
     "item": "minecraft:poppy"
   },
+  "energy_cost": 7,
   "offerings": [
     {
       "item": "hexalia:dream_paste"
@@ -23,5 +24,6 @@
       "item": "minecraft:slime_ball"
     }
   ],
-  "output": "hexalia:morphora"
+  "output": "hexalia:morphora",
+  "ritual_kind": "nature"
 }

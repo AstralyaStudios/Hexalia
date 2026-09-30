@@ -2,6 +2,7 @@ package net.astralya.hexalia.neoforge.datagen;
 
 import net.astralya.hexalia.Hexalia;
 import net.astralya.hexalia.block.ModBlocks;
+import net.astralya.hexalia.block.custom.CelestialBloomBlock;
 import net.astralya.hexalia.block.custom.HerbJarBlock;
 import net.astralya.hexalia.block.custom.RabbageCropBlock;
 import net.minecraft.core.Direction;
@@ -25,9 +26,9 @@ public final class ModBlockStateProvider extends BlockStateProvider {
     flowerWithPotBlock(ModBlocks.SPIRIT_BLOOM.get(), ModBlocks.POTTED_SPIRIT_BLOOM.get());
     flowerWithPotBlock(ModBlocks.DREAMSHROOM.get(), ModBlocks.POTTED_DREAMSHROOM.get());
     flowerWithPotBlock(ModBlocks.GHOST_FERN.get(), ModBlocks.POTTED_GHOST_FERN.get());
-    flowerWithPotBlock(
+    celestialBloomBlock(
         ModBlocks.CELESTIAL_BLOOM.get(), ModBlocks.POTTED_CELESTIAL_BLOOM.get());
-    flowerWithPotBlock(
+    celestialBloomBlock(
         ModBlocks.WITHERED_CELESTIAL_BLOOM.get(),
         ModBlocks.POTTED_WITHERED_CELESTIAL_BLOOM.get());
     flowerWithPotBlock(ModBlocks.MORPHORA.get(), ModBlocks.POTTED_MORPHORA.get());
@@ -91,6 +92,32 @@ public final class ModBlockStateProvider extends BlockStateProvider {
         models()
             .withExistingParent(potName, mcLoc("block/flower_pot_cross"))
             .texture("plant", modLoc("block/" + flowerName))
+            .renderType("cutout"));
+  }
+
+  private void celestialBloomBlock(Block flower, Block flowerPot) {
+    String flowerName = name(flower);
+    String potName = name(flowerPot);
+    ModelFile closedModel = models()
+        .cross(flowerName + "_closed", modLoc("block/" + flowerName + "_closed"))
+        .renderType("cutout");
+    ModelFile openModel = models()
+        .cross(flowerName + "_open", modLoc("block/" + flowerName + "_open"))
+        .renderType("cutout");
+    ModelFile emissiveModel = flower == ModBlocks.CELESTIAL_BLOOM.get()
+        ? models()
+            .cross("celestial_bloom_open_emissive", modLoc("block/celestial_bloom_open_emissive"))
+            .renderType("cutout")
+        : models().getExistingFile(modLoc("block/celestial_bloom_open_emissive"));
+    getMultipartBuilder(flower)
+        .part().modelFile(closedModel).addModel().condition(CelestialBloomBlock.OPEN, false).end()
+        .part().modelFile(openModel).addModel().condition(CelestialBloomBlock.OPEN, true).end()
+        .part().modelFile(emissiveModel).addModel().condition(CelestialBloomBlock.OPEN, true).end();
+    simpleBlock(
+        flowerPot,
+        models()
+            .withExistingParent(potName, mcLoc("block/flower_pot_cross"))
+            .texture("plant", modLoc("block/" + flowerName + "_closed"))
             .renderType("cutout"));
   }
 

@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import net.astralya.hexalia.HexaliaConfig;
 import net.astralya.hexalia.block.custom.RitualBrazierBlock;
 import net.astralya.hexalia.block.entity.custom.RitualBrazierBlockEntity;
 import net.astralya.hexalia.block.entity.custom.RitualTableBlockEntity;
 import net.astralya.hexalia.item.ModItems;
+import net.astralya.hexalia.particle.ModParticleTypes;
 import net.astralya.hexalia.recipe.ModRecipeTypes;
 import net.astralya.hexalia.recipe.NaturesRitualRecipe;
 import net.astralya.hexalia.recipe.NaturesRitualRecipeInput;
 import net.astralya.hexalia.util.ItemInteractionHelper;
-import net.astralya.hexalia.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -21,7 +20,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -30,7 +28,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 
 public final class NaturesRitual {
@@ -59,6 +56,8 @@ public final class NaturesRitual {
 
   public static boolean tryStart(
       Level level, BlockPos pos, Player player, RitualTableBlockEntity table) {
+    if (!(level instanceof ServerLevel server)) return true;
+    if (table.isRitualActive()) return true;
     ItemStack tableItem = table.getItem(0);
     if (tableItem.isEmpty()) {
       fail(level, pos, player, "message.hexalia.natures_ritual.missing_ingredients");
@@ -80,25 +79,55 @@ public final class NaturesRitual {
       }
     }
 
-    int cropRequirement = HexaliaConfig.naturesRitualCropRequirement();
-    List<BlockPos> grownCrops =
-        cropRequirement == 0 ? List.of() : findFullyGrownCrops(level, pos, cropRequirement, 8);
-    if (grownCrops.size() < cropRequirement) {
-      fail(level, pos, player, "message.hexalia.natures_ritual.invalid_crops");
+    NaturesRitualRecipe.RitualKind kind = match.recipe.ritualKind();
+    if (kind == NaturesRitualRecipe.RitualKind.CELESTIAL && !CelestialRitual.isNightTime(server)) {
+      fail(level, pos, player, "message.hexalia.celestial_infusion.requires_night");
+      return true;
+    }
+    int requirement = match.recipe.resolvedEnergyCost();
+    List<BlockPos> energy =
+        kind == NaturesRitualRecipe.RitualKind.CELESTIAL
+            ? CelestialRitual.findCelestialBlooms(level, pos, requirement)
+            : NatureRitual.findFullyGrownCrops(level, pos, requirement, 8);
+    if (energy.size() < requirement) {
+      fail(
+          level,
+          pos,
+          player,
+          kind == NaturesRitualRecipe.RitualKind.CELESTIAL
+              ? "message.hexalia.celestial_infusion.no_celestial_blooms"
+              : "message.hexalia.natures_ritual.invalid_crops");
       return true;
     }
 
     table.startTransformation(
         match.recipe.getResultItem(level.registryAccess()).copy(),
-        match.usedBraziers.size() * 40,
+        match.usedBraziers.size() * 40
+            + (kind == NaturesRitualRecipe.RitualKind.NATURE
+                ? Math.max(24, energy.size() * 3 + 12) + 6
+                : 0),
         match.usedBraziers,
         match.id,
         match.recipe.requiresSoul(),
-        player);
-    table.setGrownCropPositions(grownCrops);
-    play(level, pos);
-    puff(level, pos, ParticleTypes.POOF, 5, 10);
+        player,
+        kind,
+        energy);
+    if (kind == NaturesRitualRecipe.RitualKind.NATURE) {
+      NatureRitual.onStart(server, pos, match.usedBraziers);
+    } else {
+      play(level, pos);
+      if (kind == NaturesRitualRecipe.RitualKind.CELESTIAL)
+        CelestialRitual.onStart(server, pos);
+      else SummoningRitual.onStart(server, pos);
+    }
     return true;
+  }
+
+  public static boolean validEnergy(
+      Level level, BlockPos pos, NaturesRitualRecipe.RitualKind kind) {
+    return kind == NaturesRitualRecipe.RitualKind.CELESTIAL
+        ? CelestialRitual.validEnergy(level, pos)
+        : NatureRitual.validEnergy(level, pos);
   }
 
   private static @Nullable Match findMatch(
@@ -156,62 +185,6 @@ public final class NaturesRitual {
     return null;
   }
 
-  private static List<BlockPos> findFullyGrownCrops(
-      Level level, BlockPos center, int required, int radius) {
-    List<BlockPos> found = new ArrayList<>();
-    for (int dx = -radius; dx <= radius; dx++) {
-      for (int dz = -radius; dz <= radius; dz++) {
-        BlockPos cropPos = center.offset(dx, 0, dz);
-        BlockState cropState = level.getBlockState(cropPos);
-        if (isCrop(cropState) && isFullyGrown(cropState)) {
-          found.add(cropPos);
-          if (found.size() >= required) {
-            return found;
-          }
-        }
-      }
-    }
-    return found;
-  }
-
-  public static boolean isFullyGrown(BlockState state) {
-    IntegerProperty ageProperty = findAgeProperty(state);
-    return ageProperty != null && state.getValue(ageProperty) >= maxAge(ageProperty);
-  }
-
-  public static @Nullable IntegerProperty findAgeProperty(BlockState state) {
-    for (var property : state.getProperties()) {
-      if (property instanceof IntegerProperty integerProperty
-          && "age".equals(integerProperty.getName())) {
-        return integerProperty;
-      }
-    }
-    return null;
-  }
-
-  public static int maxAge(IntegerProperty property) {
-    int max = 0;
-    for (Integer value : property.getPossibleValues()) {
-      max = Math.max(max, value);
-    }
-    return max;
-  }
-
-  public static void resetCrop(Level level, BlockPos cropPos) {
-    BlockState cropState = level.getBlockState(cropPos);
-    if (!isCrop(cropState)) {
-      return;
-    }
-    IntegerProperty ageProperty = findAgeProperty(cropState);
-    if (ageProperty != null && cropState.hasProperty(ageProperty)) {
-      level.setBlock(cropPos, cropState.setValue(ageProperty, 0), 3);
-    }
-  }
-
-  private static boolean isCrop(BlockState state) {
-    return state.is(BlockTags.CROPS) || state.is(ModTags.Blocks.CROPS);
-  }
-
   private static void fail(Level level, BlockPos pos, Player player, String key) {
     puff(level, pos, ParticleTypes.SMOKE, 8, 12);
     if (!level.isClientSide) {
@@ -220,7 +193,7 @@ public final class NaturesRitual {
     level.playSound(null, pos, SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, 0.4F, 0.6F);
   }
 
-  private static void puff(Level level, BlockPos pos, SimpleParticleType type, int min, int max) {
+  static void puff(Level level, BlockPos pos, SimpleParticleType type, int min, int max) {
     if (level instanceof ServerLevel server) {
       int count = ThreadLocalRandom.current().nextInt(min, max);
       for (int index = 0; index < count; index++) {
@@ -242,6 +215,27 @@ public final class NaturesRitual {
     level.playSound(
         null, pos, SoundEvents.CHISELED_BOOKSHELF_PICKUP_ENCHANTED, SoundSource.BLOCKS, 0.8F, 0.5F);
     level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.8F, 0.5F);
+  }
+
+  public static void sendConvergingParticle(
+      ServerLevel server,
+      BlockPos center,
+      double sourceX,
+      double sourceY,
+      double sourceZ,
+      double speed) {
+    double targetX = center.getX() + 0.5 + (server.random.nextDouble() - 0.5) * 1.5;
+    double targetZ = center.getZ() + 0.5 + (server.random.nextDouble() - 0.5) * 1.5;
+    server.sendParticles(
+        ModParticleTypes.HEX_MOTES.get(),
+        sourceX,
+        sourceY,
+        sourceZ,
+        0,
+        (targetX - sourceX) * Math.max(speed, 0.025),
+        0.01,
+        (targetZ - sourceZ) * Math.max(speed, 0.025),
+        1.0);
   }
 
   private record Match(

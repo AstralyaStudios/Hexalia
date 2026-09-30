@@ -47,8 +47,17 @@ public final class ModParticleTypes {
   public static final RegistrySupplier<SimpleParticleType> CACOFEY_DUST_HELD =
       PARTICLE_TYPES.register("cacofey_dust_held", () -> new SimpleParticleType(true) {});
 
-  public static final RegistrySupplier<SimpleParticleType> HEX_MOTE =
-      PARTICLE_TYPES.register("hex_mote", () -> new SimpleParticleType(true) {});
+  public static final RegistrySupplier<SimpleParticleType> HEX_MOTES =
+      PARTICLE_TYPES.register("hex_motes", () -> new SimpleParticleType(true) {});
+
+  public static final RegistrySupplier<SimpleParticleType> RITUAL_GLYPH =
+      PARTICLE_TYPES.register("ritual_glyph", () -> new SimpleParticleType(true) {});
+
+  public static final RegistrySupplier<SimpleParticleType> CELESTIAL_GLYPH =
+      PARTICLE_TYPES.register("celestial_glyph", () -> new SimpleParticleType(true) {});
+
+  public static final RegistrySupplier<SimpleParticleType> SUMMONING_GLYPH =
+      PARTICLE_TYPES.register("summoning_glyph", () -> new SimpleParticleType(true) {});
 
   private ModParticleTypes() {}
 

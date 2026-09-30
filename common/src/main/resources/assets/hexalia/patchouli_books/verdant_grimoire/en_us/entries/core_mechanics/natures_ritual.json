@@ -31,7 +31,7 @@
       "type": "text",
       "title": "On Growth",
       "anchor": "crops",
-      "text": "Nature's Ritual depends on surrounding life. Nearby fully grown crops are consumed in the process, returning to early growth as their energy is drawn into the ritual."
+      "text": "Nature's Ritual depends on surrounding life. Each recipe requires its own number of nearby fully grown crops. Selected crops must remain mature until success, when they return to early growth."
     },
     {
       "type": "text",

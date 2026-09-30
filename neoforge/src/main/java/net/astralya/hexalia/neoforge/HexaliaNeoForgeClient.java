@@ -26,9 +26,10 @@ import net.astralya.hexalia.menu.ModMenuTypes;
 import net.astralya.hexalia.particle.ModParticleTypes;
 import net.astralya.hexalia.particle.custom.CacofeyDustHeldParticle;
 import net.astralya.hexalia.particle.custom.CacofeyDustParticle;
-import net.astralya.hexalia.particle.custom.HexMoteParticle;
+import net.astralya.hexalia.particle.custom.HexMotesParticle;
 import net.astralya.hexalia.particle.custom.InfusedBubbleParticle;
 import net.astralya.hexalia.particle.custom.LeavesParticle;
+import net.astralya.hexalia.particle.custom.RitualGlyphParticle;
 import net.astralya.hexalia.particle.custom.SparkleParticle;
 import net.astralya.hexalia.particle.custom.SporeParticle;
 import net.astralya.hexalia.util.ModItemProperties;
@@ -126,7 +127,10 @@ public final class HexaliaNeoForgeClient {
     event.registerSpriteSet(ModParticleTypes.CACOFEY_DUST.get(), CacofeyDustParticle.Factory::new);
     event.registerSpriteSet(
         ModParticleTypes.CACOFEY_DUST_HELD.get(), CacofeyDustHeldParticle.Factory::new);
-    event.registerSpriteSet(ModParticleTypes.HEX_MOTE.get(), HexMoteParticle.Factory::new);
+    event.registerSpriteSet(ModParticleTypes.HEX_MOTES.get(), HexMotesParticle.Factory::new);
+    event.registerSpriteSet(ModParticleTypes.RITUAL_GLYPH.get(), RitualGlyphParticle.Factory::new);
+    event.registerSpriteSet(ModParticleTypes.CELESTIAL_GLYPH.get(), RitualGlyphParticle.Factory::new);
+    event.registerSpriteSet(ModParticleTypes.SUMMONING_GLYPH.get(), RitualGlyphParticle.Factory::new);
   }
 
   private static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

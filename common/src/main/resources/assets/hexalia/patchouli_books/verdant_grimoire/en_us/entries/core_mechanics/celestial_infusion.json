@@ -1,46 +1,46 @@
 {
   "name": "Celestial Infusion",
-  "icon": "hexalia:ritual_brazier",
+  "icon": "hexalia:ritual_table",
   "category": "hexalia:core_mechanics",
   "sortnum": 1,
   "pages": [
     {
       "type": "text",
       "title": "Celestial Infusion",
-      "text": "Celestial Infusion is a focused ritual process that channels energy from nearby Celestial Blooms through a Ritual Brazier. It offers a direct and immediate way to transform items using natural celestial forces."
+      "text": "Celestial Infusion is a nighttime Nature's Ritual that draws energy from nearby living Celestial Blooms. Its catalyst rests on the Ritual Table while salted Ritual Braziers hold the offerings."
     },
     {
       "type": "text",
       "title": "Requirements",
       "anchor": "requirements",
-      "text": "Celestial Infusion requires a $(l:hexalia:blocks/ritual_brazier)Ritual Brazier$(/l) with open sky above it, along with at least three $(l:hexalia:resources/herbs#celestial_bloom)Celestial Blooms$(/l) placed within a short radius."
+      "text": "Set up the Ritual Table and $(l:hexalia:blocks/ritual_brazier)Ritual Braziers$(/l) as for Nature's Ritual. Salt each selected Brazier. Living $(l:hexalia:resources/herbs#celestial_bloom)Celestial Blooms$(/l) at the Table's height supply the recipe's required energy. Begin at night."
     },
     {
       "type": "text",
       "title": "Process",
       "anchor": "process",
-      "text": "Place the desired ingredient into the brazier, then activate it using a Hex Focus. If the surrounding conditions are met, the infusion begins immediately, drawing energy from the nearby blooms."
+      "text": "Place the catalyst on the Ritual Table and the recipe's offerings in nearby salted Braziers. Activate the Table with a Hex Focus at night. Offerings travel to the Table while the Blooms send energy toward it."
     },
     {
       "type": "text",
       "title": "Transformation",
       "anchor": "results",
-      "text": "During infusion, celestial energy is consumed from the blooms. They wither over time, eventually turning into dead remnants, while the inserted item is transformed within the brazier."
+      "text": "If the ritual completes while it is still night and the selected Blooms remain, the catalyst becomes the output on the Table. The selected Blooms become Dead Bushes. A cancelled ritual does not consume Blooms."
     },
     {
       "type": "text",
       "title": "On Use",
-      "text": "Celestial Infusion provides a simpler alternative to more complex rituals, allowing quick transformations at the cost of natural resources gathered from the world."
+      "text": "Galeberries and Celestial Crystals provide early progression; Moonweave upgrades use the same ritual structure with greater Bloom costs."
     },
     {
       "type": "hexalia:recipe_page",
       "recipe_id": "hexalia:celestial_crystal_from_celestial_infusion",
-      "layout": "ritual_brazier"
+      "layout": "ritual_table"
     },
     {
       "type": "hexalia:recipe_page",
       "recipe_id": "hexalia:galeberries_from_celestial_infusion",
-      "layout": "ritual_brazier"
+      "layout": "ritual_table"
     }
   ]
 }

@@ -24,9 +24,10 @@ import net.astralya.hexalia.menu.ModMenuTypes;
 import net.astralya.hexalia.particle.ModParticleTypes;
 import net.astralya.hexalia.particle.custom.CacofeyDustHeldParticle;
 import net.astralya.hexalia.particle.custom.CacofeyDustParticle;
-import net.astralya.hexalia.particle.custom.HexMoteParticle;
+import net.astralya.hexalia.particle.custom.HexMotesParticle;
 import net.astralya.hexalia.particle.custom.InfusedBubbleParticle;
 import net.astralya.hexalia.particle.custom.LeavesParticle;
+import net.astralya.hexalia.particle.custom.RitualGlyphParticle;
 import net.astralya.hexalia.particle.custom.SparkleParticle;
 import net.astralya.hexalia.particle.custom.SporeParticle;
 import net.astralya.hexalia.util.ModItemProperties;
@@ -104,7 +105,10 @@ public final class HexaliaFabricClient implements ClientModInitializer {
         ModParticleTypes.CACOFEY_DUST.get(), CacofeyDustParticle.Factory::new);
     particleFactories.register(
         ModParticleTypes.CACOFEY_DUST_HELD.get(), CacofeyDustHeldParticle.Factory::new);
-    particleFactories.register(ModParticleTypes.HEX_MOTE.get(), HexMoteParticle.Factory::new);
+    particleFactories.register(ModParticleTypes.HEX_MOTES.get(), HexMotesParticle.Factory::new);
+    particleFactories.register(ModParticleTypes.RITUAL_GLYPH.get(), RitualGlyphParticle.Factory::new);
+    particleFactories.register(ModParticleTypes.CELESTIAL_GLYPH.get(), RitualGlyphParticle.Factory::new);
+    particleFactories.register(ModParticleTypes.SUMMONING_GLYPH.get(), RitualGlyphParticle.Factory::new);
     ModItemProperties.register();
     registerTooltips();
     registerBoatLayers();

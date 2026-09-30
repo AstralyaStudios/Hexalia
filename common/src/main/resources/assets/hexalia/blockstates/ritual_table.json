@@ -1,17 +1,32 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,active=false": {
       "model": "hexalia:block/ritual_table",
       "y": 90
     },
-    "facing=north": {
+    "facing=east,active=true": {
+      "model": "hexalia:block/ritual_table",
+      "y": 90
+    },
+    "facing=north,active=false": {
       "model": "hexalia:block/ritual_table"
     },
-    "facing=south": {
+    "facing=north,active=true": {
+      "model": "hexalia:block/ritual_table"
+    },
+    "facing=south,active=false": {
       "model": "hexalia:block/ritual_table",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,active=true": {
+      "model": "hexalia:block/ritual_table",
+      "y": 180
+    },
+    "facing=west,active=false": {
+      "model": "hexalia:block/ritual_table",
+      "y": 270
+    },
+    "facing=west,active=true": {
       "model": "hexalia:block/ritual_table",
       "y": 270
     }

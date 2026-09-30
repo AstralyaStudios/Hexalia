@@ -3,6 +3,7 @@
   "center": {
     "item": "minecraft:leather_boots"
   },
+  "energy_cost": 7,
   "offerings": [
     {
       "item": "minecraft:dandelion"
@@ -17,5 +18,6 @@
       "item": "minecraft:sugar"
     }
   ],
-  "output": "hexalia:bloomwrap_boots"
+  "output": "hexalia:bloomwrap_boots",
+  "ritual_kind": "nature"
 }

@@ -1,12 +1,14 @@
 package net.astralya.hexalia.block.custom;
 
 import com.mojang.serialization.MapCodec;
-import net.astralya.hexalia.block.entity.ModBlockEntityTypes;
 import net.astralya.hexalia.block.entity.custom.RitualBrazierBlockEntity;
-import net.astralya.hexalia.gameplay.celestialinfusion.CelestialInfusion;
 import net.astralya.hexalia.item.ModItems;
+import net.astralya.hexalia.util.ItemInteractionHelper;
+import net.astralya.hexalia.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -105,16 +107,23 @@ public class RitualBrazierBlock extends BaseEntityBlock {
       return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
-    return CelestialInfusion.useItemOn(state, level, pos, player, hand, brazier);
+    if (hand == InteractionHand.MAIN_HAND
+        && !state.getValue(SALTED)
+        && stack.is(ModTags.Items.SALT)) {
+      if (!level.isClientSide()) {
+        level.setBlock(pos, state.setValue(SALTED, true), Block.UPDATE_ALL);
+        if (!player.isCreative()) stack.shrink(1);
+        level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+      }
+      return ItemInteractionResult.SUCCESS;
+    }
+    return ItemInteractionHelper.tryHandleSingleItem(
+        level, pos, player, hand, brazier, item -> true);
   }
 
   @Override
   public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
       Level level, BlockState state, BlockEntityType<T> type) {
-    return !level.isClientSide() && type == ModBlockEntityTypes.RITUAL_BRAZIER.get()
-        ? (tickLevel, tickPos, tickState, blockEntity) ->
-            RitualBrazierBlockEntity.serverTick(
-                tickLevel, tickPos, tickState, (RitualBrazierBlockEntity) blockEntity)
-        : null;
+    return null;
   }
 }

@@ -3,6 +3,7 @@
   "center": {
     "item": "hexalia:galeberries_cookie"
   },
+  "energy_cost": 11,
   "offerings": [
     {
       "item": "hexalia:spirit_powder"
@@ -34,5 +35,6 @@
     "type": "entity",
     "count": 1,
     "entity": "hexalia:cacofey"
-  }
+  },
+  "ritual_kind": "summoning"
 }

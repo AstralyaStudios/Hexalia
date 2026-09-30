@@ -34,5 +34,12 @@
         "volume": 0.6
       }
     ]
+  },
+
+  "ritual_whispers": {
+    "subtitle": "sounds.hexalia.ritual_whispers",
+    "sounds": [
+      "hexalia:ritual_whispers"
+    ]
   }
 }

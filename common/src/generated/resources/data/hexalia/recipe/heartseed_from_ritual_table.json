@@ -3,6 +3,7 @@
   "center": {
     "item": "minecraft:golden_apple"
   },
+  "energy_cost": 7,
   "offerings": [
     {
       "item": "hexalia:fragrant_nectar"
@@ -23,5 +24,6 @@
       "item": "minecraft:poppy"
     }
   ],
-  "output": "hexalia:heartseed"
+  "output": "hexalia:heartseed",
+  "ritual_kind": "nature"
 }

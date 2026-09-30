@@ -3,6 +3,7 @@
   "center": {
     "item": "minecraft:amethyst_shard"
   },
+  "energy_cost": 3,
   "offerings": [
     {
       "item": "minecraft:clay_ball"
@@ -11,5 +12,6 @@
       "item": "minecraft:brown_mushroom"
     }
   ],
-  "output": "hexalia:earth_node"
+  "output": "hexalia:earth_node",
+  "ritual_kind": "nature"
 }

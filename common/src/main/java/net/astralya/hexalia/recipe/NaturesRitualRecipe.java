@@ -6,6 +6,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.List;
 import java.util.Optional;
+import net.astralya.hexalia.HexaliaConfig;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -23,8 +24,16 @@ public record NaturesRitualRecipe(
     Ingredient centerIngredient,
     NonNullList<Ingredient> offerings,
     RitualResult result,
-    boolean requiresSoul)
+    boolean requiresSoul,
+    RitualKind ritualKind,
+    Optional<Integer> energyCost)
     implements Recipe<NaturesRitualRecipeInput> {
+  public enum RitualKind {
+    NATURE,
+    CELESTIAL,
+    SUMMONING
+  }
+
   public sealed interface RitualResult permits ItemResult, EntityResult {}
 
   public record ItemResult(ItemStack stack) implements RitualResult {
@@ -40,6 +49,13 @@ public record NaturesRitualRecipe(
   }
 
   public NaturesRitualRecipe {
+    if (energyCost.isPresent() && energyCost.get() < 0)
+      throw new IllegalArgumentException("Ritual energy cost cannot be negative");
+    if (ritualKind == RitualKind.CELESTIAL && energyCost.isEmpty())
+      throw new IllegalArgumentException("Celestial rituals require energy_cost");
+    if ((ritualKind == RitualKind.SUMMONING) != requiresSoul
+        || (ritualKind == RitualKind.SUMMONING) != (result instanceof EntityResult))
+      throw new IllegalArgumentException("Summoning requires a soul and entity result");
     NonNullList<Ingredient> copy = NonNullList.create();
     copy.addAll(offerings);
     offerings = copy;
@@ -47,11 +63,21 @@ public record NaturesRitualRecipe(
 
   public NaturesRitualRecipe(
       Ingredient center, NonNullList<Ingredient> offerings, ItemStack output) {
-    this(center, offerings, new ItemResult(output), false);
+    this(center, offerings, new ItemResult(output), false, RitualKind.NATURE, Optional.empty());
   }
 
   public NaturesRitualRecipe(NonNullList<Ingredient> ingredients, ItemStack output) {
-    this(center(ingredients), offeringList(ingredients), new ItemResult(output), false);
+    this(
+        center(ingredients),
+        offeringList(ingredients),
+        new ItemResult(output),
+        false,
+        RitualKind.NATURE,
+        Optional.empty());
+  }
+
+  public int resolvedEnergyCost() {
+    return energyCost.orElseGet(HexaliaConfig::naturesRitualCropRequirement);
   }
 
   private static Ingredient center(List<Ingredient> ingredients) {
@@ -151,7 +177,9 @@ public record NaturesRitualRecipe(
       Optional<List<Ingredient>> offerings,
       Optional<ItemStack> output,
       Optional<EntityJson> result,
-      boolean requiresSoul) {
+      boolean requiresSoul,
+      Optional<RitualKind> ritualKind,
+      Optional<Integer> energyCost) {
     private static Serialized fromRecipe(NaturesRitualRecipe recipe) {
       Optional<ItemStack> item =
           recipe.result instanceof ItemResult value ? Optional.of(value.stack()) : Optional.empty();
@@ -165,7 +193,9 @@ public record NaturesRitualRecipe(
           Optional.of(List.copyOf(recipe.offerings)),
           item,
           entity,
-          recipe.requiresSoul);
+          recipe.requiresSoul,
+          Optional.of(recipe.ritualKind),
+          recipe.energyCost);
     }
   }
 
@@ -194,7 +224,22 @@ public record NaturesRitualRecipe(
                         EntityJson.CODEC.optionalFieldOf("result").forGetter(Serialized::result),
                         Codec.BOOL
                             .optionalFieldOf("requires_soul", false)
-                            .forGetter(Serialized::requiresSoul))
+                            .forGetter(Serialized::requiresSoul),
+                        Codec.STRING
+                            .comapFlatMap(
+                                value -> {
+                                  try {
+                                    return DataResult.success(
+                                        RitualKind.valueOf(
+                                            value.toUpperCase(java.util.Locale.ROOT)));
+                                  } catch (IllegalArgumentException exception) {
+                                    return DataResult.error(() -> "Unknown ritual_kind: " + value);
+                                  }
+                                },
+                                value -> value.name().toLowerCase(java.util.Locale.ROOT))
+                            .optionalFieldOf("ritual_kind")
+                            .forGetter(Serialized::ritualKind),
+                        Codec.INT.optionalFieldOf("energy_cost").forGetter(Serialized::energyCost))
                     .apply(instance, Serialized::new));
     public static final MapCodec<NaturesRitualRecipe> CODEC =
         RAW_CODEC.flatXmap(
@@ -236,8 +281,19 @@ public record NaturesRitualRecipe(
         center = value.center.orElseThrow();
         value.offerings.ifPresent(offerings::addAll);
       }
-      return DataResult.success(
-          new NaturesRitualRecipe(center, offerings, result, value.requiresSoul));
+      try {
+        return DataResult.success(
+            new NaturesRitualRecipe(
+                center,
+                offerings,
+                result,
+                value.requiresSoul,
+                value.ritualKind.orElse(
+                    value.requiresSoul ? RitualKind.SUMMONING : RitualKind.NATURE),
+                value.energyCost));
+      } catch (IllegalArgumentException exception) {
+        return DataResult.error(exception::getMessage);
+      }
     }
 
     private static void toNetwork(RegistryFriendlyByteBuf buffer, NaturesRitualRecipe recipe) {
@@ -253,6 +309,9 @@ public record NaturesRitualRecipe(
         buffer.writeVarInt(entity.count());
       }
       buffer.writeBoolean(recipe.requiresSoul);
+      buffer.writeEnum(recipe.ritualKind);
+      buffer.writeBoolean(recipe.energyCost.isPresent());
+      recipe.energyCost.ifPresent(buffer::writeVarInt);
     }
 
     private static NaturesRitualRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
@@ -264,7 +323,11 @@ public record NaturesRitualRecipe(
           buffer.readBoolean()
               ? new ItemResult(ItemStack.STREAM_CODEC.decode(buffer))
               : new EntityResult(buffer.readResourceLocation(), buffer.readVarInt());
-      return new NaturesRitualRecipe(center, offerings, result, buffer.readBoolean());
+      boolean soul = buffer.readBoolean();
+      RitualKind kind = buffer.readEnum(RitualKind.class);
+      Optional<Integer> cost =
+          buffer.readBoolean() ? Optional.of(buffer.readVarInt()) : Optional.empty();
+      return new NaturesRitualRecipe(center, offerings, result, soul, kind, cost);
     }
 
     @Override
