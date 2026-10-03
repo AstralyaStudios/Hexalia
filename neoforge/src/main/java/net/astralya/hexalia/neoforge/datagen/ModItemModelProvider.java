@@ -15,7 +15,7 @@ public final class ModItemModelProvider extends ItemModelProvider {
 
   @Override
   protected void registerModels() {
-    basicItem(ModItems.HEX_FOCUS.get());
+    handheldItem(ModItems.HEX_FOCUS.get());
     basicItem(ModItems.SALT.get());
     basicItem(ModItems.TREE_RESIN.get());
     basicItem(ModItems.SILK_FIBER.get());
@@ -30,7 +30,7 @@ public final class ModItemModelProvider extends ItemModelProvider {
     basicItem(ModItems.WATER_NODE.get());
     basicItem(ModItems.AIR_NODE.get());
     basicItem(ModItems.EARTH_NODE.get());
-    basicItem(ModItems.LADLE.get());
+    handheldItem(ModItems.LADLE.get());
     handheldItem(ModItems.ATHAME.get());
     handheldItem(ModItems.KELPWEAVE_BLADE.get());
     handheldItem(ModItems.CINDERHEW.get());
