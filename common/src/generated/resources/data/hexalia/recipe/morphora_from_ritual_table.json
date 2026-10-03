@@ -9,19 +9,16 @@
       "item": "hexalia:dream_paste"
     },
     {
-      "item": "hexalia:spirit_powder"
-    },
-    {
       "item": "hexalia:earth_node"
-    },
-    {
-      "item": "hexalia:tree_resin"
     },
     {
       "item": "minecraft:fermented_spider_eye"
     },
     {
       "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "hexalia:tree_resin"
     }
   ],
   "output": "hexalia:morphora",

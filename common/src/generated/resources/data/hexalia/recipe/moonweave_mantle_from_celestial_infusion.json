@@ -15,7 +15,10 @@
       "item": "minecraft:phantom_membrane"
     },
     {
-      "item": "minecraft:glowstone_dust"
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
     }
   ],
   "output": "hexalia:moonweave_mantle",

@@ -13,6 +13,12 @@
     },
     {
       "item": "minecraft:feather"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
     }
   ],
   "output": "hexalia:moonweave_footwraps",

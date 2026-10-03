@@ -3,7 +3,7 @@
   "center": {
     "item": "hexalia:fragrant_nectar"
   },
-  "energy_cost": 9,
+  "energy_cost": 8,
   "offerings": [
     {
       "item": "minecraft:string"
@@ -15,13 +15,13 @@
       "item": "hexalia:spirit_powder"
     },
     {
-      "item": "hexalia:celestial_bloom"
+      "item": "minecraft:honeycomb"
     },
     {
-      "item": "minecraft:glowstone_dust"
+      "item": "minecraft:torch"
     },
     {
-      "item": "hexalia:witchweed"
+      "tag": "minecraft:leaves"
     }
   ],
   "requires_soul": true,
