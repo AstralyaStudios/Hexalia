@@ -151,9 +151,19 @@ public final class MutationProcess {
       double x = this.center.getX() + 0.5 + Math.cos(angle) * radius;
       double y = this.center.getY() + 0.35 + progress * 0.5 + Math.sin(angle * 1.5) * 0.35;
       double z = this.center.getZ() + 0.5 + Math.sin(angle) * radius;
-      dust(level, x, y, z, -Math.cos(angle) * 0.025 - Math.sin(angle) * 0.035,
-          0.015 + (1.0 - progress) * 0.015,
-          -Math.sin(angle) * 0.025 + Math.cos(angle) * 0.035);
+      double vx = -Math.cos(angle) * 0.025 - Math.sin(angle) * 0.035;
+      double vy = 0.015 + (1.0 - progress) * 0.015;
+      double vz = -Math.sin(angle) * 0.025 + Math.cos(angle) * 0.035;
+      dust(level, x, y, z, vx, vy, vz);
+      if (i == 0 && this.ticks % 5 == 0) {
+        level.sendParticles(ModParticleType.LEAVES.get(),
+            x + (level.random.nextDouble() - 0.5) * 0.18,
+            y + (level.random.nextDouble() - 0.5) * 0.12,
+            z + (level.random.nextDouble() - 0.5) * 0.18,
+            0, vx + (level.random.nextDouble() - 0.5) * 0.01,
+            vy + (level.random.nextDouble() - 0.5) * 0.01,
+            vz + (level.random.nextDouble() - 0.5) * 0.01, 1.0);
+      }
     }
     if (progress > 0.7F && this.ticks % 3 == 0) {
       level.sendParticles(ModParticleType.HEX_MOTES.get(),

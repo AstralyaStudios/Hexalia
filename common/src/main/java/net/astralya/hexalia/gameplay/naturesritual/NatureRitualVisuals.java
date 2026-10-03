@@ -231,8 +231,8 @@ public final class NatureRitualVisuals {
     }
 
     if (offeringOrigin != null && elapsed % 4 == 2) {
-      int offeringAge = elapsed - nextBrazierIndex * 40;
-      double progress = Math.max(0.0, Math.min(1.0, (offeringAge - 16) / 17.0));
+      int offeringAge = elapsed - nextBrazierIndex * 50;
+      double progress = Math.max(0.0, Math.min(1.0, (offeringAge - 18) / 31.0));
       double x = offeringOrigin.getX() + 0.5
           + (center.getX() - offeringOrigin.getX()) * progress;
       double y = offeringOrigin.getY() + 1.05 + (center.getY() - offeringOrigin.getY() + 0.1) * progress;

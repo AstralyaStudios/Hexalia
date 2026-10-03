@@ -209,7 +209,7 @@ public class RitualTableBlock extends BaseEntityBlock {
       return true;
     }
 
-    int duration = match.usedBraziers.size() * 40;
+    int duration = match.usedBraziers.size() * 50;
     if (match.recipe.ritualKind() == RitualTableRecipe.RitualKind.NATURE) {
       duration += Math.max(24, grownCrops.size() * 3 + 12) + 6;
     }

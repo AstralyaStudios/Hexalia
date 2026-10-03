@@ -6,6 +6,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import java.util.function.Supplier;
 import net.astralya.hexalia.HexaliaMod;
+import net.astralya.hexalia.block.custom.CelestialBloomBlock;
 import net.astralya.hexalia.block.custom.*;
 import net.astralya.hexalia.block.custom.signs.ModHangingSignBlock;
 import net.astralya.hexalia.block.custom.signs.ModStandingSignBlock;
@@ -106,7 +107,8 @@ public class ModBlocks {
                   6,
                   BlockBehaviour.Properties.copy(Blocks.POPPY)
                       .noCollission()
-                      .randomTicks()));
+                      .randomTicks()
+                      .lightLevel(state -> state.getValue(CelestialBloomBlock.OPEN) ? 7 : 0)));
   public static final RegistrySupplier<Block> POTTED_CELESTIAL_BLOOM =
       BLOCKS.register(
           "potted_celestial_bloom",
@@ -122,7 +124,8 @@ public class ModBlocks {
                   3,
                   BlockBehaviour.Properties.copy(Blocks.POPPY)
                       .noCollission()
-                      .randomTicks()));
+                      .randomTicks()
+                      .lightLevel(state -> state.getValue(CelestialBloomBlock.OPEN) ? 4 : 0)));
   public static final RegistrySupplier<Block> POTTED_WITHERED_CELESTIAL_BLOOM =
       BLOCKS.register(
           "potted_withered_celestial_bloom",

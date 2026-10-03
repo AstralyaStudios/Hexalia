@@ -17,6 +17,11 @@ public class ModSoundEvents {
       registerSoundEvent("ritual_success");
   public static final RegistrySupplier<SoundEvent> RITUAL_WHISPERS =
       registerSoundEvent("ritual_whispers");
+  public static final RegistrySupplier<SoundEvent> RITUAL_START = registerSoundEvent("ritual_start");
+  public static final RegistrySupplier<SoundEvent> RITUAL_PROCESS = registerSoundEvent("ritual_process");
+  public static final RegistrySupplier<SoundEvent> ABSORBING_SOULS = registerSoundEvent("absorbing_souls");
+  public static final RegistrySupplier<SoundEvent> FIREFLY_BUSH = registerSoundEvent("firefly_bush");
+  public static final RegistrySupplier<SoundEvent> RITUAL_END = registerSoundEvent("ritual_end");
   public static final RegistrySupplier<SoundEvent> SAC_IMPACT = registerSoundEvent("sac_impact");
   public static final RegistrySupplier<SoundEvent> WIND_BURST = registerSoundEvent("wind_burst");
   public static final RegistrySupplier<SoundEvent> CACOFEY_GIGGLE =

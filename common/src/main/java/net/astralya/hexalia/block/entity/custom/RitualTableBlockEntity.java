@@ -52,13 +52,16 @@ import org.jetbrains.annotations.Nullable;
 public class RitualTableBlockEntity extends BlockEntity implements Container {
 
   public static final int DURATION = 8 * 20;
-  private static final int MANIFESTATION_DURATION = 50;
+  private static final int MANIFESTATION_DURATION = 72;
+  private static final int RESOLUTION_DURATION = 72;
+  private static final int PROCESS_SOUND_INTERVAL = 380;
 
   public enum RitualState {
     IDLE,
     PROCESSING_OFFERINGS,
     AWAITING_SOUL,
-    SOUL_MANIFESTATION
+    SOUL_MANIFESTATION,
+    RESOLVING
   }
 
   private final ItemStackHandler inventory =
@@ -94,6 +97,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
   private @Nullable UUID activatingPlayerId;
   private boolean requiresSoul;
   private int manifestationTicksRemaining;
+  private int resolutionTicksRemaining;
   private long manifestationAnimationStart;
   private @Nullable BlockPos capturedSoulOrigin;
 
@@ -177,9 +181,9 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
   }
 
   public float getOfferingAnimationTick(float partialTick) {
-    if (level == null || cachedParticleItem.isEmpty() || cachedBrazierPos == null) return 40.0F;
+    if (level == null || cachedParticleItem.isEmpty() || cachedBrazierPos == null) return 50.0F;
     return Math.max(
-        0.0F, Math.min(40.0F, level.getGameTime() - offeringAnimationStart + partialTick));
+        0.0F, Math.min(50.0F, level.getGameTime() - offeringAnimationStart + partialTick));
   }
 
   public float getManifestationProgress(float partialTick) {
@@ -214,6 +218,11 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
     this.requiresSoul = requiresSoul;
     this.activatingPlayerId = activatingPlayer.getUUID();
     this.ritualState = RitualState.PROCESSING_OFFERINGS;
+    if (level instanceof ServerLevel server) {
+      server.playSound(null, worldPosition, ModSoundEvents.RITUAL_START.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
+      server.playSound(null, worldPosition, ModSoundEvents.RITUAL_PROCESS.get(), SoundSource.BLOCKS, 0.7F, 1.0F);
+      server.playSound(null, worldPosition, ModSoundEvents.FIREFLY_BUSH.get(), SoundSource.BLOCKS, 0.35F, 1.0F);
+    }
     syncVisualState();
   }
 
@@ -225,6 +234,9 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
     manifestationTicksRemaining = MANIFESTATION_DURATION;
     manifestationAnimationStart = server.getGameTime();
     ritualState = RitualState.SOUL_MANIFESTATION;
+    stopRitualSound(server, worldPosition, ModSoundEvents.FIREFLY_BUSH.get().getLocation());
+    stopRitualSound(server, worldPosition, ModSoundEvents.RITUAL_WHISPERS.get().getLocation());
+    server.playSound(null, worldPosition, ModSoundEvents.RITUAL_END.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
     SummoningRitualVisuals.spawnSoulBindingParticles(server, getBlockPos());
     syncVisualState();
     return true;
@@ -264,6 +276,12 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
       cancelRitual(level, pos, blockEntity);
       return;
     }
+    if (blockEntity.ritualState == RitualState.RESOLVING) {
+      if (--blockEntity.resolutionTicksRemaining == 0)
+        completeRitual(level, pos, blockEntity);
+      else blockEntity.setChanged();
+      return;
+    }
     if (blockEntity.ritualState == RitualState.AWAITING_SOUL) {
       if (level instanceof ServerLevel server) {
         SummoningRitualVisuals.spawnAwaitingSoulParticles(server, pos);
@@ -271,11 +289,14 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
       return;
     }
     if (blockEntity.ritualState == RitualState.SOUL_MANIFESTATION) {
-      if (level instanceof ServerLevel server)
+      if (level instanceof ServerLevel server) {
+        blockEntity.manifestationTicksRemaining =
+            (int) Math.max(0L, MANIFESTATION_DURATION - (server.getGameTime() - blockEntity.manifestationAnimationStart));
         SummoningRitualVisuals.spawnManifestationParticles(server, pos,
             blockEntity.capturedSoulOrigin, blockEntity.manifestationTicksRemaining,
             MANIFESTATION_DURATION);
-      if (--blockEntity.manifestationTicksRemaining <= 0)
+      }
+      if (blockEntity.manifestationTicksRemaining <= 0)
         completeManifestation(level, pos, blockEntity);
       else blockEntity.setChanged();
       return;
@@ -298,6 +319,14 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
 
     int base = blockEntity.totalTransformTicks > 0 ? blockEntity.totalTransformTicks : DURATION;
     int elapsed = base - blockEntity.transformTicksRemaining;
+    if (elapsed > 0 && elapsed % PROCESS_SOUND_INTERVAL == 0 && level instanceof ServerLevel server)
+      server.playSound(null, pos, ModSoundEvents.RITUAL_PROCESS.get(), SoundSource.BLOCKS, 0.7F, 1.0F);
+
+    if (elapsed > 0 && elapsed % 266 == 0 && level instanceof ServerLevel server)
+      server.playSound(null, pos, ModSoundEvents.FIREFLY_BUSH.get(), SoundSource.BLOCKS, 0.35F, 1.0F);
+
+    if (elapsed % 10 == 0 && level instanceof ServerLevel server)
+      spawnBrazierCropFireflies(server, blockEntity.activeBrazierPositions);
 
     handleActiveBraziers(level, pos, blockEntity, elapsed);
     if (level instanceof ServerLevel server) {
@@ -305,7 +334,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
         NatureRitualVisuals.onTick(server, pos, blockEntity.grownCrops,
             blockEntity.activeBrazierPositions, blockEntity.nextBrazierIndex,
             blockEntity.cachedBrazierPos, elapsed,
-            elapsed - blockEntity.activeBrazierPositions.size() * 40,
+            elapsed - blockEntity.activeBrazierPositions.size() * 50,
             blockEntity.transformTicksRemaining);
       else if (blockEntity.ritualKind == RitualTableRecipe.RitualKind.CELESTIAL)
         CelestialRitualVisuals.onTick(server, pos, blockEntity.grownCrops,
@@ -320,6 +349,10 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
     if (blockEntity.transformTicksRemaining == 0) {
       if (blockEntity.requiresSoul) {
         blockEntity.ritualState = RitualState.AWAITING_SOUL;
+        if (level instanceof ServerLevel server) {
+          stopRitualSound(server, pos, ModSoundEvents.FIREFLY_BUSH.get().getLocation());
+          stopRitualSound(server, pos, ModSoundEvents.RITUAL_PROCESS.get().getLocation());
+        }
         if (level instanceof ServerLevel server)
           SummoningRitualVisuals.onPrepared(server, pos);
         if (level instanceof ServerLevel server && blockEntity.activatingPlayerId != null) {
@@ -335,7 +368,50 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
         blockEntity.nextBrazierIndex = 0;
         blockEntity.syncVisualState();
       } else {
-        completeRitual(level, pos, blockEntity);
+        blockEntity.ritualState = RitualState.RESOLVING;
+        blockEntity.resolutionTicksRemaining = RESOLUTION_DURATION;
+        if (level instanceof ServerLevel server) {
+          stopRitualSound(server, pos, ModSoundEvents.FIREFLY_BUSH.get().getLocation());
+          server.playSound(null, pos, ModSoundEvents.RITUAL_END.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
+        }
+        blockEntity.syncVisualState();
+      }
+    }
+  }
+
+  private static void spawnBrazierCropFireflies(ServerLevel server, List<BlockPos> braziers) {
+    for (BlockPos brazier : braziers) {
+      // Sample a few columns in an 8 x 8 square; never scan the whole garden per tick.
+      samples: for (int attempt = 0; attempt < 8; attempt++) {
+        int x = brazier.getX() + server.random.nextInt(8) - 4;
+        int z = brazier.getZ() + server.random.nextInt(8) - 4;
+        for (int dy = -1; dy <= 1; dy++) {
+          BlockPos crop = new BlockPos(x, brazier.getY() + dy, z);
+          if (!server.hasChunkAt(crop)) continue;
+          BlockState state = server.getBlockState(crop);
+          if (!state.is(BlockTags.CROPS) && !state.is(ModTags.Blocks.CROPS)) continue;
+          int fireflies = 3 + server.random.nextInt(3);
+          for (int i = 0; i < fireflies; i++) {
+            double px = crop.getX() + 0.5 + (server.random.nextDouble() - 0.5) * 0.36;
+            double py = crop.getY() + 0.5 + server.random.nextDouble() * 0.25;
+            double pz = crop.getZ() + 0.5 + (server.random.nextDouble() - 0.5) * 0.36;
+            server.sendParticles(ModParticleType.FIREFLY.get(), px, py, pz, 0,
+                (server.random.nextDouble() - 0.5) * 0.012,
+                0.004 + server.random.nextDouble() * 0.008,
+                (server.random.nextDouble() - 0.5) * 0.012, 1.0);
+          }
+          int leaves = 1 + server.random.nextInt(2);
+          for (int i = 0; i < leaves; i++) {
+            double px = crop.getX() + 0.5 + (server.random.nextDouble() - 0.5) * 0.36;
+            double py = crop.getY() + 0.5 + server.random.nextDouble() * 0.25;
+            double pz = crop.getZ() + 0.5 + (server.random.nextDouble() - 0.5) * 0.36;
+            server.sendParticles(ModParticleType.LEAVES.get(), px, py, pz, 0,
+                (server.random.nextDouble() - 0.5) * 0.02,
+                0.01 + server.random.nextDouble() * 0.01,
+                (server.random.nextDouble() - 0.5) * 0.02, 1.0);
+          }
+          break samples;
+        }
       }
     }
   }
@@ -433,7 +509,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
       return;
     }
 
-    int ticksPerBrazier = 40;
+    int ticksPerBrazier = 50;
     int currentTime = elapsed - (blockEntity.nextBrazierIndex * ticksPerBrazier);
     RitualBrazierBlockEntity brazier = blockEntity.activeBraziers.get(blockEntity.nextBrazierIndex);
     if (brazier == null) {
@@ -458,14 +534,14 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
       blockEntity.syncVisualState();
     }
 
-    if (currentTime >= 16 && currentTime < 34 && level instanceof ServerLevel serverLevel) {
+    if (currentTime >= 18 && currentTime < 50 && level instanceof ServerLevel serverLevel) {
       spawnItemParticles(
           serverLevel,
           blockEntity.cachedParticleItem,
           brazier.getBlockPos(),
           pos,
-          currentTime - 16,
-          18);
+          currentTime - 18,
+          32);
     }
 
     if (currentTime == ticksPerBrazier - 1) {
@@ -579,6 +655,10 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
             && !hasValidCelestialBlooms(level, blockEntity))) {
       cancelRitual(level, pos, blockEntity);
       return;
+    }
+    if (level instanceof ServerLevel server) {
+      stopRitualSound(server, pos, ModSoundEvents.FIREFLY_BUSH.get().getLocation());
+      stopRitualSound(server, pos, ModSoundEvents.RITUAL_PROCESS.get().getLocation());
     }
     RitualTableRecipe.RitualKind completedKind = blockEntity.ritualKind;
     blockEntity.setItem(0, blockEntity.pendingOutput);
@@ -714,6 +794,8 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
   }
 
   private static void manifestationFailed(RitualTableBlockEntity table, String reason) {
+    if (table.level instanceof ServerLevel server)
+      stopRitualSound(server, table.worldPosition, ModSoundEvents.RITUAL_END.get().getLocation());
     HexaliaMod.LOGGER.warn(
         "Nature's Ritual manifestation at {} failed: {}", table.getBlockPos(), reason);
     resetManifestation(table);
@@ -742,6 +824,12 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
   }
 
   private static void cancelRitual(Level level, BlockPos pos, RitualTableBlockEntity blockEntity) {
+    if (level instanceof ServerLevel server) {
+      stopRitualSound(server, pos, ModSoundEvents.FIREFLY_BUSH.get().getLocation());
+      stopRitualSound(server, pos, ModSoundEvents.RITUAL_PROCESS.get().getLocation());
+      stopRitualSound(server, pos, ModSoundEvents.RITUAL_WHISPERS.get().getLocation());
+      stopRitualSound(server, pos, ModSoundEvents.RITUAL_END.get().getLocation());
+    }
     RitualTableRecipe.RitualKind failedKind = blockEntity.ritualKind;
     blockEntity.transformTicksRemaining = 0;
     blockEntity.totalTransformTicks = 0;
@@ -757,6 +845,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
     blockEntity.ritualKind = RitualTableRecipe.RitualKind.NATURE;
     blockEntity.activatingPlayerId = null;
     blockEntity.manifestationTicksRemaining = 0;
+    blockEntity.resolutionTicksRemaining = 0;
     blockEntity.manifestationAnimationStart = 0L;
     blockEntity.capturedSoulOrigin = null;
     blockEntity.requiresSoul = false;
@@ -790,7 +879,20 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
 
   @Override
   public void setRemoved() {
+    if (level instanceof ServerLevel server && ritualState != RitualState.IDLE) {
+      stopRitualSound(server, worldPosition, ModSoundEvents.FIREFLY_BUSH.get().getLocation());
+      stopRitualSound(server, worldPosition, ModSoundEvents.RITUAL_PROCESS.get().getLocation());
+      stopRitualSound(server, worldPosition, ModSoundEvents.RITUAL_WHISPERS.get().getLocation());
+      stopRitualSound(server, worldPosition, ModSoundEvents.RITUAL_END.get().getLocation());
+    }
     super.setRemoved();
+  }
+
+  private static void stopRitualSound(ServerLevel server, BlockPos pos, ResourceLocation sound) {
+    var packet = new net.minecraft.network.protocol.game.ClientboundStopSoundPacket(sound, SoundSource.BLOCKS);
+    for (var player : server.players())
+      if (player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) < 4096.0)
+        player.connection.send(packet);
   }
 
   @Override
@@ -805,6 +907,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
     if (activatingPlayerId != null) tag.putUUID("ActivatingPlayer", activatingPlayerId);
     tag.putBoolean("RequiresSoul", requiresSoul);
     tag.putInt("ManifestationTicks", manifestationTicksRemaining);
+    tag.putInt("ResolutionTicks", resolutionTicksRemaining);
     tag.putLong("ManifestationAnimationStart", manifestationAnimationStart);
     if (capturedSoulOrigin != null) tag.putLong("SoulOrigin", capturedSoulOrigin.asLong());
     tag.putInt("NextBrazierIndex", nextBrazierIndex);
@@ -856,6 +959,7 @@ public class RitualTableBlockEntity extends BlockEntity implements Container {
           : RitualTableRecipe.RitualKind.NATURE;
     }
     this.manifestationTicksRemaining = tag.getInt("ManifestationTicks");
+    this.resolutionTicksRemaining = tag.getInt("ResolutionTicks");
     this.manifestationAnimationStart = tag.getLong("ManifestationAnimationStart");
     this.capturedSoulOrigin =
         tag.contains("SoulOrigin") ? BlockPos.of(tag.getLong("SoulOrigin")) : null;

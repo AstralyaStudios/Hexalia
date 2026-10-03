@@ -3,6 +3,7 @@ package net.astralya.hexalia;
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.block.entity.ModBlockEntityTypes;
+import net.astralya.hexalia.client.CelestialBloomEmissiveModel;
 import net.astralya.hexalia.client.model.PestleModel;
 import net.astralya.hexalia.client.renderer.blockentity.CenserBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.blockentity.HerbJarBlockEntityRenderer;
@@ -23,6 +24,7 @@ import net.astralya.hexalia.particle.ModParticleType;
 import net.astralya.hexalia.particle.custom.CacofeyDustHeldParticle;
 import net.astralya.hexalia.particle.custom.CacofeyDustParticle;
 import net.astralya.hexalia.particle.custom.GhostParticle;
+import net.astralya.hexalia.particle.custom.FireflyParticle;
 import net.astralya.hexalia.particle.custom.HexMoteParticle;
 import net.astralya.hexalia.particle.custom.InfusedBubbleParticle;
 import net.astralya.hexalia.particle.custom.LeavesParticle;
@@ -55,6 +57,7 @@ public class HexaliaModClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        CelestialBloomEmissiveModel.register();
         registerModelLayers();
         registerBlockRenderTypes();
         registerParticles();
@@ -148,6 +151,7 @@ public class HexaliaModClient implements ClientModInitializer {
         registry.register(ModParticleType.INFUSED_BUBBLES.get(), InfusedBubbleParticle.Provider::new);
         registry.register(ModParticleType.GHOST.get(), GhostParticle.Factory::new);
         registry.register(ModParticleType.LEAVES.get(), LeavesParticle.Factory::new);
+        registry.register(ModParticleType.FIREFLY.get(), FireflyParticle.Factory::new);
         registry.register(ModParticleType.SPARKLE.get(), SparkleParticle.Factory::new);
         registry.register(ModParticleType.CACOFEY_DUST.get(), CacofeyDustParticle.Factory::new);
         registry.register(ModParticleType.HEX_MOTES.get(), HexMoteParticle.Factory::new);

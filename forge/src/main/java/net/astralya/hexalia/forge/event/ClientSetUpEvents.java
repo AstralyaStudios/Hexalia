@@ -35,6 +35,7 @@ public class ClientSetUpEvents {
         event.registerSpriteSet(ModParticleType.GHOST.get(), GhostParticle.Factory::new);
         event.registerSpriteSet(ModParticleType.INFUSED_BUBBLES.get(), InfusedBubbleParticle.Provider::new);
         event.registerSpriteSet(ModParticleType.LEAVES.get(), LeavesParticle.Factory::new);
+    event.registerSpriteSet(ModParticleType.FIREFLY.get(), FireflyParticle.Factory::new);
         event.registerSpriteSet(ModParticleType.SPARKLE.get(), SparkleParticle.Factory::new);
         event.registerSpriteSet(ModParticleType.CACOFEY_DUST.get(), CacofeyDustParticle.Factory::new);
         event.registerSpriteSet(ModParticleType.HEX_MOTES.get(), HexMoteParticle.Factory::new);
