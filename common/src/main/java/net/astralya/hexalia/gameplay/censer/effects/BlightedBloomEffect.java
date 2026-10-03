@@ -105,24 +105,12 @@ public class BlightedBloomEffect implements ICenserEffect {
       return true;
     }
 
-    for (BlockPos neighbor : neighbors(pos)) {
-      if (level.getBlockState(neighbor).is(Blocks.MYCELIUM)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  private static Iterable<BlockPos> neighbors(BlockPos pos) {
-    List<BlockPos> result = new ArrayList<>(6);
-    result.add(pos.north());
-    result.add(pos.south());
-    result.add(pos.east());
-    result.add(pos.west());
-    result.add(pos.above());
-    result.add(pos.below());
-    return result;
+    return level.getBlockState(pos.north()).is(Blocks.MYCELIUM)
+        || level.getBlockState(pos.south()).is(Blocks.MYCELIUM)
+        || level.getBlockState(pos.east()).is(Blocks.MYCELIUM)
+        || level.getBlockState(pos.west()).is(Blocks.MYCELIUM)
+        || level.getBlockState(pos.above()).is(Blocks.MYCELIUM)
+        || level.getBlockState(pos.below()).is(Blocks.MYCELIUM);
   }
 
   private static BlockPos pickBiasedNearest(

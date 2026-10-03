@@ -7,13 +7,13 @@
     {
       "type": "text",
       "title": "Polillas de Seda",
-      "text": "Las Polillas de Seda viven en los bosques y son la base de la producción de seda. También se pueden obtener mediante un $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Ritual de Invocación$(/l)."
+      "text": "Las Polillas de Seda viven en los bosques e inician el camino hacia el equipo de seda. También se pueden obtener mediante $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Invocación$(/l), que requiere un alma ofrecida con el Athame."
     },
     {
       "type": "text",
       "title": "Comportamiento",
       "anchor": "behavior",
-      "text": "Se sienten atraídas por la luz. Puedes encontrar distintas variedades en libertad."
+      "text": "Las Polillas de Seda se acercan a las luces cercanas. También deambulan y descansan de vez en cuando; hay distintas variedades en libertad."
     },
     {
       "type": "text",
@@ -25,23 +25,18 @@
       "type": "text",
       "title": "Ciclo vital",
       "anchor": "lifecycle",
-      "text": "Ponen huevos sobre hojas o Bloques Nido. Cada puesta produce dos gusanos de seda, que puedes colocar sobre troncos para formar capullos."
+      "text": "Las polillas ponen huevos sobre hojas o Bloques Nido. Cada puesta produce dos gusanos de seda, que puedes colocar sobre troncos para formar capullos."
     },
     {
       "type": "text",
       "title": "Capullos",
-      "text": "Los capullos también aparecen en ciertos árboles. Rómpelos para liberar un gusano o usa sobre ellos un bloque que emita luz para obtener una Polilla de Seda."
+      "text": "Los capullos también aparecen en ciertos árboles. Rómpelos para liberar un gusano, o usa sobre ellos un bloque que emita luz para obtener una Polilla de Seda."
     },
     {
       "type": "text",
       "title": "Recursos de seda",
       "anchor": "resources",
-      "text": "Su ciclo vital proporciona Fibra de Seda, necesaria para fabricar Silkweave. Los gusanos también pueden procesarse para obtener más fibra."
-    },
-    {
-      "type": "text",
-      "title": "Uso",
-      "text": "Prepara un lugar con hojas, Bloques Nido y troncos para mantener una fuente de seda."
+      "text": "El ciclo de las polillas da Fibra de Seda. Úsala para fabricar $(l:hexalia:content/equipment_armor#silkweave)Silkweave$(/l) y mejora ese equipo a $(l:hexalia:content/equipment_armor#moonweave)Moonweave$(/l) mediante $(l:hexalia:core_mechanics/celestial_infusion)Rituales Celestiales$(/l)."
     }
   ]
 }

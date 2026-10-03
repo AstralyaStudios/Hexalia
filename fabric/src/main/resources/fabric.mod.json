@@ -3,12 +3,12 @@
 	"id": "hexalia",
 	"version": "${version}",
 	"name": "Hexalia",
-	"description": "Hexalia is a magical mod centered on plant-based magic and rustic applications. It adds witchery, rituals, brewing new potions, and more.",
+	"description": "Hexalia is a folk-witchcraft Minecraft mod centered on nature, cultivation, herbal practices, rituals, environmental magic, and handcrafted magical tools.",
 	"authors": [
 		"Astralya Studios"
 	],
 	"contact": {
-		"homepage": "https://github.com/AstralyaStudios/",
+		"homepage": "https://github.com/AstralyaStudios/Hexalia",
 		"sources": "https://github.com/AstralyaStudios/Hexalia"
 	},
 	"license": "MIT",

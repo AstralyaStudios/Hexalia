@@ -34,7 +34,7 @@
       "item": "hexalia:herb_jar",
       "title": "Tarro de Hierbas",
       "anchor": "herb_jar",
-      "text": "Guarda hasta ocho ingredientes del mismo tipo. Usa un objeto igual para introducirlo y la mano vacía para sacar uno. Al romper el tarro normalmente, conserva su contenido; si lo rompes agachado, el tarro y los ingredientes caen por separado."
+      "text": "Guarda hasta ocho ingredientes del mismo tipo. Usa un objeto igual para introducirlo y la mano vacía para sacar uno. Al romperlo normalmente conserva su contenido; si lo rompes agachado, el tarro y los ingredientes caen por separado."
     },
     {
       "type": "spotlight",

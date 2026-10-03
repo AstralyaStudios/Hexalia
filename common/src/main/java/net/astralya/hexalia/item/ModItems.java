@@ -205,7 +205,7 @@ public class ModItems {
   public static final RegistrySupplier<Item> CINDERHEW =
       ITEMS.register(
           "cinderhew",
-          () -> new CinderhewItem(ModToolTiers.ANCIENT, new Item.Properties().rarity(Rarity.RARE)));
+          () -> new CinderhewItem(ModToolTiers.ANCIENT, new Item.Properties().rarity(Rarity.RARE).durability(1561)));
   public static final RegistrySupplier<Item> SPIRITROOT_TETHER =
       ITEMS.register(
           "spiritroot_tether",

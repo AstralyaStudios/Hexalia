@@ -1,54 +1,54 @@
 {
-  "name": "Nature's Ritual",
+  "name": "Rituals",
   "icon": "hexalia:ritual_table",
   "category": "hexalia:core_mechanics",
   "sortnum": 2,
   "pages": [
     {
       "type": "text",
-      "title": "Nature's Ritual",
-      "text": "Nature's Ritual gathers a central catalyst, salted offerings, and the vigor of cultivated land at a Ritual Table. Its workings may transmute an item or call forth a living creature."
+      "title": "Shared Rituals",
+      "text": "The Ritual Table supports three workings: $(l:hexalia:core_mechanics/natures_ritual#crops)Nature Rituals$(/l), $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Summoning$(/l), and $(l:hexalia:core_mechanics/celestial_infusion)Celestial Rituals$(/l). Each uses a catalyst on the Table and offerings in salted Ritual Braziers."
     },
     {
       "type": "text",
       "title": "Ritual Ground",
       "anchor": "structure",
-      "text": "Set $(l:hexalia:blocks/ritual_brazier)Ritual Braziers$(/l) freely around the table. They need no fixed formation, but must share the table's Y level and lie within 8 blocks horizontally. A ritual may call for any number of offerings."
+      "text": "Place $(l:hexalia:blocks/ritual_brazier)Ritual Braziers$(/l) at the Table’s height, within 8 blocks horizontally. No pattern is needed. Give each offering its own Brazier, including duplicates; add $(l:hexalia:resources/salt)Salt$(/l) or another compatible salt to each participating Brazier."
     },
     {
       "type": "text",
       "title": "Preparation",
       "anchor": "preparation",
-      "text": "Place the recipe's central catalyst on the table. Put one required offering in each nearby brazier and add $(l:hexalia:resources/salt)Salt$(/l) to those braziers. Offerings may be arranged in any order."
+      "text": "Place the recipe’s catalyst on the Table and its offerings in separate salted Braziers. Use a $(l:hexalia:content/tools#hex_focus)Hex Focus$(/l) on the prepared Table to begin. Only Braziers matching the recipe participate."
     },
     {
       "type": "text",
-      "title": "Activation",
+      "title": "Offering Stage",
       "anchor": "activation",
-      "text": "Use a $(l:hexalia:content/tools#hex_focus)Hex Focus$(/l) on the prepared table. The ritual chooses only the braziers needed to match its offerings; unrelated or surplus braziers are ignored."
+      "text": "During the offering stage, the selected offerings and their salt are consumed. The Braziers remain in place. Cancelling afterward does not refund spent offerings or salt."
     },
     {
       "type": "text",
-      "title": "On Growth",
+      "title": "Nature Rituals",
       "anchor": "crops",
-      "text": "Nature's Ritual depends on surrounding life. Nearby fully grown crops are consumed in the process, returning to early growth as their energy is drawn into the ritual."
+      "text": "A Nature Ritual requires the recipe’s number of nearby mature crops. Keep them mature until the ritual succeeds; then the selected crops return to an early growth stage. The catalyst becomes the result."
     },
     {
       "type": "text",
-      "title": "Result",
+      "title": "Nature Results",
       "anchor": "result",
-      "text": "When the working completes, the catalyst becomes the result and only the selected offerings and their salt are consumed. Used braziers then return to rest."
+      "text": "The crop energy is paid only when a Nature Ritual succeeds. If the ritual stops after its offerings are taken, those offerings and their salt remain spent, but the crops are not reset."
     },
     {
       "type": "text",
-      "title": "Soul Offerings",
+      "title": "Summoning",
       "anchor": "sacrifice",
-      "text": "Some summonings require a soul. After the offerings finish, the ritual waits: slay a nearby living creature with an $(l:hexalia:content/tools#athame)Athame$(/l) to give the waiting working its final breath."
+      "text": "Summoning uses the same Table and offerings, plus nearby mature crops and a soul. After the offerings are taken, it waits for you to defeat a nearby living creature with an $(l:hexalia:content/tools#athame)Athame$(/l). The selected crops reset only after the summoned creature appears."
     },
     {
       "type": "text",
-      "title": "When It Will Not Begin",
-      "text": "Check the catalyst and offerings, salt every brazier the ritual actually needs, and ensure enough fully grown crops stand nearby. A soul is required only after a marked summoning has accepted its offerings."
+      "title": "If It Will Not Begin",
+      "text": "Check the catalyst, separate offerings, compatible salt, and the recipe’s energy source. Summoning asks for the Athame soul only after the offering stage. Celestial Rituals require nighttime and living Celestial Blooms."
     },
     {
       "type": "hexalia:recipe_page",

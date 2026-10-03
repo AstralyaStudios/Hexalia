@@ -53,8 +53,6 @@ public class ModConfiguredFeatures {
   public static final ResourceKey<ConfiguredFeature<?, ?>> COTTONWOOD_COCOON =
       registerKey("cottonwood_cocoon");
   public static final ResourceKey<ConfiguredFeature<?, ?>> WILLOW = registerKey("willow");
-  public static final ResourceKey<ConfiguredFeature<?, ?>> DARK_OAK_PLAIN =
-      registerKey("dark_oak_plain");
   public static final ResourceKey<ConfiguredFeature<?, ?>> DARK_OAK_COCOON =
       registerKey("dark_oak_cocoon");
   public static final ResourceKey<ConfiguredFeature<?, ?>> LOTUS_FLOWER =
@@ -184,18 +182,6 @@ public class ModConfiguredFeatures {
   }
 
   private static void registerTrees(BootstapContext<ConfiguredFeature<?, ?>> context) {
-    register(
-        context,
-        DARK_OAK_PLAIN,
-        Feature.TREE,
-        new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(Blocks.DARK_OAK_LOG),
-                new DarkOakTrunkPlacer(5, 2, 1),
-                BlockStateProvider.simple(Blocks.DARK_OAK_LEAVES),
-                new DarkOakFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0)) {},
-                new TwoLayersFeatureSize(1, 0, 1))
-            .build());
-
     register(
         context,
         DARK_OAK_COCOON,

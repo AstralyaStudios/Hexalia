@@ -7,7 +7,7 @@
     {
       "type": "text",
       "title": "Cacofey",
-      "text": "The Cacofey is a mischievous jungle creature, known for stealing food and assisting with farming once tamed. It can also be summoned through $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Nature's Ritual$(/l), which requires a soul sacrifice."
+      "text": "The Cacofey is a jungle creature that steals food but helps with farming once tamed. It can also be obtained through $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Summoning$(/l)."
     },
     {
       "type": "text",
@@ -25,7 +25,7 @@
       "type": "text",
       "title": "Anchoring",
       "anchor": "anchor",
-      "text": "A tamed Cacofey can be bound to a container using a Hex Focus. Once anchored, it treats that location as its home and returns to it after working."
+      "text": "Use a Hex Focus on your tamed Cacofey, then use the same Focus on the intended container. It will return there to deposit harvested items while set to wander."
     },
     {
       "type": "text",
@@ -36,17 +36,7 @@
     {
       "type": "text",
       "title": "Modes",
-      "text": "Cacofey can switch between behaviors: following their owner, staying in place, or wandering freely. Wandering is required for farming."
-    },
-    {
-      "type": "text",
-      "title": "On Use",
-      "text": "Cacofey provide early automation for farming. With the right setup, they can maintain crops and gather resources while you focus on other tasks."
-    },
-    {
-      "type": "text",
-      "title": "Binding",
-      "text": "Bind a Cacofey by first attuning a Hex Focus to it, then using the focus on a container. The creature will treat that container as its home."
+      "text": "Use an empty hand on your Cacofey to switch between following, staying, and wandering. Set it to wander to harvest crops and deposit them at its anchor."
     }
   ]
 }

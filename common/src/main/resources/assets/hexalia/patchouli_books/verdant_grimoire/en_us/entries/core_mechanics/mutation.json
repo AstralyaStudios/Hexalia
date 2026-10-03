@@ -7,7 +7,7 @@
     {
       "type": "text",
       "title": "Mutation",
-      "text": "Mutavis is a resinous preparation that awakens hidden possibilities in ordinary blocks. Use it directly on a compatible block to transform it or draw forth a new resource."
+      "text": "Mutavis awakens hidden possibilities in compatible blocks. Use it on a block and wait a short time for the transformation."
     },
     {
       "type": "text",
@@ -24,7 +24,7 @@
       "type": "text",
       "title": "Area Mutation",
       "anchor": "area",
-      "text": "When used on a $(l:hexalia:core_mechanics/enchanted_plants#morphora)Morphora$(/l), Mutavis spreads outward, affecting nearby blocks at once. This allows large-scale transformation of the surrounding environment."
+      "text": "Using Mutavis on a $(l:hexalia:core_mechanics/enchanted_plants#morphora)Morphora$(/l) spreads mutation to nearby compatible blocks. Each successful transformation uses nearby Grass, leaving Coarse Dirt; failures leave the Grass untouched."
     },
     {
       "type": "text",
@@ -37,11 +37,6 @@
       "title": "Automation",
       "anchor": "automation",
       "text": "Mutavis can be applied using dispensers, enabling automated mutation of blocks or Morphora flowers when supplied with the necessary resources."
-    },
-    {
-      "type": "text",
-      "title": "On Discovery",
-      "text": "Different materials respond differently to Mutavis. Plants, stone, and earth each reveal their own transformations, encouraging experimentation across the natural world."
     },
     {
       "type": "hexalia:recipe_page",

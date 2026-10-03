@@ -4,9 +4,9 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import java.util.List;
 import java.util.UUID;
+import net.astralya.hexalia.client.RootshaperTooltip;
 import net.astralya.hexalia.util.ModToolTiers;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -52,8 +52,7 @@ public class RootshaperItem extends ShovelItem {
   @Override
   public void appendHoverText(
       ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag flag) {
-    boolean sneaking =
-        Minecraft.getInstance().player != null && Minecraft.getInstance().player.isShiftKeyDown();
+    boolean sneaking = RootshaperTooltip.isSneaking();
 
     if (sneaking) {
       tooltipComponents.add(

@@ -7,7 +7,7 @@
     {
       "type": "text",
       "title": "Mutación",
-      "text": "Mutavis despierta posibilidades ocultas en ciertos bloques. Úsalo sobre un bloque compatible y espera un momento para descubrir su transformación."
+      "text": "Mutavis despierta posibilidades ocultas en ciertos bloques. Úsalo sobre uno compatible y espera un momento para ver su transformación."
     },
     {
       "type": "text",
@@ -24,7 +24,7 @@
       "type": "text",
       "title": "Mutación en área",
       "anchor": "area",
-      "text": "Usa Mutavis sobre $(l:hexalia:core_mechanics/enchanted_plants#morphora)Morphora$(/l) para extender la mutación a bloques compatibles cercanos. Las transformaciones que tienen éxito dejan tierra estéril donde tomaron energía del césped."
+      "text": "Usa Mutavis sobre una $(l:hexalia:core_mechanics/enchanted_plants#morphora)Morphora$(/l) para transformar bloques compatibles cercanos. Cada transformación exitosa toma energía del césped cercano y deja tierra estéril; los fallos no lo consumen."
     },
     {
       "type": "text",
@@ -37,11 +37,6 @@
       "title": "Automatización",
       "anchor": "automation",
       "text": "Un dispensador puede aplicar Mutavis a bloques o a una Morphora para automatizar las mutaciones."
-    },
-    {
-      "type": "text",
-      "title": "Descubrimiento",
-      "text": "Prueba Mutavis sobre plantas, piedra y tierra: cada material puede revelar un resultado distinto."
     },
     {
       "type": "hexalia:recipe_page",

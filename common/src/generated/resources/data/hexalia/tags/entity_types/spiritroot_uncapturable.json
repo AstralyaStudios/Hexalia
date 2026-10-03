@@ -5,6 +5,9 @@
     "minecraft:ghast",
     "minecraft:wither",
     "minecraft:player",
-    "minecraft:warden"
+    "minecraft:villager",
+    "minecraft:warden",
+    "minecraft:bee",
+    "hexalia:cacofey"
   ]
 }

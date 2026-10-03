@@ -62,7 +62,7 @@
       "item": "hexalia:celestial_bloom",
       "title": "Flor Celestial",
       "anchor": "celestial_bloom",
-      "text": "La Flor Celestial se abre de noche y se cierra de día. Las flores frescas brillan más que las marchitas. Un $(l:hexalia:core_mechanics/celestial_infusion)Ritual Celestial$(/l) exitoso las marchita una fase: de fresca a marchita y de marchita a arbusto muerto."
+      "text": "Las Flores Celestiales se abren de noche y se cierran de día. Las frescas brillan más que las marchitas. Un $(l:hexalia:core_mechanics/celestial_infusion)Ritual Celestial$(/l) exitoso degrada cada flor elegida una fase: de fresca a marchita y después a arbusto muerto."
     }
   ]
 }

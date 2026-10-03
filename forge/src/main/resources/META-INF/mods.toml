@@ -6,9 +6,10 @@ license="MIT"
 modId="hexalia"
 version="${mod_version}"
 displayName="Hexalia"
-authors="Grape Studios"
+displayURL="https://github.com/AstralyaStudios/Hexalia"
+authors="Astralya Studios"
 
-description='''A magical mod focused on herbology and potion brewing.'''
+description='''Hexalia is a folk-witchcraft Minecraft mod centered on nature, cultivation, herbal practices, rituals, environmental magic, and handcrafted magical tools.'''
 
 [[dependencies.hexalia]]
     modId="forge"

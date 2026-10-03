@@ -261,6 +261,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_witchweed", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocks.WITCHWEED.get().asItem()).build()))
                 .save(recipeConsumer);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ModItems.SEARING_SAC.get())
+                .requires(ModItems.RABBAGE.get()).requires(ModItems.SUNFIRE_TOMATO.get()).requires(Items.LEATHER)
+                .unlockedBy("has_sunfire_tomato", inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.SUNFIRE_TOMATO.get()).build()))
+                .save(recipeConsumer);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.THORNBOW.get())
                 .pattern(" SF")
                 .pattern("REF")
@@ -402,11 +407,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.VERDANT_GRIMOIRE.get())
                 .requires(Items.BOOK).requires(ModTags.Items.HERBS)
                 .unlockedBy("has_book", inventoryTrigger(ItemPredicate.Builder.item().of(Items.BOOK).build()))
-                .save(recipeConsumer);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.MUTAVIS.get())
-                .requires(Items.BONE_MEAL).requires(ModItems.TREE_RESIN.get()).requires(ModTags.Items.CRUSHED_HERBS).requires(ModTags.Items.CRUSHED_HERBS)
-                .unlockedBy("has_bone_meal", inventoryTrigger(ItemPredicate.Builder.item().of(Items.BONE_MEAL).build()))
                 .save(recipeConsumer);
 
         // Small Cauldron Recipes
@@ -849,6 +849,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         // Wood Recipes
         planksFromLog(recipeConsumer, ModBlocks.COTTONWOOD_PLANKS.get(), ModTags.Items.COTTONWOOD_LOGS, 4);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COTTONWOOD_WOOD.get(), 3)
+                .pattern("LL").pattern("LL")
+                .define('L', ModBlocks.COTTONWOOD_LOG.get())
+                .unlockedBy("has_cottonwood_log", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocks.COTTONWOOD_LOG.get()).build()))
+                .save(recipeConsumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_COTTONWOOD_WOOD.get(), 3)
+                .pattern("LL").pattern("LL")
+                .define('L', ModBlocks.STRIPPED_COTTONWOOD_LOG.get())
+                .unlockedBy("has_stripped_cottonwood_log", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocks.STRIPPED_COTTONWOOD_LOG.get()).build()))
+                .save(recipeConsumer);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.COTTONWOOD_BUTTON.get())
                 .requires(ModBlocks.COTTONWOOD_PLANKS.get())
                 .unlockedBy("has_cottonwood_planks", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocks.COTTONWOOD_PLANKS.get()).build()))
@@ -871,6 +881,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_planks", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocks.COTTONWOOD_PLANKS.get()).build())).save(recipeConsumer);
         hangingSign(recipeConsumer, ModItems.COTTONWOOD_HANGING_SIGN.get(), ModBlocks.STRIPPED_COTTONWOOD_LOG.get());
         planksFromLog(recipeConsumer, ModBlocks.WILLOW_PLANKS.get(), ModTags.Items.WILLOW_LOGS, 4);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.WILLOW_WOOD.get(), 3)
+                .pattern("LL").pattern("LL")
+                .define('L', ModBlocks.WILLOW_LOG.get())
+                .unlockedBy("has_willow_log", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocks.WILLOW_LOG.get()).build()))
+                .save(recipeConsumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_WILLOW_WOOD.get(), 3)
+                .pattern("LL").pattern("LL")
+                .define('L', ModBlocks.STRIPPED_WILLOW_LOG.get())
+                .unlockedBy("has_stripped_willow_log", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocks.STRIPPED_WILLOW_LOG.get()).build()))
+                .save(recipeConsumer);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.WILLOW_BUTTON.get())
                 .requires(ModBlocks.WILLOW_PLANKS.get())
                 .unlockedBy("has_willow_planks", inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocks.WILLOW_PLANKS.get()).build()))

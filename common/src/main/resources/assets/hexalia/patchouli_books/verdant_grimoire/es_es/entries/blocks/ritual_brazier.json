@@ -8,12 +8,12 @@
       "type": "spotlight",
       "item": "hexalia:ritual_brazier",
       "title": "Brasero Ritual",
-      "text": "Los Braseros Rituales sostienen las ofrendas de los rituales. Para crear uno, agáchate y usa un $(l:hexalia:content/tools#athame)Athame$(/l) sobre cualquier bloque de tablones."
+      "text": "Los Braseros Rituales sostienen ofrendas para los $(l:hexalia:core_mechanics/natures_ritual)Rituales de la Naturaleza y la Invocación$(/l), y para los $(l:hexalia:core_mechanics/celestial_infusion)Rituales Celestiales$(/l). Agáchate y usa un $(l:hexalia:content/tools#athame)Athame$(/l) sobre tablones para crear uno."
     },
     {
       "type": "text",
       "title": "Preparación",
-      "text": "Para el $(l:hexalia:core_mechanics/natures_ritual)Ritual de la Naturaleza$(/l), pon una ofrenda en cada Brasero Ritual necesario y añade Sal. Sitúalos al nivel de la Mesa Ritual, a no más de 8 bloques; no necesitan formar un dibujo. Las ofrendas repetidas requieren braseros distintos. Los braseros ajenos al ritual se ignoran."
+      "text": "Pon una ofrenda en cada Brasero participante, incluso si hay ingredientes repetidos, y añade Sal u otra sal compatible. El ritual consume la ofrenda y la Sal, pero no el Brasero. Consulta la $(l:hexalia:core_mechanics/natures_ritual#structure)preparación compartida$(/l)."
     }
   ]
 }

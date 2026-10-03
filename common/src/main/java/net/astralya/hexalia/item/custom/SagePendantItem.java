@@ -52,10 +52,12 @@ public class SagePendantItem extends Item {
     ItemStack stack = player.getItemInHand(hand);
     int stored = storedExperience(stack);
     if (!player.isShiftKeyDown() || stored == 0) return InteractionResultHolder.pass(stack);
+    if (player.getCooldowns().isOnCooldown(this)) return InteractionResultHolder.consume(stack);
 
     if (!level.isClientSide) {
       SagePendantEvents.startRelease(player, stack);
     }
+    player.getCooldowns().addCooldown(this, 120);
     return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
   }
 

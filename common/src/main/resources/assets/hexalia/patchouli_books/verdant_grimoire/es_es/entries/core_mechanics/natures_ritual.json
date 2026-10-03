@@ -1,54 +1,54 @@
 {
-  "name": "Ritual de la Naturaleza",
+  "name": "Rituales",
   "icon": "hexalia:ritual_table",
   "category": "hexalia:core_mechanics",
   "sortnum": 2,
   "pages": [
     {
       "type": "text",
-      "title": "Ritual de la Naturaleza",
-      "text": "Los rituales reúnen un catalizador, ofrendas y energía natural en una Mesa Ritual. La receta determina si es un Ritual de la Naturaleza o de Invocación."
+      "title": "Rituales compartidos",
+      "text": "La Mesa Ritual permite tres prácticas: $(l:hexalia:core_mechanics/natures_ritual#crops)Rituales de la Naturaleza$(/l), $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Invocación$(/l) y $(l:hexalia:core_mechanics/celestial_infusion)Rituales Celestiales$(/l). Todas usan un catalizador en la Mesa y ofrendas en Braseros Rituales con Sal."
     },
     {
       "type": "text",
       "title": "Lugar del ritual",
       "anchor": "structure",
-      "text": "Distribuye los $(l:hexalia:blocks/ritual_brazier)Braseros Rituales$(/l) al nivel de la Mesa, a no más de 8 bloques. No necesitan una forma concreta."
+      "text": "Sitúa los $(l:hexalia:blocks/ritual_brazier)Braseros Rituales$(/l) al nivel de la Mesa, a no más de 8 bloques en horizontal. No necesitan formar un dibujo. Cada ofrenda, incluso las repetidas, requiere su propio Brasero. Añade $(l:hexalia:resources/salt)Sal$(/l) u otra sal compatible a cada uno."
     },
     {
       "type": "text",
       "title": "Preparación",
       "anchor": "preparation",
-      "text": "Coloca el catalizador en la Mesa. Pon cada ofrenda en un brasero distinto, incluso si se repite, y añade $(l:hexalia:resources/salt)Sal$(/l) a cada brasero participante."
+      "text": "Coloca el catalizador en la Mesa y las ofrendas en Braseros distintos con Sal. Usa un $(l:hexalia:content/tools#hex_focus)Foco Hex$(/l) sobre la Mesa preparada. Solo participan los Braseros que corresponden a la receta."
     },
     {
       "type": "text",
-      "title": "Activación",
+      "title": "Etapa de las ofrendas",
       "anchor": "activation",
-      "text": "Usa un $(l:hexalia:content/tools#hex_focus)Foco Hex$(/l) sobre la Mesa preparada. El ritual elegirá solo los braseros necesarios; los demás se ignoran."
+      "text": "Durante esta etapa se consumen las ofrendas elegidas y su Sal. Los Braseros permanecen intactos. Si cancelas el ritual después, no recuperarás lo gastado."
     },
     {
       "type": "text",
-      "title": "La energía de los cultivos",
+      "title": "Rituales de la Naturaleza",
       "anchor": "crops",
-      "text": "Los Rituales de la Naturaleza y de Invocación requieren cultivos maduros cercanos. Cada receta indica cuántos necesita. Los cultivos elegidos vuelven a su primera fase solo cuando el ritual tiene éxito."
+      "text": "Cada Ritual de la Naturaleza requiere cierta cantidad de cultivos maduros cercanos. Deben seguir maduros hasta que el ritual tenga éxito; entonces los cultivos elegidos vuelven a una fase temprana y el catalizador se transforma."
     },
     {
       "type": "text",
-      "title": "Resultado",
+      "title": "Resultado natural",
       "anchor": "result",
-      "text": "Durante el ritual se consumen las ofrendas elegidas y su Sal. Al completarse, el catalizador se transforma en el resultado. Si el ritual falla después, las ofrendas gastadas no regresan."
+      "text": "La energía de los cultivos solo se gasta cuando un Ritual de la Naturaleza tiene éxito. Si se detiene después de aceptar las ofrendas, estas y su Sal se pierden, pero los cultivos no retroceden."
     },
     {
       "type": "text",
-      "title": "Ofrenda de almas",
+      "title": "Invocación",
       "anchor": "sacrifice",
-      "text": "Un Ritual de Invocación espera un alma después de aceptar sus ofrendas. Derrota a una criatura cercana con un $(l:hexalia:content/tools#athame)Athame$(/l) para ofrecérsela. Los cultivos solo se gastan si la criatura invocada aparece."
+      "text": "La Invocación usa la misma Mesa y ofrendas, además de cultivos maduros cercanos y un alma. Tras aceptar las ofrendas, espera a que derrotes una criatura viva cercana con un $(l:hexalia:content/tools#athame)Athame$(/l). Los cultivos elegidos solo retroceden cuando aparece la criatura invocada."
     },
     {
       "type": "text",
-      "title": "Si el ritual no comienza",
-      "text": "Si no comienza, revisa el catalizador, las ofrendas, la Sal y los cultivos maduros cercanos. Los rituales de invocación piden el alma más adelante."
+      "title": "Si no comienza",
+      "text": "Revisa el catalizador, las ofrendas separadas, la Sal compatible y la fuente de energía de la receta. La Invocación pide el alma después de las ofrendas. Los Rituales Celestiales requieren noche y Flores Celestiales vivas."
     },
     {
       "type": "hexalia:recipe_page",

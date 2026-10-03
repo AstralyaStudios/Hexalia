@@ -7,7 +7,7 @@
     {
       "type": "text",
       "title": "Cacofey",
-      "text": "El Cacofey es una criatura traviesa de la jungla que roba comida. Domesticado, puede ayudarte con los cultivos. También se obtiene mediante un $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Ritual de Invocación$(/l)."
+      "text": "El Cacofey roba comida en la jungla, pero domesticado ayuda con los cultivos. También se puede obtener mediante $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Invocación$(/l)."
     },
     {
       "type": "text",
@@ -25,7 +25,7 @@
       "type": "text",
       "title": "Vincular un ancla",
       "anchor": "anchor",
-      "text": "Usa un Foco Hex sobre tu Cacofey y después sobre un contenedor. Ese contenedor será su ancla y regresará a él tras trabajar."
+      "text": "Usa un Foco Hex sobre tu Cacofey domesticado y después usa el mismo Foco sobre el contenedor elegido. Volverá allí para depositar lo cosechado cuando esté en modo deambular."
     },
     {
       "type": "text",
@@ -36,17 +36,7 @@
     {
       "type": "text",
       "title": "Modos",
-      "text": "Usa la mano vacía sobre tu Cacofey para cambiar entre quedarse quieto, seguirte y deambular. Debe deambular para cosechar."
-    },
-    {
-      "type": "text",
-      "title": "Uso",
-      "text": "Dale un ancla y espacio con cultivos maduros para que te ayude en la granja."
-    },
-    {
-      "type": "text",
-      "title": "Vinculación",
-      "text": "Primero sintoniza el Foco Hex con tu Cacofey; luego úsalo sobre el contenedor que quieras convertir en su hogar."
+      "text": "Usa la mano vacía sobre tu Cacofey para alternar entre seguirte, quedarse quieto y deambular. Debe deambular para cosechar y depositar los cultivos en su ancla."
     }
   ]
 }

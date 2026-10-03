@@ -4,6 +4,7 @@ import java.util.UUID;
 import net.astralya.hexalia.client.renderer.item.BogshadeBootsRenderer;
 import net.astralya.hexalia.util.ModTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -103,7 +104,14 @@ public class BogshadeBootsItem extends HexaliaGeoArmorItem {
   private static void applySwimSpeed(Player player) {
     var velocity = player.getDeltaMovement();
     double scale = player.isSprinting() ? 1.15D : 1.08D;
-    player.setDeltaMovement(velocity.x * scale, velocity.y, velocity.z * scale);
+    double verticalMovement = velocity.y;
+    if (player.isInWater()
+        && !player.isSwimming()
+        && player.getFluidHeight(FluidTags.WATER) <= 1.25D
+        && verticalMovement > 0.0D) {
+      verticalMovement = Math.min(verticalMovement + 0.04D, 0.3D);
+    }
+    player.setDeltaMovement(velocity.x * scale, verticalMovement, velocity.z * scale);
     player.hurtMarked = true;
   }
 

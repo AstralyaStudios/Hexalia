@@ -1,11 +1,10 @@
 package net.astralya.hexalia.gameplay.censer.effects;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.astralya.hexalia.Configuration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -15,8 +14,6 @@ import net.minecraft.world.phys.Vec3;
 
 public class TidalPullEffect implements ICenserEffect {
 
-  private static final double PULL_FORCE = 0.1D;
-  private static final double PULL_TARGET_RADIUS = 1.5D;
   private static final int PARTICLE_INTERVAL = 4;
 
   private static final double SWIRL_R = 0.0D;
@@ -36,24 +33,19 @@ public class TidalPullEffect implements ICenserEffect {
     AABB area = new AABB(pos).inflate(radius);
     Vec3 target = Vec3.atCenterOf(pos);
 
-    List<Entity> entities = new ArrayList<>();
-    entities.addAll(level.getEntitiesOfClass(Animal.class, area));
-    entities.addAll(level.getEntitiesOfClass(Monster.class, area));
-    entities.addAll(level.getEntitiesOfClass(ItemEntity.class, area));
-
-    for (Entity entity : entities) {
-      Vec3 entityPos = entity.position();
-      double distSq = entityPos.distanceToSqr(target);
-      if (distSq <= PULL_TARGET_RADIUS * PULL_TARGET_RADIUS) {
-        continue;
-      }
-
-      Vec3 direction = target.subtract(entityPos).normalize();
-      double dist = Math.sqrt(distSq);
-      double scaledForce = PULL_FORCE * (2.0D + 0.5D * (1.0D - Math.min(dist / radius, 1.0D)));
-
-      entity.setDeltaMovement(entity.getDeltaMovement().add(direction.scale(scaledForce)));
-      entity.hasImpulse = true;
+    for (Entity entity :
+        level.getEntitiesOfClass(
+            Entity.class, area,
+            candidate ->
+                candidate instanceof Animal
+                    || candidate instanceof Monster
+                    || candidate instanceof ItemEntity)) {
+      Vec3 direction = target.subtract(entity.position());
+      double distance = Mth.clamp(direction.length(), 1.0D, radius);
+      double strength = 1.0D + 0.5D * (1.0D - distance / radius);
+      entity.setDeltaMovement(
+          entity.getDeltaMovement().add(direction.normalize().scale(0.12D * strength / distance)));
+      entity.hurtMarked = true;
     }
 
     this.tickCounter++;

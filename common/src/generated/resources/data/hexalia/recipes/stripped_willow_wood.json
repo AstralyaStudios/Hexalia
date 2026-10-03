@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "L": {
+      "item": "hexalia:stripped_willow_log"
+    }
+  },
+  "pattern": [
+    "LL",
+    "LL"
+  ],
+  "result": {
+    "count": 3,
+    "item": "hexalia:stripped_willow_wood"
+  },
+  "show_notification": true
+}

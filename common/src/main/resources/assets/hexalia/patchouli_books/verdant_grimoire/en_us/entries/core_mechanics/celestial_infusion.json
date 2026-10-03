@@ -7,30 +7,30 @@
     {
       "type": "text",
       "title": "Celestial Ritual",
-      "text": "Celestial Ritual channels energy from nearby Celestial Blooms through the Ritual Table. Each recipe requires a catalyst, salted offering Braziers, and nearby Blooms."
+      "text": "A Celestial Ritual uses the $(l:hexalia:core_mechanics/natures_ritual#structure)shared Ritual Table setup$(/l) but draws energy from nearby Celestial Blooms instead of crops. It begins at night."
     },
     {
       "type": "text",
       "title": "Requirements",
       "anchor": "requirements",
-      "text": "Celestial Ritual requires a $(l:hexalia:core_mechanics/natures_ritual#structure)Ritual Table$(/l), selected salted Braziers, and the recipe's required number of nearby $(l:hexalia:resources/herbs#celestial_bloom)Celestial Blooms$(/l). It must be night; sky exposure is not required."
+      "text": "Keep the recipe’s required number of living $(l:hexalia:resources/herbs#celestial_bloom)Celestial Blooms$(/l) near the Table at its height. Fresh and Withered Blooms can supply energy; the recipe pages show how many are needed."
     },
     {
       "type": "text",
       "title": "Process",
       "anchor": "process",
-      "text": "Place the catalyst on the Table and offerings on salted Braziers, then activate the ritual with a Hex Focus. The ritual draws energy from selected Blooms after the offerings move."
+      "text": "At night, use a Hex Focus on the prepared Table. The selected offerings and their salt are spent during the offering stage; the participating Braziers remain. If you cancel afterward, the offerings are not returned."
     },
     {
       "type": "text",
       "title": "Transformation",
       "anchor": "results",
-      "text": "After the ritual succeeds, selected Celestial Blooms wither and selected Withered Blooms become dead bushes. The catalyst transforms at the Ritual Table."
+      "text": "On success, the catalyst becomes the output and each selected Bloom loses one stage: Fresh becomes Withered, and Withered becomes a Dead Bush. Cancelling before success does not degrade the Blooms."
     },
     {
       "type": "text",
       "title": "On Use",
-      "text": "Each Celestial recipe shows its Bloom requirement separately from Brazier offerings. The Blooms are charged only when the ritual succeeds."
+      "text": "Each recipe shows its own Bloom requirement. Galeberries and Celestial Crystals begin this path; Moonweave upgrades use the same ritual with their own requirements."
     },
     {
       "type": "hexalia:recipe_page",

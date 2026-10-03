@@ -14,14 +14,14 @@
       "item": "hexalia:hex_focus",
       "title": "Hex Focus",
       "anchor": "hex_focus",
-      "text": "The Hex Focus channels intent into magical workings. Use it to awaken systems and enchanted plants that call for focused power. It can also transform Deepslate into a Ritual Table; each system's chapter explains its own preparation."
+      "text": "The Hex Focus activates a prepared Ritual Table for Nature Rituals, Summoning, and Celestial Rituals. It also awakens certain enchanted plants and transforms Deepslate into a Ritual Table."
     },
     {
       "type": "spotlight",
       "item": "hexalia:athame",
       "title": "Athame",
       "anchor": "athame",
-      "text": "An Athame extracts Tree Resin, harvests Lotus Blossoms, and shapes planks into a $(l:hexalia:blocks/ritual_brazier)Ritual Brazier$(/l) when used while crouching. It also gives the soul sacrifice required by certain $(l:hexalia:core_mechanics/natures_ritual#sacrifice)summoning rituals$(/l)."
+      "text": "An Athame extracts Tree Resin, harvests Lotus Blossoms, and shapes planks into a $(l:hexalia:blocks/ritual_brazier)Ritual Brazier$(/l) while crouching. Defeat a nearby living creature with it to provide the soul awaited by certain $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Summonings$(/l)."
     },
     {
       "type": "spotlight",
@@ -42,7 +42,7 @@
       "item": "hexalia:spiritroot_tether",
       "title": "Spiritroot Tether",
       "anchor": "spiritroot_tether",
-      "text": "A tool for capturing and relocating creatures. It stores a creature's essence and allows it to be released elsewhere, preserving its state. When bound to a Spirit Bloom, it can return creatures to that location."
+      "text": "Right-click a compatible creature with an empty Tether to capture it. Right-click a block to release it there. Crouch and right-click a Spirit Bloom with an empty Tether to bind a return point; with a creature stored, crouch and right-click a block to send it to that point."
     },
     {
       "type": "spotlight",
@@ -56,7 +56,7 @@
       "item": "hexalia:sage_pendant",
       "title": "Sage Pendant",
       "anchor": "sage_pendant",
-      "text": "When worn or held in the off hand, the Sage Pendant stores 25% extra Experience gained, up to 300. Shift + Right-click with it to absorb the stored Experience."
+      "text": "Worn or held in the off hand, the Sage Pendant stores bonus XP equal to 25% of the XP you gain, up to 300 XP points. Crouch and right-click once to release the stored XP gradually; wait briefly before activating it again."
     },
     {
       "type": "spotlight",
@@ -64,11 +64,6 @@
       "title": "Heartseed",
       "anchor": "heartseed",
       "text": "Offer this rare seed to an untamed tameable animal to bind its trust to you at once. The seed is consumed when the bond takes root."
-    },
-    {
-      "type": "text",
-      "title": "On Craft",
-      "text": "Hexalia tools are closely tied to its systems. Mastery of them allows deeper interaction with rituals, resources, and the world itself."
     }
   ]
 }

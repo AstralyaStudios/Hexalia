@@ -37,7 +37,7 @@
       "type": "text",
       "title": "Reposo del Minero",
       "anchor": "miners_respite",
-      "text": "$(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Flor Espiritual$(/l)$(br2)Otorga Visión Nocturna y Prisa; también puede reparar yunques dañados."
+      "text": "$(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Flor Espiritual$(/l)$(br2)Otorga Visión Nocturna y Prisa II; también puede reparar yunques dañados."
     },
     {
       "type": "text",
@@ -61,24 +61,19 @@
       "type": "text",
       "title": "Atracción de las Mareas",
       "anchor": "tidal_pull",
-      "text": "$(l:hexalia:resources/herbs#witchweed)Hierba Bruja$(/l) + $(l:hexalia:resources/herbs#siren_kelp)Alga de Sirena$(/l)$(br2)Atrae criaturas y objetos hacia el Incensario; la fuerza aumenta cerca del centro."
+      "text": "$(l:hexalia:resources/herbs#witchweed)Hierba Bruja$(/l) + $(l:hexalia:resources/herbs#siren_kelp)Alga de Sirena$(/l)$(br2)Atrae criaturas y objetos hacia el Incensario con más fuerza cerca del centro, incluso a corta distancia."
     },
     {
       "type": "text",
       "title": "Calma Marchita",
       "anchor": "withering_calm",
-      "text": "$(l:hexalia:resources/herbs#witchweed)Hierba Bruja$(/l) + $(l:hexalia:resources/herbs#ghost_fern)Helecho Fantasma$(/l)$(br2)Aplica Wither y apacigua a las criaturas que no son no muertas."
+      "text": "$(l:hexalia:resources/herbs#witchweed)Hierba Bruja$(/l) + $(l:hexalia:resources/herbs#ghost_fern)Helecho Fantasma$(/l)$(br2)Aplica Wither II y apacigua a las criaturas afectadas que no son no muertas."
     },
     {
       "type": "text",
       "title": "Aura Hueca",
       "anchor": "hollow_aura",
-      "text": "$(l:hexalia:resources/herbs#witchweed)Hierba Bruja$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Flor Espiritual$(/l)$(br2)Disipa los efectos de las criaturas dentro de su alcance."
-    },
-    {
-      "type": "text",
-      "title": "Combinación de hierbas",
-      "text": "Cada pareja de hierbas crea un aura distinta. Prueba combinaciones para hallar la que necesitas."
+      "text": "$(l:hexalia:resources/herbs#witchweed)Hierba Bruja$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Flor Espiritual$(/l)$(br2)Disipa los efectos beneficiosos y neutros dentro de su alcance, pero deja los perjudiciales."
     }
   ]
 }

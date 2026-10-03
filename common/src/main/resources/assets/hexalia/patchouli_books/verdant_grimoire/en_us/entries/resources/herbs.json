@@ -62,7 +62,7 @@
       "item": "hexalia:celestial_bloom",
       "title": "Celestial Bloom",
       "anchor": "celestial_bloom",
-      "text": "Celestial Bloom holds starlit energy and is used in the $(l:hexalia:core_mechanics/celestial_infusion)Celestial Ritual$(/l) at the Ritual Table."
+      "text": "Celestial Blooms open at night and close by day. Fresh blooms shine more brightly than Withered ones. A successful $(l:hexalia:core_mechanics/celestial_infusion)Celestial Ritual$(/l) degrades each selected bloom one stage: Fresh to Withered, then Withered to Dead Bush."
     }
   ]
 }

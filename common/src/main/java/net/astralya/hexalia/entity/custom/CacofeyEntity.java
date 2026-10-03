@@ -10,7 +10,6 @@ import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.item.custom.HexFocusItem;
 import net.astralya.hexalia.particle.ModParticleType;
 import net.astralya.hexalia.sound.ModSoundEvents;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -382,16 +381,13 @@ public class CacofeyEntity extends TamableAnimal implements GeoEntity {
       this.stealGoal.completeTheft();
     }
 
-    if (this.level().isClientSide
-        && this.tickCount % 3 == 0
-        && Minecraft.getInstance().level != null) {
+    if (this.level().isClientSide && this.tickCount % 3 == 0) {
       Vec3 motion = this.getDeltaMovement();
       if (motion.horizontalDistanceSqr() > 0.001D || Math.abs(motion.y) > 0.001D) {
         double trailX = this.getX() - motion.x * 0.5D + (this.random.nextDouble() - 0.5D) * 0.15D;
         double trailY = this.getY() + 0.3D + (this.random.nextDouble() - 0.5D) * 0.1D;
         double trailZ = this.getZ() - motion.z * 0.5D + (this.random.nextDouble() - 0.5D) * 0.15D;
-        Minecraft.getInstance()
-            .level
+        this.level()
             .addParticle(
                 ModParticleType.CACOFEY_DUST.get(), trailX, trailY, trailZ, 0.0D, 0.003D, 0.0D);
       }

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bone_meal": {
+    "has_stripped_willow_log": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:bone_meal"
+              "hexalia:stripped_willow_log"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hexalia:mutavis"
+        "recipe": "hexalia:stripped_willow_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_bone_meal",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_stripped_willow_log"
     ]
   ],
   "rewards": {
     "recipes": [
-      "hexalia:mutavis"
+      "hexalia:stripped_willow_wood"
     ]
   },
   "sends_telemetry_event": false
