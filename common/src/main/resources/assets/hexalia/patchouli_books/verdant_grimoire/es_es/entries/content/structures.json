@@ -1,0 +1,33 @@
+{
+  "name": "Estructuras",
+  "icon": "minecraft:map",
+  "category": "hexalia:content",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "image",
+      "images": [
+        "hexalia:textures/gui/patchouli/herbalist_hut.png"
+      ],
+      "title": "Cabaña del Herbolario",
+      "text": "Un taller apartado que aparece en biomas de $(bold)pantano$() y $(bold)pantano de manglares$(). Puede ofrecer hierbas, cultivos y materiales de cultivo a quien empieza en la brujería."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:map",
+      "title": "Dónde encontrarla",
+      "anchor": "herbalist_hut",
+      "text": "Busca una pequeña cabaña escondida entre la vegetación del pantano. Cerca puede haber suelo imbuido y plantas útiles."
+    },
+    {
+      "type": "text",
+      "title": "Contenido",
+      "text": "En su interior y alrededores encontrarás flora mágica y recursos tempranos para cultivar."
+    },
+    {
+      "type": "text",
+      "title": "Descubrimiento",
+      "text": "La Cabaña del Herbolario ofrece un primer contacto con los rituales, los brebajes y el cultivo de Hexalia."
+    }
+  ]
+}

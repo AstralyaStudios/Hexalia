@@ -1,0 +1,36 @@
+{
+  "name": "Automatización",
+  "icon": "minecraft:hopper",
+  "category": "hexalia:technical",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Automatización",
+      "text": "Algunas prácticas de Hexalia aceptan redstone, dispensadores y transporte de objetos."
+    },
+    {
+      "type": "text",
+      "title": "Plantas encantadas",
+      "anchor": "plants",
+      "text": "Un dispensador puede usar un Foco Hex para activar ciertas plantas encantadas. Algunas también aceptan recursos automáticamente.$(br2)$(li)Astrylis acepta Cristales Celestiales$(li)Lourdes acepta Flores de Loto"
+    },
+    {
+      "type": "text",
+      "title": "Automatización de inventarios",
+      "anchor": "inventory",
+      "text": "Puedes conectar estos bloques a tolvas y otros transportadores.$(br2)$(li)Caldero Pequeño$(li)Incensario$(li)Brasero Ritual$(li)Mesa Ritual$(li)Bloque Nido$(li)Estantería$(li)Mortero y Maja"
+    },
+    {
+      "type": "text",
+      "title": "Redstone",
+      "anchor": "redstone",
+      "text": "La redstone puede activar el Mortero y Maja para automatizar su procesamiento."
+    },
+    {
+      "type": "text",
+      "title": "Preparación",
+      "text": "Combina transporte de objetos y activación automática para cuidar tus oficios sin intervenir a cada paso."
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "name": "Brebajes",
+  "icon": "hexalia:rustic_bottle",
+  "category": "hexalia:content",
+  "sortnum": 7,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Elaboración de brebajes",
+      "text": "El capítulo del $(l:hexalia:core_mechanics/brewing)Caldero Pequeño$(/l) explica cómo prepararlos y muestra sus ingredientes. Aquí encontrarás los efectos de cada brebaje."
+    },
+    {
+      "type": "text",
+      "title": "Los brebajes",
+      "text": "Los brebajes otorgan efectos poderosos. El conjunto Moonweave puede prolongar la duración de muchos de ellos."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:brew_of_bloodlust",
+      "title": "Brebaje de Sed de Sangre",
+      "text": "Otorga Sed de Sangre: te cura al dañar enemigos, pero impide la regeneración natural."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:brew_of_spikeskin",
+      "title": "Brebaje de Piel de Espinas",
+      "text": "Aumenta la armadura y devuelve parte del daño recibido, a costa de velocidad de movimiento."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:brew_of_slimewalker",
+      "title": "Brebaje de Paso Gelatinoso",
+      "text": "Evita el daño por caída y te hace rebotar al aterrizar, aunque te ralentiza al caminar."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:brew_of_homestead",
+      "title": "Brebaje del Hogar",
+      "text": "Te devuelve al lugar vinculado. Su efecto desorienta y no se prolonga con bonificaciones de duración."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:brew_of_siphon",
+      "title": "Brebaje de Sifón",
+      "text": "Acelera la minería y atrae objetos cercanos, pero aumenta el agotamiento al picar."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:brew_of_daybloom",
+      "title": "Brebaje de Flor Diurna",
+      "text": "Otorga regeneración y velocidad a plena luz del día; en la oscuridad resulta perjudicial."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:brew_of_arachnid_grace",
+      "title": "Brebaje de Gracia Arácnida",
+      "text": "Permite trepar por paredes, evita el veneno y facilita el paso entre telarañas. El agua te debilita."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:brew_of_gravebloom",
+      "title": "Brebaje de Flor Sepulcral",
+      "text": "Los monstruos que derrotes pueden dejar tras de sí musgo, hierbas y otras plantas."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:brew_of_hollow_silence",
+      "title": "Brebaje de Silencio Hueco",
+      "text": "Oculta tu presencia a criaturas sensibles al sonido, como el Warden, aunque a veces oscurece tu visión."
+    },
+    {
+      "type": "text",
+      "title": "Descubrimiento",
+      "text": "Experimenta para descubrir nuevos brebajes. Consulta sus ingredientes exactos en las páginas de recetas."
+    }
+  ]
+}

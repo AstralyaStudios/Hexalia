@@ -1,0 +1,52 @@
+{
+  "name": "Ídolos",
+  "icon": "hexalia:silk_idol",
+  "category": "hexalia:content",
+  "sortnum": 8,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Ídolos",
+      "text": "Los ídolos influyen en el clima y purifican objetos. Se elaboran a partir de un Ídolo de Seda y materiales herbales."
+    },
+    {
+      "type": "text",
+      "title": "Ídolos del clima",
+      "anchor": "weather",
+      "text": "Sostén un ídolo climático durante un momento para despertar su poder."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:rainfall_idol",
+      "title": "Ídolo de Lluvia",
+      "anchor": "rainfall_idol",
+      "text": "Trae la lluvia durante un tiempo."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:clarity_idol",
+      "title": "Ídolo de Claridad",
+      "anchor": "clarity_idol",
+      "text": "Disipa la lluvia y las tormentas."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:tempest_idol",
+      "title": "Ídolo de Tempestad",
+      "anchor": "tempest_idol",
+      "text": "Invoca una tormenta eléctrica."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:purity_idol",
+      "title": "Ídolo de Pureza",
+      "anchor": "purity_idol",
+      "text": "Elimina maldiciones de objetos encantados, incluidas las de Ligadura y Desaparición."
+    },
+    {
+      "type": "text",
+      "title": "Uso",
+      "text": "Prepara el ídolo adecuado antes de emprender tu viaje."
+    }
+  ]
+}

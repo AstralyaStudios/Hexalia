@@ -1,0 +1,37 @@
+{
+  "name": "Sacos arrojadizos",
+  "icon": "hexalia:purifying_sac",
+  "category": "hexalia:content",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Sacos arrojadizos",
+      "text": "Los sacos arrojadizos liberan su mezcla al impactar y afectan a criaturas o al entorno."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:purifying_sac",
+      "title": "Saco Purificador",
+      "text": "Elimina efectos perjudiciales de las criaturas alcanzadas."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:foul_sac",
+      "title": "Saco Fétido",
+      "text": "Envenena, ralentiza y daña a sus objetivos."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:frost_sac",
+      "title": "Saco Helado",
+      "text": "Debilita e inmoviliza a las criaturas alcanzadas."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:searing_sac",
+      "title": "Saco Ardiente",
+      "text": "Prende fuego y provoca Sangrado en un área."
+    }
+  ]
+}

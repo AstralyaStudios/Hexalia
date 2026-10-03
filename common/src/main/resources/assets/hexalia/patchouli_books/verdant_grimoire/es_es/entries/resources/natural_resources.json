@@ -1,0 +1,71 @@
+{
+  "name": "Recursos naturales",
+  "icon": "hexalia:tree_resin",
+  "category": "hexalia:resources",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Nodos elementales",
+      "text": "Los Nodos Elementales representan agua, aire, fuego y tierra. Se crean mediante el $(l:hexalia:core_mechanics/natures_ritual)Ritual de la Naturaleza$(/l) y sirven en muchos oficios de Hexalia."
+    },
+    {
+      "type": "text",
+      "title": "Creación",
+      "anchor": "creation",
+      "text": "Transmuta una esquirla de amatista con materiales afines al elemento que desees obtener."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:water_node",
+      "title": "Nodo de Agua",
+      "anchor": "water",
+      "text": "Representa el agua, la fluidez y la vida."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:air_node",
+      "title": "Nodo de Aire",
+      "anchor": "air",
+      "text": "Representa el aire, el movimiento y la ligereza."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:fire_node",
+      "title": "Nodo de Fuego",
+      "anchor": "fire",
+      "text": "Representa el fuego, el calor y la transformación. También alimenta el Atrapasueños."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:earth_node",
+      "title": "Nodo de Tierra",
+      "anchor": "earth",
+      "text": "Representa la tierra, la estabilidad y el crecimiento."
+    },
+    {
+      "type": "text",
+      "title": "Resina de Árbol",
+      "anchor": "resin",
+      "text": "Extrae Resina de Árbol de ciertos troncos con un $(l:hexalia:content/tools#athame)Athame$(/l). El tronco quedará descortezado."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:tree_resin",
+      "title": "Usos de la resina",
+      "text": "La resina sirve para brebajes, rituales y otros oficios."
+    },
+    {
+      "type": "text",
+      "title": "Semilla Antigua",
+      "anchor": "ancient_seed",
+      "text": "La Semilla Antigua es una reliquia de vida latente que puedes hallar en estructuras de la jungla."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:ancient_seed",
+      "title": "Potencial",
+      "text": "Un $(l:hexalia:core_mechanics/natures_ritual)Ritual de la Naturaleza$(/l) puede transformar la Semilla Antigua en algo poderoso."
+    }
+  ]
+}

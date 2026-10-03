@@ -1,0 +1,46 @@
+{
+  "name": "Ritual Celestial",
+  "icon": "hexalia:ritual_table",
+  "category": "hexalia:core_mechanics",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Ritual Celestial",
+      "text": "El Ritual Celestial toma energía de Flores Celestiales cercanas durante la noche. Usa la Mesa Ritual, un catalizador y Braseros Rituales con Sal para las ofrendas."
+    },
+    {
+      "type": "text",
+      "title": "Requisitos",
+      "anchor": "requirements",
+      "text": "Prepara la Mesa Ritual y los $(l:hexalia:blocks/ritual_brazier)Braseros Rituales$(/l). Añade Sal a cada brasero participante. Ten cerca las $(l:hexalia:resources/herbs#celestial_bloom)Flores Celestiales$(/l) que requiera la receta y comienza de noche."
+    },
+    {
+      "type": "text",
+      "title": "Proceso",
+      "anchor": "process",
+      "text": "Coloca el catalizador en la Mesa y las ofrendas en sus braseros. Activa la Mesa con un Foco Hex; las Flores Celestiales aportarán su energía."
+    },
+    {
+      "type": "text",
+      "title": "Transformación",
+      "anchor": "results",
+      "text": "Cuando el ritual tiene éxito, las Flores Celestiales utilizadas pierden una fase: las frescas se marchitan y las marchitas se convierten en arbustos muertos. Un ritual cancelado no las consume."
+    },
+    {
+      "type": "text",
+      "title": "Uso",
+      "text": "Cada receta tiene su propio requisito de Flores Celestiales. Este ritual permite obtener Galeberries, Cristales Celestiales y mejoras Moonweave."
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:celestial_crystal_from_celestial_infusion",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:galeberries_from_celestial_infusion",
+      "layout": "ritual_table"
+    }
+  ]
+}

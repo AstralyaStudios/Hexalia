@@ -1,0 +1,38 @@
+{
+  "name": "Ungüentos",
+  "icon": "hexalia:brambleguard_salve",
+  "category": "hexalia:content",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Ungüentos",
+      "text": "Los ungüentos se preparan en el $(l:hexalia:core_mechanics/mortar_and_pestle)Mortero y Maja$(/l) y ofrecen ayuda rápida en combate o durante la exploración."
+    },
+    {
+      "type": "text",
+      "title": "Uso",
+      "anchor": "use",
+      "text": "A diferencia de los brebajes, actúan enseguida y duran poco tiempo."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:brambleguard_salve",
+      "title": "Ungüento de Guardia de Zarzas",
+      "anchor": "brambleguard",
+      "text": "Aumenta la armadura y te protege del Sangrado."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:menders_salve",
+      "title": "Ungüento Reparador",
+      "anchor": "menders",
+      "text": "Otorga Regeneración durante un breve periodo."
+    },
+    {
+      "type": "text",
+      "title": "Preparación",
+      "text": "Guarda algunos ungüentos para cuando necesites actuar con rapidez."
+    }
+  ]
+}

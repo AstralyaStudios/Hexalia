@@ -1,13 +1,13 @@
 {
-  "name": "Celestial Infusion",
+  "name": "Celestial Ritual",
   "icon": "hexalia:ritual_table",
   "category": "hexalia:core_mechanics",
   "sortnum": 1,
   "pages": [
     {
       "type": "text",
-      "title": "Celestial Infusion",
-      "text": "Celestial Infusion is a nighttime Nature's Ritual that draws energy from nearby living Celestial Blooms. Its catalyst rests on the Ritual Table while salted Ritual Braziers hold the offerings."
+      "title": "Celestial Ritual",
+      "text": "Celestial Ritual is a nighttime Nature's Ritual that draws energy from nearby living Celestial Blooms. Its catalyst rests on the Ritual Table while salted Ritual Braziers hold the offerings."
     },
     {
       "type": "text",

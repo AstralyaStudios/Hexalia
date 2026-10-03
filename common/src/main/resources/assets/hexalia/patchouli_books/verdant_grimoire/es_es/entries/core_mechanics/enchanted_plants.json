@@ -1,0 +1,67 @@
+{
+  "name": "Plantas encantadas",
+  "icon": "hexalia:morphora",
+  "category": "hexalia:core_mechanics",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Plantas encantadas",
+      "text": "Cada planta encantada ejerce una magia distinta: puede transformar, proteger o favorecer la vida que la rodea."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:morphora",
+      "title": "Morphora",
+      "anchor": "morphora",
+      "text": "Usa $(l:hexalia:core_mechanics/mutation)Mutavis$(/l) sobre Morphora para extender la mutación a bloques compatibles cercanos. Cada mutación que tiene éxito consume la fuerza de un bloque de césped próximo y lo convierte en tierra estéril."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:grimshade",
+      "title": "Grimshade",
+      "anchor": "grimshade",
+      "text": "Activa Grimshade con un Foco Hex. Transforma esqueletos y calaveras cercanas en sus variantes Wither, y debilita a otras criaturas."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:nautilite",
+      "title": "Nautilite",
+      "anchor": "nautilite",
+      "text": "Activa Nautilite con un Foco Hex para obtener Poder del Canalizador y librarte de Fatiga Minera. También perjudica a guardianes y ahogados cercanos."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:windsong",
+      "title": "Windsong",
+      "anchor": "windsong",
+      "text": "Activa Windsong con un Foco Hex para detener proyectiles que entren en su área."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:astrylis",
+      "title": "Astrylis",
+      "anchor": "astrylis",
+      "text": "Activa Astrylis con un Cristal Celestial para acelerar los cultivos y brotes cercanos."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:lourdes",
+      "title": "Lourdes",
+      "anchor": "lourdes",
+      "text": "Dale una $(l:hexalia:resources/herbs#lotus_blossom)Flor de Loto$(/l) a Lourdes. Su aura cura efectos perjudiciales y otorga Regeneración, especialmente a los animales."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:aegiflora",
+      "title": "Aegiflora",
+      "anchor": "aegiflora",
+      "text": "Aegiflora impide explosiones de creepers cercanos. Tras usar su poder, se marchita y se convierte en un arbusto muerto."
+    },
+    {
+      "type": "text",
+      "title": "Dominio",
+      "text": "Elige la planta adecuada para transformar el terreno o proteger a quienes viven en él."
+    }
+  ]
+}

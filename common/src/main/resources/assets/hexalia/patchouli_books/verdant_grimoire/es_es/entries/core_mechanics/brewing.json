@@ -1,0 +1,93 @@
+{
+  "name": "Elaboración de brebajes",
+  "icon": "hexalia:small_cauldron",
+  "category": "hexalia:core_mechanics",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Caldero Pequeño",
+      "text": "El Caldero Pequeño combina agua, ingredientes y calor para preparar brebajes mágicos."
+    },
+    {
+      "type": "text",
+      "title": "Cómo preparar un brebaje",
+      "anchor": "process",
+      "text": "Llena el caldero de agua, enciéndelo y añade los ingredientes uno a uno. Remueve con un $(l:hexalia:content/tools#ladle)Cucharón$(/l) en la mano principal para iniciar la cocción."
+    },
+    {
+      "type": "text",
+      "title": "Cocción",
+      "anchor": "cooking",
+      "text": "Mantén el caldero encendido. Cuando el brebaje esté listo, extrae cada ración con una Botella Rústica. Antes de empezar, puedes retirar ingredientes sueltos con la mano vacía."
+    },
+    {
+      "type": "text",
+      "title": "Mezcla estropeada",
+      "anchor": "spoiled",
+      "text": "Una combinación incorrecta produce una mezcla estropeada. Puede dañar a quienes se acerquen hasta que la limpies o retires."
+    },
+    {
+      "type": "text",
+      "title": "Cocción excesiva",
+      "anchor": "overcooking",
+      "text": "Si dejas un brebaje terminado demasiado tiempo al fuego, obtendrás menos raciones."
+    },
+    {
+      "type": "text",
+      "title": "Cucharón",
+      "anchor": "ladle",
+      "text": "Para remover con el Cucharón, el caldero debe tener agua, calor y al menos un ingrediente."
+    },
+    {
+      "type": "text",
+      "title": "Sobre los brebajes",
+      "text": "Prueba distintas combinaciones y vigila la cocción para descubrir sus resultados."
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_arachnid_grace_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_bloodlust_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_daybloom_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_gravebloom_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_hollow_silence_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_homestead_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_siphon_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_slimewalker_from_small_cauldron",
+      "layout": "small_cauldron"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brew_of_spikeskin_from_small_cauldron",
+      "layout": "small_cauldron"
+    }
+  ]
+}

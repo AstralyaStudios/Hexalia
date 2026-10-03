@@ -1,0 +1,66 @@
+{
+  "name": "Cultivos",
+  "icon": "hexalia:mandrake",
+  "category": "hexalia:resources",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Cultivos",
+      "text": "Los cultivos de Hexalia crecen en distintos lugares y sirven para preparar alimentos, alimentar rituales y crear objetos mágicos."
+    },
+    {
+      "type": "text",
+      "title": "Tipos de cultivos",
+      "anchor": "types",
+      "text": "Hay dos grandes grupos de cultivos.$(br2)$(li)Los silvestres se encuentran en la naturaleza y pueden sembrarse.$(li)Los especiales se obtienen mediante rituales o transformaciones."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:mandrake",
+      "title": "Mandrágora",
+      "anchor": "mandrake",
+      "text": "Una raíz inquieta de prados y bosques de abedules o flores. Su grito puede ser peligroso; protégete antes de cosecharla."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:sunfire_tomato",
+      "title": "Tomate Solar",
+      "anchor": "sunfire_tomato",
+      "text": "Un cultivo de clima cálido que crece en las sabanas. Sus frutos sirven para preparar comidas especiadas."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:chillberries",
+      "title": "Bayas Gélidas",
+      "anchor": "chillberries",
+      "text": "Estas bayas crecen en las taigas. Puedes cosecharlas, replantarlas y usarlas en comidas que protegen del calor."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:saltsprout",
+      "title": "Brote Salino",
+      "anchor": "saltsprout",
+      "text": "Una planta del desierto que puedes procesar para obtener Sal, esencial en los rituales."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:galeberries",
+      "title": "Galeberries",
+      "anchor": "galeberries",
+      "text": "Las Galeberries no crecen de forma natural: se obtienen mediante un $(l:hexalia:core_mechanics/celestial_infusion)Ritual Celestial$(/l). Sirven para preparar alimentos ligados a la percepción."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:rabbage",
+      "title": "Rabbage",
+      "anchor": "rabbage",
+      "text": "Rabbage se obtiene mediante un $(l:hexalia:core_mechanics/natures_ritual)Ritual de la Naturaleza$(/l). Puede servir tanto de alimento como de herramienta."
+    },
+    {
+      "type": "text",
+      "title": "Cultivo",
+      "text": "Cultiva lo que encuentres: muchos recursos de Hexalia revelan su valor al sembrarlos y cuidarlos."
+    }
+  ]
+}

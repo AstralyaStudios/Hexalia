@@ -1,0 +1,109 @@
+{
+  "name": "Armaduras y accesorios",
+  "icon": "hexalia:ghostveil",
+  "category": "hexalia:content",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Armaduras y accesorios",
+      "text": "Las armaduras de Hexalia ofrecen ventajas especiales para moverte, resistir y explorar."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:ghostveil",
+      "title": "Velo Espectral",
+      "text": "Esta pechera espectral dificulta que las criaturas te detecten."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:bogshade_boots",
+      "title": "Botas Bogshade",
+      "text": "Las Botas Bogshade facilitan el paso por humedales: reducen las dificultades del barro y mejoran el movimiento en el agua."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:earplugs",
+      "title": "Tapones para los Oídos",
+      "text": "Protegen del grito aturdidor de la Mandrágora; úsalos al cosecharla."
+    },
+    {
+      "type": "text",
+      "title": "Talismanes y amuletos",
+      "anchor": "accessories",
+      "text": "Estos pequeños talismanes conceden sus dones mientras los llevas puestos."
+    },
+    {
+      "type": "spotlight",
+      "item": [
+        "hexalia:seafoam_talisman",
+        "hexalia:moonward_ring"
+      ],
+      "title": "Espuma Marina y Anillo Lunar",
+      "text": "El Talismán de Espuma Marina te ayuda a respirar bajo el agua. El Anillo Lunar elimina Ceguera y Oscuridad."
+    },
+    {
+      "type": "spotlight",
+      "item": [
+        "hexalia:witchheart_cluster",
+        "hexalia:wyrd_feather"
+      ],
+      "title": "Corazón y pluma",
+      "text": "El Racimo de Corazón de Bruja concede dos corazones extra. La Pluma Wyrd puede protegerte de un golpe o proyectil."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:green_omen",
+      "title": "Presagio Verde",
+      "text": "Al cosechar un cultivo maduro, el Presagio Verde puede duplicar sus frutos."
+    },
+    {
+      "type": "spotlight",
+      "item": [
+        "hexalia:silkweave_hood",
+        "hexalia:silkweave_mantle",
+        "hexalia:silkweave_bindings",
+        "hexalia:silkweave_footwraps"
+      ],
+      "title": "Conjunto Silkweave",
+      "anchor": "silkweave",
+      "text": "Un conjunto ligero que aumenta la resistencia al daño mágico con cada pieza. El conjunto completo otorga una bonificación adicional."
+    },
+    {
+      "type": "spotlight",
+      "item": [
+        "hexalia:moonweave_hood",
+        "hexalia:moonweave_mantle",
+        "hexalia:moonweave_bindings",
+        "hexalia:moonweave_footwraps"
+      ],
+      "title": "Conjunto Moonweave",
+      "anchor": "moonweave",
+      "text": "Refina cada pieza Silkweave mediante un Ritual Celestial para obtener Moonweave. El conjunto protege de la magia y prolonga los brebajes."
+    },
+    {
+      "type": "text",
+      "title": "Conjunto Bloomwrap",
+      "anchor": "bloomwrap",
+      "text": "Cada pieza Bloomwrap ofrece un don distinto; combínalas según lo que necesites."
+    },
+    {
+      "type": "spotlight",
+      "item": [
+        "hexalia:bloomwrap_hat",
+        "hexalia:bloomwrap_robes"
+      ],
+      "title": "Prendas superiores",
+      "text": "El sombrero reduce el empuje y resiste el aturdimiento. La túnica devuelve parte del daño recibido."
+    },
+    {
+      "type": "spotlight",
+      "item": [
+        "hexalia:bloomwrap_leggings",
+        "hexalia:bloomwrap_boots"
+      ],
+      "title": "Prendas inferiores",
+      "text": "Las mallas te regeneran cerca de flores. Las botas aumentan tu velocidad sobre hojas."
+    }
+  ]
+}

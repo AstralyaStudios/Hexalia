@@ -1,0 +1,51 @@
+{
+  "name": "Sal",
+  "icon": "hexalia:salt",
+  "category": "hexalia:resources",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Sal",
+      "text": "La Sal es un material esencial para los rituales y útil en muchos otros oficios."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:salt",
+      "title": "Obtener Sal",
+      "anchor": "obtaining",
+      "text": "Puedes obtenerla principalmente al procesar $(l:hexalia:resources/crops#saltsprout)Brote Salino$(/l) en el $(l:hexalia:core_mechanics/mortar_and_pestle)Mortero y Maja$(/l)."
+    },
+    {
+      "type": "text",
+      "title": "Uso ritual",
+      "anchor": "rituals",
+      "text": "Aplica Sal a cada Brasero Ritual que vaya a aportar una ofrenda. Es parte de la preparación de los $(l:hexalia:core_mechanics/natures_ritual)rituales$(/l)."
+    },
+    {
+      "type": "text",
+      "title": "Sustitutos",
+      "anchor": "tags",
+      "text": "En algunas recetas puedes usar otros tipos de sal compatibles."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:salt_block",
+      "title": "Bloque de Sal",
+      "anchor": "salt_block",
+      "text": "Comprime Sal en bloques para guardarla y transportarla."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:salt_lamp",
+      "title": "Lámpara de Sal",
+      "anchor": "salt_lamp",
+      "text": "La Lámpara de Sal ofrece una luz cálida y también puede colgarse."
+    },
+    {
+      "type": "text",
+      "title": "Purificación",
+      "text": "La Sal participa en distintas transformaciones y purificaciones."
+    }
+  ]
+}
