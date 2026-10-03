@@ -2,7 +2,11 @@ package net.astralya.hexalia.gameplay.censer;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
 import net.astralya.hexalia.HexaliaConfig;
 import net.astralya.hexalia.block.custom.CenserBlock;
 import net.astralya.hexalia.block.entity.custom.CenserBlockEntity;
@@ -40,6 +44,7 @@ import net.minecraft.world.phys.Vec3;
 
 public final class CenserEffectHandler {
   public static final int EFFECT_INTERVAL = 40;
+  private static final Map<ServerLevel, Set<BlockPos>> TARGET_PREVENTION_CENSERS = new WeakHashMap<>();
 
   private CenserEffectHandler() {}
 
@@ -230,8 +235,9 @@ public final class CenserEffectHandler {
         level.getEntitiesOfClass(Entity.class, area(pos), CenserEffectHandler::canPull)) {
       Vec3 direction = center.subtract(entity.position());
       double distance = Mth.clamp(direction.length(), 1.0, radius());
+      double strength = 1.0 + 0.5 * (1.0 - distance / radius());
       entity.setDeltaMovement(
-          entity.getDeltaMovement().add(direction.normalize().scale(0.12 / distance)));
+          entity.getDeltaMovement().add(direction.normalize().scale(0.12 * strength / distance)));
       entity.hurtMarked = true;
     }
     particles(level, pos, ParticleTypes.FALLING_WATER, 24, 0.8, 0.35, 0.8, 0.04);
@@ -278,15 +284,29 @@ public final class CenserEffectHandler {
   }
 
   public static boolean shouldPreventPlayerTarget(Mob mob) {
+    if (!(mob.level() instanceof ServerLevel level)) {
+      return false;
+    }
+    Set<BlockPos> positions = TARGET_PREVENTION_CENSERS.get(level);
+    if (positions == null || positions.isEmpty()) {
+      return false;
+    }
     int radius = radius();
     BlockPos center = mob.blockPosition();
-    for (BlockPos candidate :
-        BlockPos.betweenClosed(
-            center.offset(-radius, -radius, -radius), center.offset(radius, radius, radius))) {
-      if (!(mob.level().getBlockEntity(candidate) instanceof CenserBlockEntity censer)
+    for (var iterator = positions.iterator(); iterator.hasNext(); ) {
+      BlockPos candidate = iterator.next();
+      if (!level.hasChunkAt(candidate)) {
+        iterator.remove();
+        continue;
+      }
+      if (!(level.getBlockEntity(candidate) instanceof CenserBlockEntity censer)
           || !censer.getBlockState().getValue(CenserBlock.LIT)
           || censer.getBurnTime() <= 0
-          || center.distSqr(candidate) > (double) radius * radius) {
+          || !isTargetPreventionCombination(censer.getActiveCombination())) {
+        iterator.remove();
+        continue;
+      }
+      if (center.distSqr(candidate) > (double) radius * radius) {
         continue;
       }
       HerbCombination combination = censer.getActiveCombination();
@@ -301,6 +321,28 @@ public final class CenserEffectHandler {
       }
     }
     return false;
+  }
+
+  public static void updateTargetPreventionCenser(ServerLevel level, BlockPos pos, boolean active) {
+    if (active) {
+      TARGET_PREVENTION_CENSERS.computeIfAbsent(level, key -> new HashSet<>()).add(pos.immutable());
+    } else {
+      Set<BlockPos> positions = TARGET_PREVENTION_CENSERS.get(level);
+      if (positions != null) {
+        positions.remove(pos);
+        if (positions.isEmpty()) {
+          TARGET_PREVENTION_CENSERS.remove(level);
+        }
+      }
+    }
+  }
+
+  public static boolean isTargetPreventionCombination(HerbCombination combination) {
+    return combination != null
+        && (combination.equals(
+                new HerbCombination(ModItems.GHOST_FERN.get(), ModItems.SPIRIT_BLOOM.get()))
+            || combination.equals(
+                new HerbCombination(ModItems.WITCHWEED.get(), ModItems.GHOST_FERN.get())));
   }
 
   private static List<BlockPos> findContainers(ServerLevel level, BlockPos center) {

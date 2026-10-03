@@ -14,6 +14,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
@@ -46,6 +47,7 @@ public class CenserBlockEntity extends BlockEntity
   }
 
   public void tick(Level level, BlockPos pos, BlockState state) {
+    updateTargetPrevention();
     if (!state.getValue(CenserBlock.LIT)) {
       return;
     }
@@ -136,6 +138,7 @@ public class CenserBlockEntity extends BlockEntity
 
   public void setBurnTime(int burnTime) {
     this.burnTime = burnTime;
+    updateTargetPrevention();
     inventoryChanged();
   }
 
@@ -145,6 +148,7 @@ public class CenserBlockEntity extends BlockEntity
 
   public void setActiveCombination(@Nullable HerbCombination activeCombination) {
     this.activeCombination = activeCombination;
+    updateTargetPrevention();
     inventoryChanged();
   }
 
@@ -222,6 +226,7 @@ public class CenserBlockEntity extends BlockEntity
   private void extinguish(Level level, BlockPos pos, BlockState state) {
     activeCombination = null;
     burnTime = 0;
+    updateTargetPrevention();
     if (state.getValue(CenserBlock.LIT)) {
       level.setBlockAndUpdate(pos, state.setValue(CenserBlock.LIT, false));
     }
@@ -242,6 +247,25 @@ public class CenserBlockEntity extends BlockEntity
     if (level != null && !level.isClientSide()) {
       level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
     }
+  }
+
+  private void updateTargetPrevention() {
+    if (level instanceof ServerLevel server) {
+      CenserEffectHandler.updateTargetPreventionCenser(
+          server,
+          worldPosition,
+          getBlockState().getValue(CenserBlock.LIT)
+              && burnTime > 0
+              && CenserEffectHandler.isTargetPreventionCombination(activeCombination));
+    }
+  }
+
+  @Override
+  public void setRemoved() {
+    if (level instanceof ServerLevel server) {
+      CenserEffectHandler.updateTargetPreventionCenser(server, worldPosition, false);
+    }
+    super.setRemoved();
   }
 
   @Override

@@ -478,7 +478,7 @@ public final class ModLanguageProvider extends LanguageProvider {
 
     add(
             "message.hexalia.censer.ethereal_grazing",
-            "A pale tranquility settles over the herd, and life renews itself without need");
+            "Spectral Allure settles over the herd, and life renews itself without need");
 
     add(
             "message.hexalia.censer.miners_respite",
