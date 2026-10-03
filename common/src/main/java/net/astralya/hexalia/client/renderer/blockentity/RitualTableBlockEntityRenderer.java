@@ -48,7 +48,7 @@ public final class RitualTableBlockEntityRenderer
               + manifestationProgress * 0.035F;
     }
     float offeringTick = blockEntity.getOfferingAnimationTick(partialTick);
-    float absorptionProgress = Mth.clamp((offeringTick - 34.0F) / 6.0F, 0.0F, 1.0F);
+    float absorptionProgress = Mth.clamp((offeringTick - 36.0F) / 14.0F, 0.0F, 1.0F);
     float catalystPulse = Mth.sin(absorptionProgress * Mth.PI) * 0.08F;
     float manifestationPulse = Mth.clamp((manifestationProgress - 0.8F) / 0.2F, 0.0F, 1.0F) * 0.04F;
 
@@ -87,22 +87,27 @@ public final class RitualTableBlockEntityRenderer
     ItemStack offering = blockEntity.getAnimatedOffering();
     BlockPos origin = blockEntity.getAnimatedOfferingOrigin();
     Level level = blockEntity.getLevel();
-    if (offering.isEmpty() || origin == null || level == null || offeringTick >= 34.0F) {
+    if (offering.isEmpty() || origin == null || level == null || offeringTick >= 50.0F) {
       return;
     }
 
     float riseProgress = Mth.clamp(offeringTick / 10.0F, 0.0F, 1.0F);
     float smoothRise = riseProgress * riseProgress * (3.0F - 2.0F * riseProgress);
     float y = Mth.lerp(smoothRise, 0.45F, 1.05F);
-    if (offeringTick >= 10.0F && offeringTick < 16.0F) {
-      y += Mth.sin((offeringTick - 10.0F) * Mth.PI / 3.0F) * 0.015F;
+    if (offeringTick >= 10.0F && offeringTick < 18.0F) {
+      y += Mth.sin((offeringTick - 10.0F) * Mth.PI / 4.0F) * 0.015F;
     }
-    float scale = offeringTick < 16.0F ? 0.4F : 0.4F * (1.0F - (offeringTick - 16.0F) / 18.0F);
+    float contraction = Mth.clamp((offeringTick - 36.0F) / 14.0F, 0.0F, 1.0F);
+    float scale = 0.4F * (1.0F - contraction * contraction);
 
     BlockPos tablePos = blockEntity.getBlockPos();
     poseStack.pushPose();
     poseStack.translate(
-        origin.getX() - tablePos.getX() + 0.5F, y, origin.getZ() - tablePos.getZ() + 0.5F);
+        Mth.lerp(Mth.clamp((offeringTick - 18.0F) / 32.0F, 0.0F, 1.0F),
+            origin.getX() - tablePos.getX() + 0.5F, 0.5F),
+        Mth.lerp(contraction, y, 1.05F),
+        Mth.lerp(Mth.clamp((offeringTick - 18.0F) / 32.0F, 0.0F, 1.0F),
+            origin.getZ() - tablePos.getZ() + 0.5F, 0.5F));
     poseStack.mulPose(Axis.YP.rotationDegrees(animationTime * 1.5F));
     poseStack.scale(scale, scale, scale);
     itemRenderer.renderStatic(

@@ -102,7 +102,7 @@ public final class NaturesRitual {
 
     table.startTransformation(
         match.recipe.getResultItem(level.registryAccess()).copy(),
-        match.usedBraziers.size() * 40
+        match.usedBraziers.size() * 50
             + (kind == NaturesRitualRecipe.RitualKind.NATURE
                 ? Math.max(24, energy.size() * 3 + 12) + 6
                 : 0),

@@ -41,5 +41,20 @@
     "sounds": [
       "hexalia:ritual_whispers"
     ]
+  },
+  "ritual_start": {
+    "sounds": ["hexalia:ritual_start"]
+  },
+  "ritual_process": {
+    "sounds": ["hexalia:ritual_process"]
+  },
+  "absorbing_souls": {
+    "sounds": ["hexalia:absorbing_souls"]
+  },
+  "firefly_bush": {
+    "sounds": ["hexalia:firefly_bush"]
+  },
+  "ritual_end": {
+    "sounds": ["hexalia:ritual_end"]
   }
 }

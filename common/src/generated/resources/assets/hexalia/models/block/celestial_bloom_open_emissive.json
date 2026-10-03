@@ -3,5 +3,103 @@
   "render_type": "minecraft:cutout",
   "textures": {
     "cross": "hexalia:block/celestial_bloom_open_emissive"
-  }
+  },
+  "elements": [
+    {
+      "from": [
+        0.8,
+        0,
+        7.9
+      ],
+      "to": [
+        15.2,
+        16,
+        8.1
+      ],
+      "rotation": {
+        "origin": [
+          8,
+          8,
+          8
+        ],
+        "axis": "y",
+        "angle": 45,
+        "rescale": true
+      },
+      "shade": false,
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15,
+        "ambient_occlusion": false
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#cross"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#cross"
+        }
+      }
+    },
+    {
+      "from": [
+        7.9,
+        0,
+        0.8
+      ],
+      "to": [
+        8.1,
+        16,
+        15.2
+      ],
+      "rotation": {
+        "origin": [
+          8,
+          8,
+          8
+        ],
+        "axis": "y",
+        "angle": 45,
+        "rescale": true
+      },
+      "shade": false,
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15,
+        "ambient_occlusion": false
+      },
+      "faces": {
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#cross"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#cross"
+        }
+      }
+    }
+  ]
 }

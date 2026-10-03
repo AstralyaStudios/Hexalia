@@ -35,6 +35,9 @@ public final class ModParticleTypes {
   public static final RegistrySupplier<SimpleParticleType> SPARKLE =
       PARTICLE_TYPES.register("sparkle", () -> new SimpleParticleType(true) {});
 
+  public static final RegistrySupplier<SimpleParticleType> FIREFLY =
+      PARTICLE_TYPES.register("firefly", () -> new SimpleParticleType(true) {});
+
   public static final RegistrySupplier<SimpleParticleType> LEAVES =
       PARTICLE_TYPES.register("leaves", () -> new SimpleParticleType(true) {});
 

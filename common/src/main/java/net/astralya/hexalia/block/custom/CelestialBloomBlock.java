@@ -40,13 +40,24 @@ public class CelestialBloomBlock extends HerbBlock {
   }
 
   @Override
+  public void onPlace(
+      BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+    super.onPlace(state, level, pos, oldState, movedByPiston);
+    if (!level.isClientSide && !oldState.is(this) && CelestialTime.hasDayNightCycle(level)) {
+      level.scheduleTick(pos, this, 20 + level.getRandom().nextInt(40));
+    }
+  }
+
+  @Override
   protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
     updateOpenState(state, level, pos, random);
   }
 
   @Override
   protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    if (!CelestialTime.hasDayNightCycle(level)) return;
     updateOpenState(state, level, pos, random);
+    level.scheduleTick(pos, this, 60 + random.nextInt(61));
   }
 
   private void updateOpenState(
@@ -84,7 +95,8 @@ public class CelestialBloomBlock extends HerbBlock {
 
   @Override
   public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-    if (!HexaliaConfig.celestialBloomEmitsParticles() || !state.getValue(OPEN)) return;
+    if (!HexaliaConfig.celestialBloomEmitsParticles() || !state.getValue(OPEN)
+        || !CelestialTime.isNight(level)) return;
     boolean withered = state.is(ModBlocks.WITHERED_CELESTIAL_BLOOM.get());
     if (random.nextInt(withered ? 10 : 5) != 0) {
       return;

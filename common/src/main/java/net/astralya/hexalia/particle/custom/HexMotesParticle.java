@@ -49,6 +49,11 @@ public class HexMotesParticle extends TextureSheetParticle {
   }
 
   @Override
+  public int getLightColor(float partialTick) {
+    return 0xF000F0;
+  }
+
+  @Override
   public void tick() {
     this.xo = this.x;
     this.yo = this.y;

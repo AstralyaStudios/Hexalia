@@ -105,9 +105,7 @@ public final class ModBlockStateProvider extends BlockStateProvider {
         .cross(flowerName + "_open", modLoc("block/" + flowerName + "_open"))
         .renderType("cutout");
     ModelFile emissiveModel = flower == ModBlocks.CELESTIAL_BLOOM.get()
-        ? models()
-            .cross("celestial_bloom_open_emissive", modLoc("block/celestial_bloom_open_emissive"))
-            .renderType("cutout")
+        ? celestialBloomEmissiveModel()
         : models().getExistingFile(modLoc("block/celestial_bloom_open_emissive"));
     getMultipartBuilder(flower)
         .part().modelFile(closedModel).addModel().condition(CelestialBloomBlock.OPEN, false).end()
@@ -119,6 +117,26 @@ public final class ModBlockStateProvider extends BlockStateProvider {
             .withExistingParent(potName, mcLoc("block/flower_pot_cross"))
             .texture("plant", modLoc("block/" + flowerName + "_closed"))
             .renderType("cutout"));
+  }
+
+  private ModelFile celestialBloomEmissiveModel() {
+    var model = models()
+        .withExistingParent("celestial_bloom_open_emissive", mcLoc("block/cross"))
+        .texture("cross", modLoc("block/celestial_bloom_open_emissive"))
+        .renderType("cutout");
+    model.element().from(0.8F, 0, 7.9F).to(15.2F, 16, 8.1F)
+        .rotation().origin(8, 8, 8).axis(Direction.Axis.Y).angle(45).rescale(true).end()
+        .shade(false).emissivity(15, 15).ao(false)
+        .face(Direction.NORTH).uvs(0, 0, 16, 16).texture("#cross").end()
+        .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#cross").end()
+        .end();
+    model.element().from(7.9F, 0, 0.8F).to(8.1F, 16, 15.2F)
+        .rotation().origin(8, 8, 8).axis(Direction.Axis.Y).angle(45).rescale(true).end()
+        .shade(false).emissivity(15, 15).ao(false)
+        .face(Direction.WEST).uvs(0, 0, 16, 16).texture("#cross").end()
+        .face(Direction.EAST).uvs(0, 0, 16, 16).texture("#cross").end()
+        .end();
+    return model;
   }
 
   private String name(Block block) {

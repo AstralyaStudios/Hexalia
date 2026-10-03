@@ -24,6 +24,7 @@ import net.astralya.hexalia.menu.ModMenuTypes;
 import net.astralya.hexalia.particle.ModParticleTypes;
 import net.astralya.hexalia.particle.custom.CacofeyDustHeldParticle;
 import net.astralya.hexalia.particle.custom.CacofeyDustParticle;
+import net.astralya.hexalia.particle.custom.FireflyParticle;
 import net.astralya.hexalia.particle.custom.HexMotesParticle;
 import net.astralya.hexalia.particle.custom.InfusedBubbleParticle;
 import net.astralya.hexalia.particle.custom.LeavesParticle;
@@ -34,6 +35,7 @@ import net.astralya.hexalia.util.ModItemProperties;
 import net.astralya.hexalia.util.MagicResistanceTooltip;
 import net.astralya.hexalia.util.ModWoodTypes;
 import net.astralya.hexalia.fabric.mixin.WoodTypeInvoker;
+import net.astralya.hexalia.fabric.client.CelestialBloomEmissiveModel;
 import dev.architectury.platform.Platform;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -60,6 +62,7 @@ public final class HexaliaFabricClient implements ClientModInitializer {
   @Override
   public void onInitializeClient() {
     Hexalia.initClient();
+    CelestialBloomEmissiveModel.register();
     if (Platform.isModLoaded("accessories")) {
       registerAccessoryRenderers();
     }
@@ -99,6 +102,7 @@ public final class HexaliaFabricClient implements ClientModInitializer {
     particleFactories.register(ModParticleTypes.SPORE.get(), SporeParticle.Factory::new);
     particleFactories.register(ModParticleTypes.SPARKLE.get(), SparkleParticle.Factory::new);
     particleFactories.register(ModParticleTypes.LEAVES.get(), LeavesParticle.Factory::new);
+        particleFactories.register(ModParticleTypes.FIREFLY.get(), FireflyParticle.Factory::new);
     particleFactories.register(
         ModParticleTypes.INFUSED_BUBBLES.get(), InfusedBubbleParticle.Factory::new);
     particleFactories.register(

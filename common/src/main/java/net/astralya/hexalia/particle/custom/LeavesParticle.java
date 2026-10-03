@@ -48,6 +48,11 @@ public class LeavesParticle extends SimpleAnimatedParticle {
   }
 
   @Override
+  public int getLightColor(float partialTick) {
+    return 0xF000F0;
+  }
+
+  @Override
   public void tick() {
     oRoll = roll;
     super.tick();

@@ -31,6 +31,17 @@ public final class ModSoundEvents {
       SOUND_EVENTS.register(
           "ritual_whispers", () -> SoundEvent.createVariableRangeEvent(id("ritual_whispers")));
 
+  public static final RegistrySupplier<SoundEvent> RITUAL_START =
+      SOUND_EVENTS.register("ritual_start", () -> SoundEvent.createVariableRangeEvent(id("ritual_start")));
+  public static final RegistrySupplier<SoundEvent> RITUAL_PROCESS =
+      SOUND_EVENTS.register("ritual_process", () -> SoundEvent.createVariableRangeEvent(id("ritual_process")));
+  public static final RegistrySupplier<SoundEvent> ABSORBING_SOULS =
+      SOUND_EVENTS.register("absorbing_souls", () -> SoundEvent.createVariableRangeEvent(id("absorbing_souls")));
+  public static final RegistrySupplier<SoundEvent> FIREFLY_BUSH =
+      SOUND_EVENTS.register("firefly_bush", () -> SoundEvent.createVariableRangeEvent(id("firefly_bush")));
+  public static final RegistrySupplier<SoundEvent> RITUAL_END =
+      SOUND_EVENTS.register("ritual_end", () -> SoundEvent.createVariableRangeEvent(id("ritual_end")));
+
   private ModSoundEvents() {}
 
   public static void init() {

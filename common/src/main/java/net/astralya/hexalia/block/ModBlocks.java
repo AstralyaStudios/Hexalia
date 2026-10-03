@@ -353,7 +353,7 @@ public final class ModBlocks {
                   6,
                   BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)
                       .randomTicks()
-                      .lightLevel(state -> 0)));
+                      .lightLevel(state -> state.getValue(CelestialBloomBlock.OPEN) ? 7 : 0)));
 
   public static final RegistrySupplier<Block> POTTED_CELESTIAL_BLOOM =
       potted(
@@ -370,7 +370,7 @@ public final class ModBlocks {
                   3,
                   BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)
                       .randomTicks()
-                      .lightLevel(state -> 0)));
+                      .lightLevel(state -> state.getValue(CelestialBloomBlock.OPEN) ? 4 : 0)));
 
   public static final RegistrySupplier<Block> POTTED_WITHERED_CELESTIAL_BLOOM =
       potted(
