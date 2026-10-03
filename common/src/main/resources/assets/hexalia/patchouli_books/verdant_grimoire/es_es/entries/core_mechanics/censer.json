@@ -1,0 +1,84 @@
+{
+  "name": "Auras del incensario",
+  "icon": "hexalia:censer",
+  "category": "hexalia:core_mechanics",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Auras del incensario",
+      "text": "El Incensario combina el poder de dos $(l:hexalia:resources/herbs)Hierbas$(/l) en un aura. Introduce las hierbas una a una cuando esté apagado y enciende una pareja válida con un mechero. Ambas se consumen al encenderlo."
+    },
+    {
+      "type": "text",
+      "title": "Cuidar el humo",
+      "anchor": "use",
+      "text": "El humo extiende su efecto por los alrededores. Antes de encenderlo, retira la última hierba con la mano vacía. Usa una pala para apagarlo."
+    },
+    {
+      "type": "text",
+      "title": "Guardián de las Mareas",
+      "anchor": "tidewarden",
+      "text": "$(l:hexalia:resources/herbs#siren_kelp)Alga de Sirena$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Flor Espiritual$(/l)$(br2)Otorga Resistencia y Caída Lenta."
+    },
+    {
+      "type": "text",
+      "title": "Velo de los No Muertos",
+      "anchor": "undead_veil",
+      "text": "$(l:hexalia:resources/herbs#ghost_fern)Helecho Fantasma$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Flor Espiritual$(/l)$(br2)Apacigua a los no muertos cercanos."
+    },
+    {
+      "type": "text",
+      "title": "Atracción Espectral",
+      "anchor": "ethereal_grazing",
+      "text": "$(l:hexalia:resources/herbs#ghost_fern)Helecho Fantasma$(/l) + $(l:hexalia:resources/herbs#siren_kelp)Alga de Sirena$(/l)$(br2)Anima a reproducirse a animales cercanos de la misma especie."
+    },
+    {
+      "type": "text",
+      "title": "Reposo del Minero",
+      "anchor": "miners_respite",
+      "text": "$(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Flor Espiritual$(/l)$(br2)Otorga Visión Nocturna y Prisa; también puede reparar yunques dañados."
+    },
+    {
+      "type": "text",
+      "title": "Memoria de las Mareas",
+      "anchor": "tides_memory",
+      "text": "$(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l) + $(l:hexalia:resources/herbs#siren_kelp)Alga de Sirena$(/l)$(br2)Ofrece botín acuático en grandes masas de agua y puede invocar un guardián."
+    },
+    {
+      "type": "text",
+      "title": "Deriva Fantasmal",
+      "anchor": "phantom_drift",
+      "text": "$(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l) + $(l:hexalia:resources/herbs#ghost_fern)Helecho Fantasma$(/l)$(br2)Guía los objetos sueltos cercanos hasta contenedores adecuados."
+    },
+    {
+      "type": "text",
+      "title": "Floración Marchita",
+      "anchor": "blighted_bloom",
+      "text": "$(l:hexalia:resources/herbs#witchweed)Hierba Bruja$(/l) + $(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l)$(br2)Extiende micelio, hace brotar setas y rara vez transforma una vaca en champiñaca."
+    },
+    {
+      "type": "text",
+      "title": "Atracción de las Mareas",
+      "anchor": "tidal_pull",
+      "text": "$(l:hexalia:resources/herbs#witchweed)Hierba Bruja$(/l) + $(l:hexalia:resources/herbs#siren_kelp)Alga de Sirena$(/l)$(br2)Atrae criaturas y objetos hacia el Incensario; la fuerza aumenta cerca del centro."
+    },
+    {
+      "type": "text",
+      "title": "Calma Marchita",
+      "anchor": "withering_calm",
+      "text": "$(l:hexalia:resources/herbs#witchweed)Hierba Bruja$(/l) + $(l:hexalia:resources/herbs#ghost_fern)Helecho Fantasma$(/l)$(br2)Aplica Wither y apacigua a las criaturas que no son no muertas."
+    },
+    {
+      "type": "text",
+      "title": "Aura Hueca",
+      "anchor": "hollow_aura",
+      "text": "$(l:hexalia:resources/herbs#witchweed)Hierba Bruja$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Flor Espiritual$(/l)$(br2)Disipa los efectos de las criaturas dentro de su alcance."
+    },
+    {
+      "type": "text",
+      "title": "Combinación de hierbas",
+      "text": "Cada pareja de hierbas crea un aura distinta. Prueba combinaciones para hallar la que necesitas."
+    }
+  ]
+}

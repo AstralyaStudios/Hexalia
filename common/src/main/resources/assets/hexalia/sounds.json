@@ -7,6 +7,7 @@
   },
 
   "ritual_whispers": {
+    "subtitle": "sounds.hexalia.ritual_whispers",
     "sounds": [
       "hexalia:ritual_whispers"
     ]
@@ -34,6 +35,7 @@
   },
 
   "cacofey_idle": {
+    "subtitle": "sounds.hexalia.cacofey_idle",
     "sounds": [
       {
         "name": "hexalia:cacofey_idle",
@@ -49,18 +51,23 @@
     ]
   },
   "ritual_start": {
+    "subtitle": "sounds.hexalia.ritual_start",
     "sounds": ["hexalia:ritual_start"]
   },
   "ritual_process": {
+    "subtitle": "sounds.hexalia.ritual_process",
     "sounds": ["hexalia:ritual_process"]
   },
   "absorbing_souls": {
+    "subtitle": "sounds.hexalia.absorbing_souls",
     "sounds": ["hexalia:absorbing_souls"]
   },
   "firefly_bush": {
+    "subtitle": "sounds.hexalia.firefly_bush",
     "sounds": ["hexalia:firefly_bush"]
   },
   "ritual_end": {
+    "subtitle": "sounds.hexalia.ritual_end",
     "sounds": ["hexalia:ritual_end"]
   }
 }

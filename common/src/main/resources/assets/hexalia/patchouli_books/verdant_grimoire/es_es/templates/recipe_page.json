@@ -1,0 +1,12 @@
+{
+  "components": [
+    {
+      "type": "patchouli:custom",
+      "class": "net.astralya.hexalia.compat.patchouli.RecipePageComponent",
+      "x": 0,
+      "y": 0,
+      "recipe_id": "#recipe_id",
+      "layout": "#layout"
+    }
+  ]
+}

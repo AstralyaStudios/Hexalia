@@ -1,0 +1,101 @@
+{
+  "name": "Mortero y Maja",
+  "icon": "hexalia:mortar_and_pestle",
+  "category": "hexalia:core_mechanics",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Mortero y Maja",
+      "text": "El Mortero y Maja transforma materiales naturales en polvos, pastas y otras preparaciones para brebajes y rituales."
+    },
+    {
+      "type": "text",
+      "title": "Procesamiento",
+      "anchor": "processing",
+      "text": "Usa cada ingrediente sobre el mortero; admite hasta tres. Cuando tengas una mezcla válida, agáchate y úsalo tres veces con la mano vacía para molerla."
+    },
+    {
+      "type": "text",
+      "title": "Recogida",
+      "anchor": "collection",
+      "text": "El resultado queda en el cuenco. Ponte de pie y usa la mano vacía para recogerlo. Las páginas de recetas muestran los ingredientes y el producto."
+    },
+    {
+      "type": "text",
+      "title": "Características",
+      "anchor": "mechanics",
+      "text": "El mortero admite hasta tres objetos y no necesita combustible. Si la mezcla no es válida, retira ingredientes con la mano vacía y prueba otra combinación."
+    },
+    {
+      "type": "text",
+      "title": "Uso",
+      "text": "Prepara aquí los materiales que necesitarás para otros oficios de Hexalia."
+    },
+    {
+      "type": "text",
+      "title": "Procesamiento eficaz",
+      "text": "Algunas preparaciones rinden más: un hueso da cinco unidades de polvo de hueso, una caña de azúcar da dos de azúcar y una vara de blaze da tres de polvo de blaze."
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:bone_meal_from_mortar",
+      "layout": "mortar_and_pestle"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:sugar_from_mortar",
+      "layout": "mortar_and_pestle"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:blaze_powder_from_mortar",
+      "layout": "mortar_and_pestle"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:brambleguard_salve_from_mortar",
+      "layout": "mortar_and_pestle"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:dream_paste_from_mortar",
+      "layout": "mortar_and_pestle"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:fragrant_nectar_from_mortar",
+      "layout": "mortar_and_pestle"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:ghost_powder_from_mortar",
+      "layout": "mortar_and_pestle"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:menders_salve_from_mortar",
+      "layout": "mortar_and_pestle"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:mutavis_from_mortar",
+      "layout": "mortar_and_pestle"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:salt_from_mortar",
+      "layout": "mortar_and_pestle"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:siren_paste_from_mortar",
+      "layout": "mortar_and_pestle"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:spirit_powder_from_mortar",
+      "layout": "mortar_and_pestle"
+    }
+  ]
+}

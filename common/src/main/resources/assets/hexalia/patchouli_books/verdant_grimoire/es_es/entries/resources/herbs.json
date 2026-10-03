@@ -1,0 +1,68 @@
+{
+  "name": "Hierbas",
+  "icon": "hexalia:spirit_bloom",
+  "category": "hexalia:resources",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Hierbas",
+      "text": "Las hierbas mágicas sirven para rituales, brebajes y otras prácticas. Algunas se refinan en polvos o pastas; otras se usan tal como crecen."
+    },
+    {
+      "type": "text",
+      "title": "Obtener hierbas",
+      "anchor": "obtaining",
+      "text": "Muchas hierbas se obtienen al usar $(l:hexalia:core_mechanics/mutation)Mutavis$(/l) sobre bloques compatibles, que dejan brotar flora oculta."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:spirit_bloom",
+      "title": "Flor Espiritual",
+      "anchor": "spirit_bloom",
+      "text": "La Flor Espiritual surge de materiales de los pantanos. Puede refinarse en Polvo Espiritual para brebajes e incensarios."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:dreamshroom",
+      "title": "Dreamshroom",
+      "anchor": "dreamshroom",
+      "text": "Dreamshroom es un hongo mágico relacionado con los sueños, la visión y el movimiento. Puede refinarse en Pasta Onírica."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:ghost_fern",
+      "title": "Helecho Fantasma",
+      "anchor": "ghost_fern",
+      "text": "El Helecho Fantasma proporciona Polvo Fantasmal, útil para efectos espectrales y calmantes."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:siren_kelp",
+      "title": "Alga de Sirena",
+      "anchor": "siren_kelp",
+      "text": "El Alga de Sirena se refina en Pasta de Sirena y se emplea en preparaciones relacionadas con el agua."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:witchweed",
+      "title": "Hierba Bruja",
+      "anchor": "witchweed",
+      "text": "La Hierba Bruja se usa directamente en muchas recetas de Hexalia."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:lotus_blossom",
+      "title": "Flor de Loto",
+      "anchor": "lotus_blossom",
+      "text": "La Flor de Loto es una flor rara que se utiliza directamente en distintos oficios mágicos."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:celestial_bloom",
+      "title": "Flor Celestial",
+      "anchor": "celestial_bloom",
+      "text": "La Flor Celestial se abre de noche y se cierra de día. Las flores frescas brillan más que las marchitas. Un $(l:hexalia:core_mechanics/celestial_infusion)Ritual Celestial$(/l) exitoso las marchita una fase: de fresca a marchita y de marchita a arbusto muerto."
+    }
+  ]
+}

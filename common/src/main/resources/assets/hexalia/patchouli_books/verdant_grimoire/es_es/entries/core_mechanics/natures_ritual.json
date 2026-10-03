@@ -1,0 +1,109 @@
+{
+  "name": "Ritual de la Naturaleza",
+  "icon": "hexalia:ritual_table",
+  "category": "hexalia:core_mechanics",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Ritual de la Naturaleza",
+      "text": "Los rituales reúnen un catalizador, ofrendas y energía natural en una Mesa Ritual. La receta determina si es un Ritual de la Naturaleza o de Invocación."
+    },
+    {
+      "type": "text",
+      "title": "Lugar del ritual",
+      "anchor": "structure",
+      "text": "Distribuye los $(l:hexalia:blocks/ritual_brazier)Braseros Rituales$(/l) al nivel de la Mesa, a no más de 8 bloques. No necesitan una forma concreta."
+    },
+    {
+      "type": "text",
+      "title": "Preparación",
+      "anchor": "preparation",
+      "text": "Coloca el catalizador en la Mesa. Pon cada ofrenda en un brasero distinto, incluso si se repite, y añade $(l:hexalia:resources/salt)Sal$(/l) a cada brasero participante."
+    },
+    {
+      "type": "text",
+      "title": "Activación",
+      "anchor": "activation",
+      "text": "Usa un $(l:hexalia:content/tools#hex_focus)Foco Hex$(/l) sobre la Mesa preparada. El ritual elegirá solo los braseros necesarios; los demás se ignoran."
+    },
+    {
+      "type": "text",
+      "title": "La energía de los cultivos",
+      "anchor": "crops",
+      "text": "Los Rituales de la Naturaleza y de Invocación requieren cultivos maduros cercanos. Cada receta indica cuántos necesita. Los cultivos elegidos vuelven a su primera fase solo cuando el ritual tiene éxito."
+    },
+    {
+      "type": "text",
+      "title": "Resultado",
+      "anchor": "result",
+      "text": "Durante el ritual se consumen las ofrendas elegidas y su Sal. Al completarse, el catalizador se transforma en el resultado. Si el ritual falla después, las ofrendas gastadas no regresan."
+    },
+    {
+      "type": "text",
+      "title": "Ofrenda de almas",
+      "anchor": "sacrifice",
+      "text": "Un Ritual de Invocación espera un alma después de aceptar sus ofrendas. Derrota a una criatura cercana con un $(l:hexalia:content/tools#athame)Athame$(/l) para ofrecérsela. Los cultivos solo se gastan si la criatura invocada aparece."
+    },
+    {
+      "type": "text",
+      "title": "Si el ritual no comienza",
+      "text": "Si no comienza, revisa el catalizador, las ofrendas, la Sal y los cultivos maduros cercanos. Los rituales de invocación piden el alma más adelante."
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:air_node_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:astrylis_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:earth_node_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:fire_node_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:morphora_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:water_node_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:heartseed_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:cinderhew_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:sage_pendant_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:summon_silk_moth",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:summon_cacofey",
+      "layout": "ritual_table"
+    }
+  ]
+}

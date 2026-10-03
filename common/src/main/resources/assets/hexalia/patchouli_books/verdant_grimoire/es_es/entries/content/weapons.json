@@ -1,0 +1,32 @@
+{
+  "name": "Armas",
+  "icon": "hexalia:kelpweave_blade",
+  "category": "hexalia:content",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Armas",
+      "text": "Las armas de Hexalia combinan el daño con efectos útiles para controlar el combate."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:kelpweave_blade",
+      "title": "Hoja Kelpweave",
+      "text": "Ralentiza a tus enemigos y te ayuda a moverte con rapidez por el agua y bajo la lluvia."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:cinderhew",
+      "title": "Cinderhew",
+      "anchor": "cinderhew",
+      "text": "Esta hacha causa daño de fuego y prende brevemente a su objetivo. Puedes lanzarla; tras golpear o caer, regresa a tu inventario. Úsala agachado sobre un tronco para convertirlo en carbón vegetal."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:thornbow",
+      "title": "Arco de Espinas",
+      "text": "Dispara flechas de espinas sin gastar munición, a cambio de durabilidad, y provoca Sangrado."
+    }
+  ]
+}

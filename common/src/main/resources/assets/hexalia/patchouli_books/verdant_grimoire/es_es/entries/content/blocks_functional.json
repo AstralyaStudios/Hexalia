@@ -1,0 +1,47 @@
+{
+  "name": "Bloques funcionales",
+  "icon": "hexalia:dreamcatcher",
+  "category": "hexalia:content",
+  "sortnum": 9,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Bloques funcionales",
+      "text": "Estos bloques ayudan a proteger, guardar y cultivar tus recursos."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:dreamcatcher",
+      "title": "Atrapasueños",
+      "anchor": "dreamcatcher",
+      "text": "El Atrapasueños protege frente a los phantoms. Aliméntalo con un Nodo de Fuego: por la noche debilitará y quemará a los phantoms cercanos."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:shelf",
+      "title": "Estantería",
+      "anchor": "shelf",
+      "text": "Una estantería para ordenar brebajes y pociones en varias botellas."
+    },
+    {
+      "type": "text",
+      "title": "Suelo imbuido",
+      "anchor": "infused_soil",
+      "text": "La Tierra Imbuida y la Tierra de Cultivo Imbuida favorecen el crecimiento. Permiten cultivar hierbas sin riego ni cuidados constantes."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:herb_jar",
+      "title": "Tarro de Hierbas",
+      "anchor": "herb_jar",
+      "text": "Guarda hasta ocho ingredientes del mismo tipo. Usa un objeto igual para introducirlo y la mano vacía para sacar uno. Al romper el tarro normalmente, conserva su contenido; si lo rompes agachado, el tarro y los ingredientes caen por separado."
+    },
+    {
+      "type": "spotlight",
+      "item": "hexalia:nesting_block",
+      "title": "Bloque Nido",
+      "anchor": "nesting_block",
+      "text": "Atrae a las Polillas de Seda para que pongan huevos y guarda los gusanos recién nacidos hasta que los recojas."
+    }
+  ]
+}

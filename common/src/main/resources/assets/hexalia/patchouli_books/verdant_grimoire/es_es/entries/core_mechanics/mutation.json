@@ -1,0 +1,152 @@
+{
+  "name": "Mutación",
+  "icon": "hexalia:mutavis",
+  "category": "hexalia:core_mechanics",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Mutación",
+      "text": "Mutavis despierta posibilidades ocultas en ciertos bloques. Úsalo sobre un bloque compatible y espera un momento para descubrir su transformación."
+    },
+    {
+      "type": "text",
+      "title": "Uso de Mutavis",
+      "anchor": "usage",
+      "text": "Muele Resina de Árbol, una bola de slime y una hierba triturada en el $(l:hexalia:core_mechanics/mortar_and_pestle)Mortero y Maja$(/l). Usa el Mutavis resultante sobre uno de los bloques de las recetas."
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:mutavis_from_mortar",
+      "layout": "mortar_and_pestle"
+    },
+    {
+      "type": "text",
+      "title": "Mutación en área",
+      "anchor": "area",
+      "text": "Usa Mutavis sobre $(l:hexalia:core_mechanics/enchanted_plants#morphora)Morphora$(/l) para extender la mutación a bloques compatibles cercanos. Las transformaciones que tienen éxito dejan tierra estéril donde tomaron energía del césped."
+    },
+    {
+      "type": "text",
+      "title": "Resultados",
+      "anchor": "results",
+      "text": "Una mutación puede sustituir el bloque original o producir un objeto. Puedes ajustar ese comportamiento en la configuración."
+    },
+    {
+      "type": "text",
+      "title": "Automatización",
+      "anchor": "automation",
+      "text": "Un dispensador puede aplicar Mutavis a bloques o a una Morphora para automatizar las mutaciones."
+    },
+    {
+      "type": "text",
+      "title": "Descubrimiento",
+      "text": "Prueba Mutavis sobre plantas, piedra y tierra: cada material puede revelar un resultado distinto."
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:andesite_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:blackstone_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:blue_ice_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:celestial_bloom_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:cottonwood_sapling_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:diorite_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:dreamshroom_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:ghost_fern_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:granite_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:lotus_flower_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:mud_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:packed_ice_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:podzol_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:red_sand_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:rooted_dirt_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:saltsprout_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:siren_kelp_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:spirit_bloom_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:tuff_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:willow_sapling_from_mutation",
+      "layout": "mutation"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:witchweed_from_mutation",
+      "layout": "mutation"
+    }
+  ]
+}

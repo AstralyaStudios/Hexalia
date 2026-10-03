@@ -1,0 +1,47 @@
+{
+  "name": "Polilla de Seda",
+  "icon": "hexalia:silk_moth_spawn_egg",
+  "category": "hexalia:entities",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Polillas de Seda",
+      "text": "Las Polillas de Seda viven en los bosques y son la base de la producción de seda. También se pueden obtener mediante un $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Ritual de Invocación$(/l)."
+    },
+    {
+      "type": "text",
+      "title": "Comportamiento",
+      "anchor": "behavior",
+      "text": "Se sienten atraídas por la luz. Puedes encontrar distintas variedades en libertad."
+    },
+    {
+      "type": "text",
+      "title": "Cría",
+      "anchor": "breeding",
+      "text": "Críalas con Néctar Fragante, preparado en el $(l:hexalia:core_mechanics/mortar_and_pestle)Mortero y Maja$(/l)."
+    },
+    {
+      "type": "text",
+      "title": "Ciclo vital",
+      "anchor": "lifecycle",
+      "text": "Ponen huevos sobre hojas o Bloques Nido. Cada puesta produce dos gusanos de seda, que puedes colocar sobre troncos para formar capullos."
+    },
+    {
+      "type": "text",
+      "title": "Capullos",
+      "text": "Los capullos también aparecen en ciertos árboles. Rómpelos para liberar un gusano o usa sobre ellos un bloque que emita luz para obtener una Polilla de Seda."
+    },
+    {
+      "type": "text",
+      "title": "Recursos de seda",
+      "anchor": "resources",
+      "text": "Su ciclo vital proporciona Fibra de Seda, necesaria para fabricar Silkweave. Los gusanos también pueden procesarse para obtener más fibra."
+    },
+    {
+      "type": "text",
+      "title": "Uso",
+      "text": "Prepara un lugar con hojas, Bloques Nido y troncos para mantener una fuente de seda."
+    }
+  ]
+}

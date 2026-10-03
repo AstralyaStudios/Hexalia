@@ -1,0 +1,42 @@
+{
+  "name": "Configuración",
+  "icon": "minecraft:redstone",
+  "category": "hexalia:technical",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Configuración",
+      "text": "Puedes ajustar varios aspectos del juego, desde los bloques funcionales hasta las plantas encantadas y los efectos visuales."
+    },
+    {
+      "type": "text",
+      "title": "Bloques funcionales",
+      "anchor": "blocks",
+      "text": "Algunos bloques permiten ajustar su alcance o duración.$(br2)$(li)Incensario: alcance y duración$(li)Caldero Pequeño: cocción$(li)Atrapasueños: alcance y combustible$(li)Puesta de Huevos: eclosión"
+    },
+    {
+      "type": "text",
+      "title": "Herramientas y efectos",
+      "anchor": "tools",
+      "text": "También puedes ajustar herramientas y efectos.$(br2)$(li)Mutación: objeto o bloque resultante$(li)Mandrágora: grito y aturdimiento$(li)Sacos Arrojadizos: duración$(li)Efectos de combate: alcance y daño$(li)Cacofey: alcance de cosecha"
+    },
+    {
+      "type": "text",
+      "title": "Plantas encantadas",
+      "anchor": "plants",
+      "text": "Las plantas encantadas tienen ajustes propios.$(br2)$(li)Nautilite, Windsong y Grimshade: duración y alcance$(li)Astrylis: crecimiento$(li)Morphora: alcance de mutación$(li)Lourdes: duración y alcance"
+    },
+    {
+      "type": "text",
+      "title": "Ajustes del cliente",
+      "anchor": "client",
+      "text": "Puedes alternar algunos efectos visuales en el cliente.$(br2)$(li)Partículas de Helecho Fantasma$(li)Partículas de Flor Celestial$(li)Partículas de Dreamshroom"
+    },
+    {
+      "type": "text",
+      "title": "Notas",
+      "text": "La mayoría de los ajustes se aplican en el servidor. Haz una copia de seguridad del mundo antes de cambiar opciones importantes."
+    }
+  ]
+}
