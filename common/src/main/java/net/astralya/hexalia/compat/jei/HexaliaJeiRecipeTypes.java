@@ -14,8 +14,10 @@ public final class HexaliaJeiRecipeTypes {
       RecipeType.create(Hexalia.MOD_ID, "small_cauldron", SmallCauldronRecipe.class);
   public static final RecipeType<NaturesRitualRecipe> NATURES_RITUAL =
       RecipeType.create(Hexalia.MOD_ID, "natures_ritual", NaturesRitualRecipe.class);
-  public static final RecipeType<NaturesRitualRecipe> CELESTIAL_INFUSION =
-      RecipeType.create(Hexalia.MOD_ID, "celestial_infusion", NaturesRitualRecipe.class);
+  public static final RecipeType<NaturesRitualRecipe> CELESTIAL_RITUAL =
+      RecipeType.create(Hexalia.MOD_ID, "celestial_ritual", NaturesRitualRecipe.class);
+  public static final RecipeType<NaturesRitualRecipe> SUMMONING_RITUAL =
+      RecipeType.create(Hexalia.MOD_ID, "summoning_ritual", NaturesRitualRecipe.class);
   public static final RecipeType<MutationRecipe> MUTATION =
       RecipeType.create(Hexalia.MOD_ID, "mutation", MutationRecipe.class);
 

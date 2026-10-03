@@ -2,6 +2,7 @@ package net.astralya.hexalia.compat.jei.category;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -12,7 +13,6 @@ import mezz.jei.api.recipe.IFocusGroup;
 import net.astralya.hexalia.compat.HexaliaRecipeGuiLayout;
 import net.astralya.hexalia.compat.RitualEnergyViewerIndicator;
 import net.astralya.hexalia.compat.NaturesRitualViewerIndicator;
-import net.astralya.hexalia.compat.jei.HexaliaJeiRecipeTypes;
 import net.astralya.hexalia.compat.jei.util.JeiLayoutHelper;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.recipe.NaturesRitualRecipe;
@@ -30,11 +30,12 @@ public final class NaturesRitualJeiCategory
   private final IDrawableStatic background;
   private final IDrawableStatic soulIndicator;
 
-  public NaturesRitualJeiCategory(IGuiHelper guiHelper) {
+  public NaturesRitualJeiCategory(
+      IGuiHelper guiHelper, RecipeType<NaturesRitualRecipe> recipeType, String titleKey) {
     super(
         guiHelper,
-        HexaliaJeiRecipeTypes.NATURES_RITUAL,
-        "jei.hexalia.category.natures_ritual",
+        recipeType,
+        titleKey,
         ModItems.RITUAL_TABLE.get(),
         HexaliaRecipeGuiLayout.NATURES_RITUAL);
     HexaliaRecipeGuiLayout layout = HexaliaRecipeGuiLayout.NATURES_RITUAL;

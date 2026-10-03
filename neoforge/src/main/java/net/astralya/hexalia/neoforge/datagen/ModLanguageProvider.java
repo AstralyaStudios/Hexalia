@@ -755,7 +755,8 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("jei.hexalia.category.mortar_and_pestle", "Mortar & Pestle");
     add("jei.hexalia.category.small_cauldron", "Small Cauldron Brewing");
     add("jei.hexalia.category.natures_ritual", "Nature's Ritual");
-    add("jei.hexalia.category.celestial_infusion", "Celestial Infusion");
+    add("jei.hexalia.category.celestial_ritual", "Celestial Ritual");
+    add("jei.hexalia.category.summoning_ritual", "Summoning Ritual");
     add("jei.hexalia.category.mutation", "Mutation");
 
     add("jei.hexalia.tooltip.brew_time", "Brew Time: %s ticks");
@@ -832,9 +833,10 @@ public final class ModLanguageProvider extends LanguageProvider {
   private void addEmiTranslations() {
     add("emi.category.hexalia.mutation", "Mutation");
     add("emi.category.hexalia.mortar_and_pestle", "Mortar and Pestle");
-    add("emi.category.hexalia.celestial_infusion", "Celestial Infusion");
+    add("emi.category.hexalia.celestial_ritual", "Celestial Ritual");
+    add("emi.category.hexalia.summoning_ritual", "Summoning Ritual");
     add("emi.category.hexalia.ritual_brazier", "Ritual Brazier");
-    add("emi.category.hexalia.ritual_table", "Ritual Table");
+    add("emi.category.hexalia.natures_ritual", "Nature's Ritual");
     add("emi.category.hexalia.small_cauldron", "Small Cauldron");
   }
 

@@ -43,7 +43,8 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
     registry.addCategory(HexaliaEmiRecipeCategories.MORTAR_AND_PESTLE);
     registry.addCategory(HexaliaEmiRecipeCategories.SMALL_CAULDRON);
     registry.addCategory(HexaliaEmiRecipeCategories.NATURES_RITUAL);
-    registry.addCategory(HexaliaEmiRecipeCategories.CELESTIAL_INFUSION);
+    registry.addCategory(HexaliaEmiRecipeCategories.CELESTIAL_RITUAL);
+    registry.addCategory(HexaliaEmiRecipeCategories.SUMMONING_RITUAL);
     registry.addCategory(HexaliaEmiRecipeCategories.MUTATION);
   }
 
@@ -58,11 +59,17 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
         registry, HexaliaEmiRecipeCategories.NATURES_RITUAL, ModItems.RITUAL_BRAZIER.get());
     addWorkstation(registry, HexaliaEmiRecipeCategories.NATURES_RITUAL, ModItems.HEX_FOCUS.get());
     addWorkstation(
-        registry, HexaliaEmiRecipeCategories.CELESTIAL_INFUSION, ModItems.RITUAL_TABLE.get());
+        registry, HexaliaEmiRecipeCategories.CELESTIAL_RITUAL, ModItems.RITUAL_TABLE.get());
     addWorkstation(
-        registry, HexaliaEmiRecipeCategories.CELESTIAL_INFUSION, ModItems.CELESTIAL_CRYSTAL.get());
+        registry, HexaliaEmiRecipeCategories.CELESTIAL_RITUAL, ModItems.CELESTIAL_CRYSTAL.get());
     addWorkstation(
-        registry, HexaliaEmiRecipeCategories.CELESTIAL_INFUSION, ModItems.HEX_FOCUS.get());
+        registry, HexaliaEmiRecipeCategories.CELESTIAL_RITUAL, ModItems.HEX_FOCUS.get());
+    addWorkstation(
+        registry, HexaliaEmiRecipeCategories.SUMMONING_RITUAL, ModItems.RITUAL_TABLE.get());
+    addWorkstation(
+        registry, HexaliaEmiRecipeCategories.SUMMONING_RITUAL, ModItems.RITUAL_BRAZIER.get());
+    addWorkstation(
+        registry, HexaliaEmiRecipeCategories.SUMMONING_RITUAL, ModItems.HEX_FOCUS.get());
     addWorkstation(registry, HexaliaEmiRecipeCategories.MUTATION, ModItems.MUTAVIS.get());
   }
 
@@ -98,41 +105,26 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
     for (RecipeHolder<NaturesRitualRecipe> holder :
         recipes(recipeManager, ModRecipeTypes.NATURES_RITUAL.get())) {
       NaturesRitualRecipe recipe = holder.value();
-      if (recipe.ritualKind() == NaturesRitualRecipe.RitualKind.CELESTIAL) continue;
+      EmiRecipeCategory category = switch (recipe.ritualKind()) {
+        case NATURE -> HexaliaEmiRecipeCategories.NATURES_RITUAL;
+        case CELESTIAL -> HexaliaEmiRecipeCategories.CELESTIAL_RITUAL;
+        case SUMMONING -> HexaliaEmiRecipeCategories.SUMMONING_RITUAL;
+      };
       addRecipe(
           registry,
-          HexaliaEmiRecipeCategories.NATURES_RITUAL,
+          category,
           HexaliaRecipeGuiLayout.NATURES_RITUAL,
           holder,
           naturesRitualInputs(recipe),
           naturesRitualResult(recipe),
           List.of(),
-          List.of(),
+          recipe.ritualKind() == NaturesRitualRecipe.RitualKind.CELESTIAL
+              ? List.of(Component.translatable("message.hexalia.celestial_infusion.requires_night"))
+              : List.of(),
           false,
           recipe.offerings().size() > 3,
           false,
           recipe.requiresSoul(),
-          RitualEnergyViewerIndicator.of(recipe));
-    }
-
-    for (RecipeHolder<NaturesRitualRecipe> holder :
-        recipes(recipeManager, ModRecipeTypes.NATURES_RITUAL.get())) {
-      NaturesRitualRecipe recipe = holder.value();
-      if (recipe.ritualKind() != NaturesRitualRecipe.RitualKind.CELESTIAL) continue;
-      addRecipe(
-          registry,
-          HexaliaEmiRecipeCategories.CELESTIAL_INFUSION,
-          HexaliaRecipeGuiLayout.NATURES_RITUAL,
-          holder,
-          naturesRitualInputs(recipe),
-          recipe.itemResult(),
-          List.of(),
-          List.of(
-              Component.translatable("message.hexalia.celestial_infusion.requires_night")),
-          false,
-          recipe.offerings().size() > 3,
-          false,
-          false,
           RitualEnergyViewerIndicator.of(recipe));
     }
 

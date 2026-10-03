@@ -21,8 +21,8 @@ public final class CelestialInfusionJeiCategory
   public CelestialInfusionJeiCategory(IGuiHelper guiHelper) {
     super(
         guiHelper,
-        HexaliaJeiRecipeTypes.CELESTIAL_INFUSION,
-        "jei.hexalia.category.celestial_infusion",
+        HexaliaJeiRecipeTypes.CELESTIAL_RITUAL,
+        "jei.hexalia.category.celestial_ritual",
         ModItems.RITUAL_TABLE.get(),
         HexaliaRecipeGuiLayout.NATURES_RITUAL);
   }

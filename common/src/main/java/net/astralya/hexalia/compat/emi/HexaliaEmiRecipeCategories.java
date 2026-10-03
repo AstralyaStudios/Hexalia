@@ -12,9 +12,11 @@ public final class HexaliaEmiRecipeCategories {
   public static final EmiRecipeCategory SMALL_CAULDRON =
       category("small_cauldron", EmiStack.of(ModItems.SMALL_CAULDRON.get()));
   public static final EmiRecipeCategory NATURES_RITUAL =
-      category("ritual_table", EmiStack.of(ModItems.RITUAL_TABLE.get()));
-  public static final EmiRecipeCategory CELESTIAL_INFUSION =
-      category("celestial_infusion", EmiStack.of(ModItems.RITUAL_TABLE.get()));
+      category("natures_ritual", EmiStack.of(ModItems.RITUAL_TABLE.get()));
+  public static final EmiRecipeCategory CELESTIAL_RITUAL =
+      category("celestial_ritual", EmiStack.of(ModItems.RITUAL_TABLE.get()));
+  public static final EmiRecipeCategory SUMMONING_RITUAL =
+      category("summoning_ritual", EmiStack.of(ModItems.RITUAL_TABLE.get()));
   public static final EmiRecipeCategory MUTATION =
       category("mutation", EmiStack.of(ModItems.MUTAVIS.get()));
 
