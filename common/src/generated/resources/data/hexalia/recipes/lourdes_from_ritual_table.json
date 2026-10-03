@@ -7,16 +7,16 @@
   },
   "offerings": [
     {
-      "item": "hexalia:air_node"
-    },
-    {
-      "item": "minecraft:honeycomb"
+      "item": "hexalia:lotus_blossom"
     },
     {
       "item": "minecraft:glistering_melon_slice"
     },
     {
-      "item": "hexalia:dream_paste"
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "hexalia:spirit_powder"
     }
   ],
   "output": "hexalia:lourdes"

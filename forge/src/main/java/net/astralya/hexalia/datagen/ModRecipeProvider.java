@@ -421,7 +421,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         ModItems.BREW_OF_BLOODLUST.getId().getPath() + "_from_small_cauldron"));
 
         SmallCauldronRecipeBuilder.cauldron(
-                        Ingredient.of(ModItems.CELESTIAL_CRYSTAL.get()),
+                        Ingredient.of(ModItems.RABBAGE.get()),
                         Ingredient.of(Items.IRON_NUGGET),
                         Ingredient.of(Items.SWEET_BERRIES),
                         Ingredient.of(ModItems.TREE_RESIN.get()),
@@ -451,7 +451,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         ModItems.BREW_OF_HOMESTEAD.getId().getPath() + "_from_small_cauldron"));
 
         SmallCauldronRecipeBuilder.cauldron(
-                        Ingredient.of(ModItems.DREAM_PASTE.get()),
+                        Ingredient.of(ModItems.MANDRAKE.get()),
                         Ingredient.of(ModItems.SIREN_PASTE.get()),
                         Ingredient.of(Items.IRON_INGOT),
                         Ingredient.of(Items.REDSTONE),
@@ -473,7 +473,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         SmallCauldronRecipeBuilder.cauldron(
                         Ingredient.of(Items.SPIDER_EYE),
                         Ingredient.of(ModItems.GHOST_POWDER.get()),
-                        Ingredient.of(Items.BLACK_DYE),
+                        Ingredient.of(ModItems.TREE_RESIN.get()),
                         Ingredient.of(Items.STRING),
                         new ItemStack(ModItems.BREW_OF_ARACHNID_GRACE.get())
                 ).brewTime(4800).unlockedByItem("has_rustic_bottle", ModItems.RUSTIC_BOTTLE.get())
@@ -498,19 +498,19 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, ModBlocks.GRIMSHADE.getId().getPath() + "_from_ritual_table"));
 
         RitualTableRecipeBuilder.ritualTable(new ItemStack(ModItems.RABBAGE_SEEDS.get()))
-                .tableInput(Items.BEETROOT_SEEDS).brazier(ModItems.DREAM_PASTE.get()).brazier(Items.IRON_NUGGET).brazier(Items.SWEET_BERRIES).brazier(Blocks.POPPY.asItem())
+                .tableInput(Items.BEETROOT_SEEDS).brazier(ModItems.DREAM_PASTE.get()).brazier(Items.SWEET_BERRIES).brazier(Blocks.POPPY.asItem()).brazier(Items.BONE_MEAL)
                 .unlockedByItem("has_hex_focus", ModItems.HEX_FOCUS.get())
                 .energyCost(4)
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, ModItems.RABBAGE_SEEDS.getId().getPath() + "_from_ritual_table"));
 
         RitualTableRecipeBuilder.ritualTable(new ItemStack(ModItems.SAGE_PENDANT.get()))
-                .tableInput(ModItems.CELESTIAL_CRYSTAL.get()).brazier(ModItems.SPIRIT_POWDER.get()).brazier(Items.GOLD_NUGGET).brazier(Items.BOOK).brazier(Items.EXPERIENCE_BOTTLE)
+                .tableInput(Items.GOLD_INGOT).brazier(Items.BOOK).brazier(Items.EXPERIENCE_BOTTLE).brazier(ModItems.SPIRIT_POWDER.get()).brazier(Items.LAPIS_LAZULI).brazier(ModItems.TREE_RESIN.get())
                 .unlockedByItem("has_hex_focus", ModItems.HEX_FOCUS.get())
-                .energyCost(7)
+                .energyCost(6)
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, ModItems.SAGE_PENDANT.getId().getPath() + "_from_ritual_table"));
 
         RitualTableRecipeBuilder.ritualTable(new ItemStack(ModBlocks.MORPHORA.get()))
-                .tableInput(Blocks.POPPY.asItem()).brazier(ModItems.DREAM_PASTE.get()).brazier(ModItems.SPIRIT_POWDER.get()).brazier(ModItems.EARTH_NODE.get()).brazier(ModItems.TREE_RESIN.get())
+                .tableInput(Blocks.POPPY.asItem()).brazier(ModItems.DREAM_PASTE.get()).brazier(ModItems.EARTH_NODE.get()).brazier(Items.FERMENTED_SPIDER_EYE).brazier(Items.SLIME_BALL).brazier(ModItems.TREE_RESIN.get())
                 .unlockedByItem("has_hex_focus", ModItems.HEX_FOCUS.get())
                 .energyCost(7)
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, ModBlocks.MORPHORA.getId().getPath() + "_from_ritual_table"));
@@ -540,7 +540,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, ModBlocks.WINDSONG.getId().getPath() + "_from_ritual_table"));
 
         RitualTableRecipeBuilder.ritualTable(new ItemStack(ModBlocks.ASTRYLIS.get()))
-                .tableInput(Blocks.LILY_OF_THE_VALLEY.asItem()).brazier(ModItems.CELESTIAL_CRYSTAL.get()).brazier(ModItems.EARTH_NODE.get()).brazier(Items.BONE_MEAL).brazier(Items.GLOWSTONE_DUST)
+                .tableInput(Blocks.LILY_OF_THE_VALLEY.asItem()).brazier(ModItems.CELESTIAL_CRYSTAL.get()).brazier(ModItems.EARTH_NODE.get()).brazier(Items.BONE_MEAL).brazier(Items.SUNFLOWER).brazier(ModBlocks.CELESTIAL_BLOOM.get().asItem())
                 .unlockedByItem("has_hex_focus", ModItems.HEX_FOCUS.get())
                 .energyCost(7)
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, ModBlocks.ASTRYLIS.getId().getPath() + "_from_ritual_table"));
@@ -570,7 +570,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, ModItems.EARTH_NODE.getId().getPath() + "_from_ritual_table"));
 
         RitualTableRecipeBuilder.ritualTable(new ItemStack(ModBlocks.LOURDES.get()))
-                .tableInput(Blocks.BLUE_ORCHID.asItem()).brazier(ModItems.AIR_NODE.get()).brazier(Items.HONEYCOMB).brazier(Items.GLISTERING_MELON_SLICE).brazier(ModItems.DREAM_PASTE.get())
+                .tableInput(Blocks.BLUE_ORCHID.asItem()).brazier(ModItems.LOTUS_BLOSSOM.get()).brazier(Items.GLISTERING_MELON_SLICE).brazier(Items.HONEYCOMB).brazier(ModItems.SPIRIT_POWDER.get())
                 .unlockedByItem("has_hex_focus", ModItems.HEX_FOCUS.get())
                 .energyCost(5)
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, ModBlocks.LOURDES.getId().getPath() + "_from_ritual_table"));
@@ -588,7 +588,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, ModItems.BLOOMWRAP_HAT.getId().getPath() + "_from_ritual_table"));
 
         RitualTableRecipeBuilder.ritualTable(new ItemStack(ModItems.BLOOMWRAP_ROBES.get()))
-                .tableInput(Items.LEATHER_CHESTPLATE).brazier(Items.MOSS_BLOCK).brazier(ModItems.EARTH_NODE.get()).brazier(ModItems.SILK_FIBER.get()).brazier(Items.IRON_NUGGET)
+                .tableInput(Items.LEATHER_CHESTPLATE).brazier(Items.MOSS_BLOCK).brazier(ModItems.EARTH_NODE.get()).brazier(ModItems.SILK_FIBER.get()).brazier(ModItems.RABBAGE.get())
                 .unlockedByItem("has_hex_focus", ModItems.HEX_FOCUS.get())
                 .energyCost(8)
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, ModItems.BLOOMWRAP_ROBES.getId().getPath() + "_from_ritual_table"));
@@ -607,19 +607,19 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         RitualTableRecipeBuilder.ritualTable(ItemStack.EMPTY)
                 .tableInput(ModItems.FRAGRANT_NECTAR.get()).brazier(Items.STRING).brazier(Blocks.WHITE_WOOL.asItem())
-                .brazier(ModItems.SPIRIT_POWDER.get()).brazier(ModBlocks.CELESTIAL_BLOOM.get().asItem())
-                .brazier(Items.GLOWSTONE_DUST).brazier(ModBlocks.WITCHWEED.get().asItem())
-                .ritualKind("summoning").energyCost(9)
+                .brazier(ModItems.SPIRIT_POWDER.get()).brazier(Items.HONEYCOMB)
+                .brazier(Items.TORCH).brazier(Ingredient.of(ItemTags.LEAVES))
+                .ritualKind("summoning").energyCost(8)
                 .entityResult(ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, "silk_moth"), 1)
                 .unlockedBy("has_fragrant_nectar", has(ModItems.FRAGRANT_NECTAR.get()))
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, "summon_silk_moth"));
 
         RitualTableRecipeBuilder.ritualTable(ItemStack.EMPTY)
                 .tableInput(ModItems.GALEBERRIES_COOKIE.get()).brazier(ModItems.SPIRIT_POWDER.get())
-                .brazier(ModItems.TREE_RESIN.get()).brazier(Blocks.JUNGLE_SAPLING.asItem())
+                .brazier(Blocks.JUNGLE_SAPLING.asItem())
                 .brazier(Items.COCOA_BEANS).brazier(Items.MELON_SLICE).brazier(Items.WHEAT_SEEDS)
-                .brazier(Blocks.MOSS_BLOCK.asItem()).brazier(Blocks.BROWN_MUSHROOM.asItem())
-                .ritualKind("summoning").energyCost(11)
+                .brazier(Blocks.MOSS_BLOCK.asItem())
+                .ritualKind("summoning").energyCost(10)
                 .entityResult(ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, "cacofey"), 1)
                 .unlockedBy("has_galeberries_cookie", has(ModItems.GALEBERRIES_COOKIE.get()))
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, "summon_cacofey"));
@@ -637,25 +637,25 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, "celestial_crystal_from_celestial_infusion"));
 
         RitualTableRecipeBuilder.ritualTable(new ItemStack(ModItems.MOONWEAVE_HOOD.get()))
-                .tableInput(ModItems.SILKWEAVE_HOOD.get()).brazier(ModItems.CELESTIAL_CRYSTAL.get()).brazier(ModItems.SILK_FIBER.get()).brazier(Items.PHANTOM_MEMBRANE)
+                .tableInput(ModItems.SILKWEAVE_HOOD.get()).brazier(ModItems.CELESTIAL_CRYSTAL.get()).brazier(ModItems.SILK_FIBER.get()).brazier(Items.PHANTOM_MEMBRANE).brazier(Items.DIAMOND).brazier(Items.DIAMOND)
                 .ritualKind("celestial").energyCost(5)
                 .unlockedBy("has_silkweave_hood", has(ModItems.SILKWEAVE_HOOD.get()))
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, "moonweave_hood_from_celestial_infusion"));
 
         RitualTableRecipeBuilder.ritualTable(new ItemStack(ModItems.MOONWEAVE_MANTLE.get()))
-                .tableInput(ModItems.SILKWEAVE_MANTLE.get()).brazier(ModItems.CELESTIAL_CRYSTAL.get()).brazier(ModItems.SILK_FIBER.get()).brazier(Items.PHANTOM_MEMBRANE).brazier(Items.GLOWSTONE_DUST)
+                .tableInput(ModItems.SILKWEAVE_MANTLE.get()).brazier(ModItems.CELESTIAL_CRYSTAL.get()).brazier(ModItems.SILK_FIBER.get()).brazier(Items.PHANTOM_MEMBRANE).brazier(Items.DIAMOND).brazier(Items.DIAMOND)
                 .ritualKind("celestial").energyCost(6)
                 .unlockedBy("has_silkweave_mantle", has(ModItems.SILKWEAVE_MANTLE.get()))
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, "moonweave_mantle_from_celestial_infusion"));
 
         RitualTableRecipeBuilder.ritualTable(new ItemStack(ModItems.MOONWEAVE_BINDINGS.get()))
-                .tableInput(ModItems.SILKWEAVE_BINDINGS.get()).brazier(ModItems.CELESTIAL_CRYSTAL.get()).brazier(ModItems.SILK_FIBER.get()).brazier(Items.GLOWSTONE_DUST)
+                .tableInput(ModItems.SILKWEAVE_BINDINGS.get()).brazier(ModItems.CELESTIAL_CRYSTAL.get()).brazier(ModItems.SILK_FIBER.get()).brazier(Items.DIAMOND).brazier(Items.DIAMOND)
                 .ritualKind("celestial").energyCost(5)
                 .unlockedBy("has_silkweave_bindings", has(ModItems.SILKWEAVE_BINDINGS.get()))
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, "moonweave_bindings_from_celestial_infusion"));
 
         RitualTableRecipeBuilder.ritualTable(new ItemStack(ModItems.MOONWEAVE_FOOTWRAPS.get()))
-                .tableInput(ModItems.SILKWEAVE_FOOTWRAPS.get()).brazier(ModItems.CELESTIAL_CRYSTAL.get()).brazier(ModItems.SILK_FIBER.get()).brazier(Items.FEATHER)
+                .tableInput(ModItems.SILKWEAVE_FOOTWRAPS.get()).brazier(ModItems.CELESTIAL_CRYSTAL.get()).brazier(ModItems.SILK_FIBER.get()).brazier(Items.FEATHER).brazier(Items.DIAMOND).brazier(Items.DIAMOND)
                 .ritualKind("celestial").energyCost(5)
                 .unlockedBy("has_silkweave_footwraps", has(ModItems.SILKWEAVE_FOOTWRAPS.get()))
                 .save(recipeConsumer, ResourceLocation.fromNamespaceAndPath(HexaliaMod.MODID, "moonweave_footwraps_from_celestial_infusion"));

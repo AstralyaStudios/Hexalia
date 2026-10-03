@@ -16,13 +16,10 @@
       "item": "minecraft:bone_meal"
     },
     {
-      "item": "minecraft:glowstone_dust"
-    },
-    {
-      "item": "minecraft:amethyst_shard"
-    },
-    {
       "item": "minecraft:sunflower"
+    },
+    {
+      "item": "hexalia:celestial_bloom"
     }
   ],
   "output": "hexalia:astrylis"

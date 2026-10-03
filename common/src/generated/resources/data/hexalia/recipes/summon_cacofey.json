@@ -3,13 +3,10 @@
   "center": {
     "item": "hexalia:galeberries_cookie"
   },
-  "energy_cost": 11,
+  "energy_cost": 10,
   "offerings": [
     {
       "item": "hexalia:spirit_powder"
-    },
-    {
-      "item": "hexalia:tree_resin"
     },
     {
       "item": "minecraft:jungle_sapling"
@@ -25,9 +22,6 @@
     },
     {
       "item": "minecraft:moss_block"
-    },
-    {
-      "item": "minecraft:brown_mushroom"
     }
   ],
   "requires_soul": true,

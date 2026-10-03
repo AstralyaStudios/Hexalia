@@ -1,14 +1,11 @@
 {
   "type": "hexalia:natures_ritual",
   "ritual_kind": "nature",
-  "energy_cost": 7,
+  "energy_cost": 6,
   "center": {
-    "item": "hexalia:celestial_crystal"
+    "item": "minecraft:gold_ingot"
   },
   "offerings": [
-    {
-      "item": "minecraft:gold_nugget"
-    },
     {
       "item": "minecraft:book"
     },
@@ -19,7 +16,10 @@
       "item": "hexalia:spirit_powder"
     },
     {
-      "item": "minecraft:amethyst_shard"
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "hexalia:tree_resin"
     }
   ],
   "output": "hexalia:sage_pendant"
