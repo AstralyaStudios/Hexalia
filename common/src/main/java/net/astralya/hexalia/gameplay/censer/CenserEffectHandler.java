@@ -7,11 +7,15 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 import net.astralya.hexalia.Configuration;
+import net.astralya.hexalia.block.ModBlocks;
 import net.astralya.hexalia.block.custom.CenserBlock;
 import net.astralya.hexalia.block.entity.custom.CenserBlockEntity;
 import net.astralya.hexalia.gameplay.censer.effects.ICenserEffect;
+import net.astralya.hexalia.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -31,6 +35,7 @@ public final class CenserEffectHandler {
 
   private static final Map<Level, Map<BlockPos, ActiveEffect>> ACTIVE_EFFECTS = new WeakHashMap<>();
   private static final Map<Level, Set<BlockPos>> SPATIAL_CACHE = new WeakHashMap<>();
+  private static final Map<Level, Set<BlockPos>> WITHERING_CALM_CACHE = new WeakHashMap<>();
 
   private CenserEffectHandler() {}
 
@@ -63,6 +68,7 @@ public final class CenserEffectHandler {
 
     Map<BlockPos, ActiveEffect> map = ACTIVE_EFFECTS.get(serverLevel);
     if (map != null && map.containsKey(pos)) {
+      trackTargetPrevention(serverLevel, pos, combo);
       return;
     }
 
@@ -105,6 +111,7 @@ public final class CenserEffectHandler {
 
       if (!isCenserStillRunning(serverLevel, pos, active.combo())) {
         active.effect().onStop(serverLevel, pos);
+        forgetTargetPrevention(serverLevel, pos);
         iterator.remove();
         continue;
       }
@@ -112,6 +119,7 @@ public final class CenserEffectHandler {
       ActiveEffect ticked = active.tickDown();
       if (ticked.expired()) {
         ticked.effect().onStop(serverLevel, pos);
+        forgetTargetPrevention(serverLevel, pos);
         iterator.remove();
       } else {
         entry.setValue(ticked);
@@ -122,6 +130,9 @@ public final class CenserEffectHandler {
 
   private static boolean isCenserStillRunning(
       ServerLevel level, BlockPos pos, HerbCombination expectedCombo) {
+    if (!level.hasChunkAt(pos)) {
+      return false;
+    }
     if (!(level.getBlockEntity(pos) instanceof CenserBlockEntity censer)) {
       return false;
     }
@@ -140,7 +151,18 @@ public final class CenserEffectHandler {
   }
 
   public static boolean isUndeadVeilActiveInArea(Level level, BlockPos pos) {
-    return isSpatialCacheHit(level, pos);
+    return isSpatialCacheHit(level, pos, SPATIAL_CACHE);
+  }
+
+  public static boolean shouldPreventPlayerTarget(Mob mob) {
+    if (!(mob.level() instanceof ServerLevel level)) {
+      return false;
+    }
+    if (mob.getMobType() == MobType.UNDEAD) {
+      return mob.getType().is(ModTags.EntityTypes.AFFECTED_BY_UNDEAD_VEIL)
+          && isSpatialCacheHit(level, mob.blockPosition(), SPATIAL_CACHE);
+    }
+    return isSpatialCacheHit(level, mob.blockPosition(), WITHERING_CALM_CACHE);
   }
 
   public static boolean isEffectActiveInArea(Level level, BlockPos pos, HerbCombination combo) {
@@ -154,7 +176,7 @@ public final class CenserEffectHandler {
     }
 
     if (effect.usesSpatialCache()) {
-      return isSpatialCacheHit(level, pos);
+      return isSpatialCacheHit(level, pos, SPATIAL_CACHE);
     }
 
     int radius = Configuration.CENSER_EFFECT_RADIUS.get();
@@ -180,19 +202,31 @@ public final class CenserEffectHandler {
     }
   }
 
-  private static boolean isSpatialCacheHit(Level level, BlockPos pos) {
-    if (level.isClientSide()) {
+  private static boolean isSpatialCacheHit(Level level, BlockPos pos, Map<Level, Set<BlockPos>> cache) {
+    if (!(level instanceof ServerLevel serverLevel)) {
       return false;
     }
 
     int radius = Configuration.CENSER_EFFECT_RADIUS.get();
-    Set<BlockPos> cached = SPATIAL_CACHE.get(level);
+    Set<BlockPos> cached = cache.get(level);
     if (cached == null || cached.isEmpty()) {
       return false;
     }
 
     double radiusSq = (double) radius * (double) radius;
-    for (BlockPos center : cached) {
+    HerbCombination expected = cache == SPATIAL_CACHE
+        ? new HerbCombination(ModBlocks.GHOST_FERN.get().asItem(), ModBlocks.SPIRIT_BLOOM.get().asItem())
+        : new HerbCombination(ModBlocks.WITCHWEED.get().asItem(), ModBlocks.GHOST_FERN.get().asItem());
+    for (Iterator<BlockPos> iterator = cached.iterator(); iterator.hasNext(); ) {
+      BlockPos center = iterator.next();
+      if (!serverLevel.hasChunkAt(center)
+          || !(level.getBlockEntity(center) instanceof CenserBlockEntity censer)
+          || !censer.getBlockState().getValue(CenserBlock.LIT)
+          || censer.getBurnTime() <= 0
+          || !expected.equals(censer.getActiveCombination())) {
+        iterator.remove();
+        continue;
+      }
       if (pos.distSqr(center) <= radiusSq) {
         return true;
       }
@@ -206,11 +240,40 @@ public final class CenserEffectHandler {
     ACTIVE_EFFECTS
         .computeIfAbsent(level, key -> new HashMap<>())
         .put(pos.immutable(), new ActiveEffect(combo, effect, duration));
+    trackTargetPrevention(level, pos, combo);
   }
 
   private static ActiveEffect removeActive(ServerLevel level, BlockPos pos) {
+    forgetTargetPrevention(level, pos);
     Map<BlockPos, ActiveEffect> map = ACTIVE_EFFECTS.get(level);
     return map != null ? map.remove(pos) : null;
+  }
+
+  private static void trackTargetPrevention(ServerLevel level, BlockPos pos, HerbCombination combo) {
+    if (combo.equals(new HerbCombination(ModBlocks.GHOST_FERN.get().asItem(), ModBlocks.SPIRIT_BLOOM.get().asItem()))) {
+      SPATIAL_CACHE.computeIfAbsent(level, key -> new HashSet<>()).add(pos.immutable());
+    }
+    if (combo.equals(new HerbCombination(ModBlocks.WITCHWEED.get().asItem(), ModBlocks.GHOST_FERN.get().asItem()))) {
+      WITHERING_CALM_CACHE.computeIfAbsent(level, key -> new HashSet<>()).add(pos.immutable());
+    }
+  }
+
+  public static void forgetTargetPrevention(Level level, BlockPos pos) {
+    if (!(level instanceof ServerLevel)) {
+      return;
+    }
+    removeTrackedPosition(SPATIAL_CACHE, level, pos);
+    removeTrackedPosition(WITHERING_CALM_CACHE, level, pos);
+  }
+
+  private static void removeTrackedPosition(Map<Level, Set<BlockPos>> cache, Level level, BlockPos pos) {
+    Set<BlockPos> positions = cache.get(level);
+    if (positions != null) {
+      positions.remove(pos);
+      if (positions.isEmpty()) {
+        cache.remove(level);
+      }
+    }
   }
 
   private static boolean isCenserRunningCombo(CenserBlockEntity censer, HerbCombination combo) {

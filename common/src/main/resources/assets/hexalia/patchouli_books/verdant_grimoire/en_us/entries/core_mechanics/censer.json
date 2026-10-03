@@ -29,7 +29,7 @@
     },
     {
       "type": "text",
-      "title": "Ethereal Grazing",
+      "title": "Spectral Allure",
       "anchor": "ethereal_grazing",
       "text": "$(l:hexalia:resources/herbs#ghost_fern)Ghost Fern$(/l) + $(l:hexalia:resources/herbs#siren_kelp)Siren Kelp$(/l)$(br2)Encourages nearby animals of the same species to breed."
     },

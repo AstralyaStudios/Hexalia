@@ -251,6 +251,9 @@ public class CenserBlockEntity extends SyncBlockEntity {
 
   @Override
   public void setRemoved() {
+    if (this.level != null) {
+      CenserEffectHandler.forgetTargetPrevention(this.level, this.worldPosition);
+    }
     super.setRemoved();
   }
 

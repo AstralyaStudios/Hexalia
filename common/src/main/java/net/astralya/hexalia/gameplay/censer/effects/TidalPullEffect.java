@@ -50,7 +50,7 @@ public class TidalPullEffect implements ICenserEffect {
 
       Vec3 direction = target.subtract(entityPos).normalize();
       double dist = Math.sqrt(distSq);
-      double scaledForce = PULL_FORCE * (1.0D + dist / radius);
+      double scaledForce = PULL_FORCE * (2.0D + 0.5D * (1.0D - Math.min(dist / radius, 1.0D)));
 
       entity.setDeltaMovement(entity.getDeltaMovement().add(direction.scale(scaledForce)));
       entity.hasImpulse = true;

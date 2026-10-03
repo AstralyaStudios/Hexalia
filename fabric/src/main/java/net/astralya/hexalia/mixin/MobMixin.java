@@ -2,7 +2,6 @@ package net.astralya.hexalia.mixin;
 
 import net.astralya.hexalia.gameplay.censer.CenserEffectHandler;
 import net.astralya.hexalia.event.ModGameEvents;
-import net.astralya.hexalia.util.ModTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -46,13 +45,12 @@ public abstract class MobMixin extends LivingEntity {
     @Unique
     private boolean hexalia$shouldIgnorePlayers() {
         Mob self = (Mob) (Object) this;
-        if (!self.getType().is(ModTags.EntityTypes.AFFECTED_BY_UNDEAD_VEIL)) return false;
         int currentTick = this.tickCount;
         if (currentTick - hexalia$lastCheckTick < 10) {
             return hexalia$lastCheckResult;
         }
         hexalia$lastCheckTick = currentTick;
-        hexalia$lastCheckResult = CenserEffectHandler.isUndeadVeilActiveInArea(this.level(), this.blockPosition());
+        hexalia$lastCheckResult = CenserEffectHandler.shouldPreventPlayerTarget(self);
         return hexalia$lastCheckResult;
     }
 
