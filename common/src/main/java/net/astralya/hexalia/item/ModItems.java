@@ -157,6 +157,7 @@ public final class ModItems {
                   ModToolTiers.ANCIENT,
                   defaultProperties()
                       .rarity(Rarity.RARE)
+                      .durability(1561)
                       .attributes(AxeItem.createAttributes(ModToolTiers.ANCIENT, 3.0F, -3.0F))));
 
   public static final RegistrySupplier<Item> BRIAR_SICKLE =

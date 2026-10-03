@@ -14,14 +14,14 @@
       "item": "hexalia:hex_focus",
       "title": "Foco Hex",
       "anchor": "hex_focus",
-      "text": "El Foco Hex activa una Mesa Ritual preparada y despierta ciertas plantas encantadas. También transforma pizarra profunda o pizarra profunda rocosa en una Mesa Ritual."
+      "text": "El Foco Hex activa una Mesa Ritual preparada para Rituales de la Naturaleza, Invocación y Rituales Celestiales. También despierta ciertas plantas encantadas y transforma la pizarra profunda en una Mesa Ritual."
     },
     {
       "type": "spotlight",
       "item": "hexalia:athame",
       "title": "Athame",
       "anchor": "athame",
-      "text": "El Athame extrae Resina de Árbol, recoge Flores de Loto y crea un $(l:hexalia:blocks/ritual_brazier)Brasero Ritual$(/l) al usarlo agachado sobre tablones. Una criatura derrotada con él puede aportar el alma que espera un $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Ritual de Invocación$(/l)."
+      "text": "El Athame extrae Resina de Árbol, recoge Flores de Loto y crea un $(l:hexalia:blocks/ritual_brazier)Brasero Ritual$(/l) al usarlo agachado sobre tablones. Derrota con él a una criatura viva cercana para aportar el alma que espera una $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Invocación$(/l)."
     },
     {
       "type": "spotlight",
@@ -42,7 +42,7 @@
       "item": "hexalia:spiritroot_tether",
       "title": "Lazo Spiritroot",
       "anchor": "spiritroot_tether",
-      "text": "Captura criaturas compatibles y libéralas en otro lugar. Agáchate y úsalo sobre una Flor Espiritual para vincular un destino; si contiene una criatura, agáchate y úsalo para enviarla allí."
+      "text": "Haz clic derecho sobre una criatura compatible con el Lazo vacío para capturarla. Haz clic derecho sobre un bloque para liberarla allí. Con el Lazo vacío, agáchate y úsalo sobre una Flor Espiritual para vincular un destino; con una criatura dentro, agáchate y úsalo sobre un bloque para enviarla allí."
     },
     {
       "type": "spotlight",
@@ -56,7 +56,7 @@
       "item": "hexalia:sage_pendant",
       "title": "Colgante del Sabio",
       "anchor": "sage_pendant",
-      "text": "Llevado como accesorio o en la mano secundaria, el Colgante del Sabio guarda un 25 % de experiencia adicional, hasta 300 puntos. Mayús + clic derecho inicia su liberación gradual."
+      "text": "Al llevarlo puesto o en la mano secundaria, guarda experiencia adicional equivalente al 25 % de la que ganas, hasta 300 puntos de experiencia. Agáchate y haz clic derecho una vez para liberarla poco a poco; espera un momento antes de activarlo otra vez."
     },
     {
       "type": "spotlight",
@@ -64,11 +64,6 @@
       "title": "Semilla del Corazón",
       "anchor": "heartseed",
       "text": "Ofrece esta semilla a un animal domesticable aún salvaje para ganarte su confianza. La semilla se consume al crear el vínculo."
-    },
-    {
-      "type": "text",
-      "title": "Oficios",
-      "text": "Aprende las prácticas de cada herramienta en los capítulos correspondientes."
     }
   ]
 }

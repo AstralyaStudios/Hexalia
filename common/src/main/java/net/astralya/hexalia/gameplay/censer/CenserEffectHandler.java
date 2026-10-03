@@ -21,6 +21,7 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -115,7 +116,7 @@ public final class CenserEffectHandler {
   static void applyMinersRespite(ServerLevel level, BlockPos pos) {
     for (Player player : level.getEntitiesOfClass(Player.class, area(pos))) {
       player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 240, 0, true, true, true));
-      player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 120, 0, true, true, true));
+      player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 120, 1, true, true, true));
     }
     BlockPos.betweenClosedStream(
             pos.offset(-radius(), -radius(), -radius()), pos.offset(radius(), radius(), radius()))
@@ -147,7 +148,7 @@ public final class CenserEffectHandler {
     AABB area = new AABB(pos).inflate(radius());
     for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, area)) {
       if (!entity.getType().is(EntityTypeTags.UNDEAD)) {
-        entity.addEffect(new MobEffectInstance(MobEffects.WITHER, 80, 0, true, true, true));
+        entity.addEffect(new MobEffectInstance(MobEffects.WITHER, 80, 1, true, true, true));
       }
       if (entity instanceof Mob mob && !mob.getType().is(EntityTypeTags.UNDEAD)) {
         calmMob(mob);
@@ -160,6 +161,7 @@ public final class CenserEffectHandler {
     for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, area(pos))) {
       entity.getActiveEffects().stream()
           .map(MobEffectInstance::getEffect)
+          .filter(effect -> effect.value().getCategory() != MobEffectCategory.HARMFUL)
           .toList()
           .forEach(entity::removeEffect);
       particles(level, entity.blockPosition(), ParticleTypes.WITCH, 4, 0.25, 0.2, 0.25, 0.01);

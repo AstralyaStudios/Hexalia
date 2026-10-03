@@ -3,10 +3,14 @@
   "id": "hexalia",
   "version": "${version}",
   "name": "Hexalia",
-  "description": "An empty Architectury environment for Hexalia.",
+  "description": "Hexalia is a folk-witchcraft Minecraft mod centered on nature, cultivation, herbal practices, rituals, environmental magic, and handcrafted magical tools.",
   "authors": [
     "Astralya Studios"
   ],
+  "contact": {
+    "homepage": "https://github.com/AstralyaStudios/Hexalia",
+    "sources": "https://github.com/AstralyaStudios/Hexalia"
+  },
   "license": "MIT",
   "environment": "*",
   "entrypoints": {

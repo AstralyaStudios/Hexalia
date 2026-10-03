@@ -7,30 +7,30 @@
     {
       "type": "text",
       "title": "Celestial Ritual",
-      "text": "Celestial Ritual is a nighttime Nature's Ritual that draws energy from nearby living Celestial Blooms. Its catalyst rests on the Ritual Table while salted Ritual Braziers hold the offerings."
+      "text": "A Celestial Ritual uses the $(l:hexalia:core_mechanics/natures_ritual#structure)shared Ritual Table setup$(/l) but draws energy from nearby Celestial Blooms instead of crops. It begins at night."
     },
     {
       "type": "text",
       "title": "Requirements",
       "anchor": "requirements",
-      "text": "Set up the Ritual Table and $(l:hexalia:blocks/ritual_brazier)Ritual Braziers$(/l) as for Nature's Ritual. Salt each selected Brazier. Living $(l:hexalia:resources/herbs#celestial_bloom)Celestial Blooms$(/l) at the Table's height supply the recipe's required energy. Begin at night."
+      "text": "Keep the recipe’s required number of living $(l:hexalia:resources/herbs#celestial_bloom)Celestial Blooms$(/l) near the Table at its height. Fresh and Withered Blooms can supply energy; the recipe pages show how many are needed."
     },
     {
       "type": "text",
       "title": "Process",
       "anchor": "process",
-      "text": "Place the catalyst on the Ritual Table and the recipe's offerings in nearby salted Braziers. Activate the Table with a Hex Focus at night. Offerings travel to the Table while the Blooms send energy toward it."
+      "text": "At night, use a Hex Focus on the prepared Table. The selected offerings and their salt are spent during the offering stage; the participating Braziers remain. If you cancel afterward, the offerings are not returned."
     },
     {
       "type": "text",
       "title": "Transformation",
       "anchor": "results",
-      "text": "If the ritual completes while it is still night and the selected Blooms remain, the catalyst becomes the output on the Table. The selected Blooms become Dead Bushes. A cancelled ritual does not consume Blooms."
+      "text": "On success, the catalyst becomes the output and each selected Bloom loses one stage: Fresh becomes Withered, and Withered becomes a Dead Bush. Cancelling before success does not degrade the Blooms."
     },
     {
       "type": "text",
       "title": "On Use",
-      "text": "Galeberries and Celestial Crystals provide early progression; Moonweave upgrades use the same ritual structure with greater Bloom costs."
+      "text": "Each recipe shows its own Bloom requirement. Galeberries and Celestial Crystals begin this path; Moonweave upgrades use the same ritual with their own requirements."
     },
     {
       "type": "hexalia:recipe_page",
@@ -40,6 +40,26 @@
     {
       "type": "hexalia:recipe_page",
       "recipe_id": "hexalia:galeberries_from_celestial_infusion",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:moonweave_bindings_from_celestial_infusion",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:moonweave_footwraps_from_celestial_infusion",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:moonweave_hood_from_celestial_infusion",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:moonweave_mantle_from_celestial_infusion",
       "layout": "ritual_table"
     }
   ]

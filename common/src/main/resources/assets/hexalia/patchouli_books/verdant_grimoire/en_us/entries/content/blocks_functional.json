@@ -34,7 +34,7 @@
       "item": "hexalia:herb_jar",
       "title": "Herb Jar",
       "anchor": "herb_jar",
-      "text": "Stores up to 8 valid ingredients of one kind. Right-click with a matching item to insert it; use an empty hand to take one out. The jar keeps its contents when broken and carried."
+      "text": "Stores up to eight valid ingredients of one kind. Right-click with a matching item to insert it; use an empty hand to take one out. Break it normally to carry its contents, or crouch while breaking it to drop the jar and ingredients separately."
     },
     {
       "type": "spotlight",

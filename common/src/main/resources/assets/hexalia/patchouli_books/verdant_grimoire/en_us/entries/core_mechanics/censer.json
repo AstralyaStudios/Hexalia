@@ -37,7 +37,7 @@
       "type": "text",
       "title": "Miner's Respite",
       "anchor": "miners_respite",
-      "text": "$(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Spirit Bloom$(/l)$(br2)Grants Night Vision and Haste, and may restore damaged anvils."
+      "text": "$(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Spirit Bloom$(/l)$(br2)Grants Night Vision and Haste II, and may restore damaged anvils."
     },
     {
       "type": "text",
@@ -49,7 +49,7 @@
       "type": "text",
       "title": "Phantom Drift",
       "anchor": "phantom_drift",
-      "text": "$(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l) + $(l:hexalia:resources/herbs#ghost_fern)Ghost Fern$(/l)$(br2)Moves nearby items into surrounding containers."
+      "text": "$(l:hexalia:resources/herbs#dreamshroom)Dreamshroom$(/l) + $(l:hexalia:resources/herbs#ghost_fern)Ghost Fern$(/l)$(br2)Moves nearby items into eligible nearby containers."
     },
     {
       "type": "text",
@@ -61,24 +61,19 @@
       "type": "text",
       "title": "Tidal Pull",
       "anchor": "tidal_pull",
-      "text": "$(l:hexalia:resources/herbs#witchweed)Witchweed$(/l) + $(l:hexalia:resources/herbs#siren_kelp)Siren Kelp$(/l)$(br2)Pulls nearby mobs and items toward the censer."
+      "text": "$(l:hexalia:resources/herbs#witchweed)Witchweed$(/l) + $(l:hexalia:resources/herbs#siren_kelp)Siren Kelp$(/l)$(br2)Pulls nearby mobs and items toward the Censer, more strongly near its center, even at close range."
     },
     {
       "type": "text",
       "title": "Withering Calm",
       "anchor": "withering_calm",
-      "text": "$(l:hexalia:resources/herbs#witchweed)Witchweed$(/l) + $(l:hexalia:resources/herbs#ghost_fern)Ghost Fern$(/l)$(br2)Applies Wither while suppressing aggression from affected mobs."
+      "text": "$(l:hexalia:resources/herbs#witchweed)Witchweed$(/l) + $(l:hexalia:resources/herbs#ghost_fern)Ghost Fern$(/l)$(br2)Applies Wither II and pacifies affected non-undead mobs."
     },
     {
       "type": "text",
       "title": "Hollow Aura",
       "anchor": "hollow_aura",
-      "text": "$(l:hexalia:resources/herbs#witchweed)Witchweed$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Spirit Bloom$(/l)$(br2)Periodically removes beneficial effects from those within its range."
-    },
-    {
-      "type": "text",
-      "title": "On Pairing",
-      "text": "Each herb contributes its own nature to the resulting aura. Understanding how they combine allows for precise control over the effects created by the censer."
+      "text": "$(l:hexalia:resources/herbs#witchweed)Witchweed$(/l) + $(l:hexalia:resources/herbs#spirit_bloom)Spirit Bloom$(/l)$(br2)Removes beneficial and neutral effects within its range while leaving harmful effects."
     }
   ]
 }

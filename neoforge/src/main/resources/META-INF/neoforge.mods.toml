@@ -9,9 +9,10 @@ config = "hexalia-neoforge.mixins.json"
 modId = "hexalia"
 version = "${version}"
 displayName = "Hexalia"
+displayURL = "https://github.com/AstralyaStudios/Hexalia"
 authors = "Astralya Studios"
 description = '''
-An empty Architectury environment for Hexalia.
+Hexalia is a folk-witchcraft Minecraft mod centered on nature, cultivation, herbal practices, rituals, environmental magic, and handcrafted magical tools.
 '''
 
 [[dependencies.hexalia]]

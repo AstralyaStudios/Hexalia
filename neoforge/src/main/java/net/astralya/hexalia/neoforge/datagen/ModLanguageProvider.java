@@ -908,7 +908,6 @@ public final class ModLanguageProvider extends LanguageProvider {
             "A detailed book is your trusted tool in matters of witchcraft and plant care.");
 
     add("sounds.hexalia.mandrake_scream", "Mandrake screamed");
-    add("sounds.hexalia.ritual_success", "Ritual completed");
     add("sounds.hexalia.conversion", "Block converted");
     add("sounds.hexalia.sac_impact", "Sac hits the ground");
     add("sounds.hexalia.cacofey_giggle", "Cacofey giggling");

@@ -41,7 +41,7 @@
     {
       "type": "text",
       "title": "Notes",
-      "text": "Most settings apply server-side. 20 ticks equal 1 second. Back up your world before making major changes."
+      "text": "Most settings apply server-side. Back up your world before making major changes."
     }
   ]
 }

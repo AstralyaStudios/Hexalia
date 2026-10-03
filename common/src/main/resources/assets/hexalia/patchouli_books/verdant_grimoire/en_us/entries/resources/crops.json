@@ -20,7 +20,7 @@
       "item": "hexalia:mandrake",
       "title": "Mandrake",
       "anchor": "mandrake",
-      "text": "A volatile root found in forest regions. Its cry can be dangerous without protection, but it is valued for hearty meals such as Mandrake Stew."
+      "text": "A volatile root found in meadows and birch or flower forests. Its cry can be dangerous without protection, but it is valued for hearty meals such as Mandrake Stew."
     },
     {
       "type": "spotlight",
@@ -48,7 +48,7 @@
       "item": "hexalia:galeberries",
       "title": "Galeberries",
       "anchor": "galeberries",
-      "text": "Not found naturally, Galeberries are created through $(l:hexalia:core_mechanics/celestial_infusion)Celestial Infusion$(/l). They are used in crafted foods tied to enhanced perception."
+      "text": "Galeberries do not grow naturally: they are obtained through a $(l:hexalia:core_mechanics/celestial_infusion)Celestial Ritual$(/l). They are used in foods tied to enhanced perception."
     },
     {
       "type": "spotlight",

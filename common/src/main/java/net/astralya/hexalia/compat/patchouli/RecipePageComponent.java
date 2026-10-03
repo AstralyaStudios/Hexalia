@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.UnaryOperator;
 import net.astralya.hexalia.Hexalia;
+import net.astralya.hexalia.compat.RitualEnergyViewerIndicator;
 import net.astralya.hexalia.recipe.MortarAndPestleRecipe;
 import net.astralya.hexalia.recipe.MutationRecipe;
 import net.astralya.hexalia.recipe.NaturesRitualRecipe;
@@ -204,6 +205,23 @@ public class RecipePageComponent implements ICustomComponent {
           mouseY,
           currentRecipe.output);
     }
+    if (currentRecipe.energy() != null) {
+      RitualEnergyViewerIndicator energy = currentRecipe.energy();
+      if (!energy.icons().isEmpty()) {
+        ItemStack icon =
+            energy.icons().get((int) ((System.currentTimeMillis() / 1000) % energy.icons().size()));
+        context.renderItemStack(graphics, left + 4, top + 86, mouseX, mouseY, icon);
+      }
+      graphics.drawString(
+          Minecraft.getInstance().font, energy.firstLine(), left + 24, top + 86, 0xFF706C77, false);
+      graphics.drawString(
+          Minecraft.getInstance().font, energy.secondLine(), left + 24, top + 97, 0xFF706C77, false);
+      if (mouseX >= left + 4 && mouseX < left + 114
+          && mouseY >= top + RitualEnergyViewerIndicator.Y
+          && mouseY < top + RitualEnergyViewerIndicator.Y + RitualEnergyViewerIndicator.HEIGHT)
+        graphics.renderComponentTooltip(
+            Minecraft.getInstance().font, energy.tooltip(), mouseX, mouseY);
+    }
   }
 
   private void renderIngredient(
@@ -301,15 +319,23 @@ public class RecipePageComponent implements ICustomComponent {
                                 result ->
                                     Component.translatable(result.entity().toLanguageKey("entity")))
                             .orElseGet(output::getHoverName);
-                    return new RecipeView(List.copyOf(recipe.getIngredients()), output, title);
+                    return new RecipeView(
+                        List.copyOf(recipe.getIngredients()),
+                        output,
+                        title,
+                        RitualEnergyViewerIndicator.of(recipe));
                   });
       default -> Optional.empty();
     };
   }
 
-  private record RecipeView(List<Ingredient> ingredients, ItemStack output, Component title) {
+  private record RecipeView(
+      List<Ingredient> ingredients,
+      ItemStack output,
+      Component title,
+      RitualEnergyViewerIndicator energy) {
     private RecipeView(List<Ingredient> ingredients, ItemStack output) {
-      this(ingredients, output, output.getHoverName());
+      this(ingredients, output, output.getHoverName(), null);
     }
   }
 }

@@ -7,13 +7,13 @@
     {
       "type": "text",
       "title": "Silk Moths",
-      "text": "Silk Moths are delicate magical insects found in forests, essential for producing silk-based resources. They may also be summoned through $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Nature's Ritual$(/l), which requires a soul sacrifice."
+      "text": "Silk Moths live in forests and begin the path to silk equipment. They can also be obtained through $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Summoning$(/l), which requires an Athame soul."
     },
     {
       "type": "text",
       "title": "Behavior",
       "anchor": "behavior",
-      "text": "Silk Moths are fragile and drawn to light. They will hover around light sources when present, and wander or rest when none are nearby. Different variants can be found in the wild."
+      "text": "Silk Moths are drawn to nearby lights. They also wander and occasionally rest; different varieties can be found in the wild."
     },
     {
       "type": "text",
@@ -25,23 +25,18 @@
       "type": "text",
       "title": "Lifecycle",
       "anchor": "lifecycle",
-      "text": "Moths lay Egg Clusters on leaves or Nesting Blocks. These hatch into Silkworms, which can be placed on logs to form cocoons."
+      "text": "Moths lay Egg Clusters on leaves or Nesting Blocks. Each Cluster yields two Silkworms, which you can place on logs to form cocoons."
     },
     {
       "type": "text",
       "title": "Cocoons",
-      "text": "Silkworm Cocoons form on logs and can be found naturally on certain trees. They can be broken to release a silkworm, or activated with light to produce a Silk Moth."
+      "text": "Cocoons can also grow on certain trees. Break one to release a Silkworm, or use a light-emitting block item on it to hatch a Silk Moth."
     },
     {
       "type": "text",
       "title": "Silk Resources",
       "anchor": "resources",
-      "text": "Silk Moths and their lifecycle produce Silk Fiber, a key material used in crafting. Silkworms can also be processed to obtain additional fiber."
-    },
-    {
-      "type": "text",
-      "title": "On Use",
-      "text": "Silk Moths form the foundation of silk production. With proper setup, they can be farmed for a steady supply of materials used in rituals and crafting."
+      "text": "The moth’s lifecycle yields Silk Fiber. Craft it into $(l:hexalia:content/equipment_armor#silkweave)Silkweave$(/l), then use $(l:hexalia:core_mechanics/celestial_infusion)Celestial Rituals$(/l) to upgrade Silkweave into $(l:hexalia:content/equipment_armor#moonweave)Moonweave$(/l)."
     }
   ]
 }

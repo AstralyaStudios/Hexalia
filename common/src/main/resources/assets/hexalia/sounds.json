@@ -6,13 +6,6 @@
     ]
   },
 
-  "ritual_success": {
-    "subtitle": "sounds.hexalia.ritual_success",
-    "sounds": [
-      "hexalia:ritual_success"
-    ]
-  },
-
   "sac_impact": {
     "subtitle": "sounds.hexalia.sac_impact",
     "sounds": [
