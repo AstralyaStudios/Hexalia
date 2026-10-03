@@ -6,6 +6,7 @@ import net.astralya.hexalia.block.entity.ModBlockEntityTypes;
 import net.astralya.hexalia.effect.ModMobEffects;
 import net.astralya.hexalia.entity.ModEntities;
 import net.astralya.hexalia.event.NaturesRitualSoulEvents;
+import net.astralya.hexalia.event.SagePendantEvents;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.menu.ModMenuTypes;
 import net.astralya.hexalia.particle.ModParticleType;
@@ -33,6 +34,7 @@ public final class HexaliaMod {
     ModRecipes.register();
     ModEntities.register();
     NaturesRitualSoulEvents.register();
+    SagePendantEvents.register();
     net.astralya.hexalia.event.AccessoryEffects.register();
     net.astralya.hexalia.event.GravebloomEvents.register();
     net.astralya.hexalia.event.CinderhewEvents.register();

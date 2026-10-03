@@ -4,8 +4,7 @@ import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import net.astralya.hexalia.event.SagePendantEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -41,6 +40,13 @@ public class SagePendantItem extends Item {
     tag.putInt(TAG_REMAINDER, next == CAPACITY ? 0 : (int) (quarters % 4));
   }
 
+  public static void releaseExperience(ItemStack stack, int amount) {
+    CompoundTag tag = stack.getOrCreateTag();
+    int remaining = storedExperience(stack) - amount;
+    tag.putInt(TAG_EXPERIENCE, remaining);
+    if (remaining == 0) tag.putInt(TAG_REMAINDER, 0);
+  }
+
   @Override
   public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
     ItemStack stack = player.getItemInHand(hand);
@@ -48,11 +54,7 @@ public class SagePendantItem extends Item {
     if (!player.isShiftKeyDown() || stored == 0) return InteractionResultHolder.pass(stack);
 
     if (!level.isClientSide) {
-      CompoundTag tag = stack.getOrCreateTag();
-      tag.putInt(TAG_EXPERIENCE, 0);
-      tag.putInt(TAG_REMAINDER, 0);
-      player.giveExperiencePoints(stored);
-      level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.6F, 1.1F);
+      SagePendantEvents.startRelease(player, stack);
     }
     return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
   }
