@@ -15,6 +15,7 @@ import net.astralya.hexalia.event.CinderhewEvents;
 import net.astralya.hexalia.event.GravebloomEvents;
 import net.astralya.hexalia.event.NaturesRitualSoulEvents;
 import net.astralya.hexalia.event.RootshaperEvents;
+import net.astralya.hexalia.event.SagePendantEvents;
 import net.astralya.hexalia.item.ModCreativeModeTabs;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.menu.ModMenuTypes;
@@ -58,6 +59,7 @@ public final class Hexalia {
     GravebloomEvents.register();
     NaturesRitualSoulEvents.register();
     RootshaperEvents.register();
+    SagePendantEvents.register();
     initAccessoriesCompat();
     LOGGER.info("Initializing Hexalia");
   }
