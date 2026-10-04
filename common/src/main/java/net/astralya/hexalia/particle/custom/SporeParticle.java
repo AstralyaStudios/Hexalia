@@ -6,13 +6,16 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.TextureSheetParticle;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 
 public class SporeParticle extends TextureSheetParticle {
 
   private final SpriteSet sprites;
+  private final double baseX;
+  private final double baseY;
+  private final double baseZ;
   private final double swayOffset;
+  private final double verticalOffset;
 
   public SporeParticle(
       ClientLevel level,
@@ -22,19 +25,24 @@ public class SporeParticle extends TextureSheetParticle {
       double velocityX,
       double velocityY,
       double velocityZ,
-      SpriteSet spriteSet) {
+      SpriteSet spriteSet,
+      float red,
+      float green,
+      float blue) {
     super(level, x, y, z, velocityX, velocityY, velocityZ);
     this.sprites = spriteSet;
+    this.baseX = x;
+    this.baseY = y;
+    this.baseZ = z;
     this.swayOffset = this.random.nextDouble() * Math.PI * 2.0D;
-    this.xd = velocityX + (this.random.nextDouble() - 0.5D) * 0.02D;
-    this.yd = 0.01D + this.random.nextDouble() * 0.015D;
-    this.zd = velocityZ + (this.random.nextDouble() - 0.5D) * 0.02D;
-    this.quadSize *= 0.12F;
+    this.verticalOffset = this.random.nextDouble() * Math.PI * 2.0D;
+    this.quadSize *= 0.12F + this.random.nextFloat() * 0.05F;
     this.lifetime = 80 + this.random.nextInt(40);
     this.gravity = 0.0F;
-    this.friction = 0.98F;
+    this.friction = 1.0F;
     this.hasPhysics = false;
     this.alpha = 0.0F;
+    this.setColor(red, green, blue);
     this.pickSprite(spriteSet);
   }
 
@@ -62,15 +70,12 @@ public class SporeParticle extends TextureSheetParticle {
             ? lifeT / 0.15F
             : lifeT > 0.75F ? Mth.clamp((1.0F - lifeT) / 0.25F, 0.0F, 1.0F) : 1.0F;
 
-    double sway = Math.sin((this.age + this.swayOffset) * 0.08D) * 0.003D;
-    this.xd += sway;
-    this.zd += Math.cos((this.age + this.swayOffset) * 0.08D) * 0.003D;
-    this.yd *= 0.97D;
-
-    this.move(this.xd, this.yd, this.zd);
+    this.x = this.baseX + Math.sin((this.age * 0.06D) + this.swayOffset) * 0.03D;
+    this.y = this.baseY + Math.sin((this.age * 0.04D) + this.verticalOffset) * 0.01D;
+    this.z = this.baseZ + Math.cos((this.age * 0.06D) + this.swayOffset) * 0.03D;
   }
 
-  public static class Factory implements ParticleProvider<SimpleParticleType> {
+  public static class Factory implements ParticleProvider<ColoredSporeParticleOptions> {
 
     private final SpriteSet spriteSet;
 
@@ -80,7 +85,7 @@ public class SporeParticle extends TextureSheetParticle {
 
     @Override
     public Particle createParticle(
-        SimpleParticleType type,
+        ColoredSporeParticleOptions options,
         ClientLevel level,
         double x,
         double y,
@@ -88,7 +93,9 @@ public class SporeParticle extends TextureSheetParticle {
         double vx,
         double vy,
         double vz) {
-      return new SporeParticle(level, x, y, z, vx, vy, vz, this.spriteSet);
+      return new SporeParticle(
+          level, x, y, z, vx, vy, vz, this.spriteSet,
+          options.color().x(), options.color().y(), options.color().z());
     }
   }
 }

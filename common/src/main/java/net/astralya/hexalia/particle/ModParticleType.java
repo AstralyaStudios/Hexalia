@@ -3,6 +3,7 @@ package net.astralya.hexalia.particle;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.astralya.hexalia.HexaliaMod;
+import net.astralya.hexalia.particle.custom.ColoredSporeParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
@@ -12,10 +13,17 @@ public class ModParticleType {
   public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES =
       DeferredRegister.create(HexaliaMod.MODID, Registries.PARTICLE_TYPE);
 
-  public static final RegistrySupplier<SimpleParticleType> SPORE =
-      PARTICLE_TYPES.register("spore", () -> new SimpleParticleType(true) {});
-  public static final RegistrySupplier<SimpleParticleType> GHOST =
-      PARTICLE_TYPES.register("ghost", () -> new SimpleParticleType(true) {});
+  public static final RegistrySupplier<ParticleType<ColoredSporeParticleOptions>> SPORE =
+      PARTICLE_TYPES.register(
+          "spore",
+          () ->
+              new ParticleType<ColoredSporeParticleOptions>(
+                  false, ColoredSporeParticleOptions.DESERIALIZER) {
+                @Override
+                public com.mojang.serialization.Codec<ColoredSporeParticleOptions> codec() {
+                  return ColoredSporeParticleOptions.CODEC;
+                }
+              });
   public static final RegistrySupplier<SimpleParticleType> FIREFLY =
       PARTICLE_TYPES.register("firefly", () -> new SimpleParticleType(true) {});
 

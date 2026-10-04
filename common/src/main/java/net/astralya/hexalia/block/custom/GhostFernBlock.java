@@ -2,12 +2,13 @@ package net.astralya.hexalia.block.custom;
 
 import java.util.function.Supplier;
 import net.astralya.hexalia.Configuration;
-import net.astralya.hexalia.particle.ModParticleType;
+import net.astralya.hexalia.particle.custom.ColoredSporeParticleOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import org.joml.Vector3f;
 
 public class GhostFernBlock extends HerbBlock {
 
@@ -18,22 +19,15 @@ public class GhostFernBlock extends HerbBlock {
 
   @Override
   public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-    if (level.isClientSide() && Configuration.GHOST_FERN_EMITS_PARTICLES.get()) {
-      double centerX = pos.getX() + 0.5;
-      double centerY = pos.getY() + 0.5;
-      double centerZ = pos.getZ() + 0.5;
+    if (!level.isClientSide() || !Configuration.GHOST_FERN_EMITS_PARTICLES.get()
+        || random.nextFloat() > 0.25F) return;
 
-      double offsetX = (random.nextDouble() - 0.5) * 0.2;
-      double offsetZ = (random.nextDouble() - 0.5) * 0.2;
+    double x = pos.getX() + 0.1D + random.nextDouble() * 0.8D;
+    double y = pos.getY() + random.nextDouble() * 0.7D;
+    double z = pos.getZ() + 0.1D + random.nextDouble() * 0.8D;
 
-      level.addParticle(
-          ModParticleType.GHOST.get(),
-          centerX + offsetX,
-          centerY,
-          centerZ + offsetZ,
-          (random.nextDouble() - 0.5) * 0.02,
-          0.08,
-          (random.nextDouble() - 0.5) * 0.02);
-    }
+    level.addParticle(
+        new ColoredSporeParticleOptions(new Vector3f(0.72F, 0.82F, 0.76F)),
+        x, y, z, 0.0D, 0.0D, 0.0D);
   }
 }

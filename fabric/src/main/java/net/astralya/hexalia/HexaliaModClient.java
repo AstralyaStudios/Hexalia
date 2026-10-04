@@ -23,7 +23,6 @@ import net.astralya.hexalia.menu.ModMenuTypes;
 import net.astralya.hexalia.particle.ModParticleType;
 import net.astralya.hexalia.particle.custom.CacofeyDustHeldParticle;
 import net.astralya.hexalia.particle.custom.CacofeyDustParticle;
-import net.astralya.hexalia.particle.custom.GhostParticle;
 import net.astralya.hexalia.particle.custom.FireflyParticle;
 import net.astralya.hexalia.particle.custom.HexMoteParticle;
 import net.astralya.hexalia.particle.custom.InfusedBubbleParticle;
@@ -149,7 +148,6 @@ public class HexaliaModClient implements ClientModInitializer {
         ParticleFactoryRegistry registry = ParticleFactoryRegistry.getInstance();
         registry.register(ModParticleType.SPORE.get(), SporeParticle.Factory::new);
         registry.register(ModParticleType.INFUSED_BUBBLES.get(), InfusedBubbleParticle.Provider::new);
-        registry.register(ModParticleType.GHOST.get(), GhostParticle.Factory::new);
         registry.register(ModParticleType.LEAVES.get(), LeavesParticle.Factory::new);
         registry.register(ModParticleType.FIREFLY.get(), FireflyParticle.Factory::new);
         registry.register(ModParticleType.SPARKLE.get(), SparkleParticle.Factory::new);
