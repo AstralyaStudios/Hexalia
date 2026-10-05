@@ -74,6 +74,7 @@ dependencies {
     modCompileOnly("io.wispforest:accessories-neoforge:$rootProject.accessories_version") {
         transitive = false
     }
+    modCompileOnly "top.theillusivec4.curios:curios-neoforge:$rootProject.curios_version:api"
     compileOnly "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
     modCompileOnly "mezz.jei:jei-${rootProject.minecraft_version}-common-api:$rootProject.jei_version"
     modCompileOnly "mezz.jei:jei-${rootProject.minecraft_version}-neoforge-api:$rootProject.jei_version"

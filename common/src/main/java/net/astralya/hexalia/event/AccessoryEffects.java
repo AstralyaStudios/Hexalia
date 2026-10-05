@@ -53,7 +53,7 @@ public final class AccessoryEffects {
       return;
     }
 
-    if (AccessoriesIntegration.isEquipped(player, ModItems.WITCHHEART_CLUSTER.get())) {
+    if (AccessoriesIntegration.isActive(player, ModItems.WITCHHEART_CLUSTER.get())) {
       if (!maxHealth.hasModifier(WITCHHEART_HEALTH_ID)) {
         maxHealth.addTransientModifier(WITCHHEART_HEALTH);
       }
@@ -63,7 +63,7 @@ public final class AccessoryEffects {
   }
 
   private static void updateMoonward(Player player) {
-    if (!AccessoriesIntegration.isEquipped(player, ModItems.MOONWARD_RING.get())) {
+    if (!AccessoriesIntegration.isActive(player, ModItems.MOONWARD_RING.get())) {
       return;
     }
 
@@ -73,7 +73,7 @@ public final class AccessoryEffects {
 
   private static void updateSeafoam(Player player) {
     if (!player.isUnderWater()
-        || !AccessoriesIntegration.isEquipped(player, ModItems.SEAFOAM_TALISMAN.get())) {
+        || !AccessoriesIntegration.isActive(player, ModItems.SEAFOAM_TALISMAN.get())) {
       return;
     }
 
@@ -89,7 +89,7 @@ public final class AccessoryEffects {
     if (!(entity instanceof Player player)
         || player.level().isClientSide()
         || !isDirectAttack(source)
-        || !AccessoriesIntegration.isEquipped(player, ModItems.WYRD_FEATHER.get())
+        || !AccessoriesIntegration.isActive(player, ModItems.WYRD_FEATHER.get())
         || player.getRandom().nextFloat() >= WYRD_DODGE_CHANCE) {
       return EventResult.pass();
     }

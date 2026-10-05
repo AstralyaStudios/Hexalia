@@ -16,6 +16,9 @@ public final class HexaliaFabric implements ModInitializer {
   public void onInitialize() {
     HexaliaFabricConfig.init();
     Hexalia.init();
+    if (net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("trinkets")) {
+      net.astralya.hexalia.fabric.integration.TrinketsIntegration.register();
+    }
     FabricDefaultAttributeRegistry.register(ModEntities.SILK_MOTH.get(), SilkMothEntity.setAttributes());
     FabricDefaultAttributeRegistry.register(ModEntities.CACOFEY.get(), CacofeyEntity.setAttributes());
     FabricEntitySpawns.register();

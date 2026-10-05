@@ -30,6 +30,9 @@ public final class HexaliaNeoForge {
   public HexaliaNeoForge(IEventBus modEventBus, ModContainer modContainer) {
     HexaliaNeoForgeConfig.init(modContainer, modEventBus);
     Hexalia.init();
+    if (net.neoforged.fml.ModList.get().isLoaded("curios")) {
+      net.astralya.hexalia.neoforge.integration.CuriosIntegration.register();
+    }
     NeoForgeArmorEvents.register();
     NeoForgeGreenOmenEvents.register();
     NeoForgeSagePendantEvents.register();

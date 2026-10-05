@@ -72,6 +72,16 @@ subprojects {
             }
         }
         maven {
+            name = 'Curios'
+            url = 'https://maven.theillusivec4.top/'
+            content { includeGroup 'top.theillusivec4.curios' }
+        }
+        maven {
+            name = 'Ladysnake'
+            url = 'https://maven.ladysnake.org/releases'
+            content { includeGroup 'org.ladysnake.cardinal-components-api' }
+        }
+        maven {
             name = 'Su5ed'
             url = 'https://maven.su5ed.dev/releases/'
             content {

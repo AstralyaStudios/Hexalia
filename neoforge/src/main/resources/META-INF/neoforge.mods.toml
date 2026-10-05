@@ -50,6 +50,12 @@ ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.hexalia]]
+modId = "curios"
+type = "optional"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexalia]]
 modId = "patchouli"
 type = "optional"
 ordering = "AFTER"
