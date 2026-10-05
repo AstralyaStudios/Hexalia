@@ -76,6 +76,9 @@ dependencies {
     modCompileOnly "dev.emi:emi-forge:${rootProject.emi_version}:api"
     modRuntimeOnly "dev.emi:emi-forge:${rootProject.emi_version}"
     modCompileOnly "top.theillusivec4.curios:curios-forge:5.14.1+1.20.1:api"
+    modCompileOnly("io.wispforest:accessories-neoforge:$rootProject.accessories_version") {
+        transitive = false
+    }
     modRuntimeOnly "top.theillusivec4.curios:curios-forge:5.14.1+1.20.1"
     modCompileOnly "vazkii.patchouli:Patchouli:${rootProject.patchouli_version}-FORGE:api"
     modRuntimeOnly "vazkii.patchouli:Patchouli:${rootProject.patchouli_version}-FORGE"

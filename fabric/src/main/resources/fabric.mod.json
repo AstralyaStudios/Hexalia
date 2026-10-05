@@ -38,9 +38,11 @@
 		"fabricloader": ">=0.15.6",
 		"minecraft": "~1.20.1",
 		"java": ">=17",
+		"architectury": ">=9.2.14",
 		"fabric-api": "*"
 	},
 	"suggests": {
-		"another-mod": "*"
+		"trinkets": "*",
+		"accessories": "*"
 	}
 }

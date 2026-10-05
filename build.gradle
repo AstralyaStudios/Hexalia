@@ -90,6 +90,11 @@ subprojects {
             url = 'https://maven.theillusivec4.top/'
             content { includeGroup 'top.theillusivec4.curios' }
         }
+        maven {
+            name = 'WispForest'
+            url = 'https://maven.wispforest.io/releases/'
+            content { includeGroupByRegex 'io\\.wispforest(\\..*)?' }
+        }
         maven { url = 'https://maven.jamieswhiteshirt.com/libs-release' }
     }
 

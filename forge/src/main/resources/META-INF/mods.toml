@@ -26,6 +26,13 @@ description='''Hexalia is a folk-witchcraft Minecraft mod centered on nature, cu
     side="BOTH"
 
 [[dependencies.hexalia]]
+    modId="architectury"
+    mandatory=true
+    versionRange="[9.2.14,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.hexalia]]
     modId="geckolib"
     mandatory=true
     versionRange="${geckolib_version_range}"
@@ -37,4 +44,18 @@ description='''Hexalia is a folk-witchcraft Minecraft mod centered on nature, cu
     mandatory=false
     versionRange="${patchouli_version_range}"
     ordering="NONE"
+    side="BOTH"
+
+[[dependencies.hexalia]]
+    modId="accessories"
+    mandatory=false
+    versionRange="[1.0.0-beta.47,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.hexalia]]
+    modId="curios"
+    mandatory=false
+    versionRange="[5.14.1,)"
+    ordering="AFTER"
     side="BOTH"

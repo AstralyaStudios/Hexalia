@@ -45,6 +45,9 @@ public class HexaliaFabric implements ModInitializer {
 		if (net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("trinkets")) {
 			net.astralya.hexalia.fabric.integration.TrinketsIntegration.register();
 		}
+		if (net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("accessories")) {
+			net.astralya.hexalia.integration.accessories.AccessoriesCompat.register();
+		}
 		FabricConfiguration.register();
 	}
 

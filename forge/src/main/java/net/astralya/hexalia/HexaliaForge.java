@@ -29,6 +29,9 @@ public class HexaliaForge {
         if (net.minecraftforge.fml.ModList.get().isLoaded("curios")) {
             net.astralya.hexalia.forge.integration.CuriosIntegration.register();
         }
+        if (net.minecraftforge.fml.ModList.get().isLoaded("accessories")) {
+            net.astralya.hexalia.integration.accessories.AccessoriesCompat.register();
+        }
         ModCreativeModeTabs.register(modEventBus);
         ModLootModifiers.register(modEventBus);
 

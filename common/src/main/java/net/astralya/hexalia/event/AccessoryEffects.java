@@ -54,17 +54,20 @@ public final class AccessoryEffects {
       return;
     }
 
-    if (AccessoriesIntegration.isEquipped(player, ModItems.WITCHHEART_CLUSTER.get())) {
-      if (maxHealth.getModifier(WITCHHEART_HEALTH_ID) == null) {
-        maxHealth.addTransientModifier(WITCHHEART_HEALTH);
-      }
-    } else {
+    boolean active = AccessoriesIntegration.isActive(player, ModItems.WITCHHEART_CLUSTER.get());
+    boolean hasModifier = maxHealth.getModifier(WITCHHEART_HEALTH_ID) != null;
+    if (active && !hasModifier) {
+      maxHealth.addTransientModifier(WITCHHEART_HEALTH);
+    } else if (!active && hasModifier) {
       maxHealth.removeModifier(WITCHHEART_HEALTH_ID);
+      if (player.getHealth() > player.getMaxHealth()) {
+        player.setHealth(player.getMaxHealth());
+      }
     }
   }
 
   private static void updateMoonward(Player player) {
-    if (!AccessoriesIntegration.isEquipped(player, ModItems.MOONWARD_RING.get())) {
+    if (!AccessoriesIntegration.isActive(player, ModItems.MOONWARD_RING.get())) {
       return;
     }
 
@@ -74,7 +77,7 @@ public final class AccessoryEffects {
 
   private static void updateSeafoam(Player player) {
     if (!player.isUnderWater()
-        || !AccessoriesIntegration.isEquipped(player, ModItems.SEAFOAM_TALISMAN.get())) {
+        || !AccessoriesIntegration.isActive(player, ModItems.SEAFOAM_TALISMAN.get())) {
       return;
     }
 
@@ -90,7 +93,7 @@ public final class AccessoryEffects {
     if (!(entity instanceof Player player)
         || player.level().isClientSide()
         || !isDirectAttack(source)
-        || !AccessoriesIntegration.isEquipped(player, ModItems.WYRD_FEATHER.get())
+        || !AccessoriesIntegration.isActive(player, ModItems.WYRD_FEATHER.get())
         || player.getRandom().nextFloat() >= WYRD_DODGE_CHANCE) {
       return EventResult.pass();
     }

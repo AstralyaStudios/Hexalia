@@ -37,6 +37,9 @@ dependencies {
     modCompileOnly "dev.emi:emi-fabric:${rootProject.emi_version}:api"
     modRuntimeOnly "dev.emi:emi-fabric:${rootProject.emi_version}"
     modCompileOnly "dev.emi:trinkets:3.7.1"
+    modCompileOnly("io.wispforest:accessories-fabric:$rootProject.accessories_version") {
+        transitive = false
+    }
     modRuntimeOnly "dev.emi:trinkets:3.7.1"
     modImplementation "vazkii.patchouli:Patchouli:${rootProject.patchouli_version}-FABRIC"
 

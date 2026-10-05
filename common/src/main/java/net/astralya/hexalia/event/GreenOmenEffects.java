@@ -29,7 +29,7 @@ public final class GreenOmenEffects {
     if (drops.isEmpty()
         || player.isCreative()
         || !state.is(ModTags.Blocks.CROPS)
-        || !AccessoriesIntegration.isEquipped(player, ModItems.GREEN_OMEN.get())
+        || !AccessoriesIntegration.isActive(player, ModItems.GREEN_OMEN.get())
         || player.getRandom().nextFloat() >= chance) {
       return List.of();
     }
