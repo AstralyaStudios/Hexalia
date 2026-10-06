@@ -1,0 +1,118 @@
+{
+  "values": {
+    "hexalia:mandrake_seeds": {
+      "chance": 0.3
+    },
+    "hexalia:sunfire_tomato_seeds": {
+      "chance": 0.3
+    },
+    "hexalia:rabbage_seeds": {
+      "chance": 0.3
+    },
+    "hexalia:chillberries": {
+      "chance": 0.3
+    },
+    "hexalia:galeberries": {
+      "chance": 0.3
+    },
+    "hexalia:lotus_flower": {
+      "chance": 0.3
+    },
+    "hexalia:cottonwood_catkin": {
+      "chance": 0.3
+    },
+    "hexalia:cottonwood_leaves": {
+      "chance": 0.3
+    },
+    "hexalia:willow_leaves": {
+      "chance": 0.3
+    },
+    "hexalia:cottonwood_sapling": {
+      "chance": 0.3
+    },
+    "hexalia:willow_sapling": {
+      "chance": 0.3
+    },
+    "hexalia:spirit_bloom": {
+      "chance": 0.5
+    },
+    "hexalia:dreamshroom": {
+      "chance": 0.5
+    },
+    "hexalia:celestial_bloom": {
+      "chance": 0.5
+    },
+    "hexalia:withered_celestial_bloom": {
+      "chance": 0.5
+    },
+    "hexalia:siren_kelp": {
+      "chance": 0.5
+    },
+    "hexalia:lotus_blossom": {
+      "chance": 0.5
+    },
+    "hexalia:begonia": {
+      "chance": 0.5
+    },
+    "hexalia:lavender": {
+      "chance": 0.5
+    },
+    "hexalia:dahlia": {
+      "chance": 0.5
+    },
+    "hexalia:pale_mushroom": {
+      "chance": 0.5
+    },
+    "hexalia:witchweed": {
+      "chance": 0.5
+    },
+    "hexalia:ghost_fern": {
+      "chance": 0.5
+    },
+    "hexalia:nightshade_bush": {
+      "chance": 0.5
+    },
+    "hexalia:wild_mandrake": {
+      "chance": 0.5
+    },
+    "hexalia:wild_sunfire_tomato": {
+      "chance": 0.5
+    },
+    "hexalia:mandrake": {
+      "chance": 0.6
+    },
+    "hexalia:sunfire_tomato": {
+      "chance": 0.6
+    },
+    "hexalia:rabbage": {
+      "chance": 0.6
+    },
+    "hexalia:saltsprout": {
+      "chance": 0.6
+    },
+    "hexalia:morphora": {
+      "chance": 0.8
+    },
+    "hexalia:grimshade": {
+      "chance": 0.8
+    },
+    "hexalia:nautilite": {
+      "chance": 0.8
+    },
+    "hexalia:windsong": {
+      "chance": 0.8
+    },
+    "hexalia:astrylis": {
+      "chance": 0.8
+    },
+    "hexalia:lourdes": {
+      "chance": 0.8
+    },
+    "hexalia:aegiflora": {
+      "chance": 0.8
+    },
+    "hexalia:withered_aegiflora": {
+      "chance": 0.8
+    }
+  }
+}

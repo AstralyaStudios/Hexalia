@@ -1,0 +1,7 @@
+{
+  "values": [
+    "hexalia:salt",
+    {"id": "#c:salt", "required": false},
+    {"id": "#c:dusts/salt", "required": false}
+  ]
+}

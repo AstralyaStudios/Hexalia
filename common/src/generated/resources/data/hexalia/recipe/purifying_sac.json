@@ -3,7 +3,7 @@
   "category": "equipment",
   "ingredients": [
     {
-      "item": "hexalia:salt"
+      "tag": "hexalia:salt"
     },
     {
       "item": "hexalia:lotus_blossom"

@@ -106,7 +106,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .save(recipeOutput);
 
     ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ModItems.PURIFYING_SAC.get())
-            .requires(ModItems.SALT.get())
+            .requires(ModTags.Items.SALT)
             .requires(ModItems.LOTUS_BLOSSOM.get())
             .requires(Items.LEATHER)
             .unlockedBy(
@@ -481,7 +481,7 @@ public final class ModRecipeProvider extends RecipeProvider implements IConditio
             .requires(ModItems.SILK_IDOL.get())
             .requires(ModItems.WATER_NODE.get())
             .requires(ModItems.LOTUS_BLOSSOM.get())
-            .requires(ModItems.SALT.get())
+            .requires(ModTags.Items.SALT)
             .unlockedBy(
                     "has_silk_idol",
                     inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.SILK_IDOL.get()).build()))

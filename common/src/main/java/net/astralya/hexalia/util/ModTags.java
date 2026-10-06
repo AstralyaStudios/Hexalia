@@ -14,7 +14,9 @@ public final class ModTags {
 
   public static final class Items {
     public static final TagKey<Item> SALT =
-        TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "salt"));
+        create("salt");
+    public static final TagKey<Item> SALT_DUST =
+        TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/salt"));
     public static final TagKey<Item> COTTONWOOD_LOGS = create("cottonwood_logs");
     public static final TagKey<Item> WILLOW_LOGS = create("willow_logs");
     public static final TagKey<Item> SALT_BLOCKS =

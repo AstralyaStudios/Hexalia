@@ -6,7 +6,7 @@
       "item": "minecraft:rotten_flesh"
     },
     "S": {
-      "tag": "c:salt"
+      "tag": "hexalia:salt"
     }
   },
   "pattern": [

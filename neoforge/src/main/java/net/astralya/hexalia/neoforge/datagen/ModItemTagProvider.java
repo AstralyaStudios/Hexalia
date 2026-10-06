@@ -230,7 +230,7 @@ public final class ModItemTagProvider extends ItemTagsProvider {
         .add(ModItems.BREW_OF_HOLLOW_SILENCE.get())
         .add(ModItems.RUSTIC_BOTTLE.get());
 
-    tag(ModTags.Items.SALT).add(ModItems.SALT.get());
+    tag(ModTags.Items.SALT).add(ModItems.SALT.get()).addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "salt")).addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "dusts/salt"));
     tag(ModTags.Items.SALT_BLOCKS).add(ModItems.SALT_BLOCK.get());
     tag(ModTags.Items.MUSHROOMS)
         .add(ModBlocks.DREAMSHROOM.get().asItem())

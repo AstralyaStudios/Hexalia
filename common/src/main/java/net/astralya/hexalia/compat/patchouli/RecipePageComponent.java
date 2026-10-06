@@ -11,9 +11,11 @@ import net.astralya.hexalia.recipe.NaturesRitualRecipe;
 import net.astralya.hexalia.recipe.SmallCauldronRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 import vazkii.patchouli.api.IComponentRenderContext;
@@ -311,7 +313,11 @@ public class RecipePageComponent implements ICustomComponent {
               .map(
                   holder -> {
                     NaturesRitualRecipe recipe = (NaturesRitualRecipe) holder.value();
-                    ItemStack output = recipe.getResultItem(client.level.registryAccess()).copy();
+                    ItemStack output = recipe.entityResult()
+                        .flatMap(result -> BuiltInRegistries.ENTITY_TYPE.getOptional(result.entity()))
+                        .map(SpawnEggItem::byId)
+                        .map(SpawnEggItem::getDefaultInstance)
+                        .orElseGet(() -> recipe.getResultItem(client.level.registryAccess()).copy());
                     Component title =
                         recipe
                             .entityResult()
