@@ -1,0 +1,6 @@
+{
+  "values": [
+    {"id": "#forge:salt", "required": false},
+    {"id": "#forge:dusts/salt", "required": false}
+  ]
+}

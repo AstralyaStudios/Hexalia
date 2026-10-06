@@ -1,7 +1,6 @@
 package net.astralya.hexalia.item.custom.armor;
 
 import java.util.List;
-import net.astralya.hexalia.client.renderer.item.EarplugsRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ArmorMaterial;
@@ -17,7 +16,6 @@ import software.bernie.geckolib.core.animation.Animation;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class EarplugsItem extends HexaliaGeoArmorItem {
 
@@ -38,8 +36,8 @@ public class EarplugsItem extends HexaliaGeoArmorItem {
   }
 
   @Override
-  public GeoArmorRenderer<?> createGeoArmorRenderer() {
-    return new EarplugsRenderer();
+  public Object createGeoArmorRenderer() {
+    return createClientRenderer("EarplugsRenderer");
   }
 
   @Override

@@ -5,7 +5,6 @@ import java.util.function.Supplier;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 /** Shared armor contract; loader-specific renderer attachment is supplied by platform mixins. */
 public abstract class HexaliaGeoArmorItem extends ArmorItem implements GeoItem {
@@ -13,7 +12,17 @@ public abstract class HexaliaGeoArmorItem extends ArmorItem implements GeoItem {
     super(material, type, properties);
   }
 
-  public abstract GeoArmorRenderer<?> createGeoArmorRenderer();
+  public abstract Object createGeoArmorRenderer();
+
+  protected final Object createClientRenderer(String name) {
+    try {
+      return Class.forName("net.astralya.hexalia.client.renderer.item." + name)
+          .getConstructor()
+          .newInstance();
+    } catch (ReflectiveOperationException exception) {
+      throw new IllegalStateException("Unable to create " + name, exception);
+    }
+  }
 
   @Override
   public void createRenderer(Consumer<Object> consumer) {}

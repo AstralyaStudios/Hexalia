@@ -15,7 +15,7 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 @Mixin(HexaliaGeoArmorItem.class)
 public abstract class HexaliaGeoArmorItemMixin {
     @Shadow(remap = false)
-    public abstract GeoArmorRenderer<?> createGeoArmorRenderer();
+    public abstract Object createGeoArmorRenderer();
 
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
@@ -29,7 +29,7 @@ public abstract class HexaliaGeoArmorItemMixin {
                     EquipmentSlot slot,
                     HumanoidModel<?> original) {
                 if (this.renderer == null) {
-                    this.renderer = HexaliaGeoArmorItemMixin.this.createGeoArmorRenderer();
+                    this.renderer = (GeoArmorRenderer<?>) HexaliaGeoArmorItemMixin.this.createGeoArmorRenderer();
                 }
 
                 this.renderer.prepForRender(livingEntity, stack, slot, original);

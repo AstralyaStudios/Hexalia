@@ -7,6 +7,7 @@ import net.astralya.hexalia.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -128,7 +129,13 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         // Minerals
         tag(ModTags.Items.SALT)
-                .add(ModItems.SALT.get());
+                .add(ModItems.SALT.get())
+                .addOptionalTag(new ResourceLocation("c", "salt"))
+                .addOptionalTag(new ResourceLocation("c", "salts"))
+                .addOptionalTag(new ResourceLocation("c", "salt_dusts"))
+                .addOptionalTag(new ResourceLocation("forge", "salt"))
+                .addOptionalTag(new ResourceLocation("forge", "dusts/salt"));
+        tag(ModTags.Items.FORGE_SALT).add(ModItems.SALT.get());
 
         tag(ModTags.Items.SALT_BLOCKS)
                 .add(ModBlocks.SALT_BLOCK.get().asItem());

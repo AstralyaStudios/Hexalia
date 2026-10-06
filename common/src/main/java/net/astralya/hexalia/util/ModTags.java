@@ -32,7 +32,9 @@ public class ModTags {
     public static final TagKey<Item> VEGETABLES = forgeItemTag("vegetables");
     public static final TagKey<Item> VEGETABLES_TOMATO = forgeItemTag("vegetables/tomato");
 
-    public static final TagKey<Item> SALT = forgeItemTag("salt");
+    public static final TagKey<Item> SALT = createItemTag("salt");
+    public static final TagKey<Item> SALT_DUST = commonItemTag("dusts/salt");
+    public static final TagKey<Item> FORGE_SALT = forgeItemTag("salt");
     public static final TagKey<Item> BERRIES = forgeItemTag("berries");
     public static final TagKey<Item> SEEDS = forgeItemTag("seeds");
     public static final TagKey<Item> MUSHROOMS = forgeItemTag("mushrooms");
@@ -49,6 +51,10 @@ public class ModTags {
 
     private static TagKey<Item> forgeItemTag(String name) {
       return TagKey.create(Registries.ITEM, new ResourceLocation("forge", name));
+    }
+
+    private static TagKey<Item> commonItemTag(String name) {
+      return TagKey.create(Registries.ITEM, new ResourceLocation("c", name));
     }
   }
 

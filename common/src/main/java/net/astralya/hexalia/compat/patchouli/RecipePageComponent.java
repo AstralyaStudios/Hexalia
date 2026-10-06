@@ -296,7 +296,7 @@ public class RecipePageComponent implements ICustomComponent {
               .findFirst()
               .map(
                   recipe -> {
-                    ItemStack output = recipe.getResultItem(client.level.registryAccess()).copy();
+                    ItemStack output = NaturesRitualViewer.result(recipe);
                     Component title =
                         Optional.ofNullable(recipe.entityResult())
                             .flatMap(result -> BuiltInRegistries.ENTITY_TYPE.getOptional(result))

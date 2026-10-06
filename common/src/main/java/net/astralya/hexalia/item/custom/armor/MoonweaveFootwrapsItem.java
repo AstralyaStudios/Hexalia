@@ -1,6 +1,5 @@
 package net.astralya.hexalia.item.custom.armor;
 
-import net.astralya.hexalia.client.renderer.item.MoonweaveFootwrapsRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorMaterial;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
@@ -11,7 +10,6 @@ import software.bernie.geckolib.core.animation.Animation;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class MoonweaveFootwrapsItem extends HexaliaGeoArmorItem implements MagicResistanceArmor {
 
@@ -41,8 +39,8 @@ public class MoonweaveFootwrapsItem extends HexaliaGeoArmorItem implements Magic
   }
 
   @Override
-  public GeoArmorRenderer<?> createGeoArmorRenderer() {
-    return new MoonweaveFootwrapsRenderer();
+  public Object createGeoArmorRenderer() {
+    return createClientRenderer("MoonweaveFootwrapsRenderer");
   }
 
   @Override

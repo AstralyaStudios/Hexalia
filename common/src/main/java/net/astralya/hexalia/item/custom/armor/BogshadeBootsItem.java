@@ -1,7 +1,6 @@
 package net.astralya.hexalia.item.custom.armor;
 
 import java.util.UUID;
-import net.astralya.hexalia.client.renderer.item.BogshadeBootsRenderer;
 import net.astralya.hexalia.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
@@ -22,7 +21,6 @@ import software.bernie.geckolib.core.animation.Animation;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class BogshadeBootsItem extends HexaliaGeoArmorItem {
 
@@ -45,8 +43,8 @@ public class BogshadeBootsItem extends HexaliaGeoArmorItem {
   }
 
   @Override
-  public GeoArmorRenderer<?> createGeoArmorRenderer() {
-    return new BogshadeBootsRenderer();
+  public Object createGeoArmorRenderer() {
+    return createClientRenderer("BogshadeBootsRenderer");
   }
 
   @Override

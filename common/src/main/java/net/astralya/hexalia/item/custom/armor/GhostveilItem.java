@@ -1,6 +1,5 @@
 package net.astralya.hexalia.item.custom.armor;
 
-import net.astralya.hexalia.client.renderer.item.GhostveilRenderer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorMaterial;
@@ -12,7 +11,6 @@ import software.bernie.geckolib.core.animation.Animation;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class GhostveilItem extends HexaliaGeoArmorItem {
   private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
@@ -27,8 +25,8 @@ public class GhostveilItem extends HexaliaGeoArmorItem {
   }
 
   @Override
-  public GeoArmorRenderer<?> createGeoArmorRenderer() {
-    return new GhostveilRenderer();
+  public Object createGeoArmorRenderer() {
+    return createClientRenderer("GhostveilRenderer");
   }
 
   @Override

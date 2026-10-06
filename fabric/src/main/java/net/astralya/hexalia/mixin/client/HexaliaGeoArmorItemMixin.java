@@ -20,7 +20,7 @@ public abstract class HexaliaGeoArmorItemMixin implements GeoItem {
     @Unique private Supplier<Object> hexalia$renderProvider;
 
     @Shadow(remap = false)
-    public abstract GeoArmorRenderer<?> createGeoArmorRenderer();
+    public abstract Object createGeoArmorRenderer();
 
     @Overwrite(remap = false)
     public void createRenderer(Consumer<Object> consumer) {
@@ -35,7 +35,7 @@ public abstract class HexaliaGeoArmorItemMixin implements GeoItem {
                     EquipmentSlot slot,
                     HumanoidModel<LivingEntity> original) {
                 if (this.renderer == null) {
-                    this.renderer = HexaliaGeoArmorItemMixin.this.createGeoArmorRenderer();
+                    this.renderer = (GeoArmorRenderer<?>) HexaliaGeoArmorItemMixin.this.createGeoArmorRenderer();
                 }
 
                 this.renderer.prepForRender(livingEntity, stack, slot, original);

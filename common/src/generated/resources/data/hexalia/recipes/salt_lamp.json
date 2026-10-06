@@ -6,7 +6,7 @@
       "item": "minecraft:copper_ingot"
     },
     "P": {
-      "tag": "c:dusts/salt"
+      "tag": "hexalia:salt"
     },
     "S": {
       "item": "minecraft:torch"

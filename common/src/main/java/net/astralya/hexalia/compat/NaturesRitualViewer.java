@@ -3,7 +3,7 @@ package net.astralya.hexalia.compat;
 import java.util.ArrayList;
 import java.util.List;
 import net.astralya.hexalia.block.ModBlocks;
-import net.astralya.hexalia.item.ModItems;
+import net.astralya.hexalia.item.custom.CustomModelSpawnEggItem;
 import net.astralya.hexalia.util.ModTags;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -95,14 +95,15 @@ public final class NaturesRitualViewer {
   public static ItemStack result(RitualTableRecipe recipe) {
     if (!recipe.isEntityResult()) return recipe.getResultItem(null).copy();
     ResourceLocation id = recipe.entityResult();
-    if (id != null && "hexalia".equals(id.getNamespace())) {
-      if ("silk_moth".equals(id.getPath()))
-        return new ItemStack(ModItems.SILK_MOTH_SPAWN_EGG.get());
-      if ("cacofey".equals(id.getPath())) return new ItemStack(ModItems.CACOFEY_SPAWN_EGG.get());
-    }
     EntityType<?> type =
         id == null ? null : BuiltInRegistries.ENTITY_TYPE.getOptional(id).orElse(null);
-    SpawnEggItem egg = type == null ? null : SpawnEggItem.byId(type);
+    if (type == null) return ItemStack.EMPTY;
+    for (var item : BuiltInRegistries.ITEM) {
+      if (item instanceof CustomModelSpawnEggItem customEgg
+          && customEgg.spawnsEntity(item.getDefaultInstance(), type))
+        return item.getDefaultInstance();
+    }
+    SpawnEggItem egg = SpawnEggItem.byId(type);
     return egg == null ? ItemStack.EMPTY : egg.getDefaultInstance();
   }
 }

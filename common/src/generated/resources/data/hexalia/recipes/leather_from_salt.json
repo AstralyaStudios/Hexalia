@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "S": {
-      "tag": "c:dusts/salt"
+      "tag": "hexalia:salt"
     },
     "T": {
       "item": "minecraft:rotten_flesh"

@@ -390,7 +390,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, ModItems.PURITY_IDOL.get())
-                .requires(ModItems.SILK_IDOL.get()).requires(ModItems.WATER_NODE.get()).requires(ModItems.LOTUS_BLOSSOM.get()).requires(ModItems.SALT.get())
+                .requires(ModItems.SILK_IDOL.get()).requires(ModItems.WATER_NODE.get()).requires(ModItems.LOTUS_BLOSSOM.get()).requires(ModTags.Items.SALT)
                 .unlockedBy("has_silk_idol", inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.SILK_IDOL.get()).build()))
                 .save(recipeConsumer);
 
