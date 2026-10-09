@@ -7,13 +7,13 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.WeakHashMap;
 import net.astralya.hexalia.integration.accessories.AccessoriesIntegration;
+import net.astralya.hexalia.item.ModItems;
+import net.astralya.hexalia.item.custom.SagePendantItem;
 import net.astralya.hexalia.sound.ModSoundEvents;
 import net.minecraft.network.protocol.game.ClientboundStopSoundPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.astralya.hexalia.item.ModItems;
-import net.astralya.hexalia.item.custom.SagePendantItem;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -29,24 +29,34 @@ public final class SagePendantEvents {
   }
 
   public static void startRelease(Player player, ItemStack stack) {
-    if (player.level().isClientSide() || SagePendantItem.storedExperience(stack) == 0
+    if (player.level().isClientSide()
+        || SagePendantItem.storedExperience(stack) == 0
         || ACTIVE_RELEASES.containsKey(player)) return;
     if (!(player.level() instanceof ServerLevel server)) return;
     List<UUID> listeners = new ArrayList<>();
     for (ServerPlayer listener : server.players())
-      if (listener.distanceToSqr(player) < 1024.0)
-        listeners.add(listener.getUUID());
-    ACTIVE_RELEASES.put(player, new Release(stack,
-        player.level().getGameTime() + PULSE_INTERVAL, listeners));
-    player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
-        ModSoundEvents.ABSORBING_SOULS.get(), SoundSource.PLAYERS, 0.6F, 1.0F);
+      if (listener.distanceToSqr(player) < 1024.0) listeners.add(listener.getUUID());
+    ACTIVE_RELEASES.put(
+        player, new Release(stack, player.level().getGameTime() + PULSE_INTERVAL, listeners));
+    player
+        .level()
+        .playSound(
+            null,
+            player.getX(),
+            player.getY(),
+            player.getZ(),
+            ModSoundEvents.ABSORBING_SOULS.get(),
+            SoundSource.PLAYERS,
+            0.6F,
+            1.0F);
   }
 
   private static void tickRelease(Player player) {
     if (player.level().isClientSide()) return;
     Release release = ACTIVE_RELEASES.get(player);
     if (release == null) return;
-    if (!hasPendant(player, release.stack) || SagePendantItem.storedExperience(release.stack) == 0) {
+    if (!hasPendant(player, release.stack)
+        || SagePendantItem.storedExperience(release.stack) == 0) {
       finishRelease(player);
       return;
     }
@@ -60,7 +70,8 @@ public final class SagePendantEvents {
   }
 
   private static boolean hasPendant(Player player, ItemStack stack) {
-    if (player.getOffhandItem() == stack || player.getMainHandItem() == stack
+    if (player.getOffhandItem() == stack
+        || player.getMainHandItem() == stack
         || AccessoriesIntegration.getEquippedStack(player, ModItems.SAGE_PENDANT.get()) == stack)
       return true;
     for (ItemStack inventoryStack : player.getInventory().items)
@@ -71,8 +82,9 @@ public final class SagePendantEvents {
   private static void finishRelease(Player player) {
     Release release = ACTIVE_RELEASES.remove(player);
     if (release == null || !(player.level() instanceof ServerLevel server)) return;
-    var packet = new ClientboundStopSoundPacket(
-        ModSoundEvents.ABSORBING_SOULS.get().getLocation(), SoundSource.PLAYERS);
+    var packet =
+        new ClientboundStopSoundPacket(
+            ModSoundEvents.ABSORBING_SOULS.get().getLocation(), SoundSource.PLAYERS);
     for (UUID listenerId : release.listeners) {
       ServerPlayer listener = server.getServer().getPlayerList().getPlayer(listenerId);
       if (listener != null) listener.connection.send(packet);

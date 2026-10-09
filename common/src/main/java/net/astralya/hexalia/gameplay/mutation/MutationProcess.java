@@ -38,7 +38,11 @@ public final class MutationProcess {
   private int ticks;
 
   private MutationProcess(
-      ServerLevel level, BlockPos center, List<Target> targets, List<BlockPos> unfunded, boolean morphora) {
+      ServerLevel level,
+      BlockPos center,
+      List<Target> targets,
+      List<BlockPos> unfunded,
+      boolean morphora) {
     this.dimension = level.dimension();
     this.center = center.immutable();
     this.targets = targets;
@@ -52,7 +56,10 @@ public final class MutationProcess {
     if (input.isEmpty()) return null;
     MutationRecipeInput recipeInput = new MutationRecipeInput(input);
     RecipeHolder<MutationRecipe> recipe =
-        level.getRecipeManager().getRecipeFor(ModRecipeTypes.MUTATION.get(), recipeInput, level).orElse(null);
+        level
+            .getRecipeManager()
+            .getRecipeFor(ModRecipeTypes.MUTATION.get(), recipeInput, level)
+            .orElse(null);
     if (recipe == null) return null;
     ItemStack output = recipe.value().assemble(recipeInput, level.registryAccess());
     return output.isEmpty() ? null : new Target(pos.immutable(), state, output, null);
@@ -68,7 +75,11 @@ public final class MutationProcess {
   }
 
   private static void start(
-      ServerLevel level, BlockPos center, List<Target> targets, List<BlockPos> unfunded, boolean morphora) {
+      ServerLevel level,
+      BlockPos center,
+      List<Target> targets,
+      List<BlockPos> unfunded,
+      boolean morphora) {
     if (!registered) {
       TickEvent.SERVER_POST.register(MutationProcess::tickAll);
       registered = true;
@@ -102,7 +113,8 @@ public final class MutationProcess {
       if (this.morphora) this.morphoraParticles(level);
       else this.directParticles(level);
       if (this.morphora && this.ticks == duration / 2) {
-        level.playSound(null, this.center, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 0.45F, 1.1F);
+        level.playSound(
+            null, this.center, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 0.45F, 1.1F);
       }
       return false;
     }
@@ -119,7 +131,8 @@ public final class MutationProcess {
       if (!level.hasChunkAt(target.pos())
           || level.getBlockState(target.pos()) != target.original()
           || target.grass() != null
-              && (!level.hasChunkAt(target.grass()) || !level.getBlockState(target.grass()).is(Blocks.GRASS_BLOCK))) {
+              && (!level.hasChunkAt(target.grass())
+                  || !level.getBlockState(target.grass()).is(Blocks.GRASS_BLOCK))) {
         fail(level, target.pos());
         continue;
       }
@@ -132,14 +145,16 @@ public final class MutationProcess {
         fail(level, target.pos());
         continue;
       }
-      if (target.grass() != null) level.setBlock(target.grass(), Blocks.COARSE_DIRT.defaultBlockState(), 3);
+      if (target.grass() != null)
+        level.setBlock(target.grass(), Blocks.COARSE_DIRT.defaultBlockState(), 3);
       burst(level, target.pos(), this.morphora ? 4 : 7);
       completed++;
     }
     for (BlockPos pos : this.unfunded) fail(level, pos);
     if (completed > 0) {
       if (this.morphora) burst(level, this.center, 12);
-      level.playSound(null, this.center, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.BLOCKS, 0.55F, 1.2F);
+      level.playSound(
+          null, this.center, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.BLOCKS, 0.55F, 1.2F);
     }
     return true;
   }
@@ -158,19 +173,29 @@ public final class MutationProcess {
       double vz = -Math.sin(angle) * 0.025 + Math.cos(angle) * 0.035;
       dust(level, x, y, z, vx, vy, vz);
       if (i == 0 && this.ticks % 5 == 0) {
-        level.sendParticles(ModParticleTypes.LEAVES.get(),
+        level.sendParticles(
+            ModParticleTypes.LEAVES.get(),
             x + (level.random.nextDouble() - 0.5) * 0.18,
             y + (level.random.nextDouble() - 0.5) * 0.12,
             z + (level.random.nextDouble() - 0.5) * 0.18,
-            0, vx + (level.random.nextDouble() - 0.5) * 0.01,
+            0,
+            vx + (level.random.nextDouble() - 0.5) * 0.01,
             vy + (level.random.nextDouble() - 0.5) * 0.01,
-            vz + (level.random.nextDouble() - 0.5) * 0.01, 1.0);
+            vz + (level.random.nextDouble() - 0.5) * 0.01,
+            1.0);
       }
     }
     if (progress > 0.7F && this.ticks % 3 == 0) {
-      level.sendParticles(ModParticleTypes.HEX_MOTES.get(),
-          this.center.getX() + 0.5, this.center.getY() + 0.65, this.center.getZ() + 0.5,
-          2, 0.2, 0.2, 0.2, 0.01);
+      level.sendParticles(
+          ModParticleTypes.HEX_MOTES.get(),
+          this.center.getX() + 0.5,
+          this.center.getY() + 0.65,
+          this.center.getZ() + 0.5,
+          2,
+          0.2,
+          0.2,
+          0.2,
+          0.01);
     }
   }
 
@@ -178,8 +203,12 @@ public final class MutationProcess {
     float progress = this.ticks / (float) MORPHORA_TICKS;
     int orbitCount = progress < 0.5F ? 1 + this.ticks / 25 : 3;
     for (int i = 0; i < orbitCount; i++) {
-      orbit(level, this.center, this.ticks * 0.3 + i * Math.PI * 2.0 / orbitCount,
-          0.7 + progress * 0.5, 0.55 + i * 0.2);
+      orbit(
+          level,
+          this.center,
+          this.ticks * 0.3 + i * Math.PI * 2.0 / orbitCount,
+          0.7 + progress * 0.5,
+          0.55 + i * 0.2);
     }
     if (this.ticks % (progress > 0.8F ? 1 : 2) != 0 || this.targets.isEmpty()) return;
     int count = Math.min(progress > 0.8F ? 8 : 5, this.targets.size());
@@ -188,19 +217,30 @@ public final class MutationProcess {
       Target target = this.targets.get(index);
       if (this.ticks < MORPHORA_TICKS / 2) {
         BlockPos grass = target.grass();
-        dust(level, grass.getX() + 0.5 + (level.random.nextDouble() - 0.5) * 0.4,
-            grass.getY() + 0.3, grass.getZ() + 0.5 + (level.random.nextDouble() - 0.5) * 0.4,
-            0.0, 0.055, 0.0);
+        dust(
+            level,
+            grass.getX() + 0.5 + (level.random.nextDouble() - 0.5) * 0.4,
+            grass.getY() + 0.3,
+            grass.getZ() + 0.5 + (level.random.nextDouble() - 0.5) * 0.4,
+            0.0,
+            0.055,
+            0.0);
         arc(level, grass, this.center, (this.ticks + index * 4) % 18 / 18.0, index);
       } else {
         arc(level, this.center, target.pos(), (this.ticks + index * 5) % 20 / 20.0, index);
-        if (this.ticks > 65) orbit(level, target.pos(), this.ticks * 0.4 + index,
-            0.7 - Math.max(0.0, progress - 0.8) * 1.5, 0.55);
+        if (this.ticks > 65)
+          orbit(
+              level,
+              target.pos(),
+              this.ticks * 0.4 + index,
+              0.7 - Math.max(0.0, progress - 0.8) * 1.5,
+              0.55);
       }
     }
   }
 
-  private static void arc(ServerLevel level, BlockPos source, BlockPos destination, double progress, int index) {
+  private static void arc(
+      ServerLevel level, BlockPos source, BlockPos destination, double progress, int index) {
     double sx = source.getX() + 0.5;
     double sy = source.getY() + 0.45;
     double sz = source.getZ() + 0.5;
@@ -208,33 +248,68 @@ public final class MutationProcess {
     double dz = destination.getZ() - source.getZ();
     double length = Math.max(1.0, Math.sqrt(dx * dx + dz * dz));
     double bend = Math.sin(progress * Math.PI) * Math.sin(index * 2.4) * 0.8;
-    dust(level, sx + dx * progress - dz / length * bend,
+    dust(
+        level,
+        sx + dx * progress - dz / length * bend,
         sy + (destination.getY() - source.getY()) * progress + Math.sin(progress * Math.PI) * 1.2,
         sz + dz * progress + dx / length * bend,
-        dx * 0.012, 0.015, dz * 0.012);
+        dx * 0.012,
+        0.015,
+        dz * 0.012);
   }
 
-  private static void orbit(ServerLevel level, BlockPos center, double angle, double radius, double height) {
-    dust(level, center.getX() + 0.5 + Math.cos(angle) * radius,
+  private static void orbit(
+      ServerLevel level, BlockPos center, double angle, double radius, double height) {
+    dust(
+        level,
+        center.getX() + 0.5 + Math.cos(angle) * radius,
         center.getY() + height + Math.sin(angle * 0.7) * 0.25,
         center.getZ() + 0.5 + Math.sin(angle) * radius,
-        -Math.sin(angle) * 0.04, 0.02, Math.cos(angle) * 0.04);
+        -Math.sin(angle) * 0.04,
+        0.02,
+        Math.cos(angle) * 0.04);
   }
 
-  private static void dust(ServerLevel level, double x, double y, double z, double vx, double vy, double vz) {
+  private static void dust(
+      ServerLevel level, double x, double y, double z, double vx, double vy, double vz) {
     level.sendParticles(ModParticleTypes.HEX_MOTES.get(), x, y, z, 0, vx, vy, vz, 1.0);
   }
 
   private static void burst(ServerLevel level, BlockPos pos, int count) {
-    level.sendParticles(ModParticleTypes.HEX_MOTES.get(),
-        pos.getX() + 0.5, pos.getY() + 0.65, pos.getZ() + 0.5,
-        count, 0.35, 0.3, 0.35, 0.04);
+    level.sendParticles(
+        ModParticleTypes.HEX_MOTES.get(),
+        pos.getX() + 0.5,
+        pos.getY() + 0.65,
+        pos.getZ() + 0.5,
+        count,
+        0.35,
+        0.3,
+        0.35,
+        0.04);
   }
 
   private static void fail(ServerLevel level, BlockPos pos) {
     if (!level.hasChunkAt(pos)) return;
-    level.sendParticles(ModParticleTypes.LEAVES.get(), pos.getX() + 0.5, pos.getY() + 0.6, pos.getZ() + 0.5, 3, 0.2, 0.2, 0.2, 0.01);
-    level.sendParticles(ParticleTypes.SMOKE, pos.getX() + 0.5, pos.getY() + 0.6, pos.getZ() + 0.5, 2, 0.15, 0.15, 0.15, 0.005);
+    level.sendParticles(
+        ModParticleTypes.LEAVES.get(),
+        pos.getX() + 0.5,
+        pos.getY() + 0.6,
+        pos.getZ() + 0.5,
+        3,
+        0.2,
+        0.2,
+        0.2,
+        0.01);
+    level.sendParticles(
+        ParticleTypes.SMOKE,
+        pos.getX() + 0.5,
+        pos.getY() + 0.6,
+        pos.getZ() + 0.5,
+        2,
+        0.15,
+        0.15,
+        0.15,
+        0.005);
   }
 
   public record Target(BlockPos pos, BlockState original, ItemStack output, BlockPos grass) {

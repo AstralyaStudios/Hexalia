@@ -2,11 +2,11 @@ package net.astralya.hexalia.compat.jei.category;
 
 import java.util.List;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.astralya.hexalia.compat.HexaliaRecipeGuiLayout;
 import net.astralya.hexalia.compat.RitualEnergyViewerIndicator;
 import net.astralya.hexalia.compat.jei.HexaliaJeiRecipeTypes;
@@ -45,7 +45,9 @@ public final class CelestialInfusionJeiCategory
           layout.inputX(index + 1),
           layout.inputY(index + 1));
     var energy = RitualEnergyViewerIndicator.of(recipe);
-    builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 4, RitualEnergyViewerIndicator.Y + 2).addItemStacks(energy.icons());
+    builder
+        .addSlot(RecipeIngredientRole.RENDER_ONLY, 4, RitualEnergyViewerIndicator.Y + 2)
+        .addItemStacks(energy.icons());
     JeiLayoutHelper.addOutput(builder, recipe.itemResult(), layout);
   }
 
@@ -71,14 +73,21 @@ public final class CelestialInfusionJeiCategory
   }
 
   @Override
-  public void draw(NaturesRitualRecipe recipe, IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphics guiGraphics, double mouseX, double mouseY) {
+  public void draw(
+      NaturesRitualRecipe recipe,
+      IRecipeSlotsView recipeSlotsView,
+      net.minecraft.client.gui.GuiGraphics guiGraphics,
+      double mouseX,
+      double mouseY) {
     super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
     drawEnergyLabel(guiGraphics, recipe);
   }
 
-  private static void drawEnergyLabel(net.minecraft.client.gui.GuiGraphics guiGraphics, NaturesRitualRecipe recipe) {
+  private static void drawEnergyLabel(
+      net.minecraft.client.gui.GuiGraphics guiGraphics, NaturesRitualRecipe recipe) {
     var font = net.minecraft.client.Minecraft.getInstance().font;
     guiGraphics.fill(4, 81, 114, 82, 0xFF706C77);
-    guiGraphics.drawWordWrap(font, RitualEnergyViewerIndicator.of(recipe).label(), 24, 86, 90, 0xA9A29C);
+    guiGraphics.drawWordWrap(
+        font, RitualEnergyViewerIndicator.of(recipe).label(), 24, 86, 90, 0xA9A29C);
   }
 }

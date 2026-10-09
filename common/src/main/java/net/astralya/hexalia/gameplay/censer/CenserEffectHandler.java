@@ -20,8 +20,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -45,7 +45,8 @@ import net.minecraft.world.phys.Vec3;
 
 public final class CenserEffectHandler {
   public static final int EFFECT_INTERVAL = 40;
-  private static final Map<ServerLevel, Set<BlockPos>> TARGET_PREVENTION_CENSERS = new WeakHashMap<>();
+  private static final Map<ServerLevel, Set<BlockPos>> TARGET_PREVENTION_CENSERS =
+      new WeakHashMap<>();
 
   private CenserEffectHandler() {}
 

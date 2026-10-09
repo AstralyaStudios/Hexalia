@@ -45,7 +45,8 @@ public class RitualTableBlock extends BaseEntityBlock {
 
   public RitualTableBlock(Properties properties) {
     super(properties);
-    registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(ACTIVE, false));
+    registerDefaultState(
+        defaultBlockState().setValue(FACING, Direction.NORTH).setValue(ACTIVE, false));
   }
 
   @Override

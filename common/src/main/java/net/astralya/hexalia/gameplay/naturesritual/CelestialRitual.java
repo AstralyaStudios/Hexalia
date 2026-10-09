@@ -50,8 +50,14 @@ public final class CelestialRitual {
   public static void onStart(ServerLevel server, BlockPos pos) {
     server.sendParticles(
         ModParticleTypes.CELESTIAL_GLYPH.get(),
-        pos.getX() + 0.5, pos.getY() + GLYPH_HEIGHT, pos.getZ() + 0.5,
-        0, 0.0, 0.0, 0.0, 1.0);
+        pos.getX() + 0.5,
+        pos.getY() + GLYPH_HEIGHT,
+        pos.getZ() + 0.5,
+        0,
+        0.0,
+        0.0,
+        0.0,
+        1.0);
     for (int index = 0; index < 4; index++) {
       double angle = index * Math.PI * 0.5 + server.random.nextDouble() * 0.3;
       double radius = 0.3 + server.random.nextDouble() * 0.3;
@@ -60,32 +66,49 @@ public final class CelestialRitual {
           pos.getX() + 0.5 + Math.cos(angle) * radius,
           pos.getY() + 0.8 + server.random.nextDouble() * 0.4,
           pos.getZ() + 0.5 + Math.sin(angle) * radius,
-          1, 0.0, 0.0, 0.0, 0.0);
+          1,
+          0.0,
+          0.0,
+          0.0,
+          0.0);
     }
-    server.playSound(
-        null, pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 0.45F, 1.2F);
+    server.playSound(null, pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 0.45F, 1.2F);
     NaturesRitual.puff(server, pos, ParticleTypes.POOF, 5, 10);
   }
 
   public static void onTick(
-      ServerLevel server, BlockPos pos, List<BlockPos> energyPositions,
-      int elapsed, int ticksRemaining, boolean hasOutput, boolean requiresSoul) {
+      ServerLevel server,
+      BlockPos pos,
+      List<BlockPos> energyPositions,
+      int elapsed,
+      int ticksRemaining,
+      boolean hasOutput,
+      boolean requiresSoul) {
     spawnCelestialEnergy(server, pos, energyPositions, elapsed);
     if (elapsed > 0 && elapsed % 52 == 0 && ticksRemaining > 30)
       server.sendParticles(
           ModParticleTypes.CELESTIAL_GLYPH.get(),
-          pos.getX() + 0.5, pos.getY() + GLYPH_HEIGHT, pos.getZ() + 0.5,
-          0, 0.0, -0.01, 0.0, 1.0);
+          pos.getX() + 0.5,
+          pos.getY() + GLYPH_HEIGHT,
+          pos.getZ() + 0.5,
+          0,
+          0.0,
+          -0.01,
+          0.0,
+          1.0);
     if (ticksRemaining == 6 && hasOutput) {
       server.sendParticles(
           ModParticleTypes.CELESTIAL_GLYPH.get(),
-          pos.getX() + 0.5, pos.getY() + GLYPH_HEIGHT, pos.getZ() + 0.5,
-          0, 0.0, 0.01, 0.0, 1.0);
+          pos.getX() + 0.5,
+          pos.getY() + GLYPH_HEIGHT,
+          pos.getZ() + 0.5,
+          0,
+          0.0,
+          0.01,
+          0.0,
+          1.0);
       spawnCelestialTableSparkles(server, pos, 5);
-    } else if (ticksRemaining < 6
-        && ticksRemaining > 0
-        && ticksRemaining % 2 == 0
-        && hasOutput) {
+    } else if (ticksRemaining < 6 && ticksRemaining > 0 && ticksRemaining % 2 == 0 && hasOutput) {
       spawnCelestialTableSparkles(server, pos, 1);
     }
     if (!requiresSoul && ticksRemaining <= 6)
@@ -122,22 +145,37 @@ public final class CelestialRitual {
     BlockState state = level.getBlockState(energy);
     boolean degraded = false;
     if (state.is(ModBlocks.CELESTIAL_BLOOM.get()))
-      degraded = level.setBlock(
-          energy,
-          ModBlocks.WITHERED_CELESTIAL_BLOOM.get().defaultBlockState()
-              .setValue(CelestialBloomBlock.OPEN, state.getValue(CelestialBloomBlock.OPEN)),
-          3);
+      degraded =
+          level.setBlock(
+              energy,
+              ModBlocks.WITHERED_CELESTIAL_BLOOM
+                  .get()
+                  .defaultBlockState()
+                  .setValue(CelestialBloomBlock.OPEN, state.getValue(CelestialBloomBlock.OPEN)),
+              3);
     else if (state.is(ModBlocks.WITHERED_CELESTIAL_BLOOM.get()))
       degraded = level.setBlock(energy, Blocks.DEAD_BUSH.defaultBlockState(), 3);
     if (degraded && level instanceof ServerLevel server) {
       server.sendParticles(
           ModParticleTypes.SPARKLE.get(),
-          energy.getX() + 0.5, energy.getY() + 0.75, energy.getZ() + 0.5,
-          2, 0.18, 0.18, 0.18, 0.0);
+          energy.getX() + 0.5,
+          energy.getY() + 0.75,
+          energy.getZ() + 0.5,
+          2,
+          0.18,
+          0.18,
+          0.18,
+          0.0);
       server.sendParticles(
           ModParticleTypes.HEX_MOTES.get(),
-          energy.getX() + 0.5, energy.getY() + 0.75, energy.getZ() + 0.5,
-          2, 0.15, 0.15, 0.15, 0.01);
+          energy.getX() + 0.5,
+          energy.getY() + 0.75,
+          energy.getZ() + 0.5,
+          2,
+          0.15,
+          0.15,
+          0.15,
+          0.01);
     }
   }
 
@@ -154,7 +192,11 @@ public final class CelestialRitual {
               bloom.getX() + 0.3 + server.random.nextDouble() * 0.4,
               bloom.getY() + 0.55 + server.random.nextDouble() * 0.35,
               bloom.getZ() + 0.3 + server.random.nextDouble() * 0.4,
-              1, 0.0, 0.0, 0.0, 0.0);
+              1,
+              0.0,
+              0.0,
+              0.0,
+              0.0);
         }
       }
     }
@@ -167,7 +209,11 @@ public final class CelestialRitual {
           bloom.getX() + 0.4 + server.random.nextDouble() * 0.2,
           bloom.getY() + 0.6 + server.random.nextDouble() * 0.25,
           bloom.getZ() + 0.4 + server.random.nextDouble() * 0.2,
-          1, 0.0, 0.0, 0.0, 0.0);
+          1,
+          0.0,
+          0.0,
+          0.0,
+          0.0);
     }
     double progress = (elapsed % 16) / 15.0;
     double dx = center.getX() - bloom.getX();
@@ -178,7 +224,11 @@ public final class CelestialRitual {
         bloom.getX() + 0.5 + dx * progress - dz * bend,
         bloom.getY() + 0.75 + 0.3 * progress + Math.sin(progress * Math.PI) * 0.2,
         bloom.getZ() + 0.5 + dz * progress + dx * bend,
-        1, 0.01, 0.01, 0.01, 0.0);
+        1,
+        0.01,
+        0.01,
+        0.01,
+        0.0);
   }
 
   public static void spawnCelestialTableSparkles(ServerLevel server, BlockPos center, int count) {
@@ -190,7 +240,11 @@ public final class CelestialRitual {
           center.getX() + 0.5 + Math.cos(angle) * radius,
           center.getY() + 0.9 + server.random.nextDouble() * 0.4,
           center.getZ() + 0.5 + Math.sin(angle) * radius,
-          1, 0.0, 0.0, 0.0, 0.0);
+          1,
+          0.0,
+          0.0,
+          0.0,
+          0.0);
     }
   }
 

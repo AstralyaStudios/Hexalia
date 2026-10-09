@@ -103,11 +103,15 @@ public final class RitualTableBlockEntityRenderer
     BlockPos tablePos = blockEntity.getBlockPos();
     poseStack.pushPose();
     poseStack.translate(
-        Mth.lerp(Mth.clamp((offeringTick - 18.0F) / 32.0F, 0.0F, 1.0F),
-            origin.getX() - tablePos.getX() + 0.5F, 0.5F),
+        Mth.lerp(
+            Mth.clamp((offeringTick - 18.0F) / 32.0F, 0.0F, 1.0F),
+            origin.getX() - tablePos.getX() + 0.5F,
+            0.5F),
         Mth.lerp(contraction, y, 1.05F),
-        Mth.lerp(Mth.clamp((offeringTick - 18.0F) / 32.0F, 0.0F, 1.0F),
-            origin.getZ() - tablePos.getZ() + 0.5F, 0.5F));
+        Mth.lerp(
+            Mth.clamp((offeringTick - 18.0F) / 32.0F, 0.0F, 1.0F),
+            origin.getZ() - tablePos.getZ() + 0.5F,
+            0.5F));
     poseStack.mulPose(Axis.YP.rotationDegrees(animationTime * 1.5F));
     poseStack.scale(scale, scale, scale);
     itemRenderer.renderStatic(

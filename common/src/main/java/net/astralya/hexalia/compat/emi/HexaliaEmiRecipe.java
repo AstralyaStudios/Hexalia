@@ -70,10 +70,34 @@ public final class HexaliaEmiRecipe implements EmiRecipe {
       boolean showRitualTableFocusTooltip,
       boolean showMutationTooltip,
       boolean showSoulIndicator) {
-    this(category, layout, id, inputs, output, recipeTooltips, outputTooltips, drawRitualBrazierFocus, showRitualTableFocusTooltip, showMutationTooltip, showSoulIndicator, null);
+    this(
+        category,
+        layout,
+        id,
+        inputs,
+        output,
+        recipeTooltips,
+        outputTooltips,
+        drawRitualBrazierFocus,
+        showRitualTableFocusTooltip,
+        showMutationTooltip,
+        showSoulIndicator,
+        null);
   }
 
-  public HexaliaEmiRecipe(EmiRecipeCategory category, HexaliaRecipeGuiLayout layout, ResourceLocation id, List<EmiIngredient> inputs, EmiStack output, List<Component> recipeTooltips, List<Component> outputTooltips, boolean drawRitualBrazierFocus, boolean showRitualTableFocusTooltip, boolean showMutationTooltip, boolean showSoulIndicator, RitualEnergyViewerIndicator energy) {
+  public HexaliaEmiRecipe(
+      EmiRecipeCategory category,
+      HexaliaRecipeGuiLayout layout,
+      ResourceLocation id,
+      List<EmiIngredient> inputs,
+      EmiStack output,
+      List<Component> recipeTooltips,
+      List<Component> outputTooltips,
+      boolean drawRitualBrazierFocus,
+      boolean showRitualTableFocusTooltip,
+      boolean showMutationTooltip,
+      boolean showSoulIndicator,
+      RitualEnergyViewerIndicator energy) {
     this.category = category;
     this.layout = layout;
     this.id = id;
@@ -115,7 +139,9 @@ public final class HexaliaEmiRecipe implements EmiRecipe {
 
   @Override
   public int getDisplayHeight() {
-    return energy == null ? layout.height() : RitualEnergyViewerIndicator.Y + RitualEnergyViewerIndicator.HEIGHT;
+    return energy == null
+        ? layout.height()
+        : RitualEnergyViewerIndicator.Y + RitualEnergyViewerIndicator.HEIGHT;
   }
 
   @Override
@@ -134,10 +160,21 @@ public final class HexaliaEmiRecipe implements EmiRecipe {
         256);
 
     if (energy != null) {
-      widgets.addSlot(EmiIngredient.of(net.minecraft.world.item.crafting.Ingredient.of(energy.icons().stream())), 4, RitualEnergyViewerIndicator.Y + 2).drawBack(false);
+      widgets
+          .addSlot(
+              EmiIngredient.of(
+                  net.minecraft.world.item.crafting.Ingredient.of(energy.icons().stream())),
+              4,
+              RitualEnergyViewerIndicator.Y + 2)
+          .drawBack(false);
       widgets.addText(energy.firstLine(), 24, RitualEnergyViewerIndicator.Y + 3, 0xA9A29C, false);
       widgets.addText(energy.secondLine(), 24, RitualEnergyViewerIndicator.Y + 13, 0xA9A29C, false);
-      widgets.addTooltipText(energy.tooltip(), 0, RitualEnergyViewerIndicator.Y, layout.width(), RitualEnergyViewerIndicator.HEIGHT);
+      widgets.addTooltipText(
+          energy.tooltip(),
+          0,
+          RitualEnergyViewerIndicator.Y,
+          layout.width(),
+          RitualEnergyViewerIndicator.HEIGHT);
     }
 
     if (showSoulIndicator) {

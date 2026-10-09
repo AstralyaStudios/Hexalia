@@ -25,8 +25,14 @@ public final class NatureRitual {
       ServerLevel server, BlockPos pos, List<RitualBrazierBlockEntity> braziers) {
     server.sendParticles(
         ModParticleTypes.RITUAL_GLYPH.get(),
-        pos.getX() + 0.5, pos.getY() + GLYPH_HEIGHT, pos.getZ() + 0.5,
-        0, 0.01, 0.0, 0.0, 1.0);
+        pos.getX() + 0.5,
+        pos.getY() + GLYPH_HEIGHT,
+        pos.getZ() + 0.5,
+        0,
+        0.01,
+        0.0,
+        0.0,
+        1.0);
     for (RitualBrazierBlockEntity brazier : braziers) {
       BlockPos target = brazier.getBlockPos();
       double dx = target.getX() - pos.getX();
@@ -34,37 +40,53 @@ public final class NatureRitual {
       for (int index = 0; index < 3; index++) {
         server.sendParticles(
             ModParticleTypes.HEX_MOTES.get(),
-            pos.getX() + 0.5, pos.getY() + 0.85, pos.getZ() + 0.5,
-            0, dx * (0.035 + index * 0.007), 0.01, dz * (0.035 + index * 0.007), 1.0);
+            pos.getX() + 0.5,
+            pos.getY() + 0.85,
+            pos.getZ() + 0.5,
+            0,
+            dx * (0.035 + index * 0.007),
+            0.01,
+            dz * (0.035 + index * 0.007),
+            1.0);
       }
     }
     playNatureSound(server, pos, SoundEvents.AMETHYST_BLOCK_CHIME, 0.42F, 0.9F);
   }
 
   public static void onTick(
-      ServerLevel server, BlockPos pos, List<BlockPos> energyPositions,
-      List<BlockPos> activeBraziers, int nextBrazierIndex, @Nullable BlockPos offeringOrigin,
-      int elapsed, int energyElapsed, int ticksRemaining) {
-    spawnNatureAmbient(server, pos, activeBraziers, nextBrazierIndex,
-        offeringOrigin, elapsed, ticksRemaining);
+      ServerLevel server,
+      BlockPos pos,
+      List<BlockPos> energyPositions,
+      List<BlockPos> activeBraziers,
+      int nextBrazierIndex,
+      @Nullable BlockPos offeringOrigin,
+      int elapsed,
+      int energyElapsed,
+      int ticksRemaining) {
+    spawnNatureAmbient(
+        server, pos, activeBraziers, nextBrazierIndex, offeringOrigin, elapsed, ticksRemaining);
     if (energyElapsed >= 0 && ticksRemaining > 6) {
       for (int index = Math.max(0, (energyElapsed - 11 + 2) / 3);
-          index <= energyElapsed / 3 && index < energyPositions.size(); index++) {
+          index <= energyElapsed / 3 && index < energyPositions.size();
+          index++) {
         int cropAge = energyElapsed - index * 3;
-        if (cropAge == 0)
-          spawnNatureCropEnergy(server, pos, energyPositions.get(index));
-        if (cropAge < 12)
-          spawnNatureCropTrail(server, pos, energyPositions.get(index), cropAge);
+        if (cropAge == 0) spawnNatureCropEnergy(server, pos, energyPositions.get(index));
+        if (cropAge < 12) spawnNatureCropTrail(server, pos, energyPositions.get(index), cropAge);
       }
     }
     if (ticksRemaining == 6) {
       server.sendParticles(
           ModParticleTypes.RITUAL_GLYPH.get(),
-          pos.getX() + 0.5, pos.getY() + GLYPH_HEIGHT, pos.getZ() + 0.5,
-          0, 0.01, 0.01, 0.0, 1.0);
+          pos.getX() + 0.5,
+          pos.getY() + GLYPH_HEIGHT,
+          pos.getZ() + 0.5,
+          0,
+          0.01,
+          0.01,
+          0.0,
+          1.0);
     }
-    if (ticksRemaining <= 6)
-      spawnNatureFinale(server, pos, ticksRemaining);
+    if (ticksRemaining <= 6) spawnNatureFinale(server, pos, ticksRemaining);
   }
 
   public static void onComplete(Level level, BlockPos pos) {
@@ -72,8 +94,14 @@ public final class NatureRitual {
     if (level instanceof ServerLevel server) {
       server.sendParticles(
           ModParticleTypes.HEX_MOTES.get(),
-          pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() + 0.5,
-          12, 0.15, 0.12, 0.15, 0.045);
+          pos.getX() + 0.5,
+          pos.getY() + 1.05,
+          pos.getZ() + 0.5,
+          12,
+          0.15,
+          0.12,
+          0.15,
+          0.045);
       spawnNatureLeaves(server, pos, 1.0, 4);
     }
   }
@@ -81,8 +109,14 @@ public final class NatureRitual {
   public static void onFailure(ServerLevel server, BlockPos pos) {
     server.sendParticles(
         ModParticleTypes.HEX_MOTES.get(),
-        pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
-        7, 0.25, 0.2, 0.25, 0.07);
+        pos.getX() + 0.5,
+        pos.getY() + 1.0,
+        pos.getZ() + 0.5,
+        7,
+        0.25,
+        0.2,
+        0.25,
+        0.07);
   }
 
   public static List<BlockPos> findFullyGrownCrops(
@@ -148,8 +182,7 @@ public final class NatureRitual {
   }
 
   public static void playNatureOffering(Level level, BlockPos pos, int index) {
-    playNatureSound(level, pos, SoundEvents.AMETHYST_BLOCK_CHIME,
-        0.32F, 0.95F + index * 0.07F);
+    playNatureSound(level, pos, SoundEvents.AMETHYST_BLOCK_CHIME, 0.32F, 0.95F + index * 0.07F);
   }
 
   public static void playNatureCompletion(Level level, BlockPos pos) {
@@ -200,23 +233,25 @@ public final class NatureRitual {
     server.sendParticles(
         ModParticleTypes.HEX_MOTES.get(),
         sourceX + dx * progress - dz * bend,
-        sourceY + (center.getY() + 1.05 - sourceY) * progress
-            + Math.sin(progress * Math.PI) * 0.22,
+        sourceY + (center.getY() + 1.05 - sourceY) * progress + Math.sin(progress * Math.PI) * 0.22,
         sourceZ + dz * progress + dx * bend,
-        1, 0.015, 0.015, 0.015, 0.0);
+        1,
+        0.015,
+        0.015,
+        0.015,
+        0.0);
     if (age == 2 || age == 5)
       server.sendParticles(
           ModParticleTypes.LEAVES.get(),
           sourceX + dx * progress - dz * bend,
-          sourceY + (center.getY() + 1.05 - sourceY) * progress
+          sourceY
+              + (center.getY() + 1.05 - sourceY) * progress
               + Math.sin(progress * Math.PI) * 0.22,
           sourceZ + dz * progress + dx * bend,
           0,
-          dx * 0.0015 - dz * bend * 0.012
-              + (server.random.nextDouble() - 0.5) * 0.014,
+          dx * 0.0015 - dz * bend * 0.012 + (server.random.nextDouble() - 0.5) * 0.014,
           0.006 + server.random.nextDouble() * 0.008,
-          dz * 0.0015 + dx * bend * 0.012
-              + (server.random.nextDouble() - 0.5) * 0.014,
+          dz * 0.0015 + dx * bend * 0.012 + (server.random.nextDouble() - 0.5) * 0.014,
           1.0);
   }
 
@@ -230,19 +265,34 @@ public final class NatureRitual {
           center.getX() + 0.5 + Math.cos(orbit) * radius,
           center.getY() + 1.05 + index * 0.08,
           center.getZ() + 0.5 + Math.sin(orbit) * radius,
-          0, -Math.cos(orbit) * 0.012, 0.005, -Math.sin(orbit) * 0.012, 1.0);
+          0,
+          -Math.cos(orbit) * 0.012,
+          0.005,
+          -Math.sin(orbit) * 0.012,
+          1.0);
     }
   }
 
   private static void spawnNatureAmbient(
-      ServerLevel server, BlockPos center, List<BlockPos> braziers, int nextBrazierIndex,
-      @Nullable BlockPos offeringOrigin, int elapsed, int ticksRemaining) {
+      ServerLevel server,
+      BlockPos center,
+      List<BlockPos> braziers,
+      int nextBrazierIndex,
+      @Nullable BlockPos offeringOrigin,
+      int elapsed,
+      int ticksRemaining) {
     double focus = Math.max(0.0, Math.min(1.0, (30.0 - ticksRemaining) / 24.0));
     if (elapsed > 0 && elapsed % 52 == 0 && ticksRemaining > 30)
       server.sendParticles(
           ModParticleTypes.RITUAL_GLYPH.get(),
-          center.getX() + 0.5, center.getY() + GLYPH_HEIGHT, center.getZ() + 0.5,
-          0, 0.01, -0.01, 0.0, 1.0);
+          center.getX() + 0.5,
+          center.getY() + GLYPH_HEIGHT,
+          center.getZ() + 0.5,
+          0,
+          0.01,
+          -0.01,
+          0.0,
+          1.0);
     if (elapsed % (focus > 0.5 ? 3 : 5) == 0) {
       double angle = elapsed * 0.21 + server.random.nextDouble() * 1.2;
       double radius = (0.55 + server.random.nextDouble() * 0.75) * (1.0 - focus * 0.68);
@@ -253,7 +303,9 @@ public final class NatureRitual {
       double z = center.getZ() + 0.5 + offsetZ;
       server.sendParticles(
           ModParticleTypes.HEX_MOTES.get(),
-          x, y, z,
+          x,
+          y,
+          z,
           0,
           -Math.sin(angle) * 0.009 - offsetX * (0.003 + focus * 0.018),
           0.004 + server.random.nextDouble() * 0.006,
@@ -280,8 +332,10 @@ public final class NatureRitual {
       double z = brazier.getZ() + 0.5 + (server.random.nextDouble() - 0.5) * 0.4;
       double angle = server.random.nextDouble() * Math.PI * 2.0;
       server.sendParticles(
-          ModParticleTypes.HEX_MOTES.get(), x,
-          brazier.getY() + 0.8 + server.random.nextDouble() * 0.35, z,
+          ModParticleTypes.HEX_MOTES.get(),
+          x,
+          brazier.getY() + 0.8 + server.random.nextDouble() * 0.35,
+          z,
           0,
           (center.getX() + 0.5 - x) * 0.003 + Math.cos(angle) * 0.007,
           0.006 + server.random.nextDouble() * 0.008,
@@ -294,22 +348,19 @@ public final class NatureRitual {
             brazier.getY() + 0.78 + server.random.nextDouble() * 0.38,
             z + (server.random.nextDouble() - 0.5) * 0.3,
             0,
-            (center.getX() + 0.5 - x) * 0.0015
-                + (server.random.nextDouble() - 0.5) * 0.01,
+            (center.getX() + 0.5 - x) * 0.0015 + (server.random.nextDouble() - 0.5) * 0.01,
             0.004 + server.random.nextDouble() * 0.006,
-            (center.getZ() + 0.5 - z) * 0.0015
-                + (server.random.nextDouble() - 0.5) * 0.01,
+            (center.getZ() + 0.5 - z) * 0.0015 + (server.random.nextDouble() - 0.5) * 0.01,
             1.0);
     }
 
     if (offeringOrigin != null && elapsed % 4 == 2) {
       int offeringAge = elapsed - nextBrazierIndex * 50;
       double progress = Math.max(0.0, Math.min(1.0, (offeringAge - 18) / 31.0));
-      double x = offeringOrigin.getX() + 0.5
-          + (center.getX() - offeringOrigin.getX()) * progress;
-      double y = offeringOrigin.getY() + 1.05 + (center.getY() - offeringOrigin.getY() + 0.1) * progress;
-      double z = offeringOrigin.getZ() + 0.5
-          + (center.getZ() - offeringOrigin.getZ()) * progress;
+      double x = offeringOrigin.getX() + 0.5 + (center.getX() - offeringOrigin.getX()) * progress;
+      double y =
+          offeringOrigin.getY() + 1.05 + (center.getY() - offeringOrigin.getY() + 0.1) * progress;
+      double z = offeringOrigin.getZ() + 0.5 + (center.getZ() - offeringOrigin.getZ()) * progress;
       double angle = offeringAge * 0.43 + server.random.nextDouble() * 1.1;
       double radius = 0.13 + server.random.nextDouble() * 0.1;
       server.sendParticles(

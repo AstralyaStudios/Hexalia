@@ -217,8 +217,14 @@ public class RecipePageComponent implements ICustomComponent {
       graphics.drawString(
           Minecraft.getInstance().font, energy.firstLine(), left + 24, top + 86, 0xFF706C77, false);
       graphics.drawString(
-          Minecraft.getInstance().font, energy.secondLine(), left + 24, top + 97, 0xFF706C77, false);
-      if (mouseX >= left + 4 && mouseX < left + 114
+          Minecraft.getInstance().font,
+          energy.secondLine(),
+          left + 24,
+          top + 97,
+          0xFF706C77,
+          false);
+      if (mouseX >= left + 4
+          && mouseX < left + 114
           && mouseY >= top + RitualEnergyViewerIndicator.Y
           && mouseY < top + RitualEnergyViewerIndicator.Y + RitualEnergyViewerIndicator.HEIGHT)
         graphics.renderComponentTooltip(
@@ -313,11 +319,16 @@ public class RecipePageComponent implements ICustomComponent {
               .map(
                   holder -> {
                     NaturesRitualRecipe recipe = (NaturesRitualRecipe) holder.value();
-                    ItemStack output = recipe.entityResult()
-                        .flatMap(result -> BuiltInRegistries.ENTITY_TYPE.getOptional(result.entity()))
-                        .map(SpawnEggItem::byId)
-                        .map(SpawnEggItem::getDefaultInstance)
-                        .orElseGet(() -> recipe.getResultItem(client.level.registryAccess()).copy());
+                    ItemStack output =
+                        recipe
+                            .entityResult()
+                            .flatMap(
+                                result ->
+                                    BuiltInRegistries.ENTITY_TYPE.getOptional(result.entity()))
+                            .map(SpawnEggItem::byId)
+                            .map(SpawnEggItem::getDefaultInstance)
+                            .orElseGet(
+                                () -> recipe.getResultItem(client.level.registryAccess()).copy());
                     Component title =
                         recipe
                             .entityResult()

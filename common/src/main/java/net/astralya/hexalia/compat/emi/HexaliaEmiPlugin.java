@@ -62,14 +62,12 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
         registry, HexaliaEmiRecipeCategories.CELESTIAL_RITUAL, ModItems.RITUAL_TABLE.get());
     addWorkstation(
         registry, HexaliaEmiRecipeCategories.CELESTIAL_RITUAL, ModItems.CELESTIAL_CRYSTAL.get());
-    addWorkstation(
-        registry, HexaliaEmiRecipeCategories.CELESTIAL_RITUAL, ModItems.HEX_FOCUS.get());
+    addWorkstation(registry, HexaliaEmiRecipeCategories.CELESTIAL_RITUAL, ModItems.HEX_FOCUS.get());
     addWorkstation(
         registry, HexaliaEmiRecipeCategories.SUMMONING_RITUAL, ModItems.RITUAL_TABLE.get());
     addWorkstation(
         registry, HexaliaEmiRecipeCategories.SUMMONING_RITUAL, ModItems.RITUAL_BRAZIER.get());
-    addWorkstation(
-        registry, HexaliaEmiRecipeCategories.SUMMONING_RITUAL, ModItems.HEX_FOCUS.get());
+    addWorkstation(registry, HexaliaEmiRecipeCategories.SUMMONING_RITUAL, ModItems.HEX_FOCUS.get());
     addWorkstation(registry, HexaliaEmiRecipeCategories.MUTATION, ModItems.MUTAVIS.get());
   }
 
@@ -105,11 +103,12 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
     for (RecipeHolder<NaturesRitualRecipe> holder :
         recipes(recipeManager, ModRecipeTypes.NATURES_RITUAL.get())) {
       NaturesRitualRecipe recipe = holder.value();
-      EmiRecipeCategory category = switch (recipe.ritualKind()) {
-        case NATURE -> HexaliaEmiRecipeCategories.NATURES_RITUAL;
-        case CELESTIAL -> HexaliaEmiRecipeCategories.CELESTIAL_RITUAL;
-        case SUMMONING -> HexaliaEmiRecipeCategories.SUMMONING_RITUAL;
-      };
+      EmiRecipeCategory category =
+          switch (recipe.ritualKind()) {
+            case NATURE -> HexaliaEmiRecipeCategories.NATURES_RITUAL;
+            case CELESTIAL -> HexaliaEmiRecipeCategories.CELESTIAL_RITUAL;
+            case SUMMONING -> HexaliaEmiRecipeCategories.SUMMONING_RITUAL;
+          };
       addRecipe(
           registry,
           category,
@@ -199,15 +198,36 @@ public final class HexaliaEmiPlugin implements EmiPlugin {
       boolean showRitualTableFocusTooltip,
       boolean showMutationTooltip,
       boolean showSoulIndicator) {
-    addRecipe(registry, category, layout, holder, ingredients, output, recipeTooltips, outputTooltips, drawRitualBrazierFocus, showRitualTableFocusTooltip, showMutationTooltip, showSoulIndicator, null);
+    addRecipe(
+        registry,
+        category,
+        layout,
+        holder,
+        ingredients,
+        output,
+        recipeTooltips,
+        outputTooltips,
+        drawRitualBrazierFocus,
+        showRitualTableFocusTooltip,
+        showMutationTooltip,
+        showSoulIndicator,
+        null);
   }
 
   private static <I extends RecipeInput, T extends Recipe<I>> void addRecipe(
-      EmiRegistry registry, EmiRecipeCategory category, HexaliaRecipeGuiLayout layout,
-      RecipeHolder<T> holder, List<Ingredient> ingredients, ItemStack output,
-      List<Component> recipeTooltips, List<Component> outputTooltips,
-      boolean drawRitualBrazierFocus, boolean showRitualTableFocusTooltip,
-      boolean showMutationTooltip, boolean showSoulIndicator, RitualEnergyViewerIndicator energy) {
+      EmiRegistry registry,
+      EmiRecipeCategory category,
+      HexaliaRecipeGuiLayout layout,
+      RecipeHolder<T> holder,
+      List<Ingredient> ingredients,
+      ItemStack output,
+      List<Component> recipeTooltips,
+      List<Component> outputTooltips,
+      boolean drawRitualBrazierFocus,
+      boolean showRitualTableFocusTooltip,
+      boolean showMutationTooltip,
+      boolean showSoulIndicator,
+      RitualEnergyViewerIndicator energy) {
     List<EmiIngredient> inputs = ingredients.stream().map(EmiIngredient::of).toList();
     EmiStack emiOutput = EmiStack.of(output.copy());
     if (inputs.isEmpty() || emiOutput.isEmpty()) {

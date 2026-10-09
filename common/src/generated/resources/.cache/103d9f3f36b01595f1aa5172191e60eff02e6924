@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-05T11:52:24.4830266	Registries
+// 1.21.1	2026-09-29T19:14:33.968938853	Registries
 1ae5e512d27503fc87c2cb962940301e3d20c44f data/hexalia/neoforge/biome_modifier/add_begonia.json
 0b32655140407c87c8167094ff2843622461629f data/hexalia/neoforge/biome_modifier/add_celestial_bloom.json
 18cb9b1a7eb610d7a1bc50abdd33e23b49209aa1 data/hexalia/neoforge/biome_modifier/add_chillberry.json
@@ -21,7 +21,7 @@ e99aa211fff2e87e2216b67f5e931317c97adba7 data/hexalia/neoforge/biome_modifier/ad
 df593c08916b137788247330e36a064f59132c78 data/hexalia/neoforge/biome_modifier/spawn_cacofey.json
 37894f1bb7e3e7f7b948fe5872c696c356405085 data/hexalia/neoforge/biome_modifier/spawn_silk_moth.json
 df63e8760cf3a3ebd46765f88e7086213822d88e data/hexalia/worldgen/configured_feature/begonia.json
-b214fb172643a3046f5673b27529bbd7ceb06f69 data/hexalia/worldgen/configured_feature/celestial_bloom.json
+d176b4d583dddb41596a6a1ca8a3c4e6c92e8163 data/hexalia/worldgen/configured_feature/celestial_bloom.json
 e2b77dbfda1bde85d01b301722a8e9ad78d789a1 data/hexalia/worldgen/configured_feature/chillberry.json
 ea3e92d553f6e68e4252c4294399f5bf7547765b data/hexalia/worldgen/configured_feature/cottonwood.json
 c39276cdcbd25442305c215250be50073a52af6a data/hexalia/worldgen/configured_feature/dahlia.json

@@ -13,8 +13,7 @@ public final class ModTags {
   private ModTags() {}
 
   public static final class Items {
-    public static final TagKey<Item> SALT =
-        create("salt");
+    public static final TagKey<Item> SALT = create("salt");
     public static final TagKey<Item> SALT_DUST =
         TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/salt"));
     public static final TagKey<Item> COTTONWOOD_LOGS = create("cottonwood_logs");

@@ -150,8 +150,10 @@ public class SilkMothAmbientGoal extends Goal {
   private boolean startSocial() {
     AABB area = this.moth.getBoundingBox().inflate(8.0, 4.0, 8.0);
     List<SilkMothEntity> nearby =
-        this.moth.level().getEntitiesOfClass(
-            SilkMothEntity.class, area, other -> other != this.moth && !other.isRemoved());
+        this.moth
+            .level()
+            .getEntitiesOfClass(
+                SilkMothEntity.class, area, other -> other != this.moth && !other.isRemoved());
     if (nearby.isEmpty()) {
       return false;
     }
@@ -288,7 +290,8 @@ public class SilkMothAmbientGoal extends Goal {
     }
 
     Direction[] directions = Direction.values();
-    int start = preferAbove ? Direction.UP.ordinal() : this.moth.getRandom().nextInt(directions.length);
+    int start =
+        preferAbove ? Direction.UP.ordinal() : this.moth.getRandom().nextInt(directions.length);
     for (int offset = 0; offset < directions.length; offset++) {
       Direction direction = directions[(start + offset) % directions.length];
       BlockPos candidate = foliage.relative(direction);
@@ -317,9 +320,7 @@ public class SilkMothAmbientGoal extends Goal {
       return;
     }
     this.repathCooldown = 20;
-    this.moth
-        .getNavigation()
-        .moveTo(this.target.x, this.target.y, this.target.z, this.speed);
+    this.moth.getNavigation().moveTo(this.target.x, this.target.y, this.target.z, this.speed);
   }
 
   private void updateStagnation() {

@@ -63,8 +63,10 @@ public class SparkleParticle extends SimpleAnimatedParticle {
     float fadeIn = Mth.clamp(ageProgress / 0.15F, 0.0F, 1.0F);
     float fadeOut = Mth.clamp((1.0F - ageProgress) / 0.45F, 0.0F, 1.0F);
     alpha = Math.min(fadeIn, fadeOut) * 0.8F;
-    quadSize = baseSize * (0.96F + 0.06F * Mth.sin(age * 0.24F + driftPhase))
-        * (1.0F - ageProgress * 0.15F);
+    quadSize =
+        baseSize
+            * (0.96F + 0.06F * Mth.sin(age * 0.24F + driftPhase))
+            * (1.0F - ageProgress * 0.15F);
   }
 
   @Override

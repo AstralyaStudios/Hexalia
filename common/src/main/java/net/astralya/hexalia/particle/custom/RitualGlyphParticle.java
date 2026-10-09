@@ -22,7 +22,14 @@ public class RitualGlyphParticle extends TextureSheetParticle {
   private final float rollSpeed;
 
   protected RitualGlyphParticle(
-      ClientLevel level, double x, double y, double z, double vx, double vy, double vz, SpriteSet sprites) {
+      ClientLevel level,
+      double x,
+      double y,
+      double z,
+      double vx,
+      double vy,
+      double vz,
+      SpriteSet sprites) {
     super(level, x, y, z, 0.0, 0.0, 0.0);
     boolean completion = vy > 0.0;
     boolean ambient = vy < 0.0;
@@ -32,8 +39,8 @@ public class RitualGlyphParticle extends TextureSheetParticle {
     this.quadSize = this.startingSize;
     this.roll = this.random.nextFloat() * Mth.TWO_PI;
     this.oRoll = this.roll;
-    this.rollSpeed = (this.random.nextBoolean() ? 1.0F : -1.0F)
-        * (0.045F + this.random.nextFloat() * 0.01F);
+    this.rollSpeed =
+        (this.random.nextBoolean() ? 1.0F : -1.0F) * (0.045F + this.random.nextFloat() * 0.01F);
     this.lifetime = completion ? 42 + this.random.nextInt(5) : 54 + this.random.nextInt(5);
     this.gravity = 0.0F;
     this.hasPhysics = false;
@@ -106,8 +113,7 @@ public class RitualGlyphParticle extends TextureSheetParticle {
     this.quadSize = this.startingSize + (this.finalSize - this.startingSize) * progress;
     this.roll += this.rollSpeed;
     float pulse = 0.9F + 0.1F * Mth.sin(this.age * 0.22F);
-    this.alpha = this.baseAlpha * pulse
-        * Mth.clamp((1.0F - progress) / 0.3F, 0.0F, 1.0F);
+    this.alpha = this.baseAlpha * pulse * Mth.clamp((1.0F - progress) / 0.3F, 0.0F, 1.0F);
   }
 
   public static class Factory implements ParticleProvider<SimpleParticleType> {
@@ -119,8 +125,14 @@ public class RitualGlyphParticle extends TextureSheetParticle {
 
     @Override
     public Particle createParticle(
-        SimpleParticleType type, ClientLevel level, double x, double y, double z,
-        double vx, double vy, double vz) {
+        SimpleParticleType type,
+        ClientLevel level,
+        double x,
+        double y,
+        double z,
+        double vx,
+        double vy,
+        double vz) {
       return new RitualGlyphParticle(level, x, y, z, vx, vy, vz, sprites);
     }
   }

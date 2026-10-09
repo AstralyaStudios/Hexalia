@@ -2,10 +2,10 @@ package net.astralya.hexalia.compat.rei;
 
 import java.util.List;
 import java.util.Optional;
-import net.astralya.hexalia.compat.RitualEnergyViewerIndicator;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import net.astralya.hexalia.compat.RitualEnergyViewerIndicator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -49,11 +49,34 @@ public final class HexaliaReiDisplay extends BasicDisplay {
       List<EntryIngredient> outputs,
       List<Component> recipeTooltips,
       boolean showSoulIndicator) {
-    this(category, layout, inputs, outputs, recipeTooltips, Optional.empty(), showSoulIndicator, null);
+    this(
+        category,
+        layout,
+        inputs,
+        outputs,
+        recipeTooltips,
+        Optional.empty(),
+        showSoulIndicator,
+        null);
   }
 
-  public HexaliaReiDisplay(CategoryIdentifier<HexaliaReiDisplay> category, Layout layout, List<EntryIngredient> inputs, List<EntryIngredient> outputs, List<Component> recipeTooltips, boolean showSoulIndicator, RitualEnergyViewerIndicator energy) {
-    this(category, layout, inputs, outputs, recipeTooltips, Optional.empty(), showSoulIndicator, energy);
+  public HexaliaReiDisplay(
+      CategoryIdentifier<HexaliaReiDisplay> category,
+      Layout layout,
+      List<EntryIngredient> inputs,
+      List<EntryIngredient> outputs,
+      List<Component> recipeTooltips,
+      boolean showSoulIndicator,
+      RitualEnergyViewerIndicator energy) {
+    this(
+        category,
+        layout,
+        inputs,
+        outputs,
+        recipeTooltips,
+        Optional.empty(),
+        showSoulIndicator,
+        energy);
   }
 
   private HexaliaReiDisplay(

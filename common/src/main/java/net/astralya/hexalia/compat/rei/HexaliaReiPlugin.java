@@ -108,21 +108,24 @@ public class HexaliaReiPlugin implements REIClientPlugin {
               smallCauldronOutputTooltips(recipe)));
     }
     for (NaturesRitualRecipe recipe : recipes(registry, ModRecipeTypes.NATURES_RITUAL.get())) {
-      CategoryIdentifier<HexaliaReiDisplay> category = switch (recipe.ritualKind()) {
-        case NATURE -> HexaliaReiRecipeTypes.NATURES_RITUAL;
-        case CELESTIAL -> HexaliaReiRecipeTypes.CELESTIAL_RITUAL;
-        case SUMMONING -> HexaliaReiRecipeTypes.SUMMONING_RITUAL;
-      };
-      registry.add(new HexaliaReiDisplay(
-          category,
-          Layout.NATURES_RITUAL,
-          EntryIngredients.ofIngredients(naturesRitualInputs(recipe)),
-          List.of(output(naturesRitualResult(recipe), List.of())),
-          recipe.ritualKind() == NaturesRitualRecipe.RitualKind.CELESTIAL
-              ? List.of(Component.translatable("message.hexalia.celestial_infusion.requires_night"))
-              : List.of(),
-          recipe.requiresSoul(),
-          RitualEnergyViewerIndicator.of(recipe)));
+      CategoryIdentifier<HexaliaReiDisplay> category =
+          switch (recipe.ritualKind()) {
+            case NATURE -> HexaliaReiRecipeTypes.NATURES_RITUAL;
+            case CELESTIAL -> HexaliaReiRecipeTypes.CELESTIAL_RITUAL;
+            case SUMMONING -> HexaliaReiRecipeTypes.SUMMONING_RITUAL;
+          };
+      registry.add(
+          new HexaliaReiDisplay(
+              category,
+              Layout.NATURES_RITUAL,
+              EntryIngredients.ofIngredients(naturesRitualInputs(recipe)),
+              List.of(output(naturesRitualResult(recipe), List.of())),
+              recipe.ritualKind() == NaturesRitualRecipe.RitualKind.CELESTIAL
+                  ? List.of(
+                      Component.translatable("message.hexalia.celestial_infusion.requires_night"))
+                  : List.of(),
+              recipe.requiresSoul(),
+              RitualEnergyViewerIndicator.of(recipe)));
     }
     for (MutationRecipe recipe : recipes(registry, ModRecipeTypes.MUTATION.get())) {
       registry.add(

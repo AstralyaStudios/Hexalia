@@ -62,10 +62,15 @@ public class HexMotesParticle extends TextureSheetParticle {
       this.remove();
       return;
     }
-    int color = Math.floorMod(this.startingColor + this.colorDirection * (this.age / this.colorInterval), 4);
+    int color =
+        Math.floorMod(
+            this.startingColor + this.colorDirection * (this.age / this.colorInterval), 4);
     this.setSprite(this.sprites.get(color, 3));
     float life = (float) this.age / this.lifetime;
-    this.alpha = life < 0.12F ? life / 0.12F : life > 0.75F ? Mth.clamp((1.0F - life) / 0.25F, 0.0F, 1.0F) : 1.0F;
+    this.alpha =
+        life < 0.12F
+            ? life / 0.12F
+            : life > 0.75F ? Mth.clamp((1.0F - life) / 0.25F, 0.0F, 1.0F) : 1.0F;
     this.xd += Math.sin((this.age + this.swayOffset) * 0.12) * 0.0008;
     this.zd += Math.cos((this.age + this.swayOffset) * 0.12) * 0.0008;
     this.move(this.xd, this.yd, this.zd);

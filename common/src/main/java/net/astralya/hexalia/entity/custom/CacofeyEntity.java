@@ -1,7 +1,7 @@
 package net.astralya.hexalia.entity.custom;
 
-import net.astralya.hexalia.gameplay.cacofey.ai.CacofeyAnchorHoverGoal;
 import net.astralya.hexalia.gameplay.cacofey.ai.CacofeyAmbientGoal;
+import net.astralya.hexalia.gameplay.cacofey.ai.CacofeyAnchorHoverGoal;
 import net.astralya.hexalia.gameplay.cacofey.ai.CacofeyHarvestGoal;
 import net.astralya.hexalia.gameplay.cacofey.ai.CacofeyStealGoal;
 import net.astralya.hexalia.gameplay.moths.ai.DriftFlyGoal;
@@ -368,7 +368,8 @@ public class CacofeyEntity extends TamableAnimal implements GeoEntity {
       this.stealCooldown--;
     }
 
-    if (!this.level().isClientSide && this.isTheftTimerActive()
+    if (!this.level().isClientSide
+        && this.isTheftTimerActive()
         && (!this.isHoldingItem() || ++this.stolenFoodTicks >= 100)) {
       this.stealGoal.completeTheft();
     }

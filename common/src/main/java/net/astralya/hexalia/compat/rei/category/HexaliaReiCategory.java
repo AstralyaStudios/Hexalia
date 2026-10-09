@@ -57,7 +57,9 @@ public final class HexaliaReiCategory implements DisplayCategory<HexaliaReiDispl
 
   @Override
   public int getDisplayHeight() {
-    return layout == HexaliaRecipeGuiLayout.NATURES_RITUAL ? RitualEnergyViewerIndicator.Y + RitualEnergyViewerIndicator.HEIGHT : layout.height();
+    return layout == HexaliaRecipeGuiLayout.NATURES_RITUAL
+        ? RitualEnergyViewerIndicator.Y + RitualEnergyViewerIndicator.HEIGHT
+        : layout.height();
   }
 
   @Override
@@ -110,12 +112,24 @@ public final class HexaliaReiCategory implements DisplayCategory<HexaliaReiDispl
     addOutput(widgets, display, bounds, HexaliaRecipeGuiLayout.NATURES_RITUAL);
     if (display.energy() != null) {
       RitualEnergyViewerIndicator energy = display.energy();
-      widgets.add(Widgets.createSlot(point(bounds, 5, RitualEnergyViewerIndicator.Y + 3))
-          .entries(EntryIngredient.of(energy.icons().stream().map(EntryStacks::of).toList()))
-          .disableBackground());
-      widgets.add(Widgets.createLabel(point(bounds, 24, RitualEnergyViewerIndicator.Y + 3), energy.firstLine()));
-      widgets.add(Widgets.createLabel(point(bounds, 24, RitualEnergyViewerIndicator.Y + 13), energy.secondLine()));
-      widgets.add(Widgets.createTooltip(new Rectangle(bounds.x, bounds.y + RitualEnergyViewerIndicator.Y, bounds.width, RitualEnergyViewerIndicator.HEIGHT), energy.tooltip()));
+      widgets.add(
+          Widgets.createSlot(point(bounds, 5, RitualEnergyViewerIndicator.Y + 3))
+              .entries(EntryIngredient.of(energy.icons().stream().map(EntryStacks::of).toList()))
+              .disableBackground());
+      widgets.add(
+          Widgets.createLabel(
+              point(bounds, 24, RitualEnergyViewerIndicator.Y + 3), energy.firstLine()));
+      widgets.add(
+          Widgets.createLabel(
+              point(bounds, 24, RitualEnergyViewerIndicator.Y + 13), energy.secondLine()));
+      widgets.add(
+          Widgets.createTooltip(
+              new Rectangle(
+                  bounds.x,
+                  bounds.y + RitualEnergyViewerIndicator.Y,
+                  bounds.width,
+                  RitualEnergyViewerIndicator.HEIGHT),
+              energy.tooltip()));
     }
     if (display.showSoulIndicator()) {
       widgets.add(

@@ -48,7 +48,12 @@ public class MutavisItem extends Item {
   }
 
   public static void playApplicationSound(ServerLevel level, BlockPos pos) {
-    level.playSound(null, pos, SoundEvents.HONEY_BLOCK_PLACE, SoundSource.BLOCKS, 0.9F,
+    level.playSound(
+        null,
+        pos,
+        SoundEvents.HONEY_BLOCK_PLACE,
+        SoundSource.BLOCKS,
+        0.9F,
         0.85F + level.random.nextFloat() * 0.15F);
   }
 }

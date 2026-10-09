@@ -39,9 +39,11 @@ public record RitualEnergyViewerIndicator(
               Component.translatable("jei.hexalia.energy.bloom_effect")));
     }
     List<ItemStack> crops = new ArrayList<>();
-    BuiltInRegistries.BLOCK.getTagOrEmpty(BlockTags.CROPS)
+    BuiltInRegistries.BLOCK
+        .getTagOrEmpty(BlockTags.CROPS)
         .forEach(holder -> addCrop(crops, holder));
-    BuiltInRegistries.BLOCK.getTagOrEmpty(ModTags.Blocks.CROPS)
+    BuiltInRegistries.BLOCK
+        .getTagOrEmpty(ModTags.Blocks.CROPS)
         .forEach(holder -> addCrop(crops, holder));
     return new RitualEnergyViewerIndicator(
         List.copyOf(crops),

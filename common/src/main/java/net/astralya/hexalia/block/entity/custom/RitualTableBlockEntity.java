@@ -8,17 +8,16 @@ import java.util.UUID;
 import net.astralya.hexalia.block.custom.RitualBrazierBlock;
 import net.astralya.hexalia.block.custom.RitualTableBlock;
 import net.astralya.hexalia.block.entity.ModBlockEntityTypes;
-import net.astralya.hexalia.gameplay.naturesritual.NaturesRitual;
-import net.astralya.hexalia.gameplay.naturesritual.NatureRitual;
 import net.astralya.hexalia.gameplay.naturesritual.CelestialRitual;
+import net.astralya.hexalia.gameplay.naturesritual.NatureRitual;
+import net.astralya.hexalia.gameplay.naturesritual.NaturesRitual;
 import net.astralya.hexalia.gameplay.naturesritual.SummoningRitual;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.particle.ModParticleTypes;
 import net.astralya.hexalia.recipe.NaturesRitualRecipe;
 import net.astralya.hexalia.sound.ModSoundEvents;
-import net.astralya.hexalia.util.ModTags;
-import net.minecraft.tags.BlockTags;
 import net.astralya.hexalia.util.ItemInteractionHelper;
+import net.astralya.hexalia.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -34,6 +33,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
@@ -221,9 +221,12 @@ public class RitualTableBlockEntity extends BlockEntity
     activatingPlayerId = activatingPlayer.getUUID();
     ritualState = RitualState.PROCESSING_OFFERINGS;
     if (level instanceof ServerLevel server) {
-      server.playSound(null, worldPosition, ModSoundEvents.RITUAL_START.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
-      server.playSound(null, worldPosition, ModSoundEvents.RITUAL_PROCESS.get(), SoundSource.BLOCKS, 0.7F, 1.0F);
-      server.playSound(null, worldPosition, ModSoundEvents.FIREFLY_BUSH.get(), SoundSource.BLOCKS, 0.35F, 1.0F);
+      server.playSound(
+          null, worldPosition, ModSoundEvents.RITUAL_START.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
+      server.playSound(
+          null, worldPosition, ModSoundEvents.RITUAL_PROCESS.get(), SoundSource.BLOCKS, 0.7F, 1.0F);
+      server.playSound(
+          null, worldPosition, ModSoundEvents.FIREFLY_BUSH.get(), SoundSource.BLOCKS, 0.35F, 1.0F);
     }
     updateActiveLight();
     setChanged();
@@ -254,7 +257,8 @@ public class RitualTableBlockEntity extends BlockEntity
     ritualState = RitualState.SOUL_MANIFESTATION;
     stopRitualSound(server, worldPosition, ModSoundEvents.FIREFLY_BUSH.get().getLocation());
     stopRitualSound(server, worldPosition, ModSoundEvents.RITUAL_WHISPERS.get().getLocation());
-    server.playSound(null, worldPosition, ModSoundEvents.RITUAL_END.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
+    server.playSound(
+        null, worldPosition, ModSoundEvents.RITUAL_END.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
     SummoningRitual.spawnSoulBindingParticles(server, getBlockPos());
     syncVisualState();
     return true;
@@ -301,10 +305,17 @@ public class RitualTableBlockEntity extends BlockEntity
       }
       if (level instanceof ServerLevel server) {
         table.manifestationTicksRemaining =
-            (int) Math.max(0L, MANIFESTATION_DURATION - (server.getGameTime() - table.manifestationAnimationStart));
+            (int)
+                Math.max(
+                    0L,
+                    MANIFESTATION_DURATION
+                        - (server.getGameTime() - table.manifestationAnimationStart));
         SummoningRitual.spawnManifestationParticles(
-            server, pos, table.capturedSoulOrigin,
-            table.manifestationTicksRemaining, MANIFESTATION_DURATION);
+            server,
+            pos,
+            table.capturedSoulOrigin,
+            table.manifestationTicksRemaining,
+            MANIFESTATION_DURATION);
       }
       table.setChanged();
       if (table.manifestationTicksRemaining <= 0) completeManifestation(level, pos, table);
@@ -318,10 +329,12 @@ public class RitualTableBlockEntity extends BlockEntity
     int base = table.totalTransformTicks > 0 ? table.totalTransformTicks : DEFAULT_DURATION;
     int elapsed = base - table.transformTicksRemaining;
     if (elapsed > 0 && elapsed % PROCESS_SOUND_INTERVAL == 0 && level instanceof ServerLevel server)
-      server.playSound(null, pos, ModSoundEvents.RITUAL_PROCESS.get(), SoundSource.BLOCKS, 0.7F, 1.0F);
+      server.playSound(
+          null, pos, ModSoundEvents.RITUAL_PROCESS.get(), SoundSource.BLOCKS, 0.7F, 1.0F);
 
     if (elapsed > 0 && elapsed % 266 == 0 && level instanceof ServerLevel server)
-      server.playSound(null, pos, ModSoundEvents.FIREFLY_BUSH.get(), SoundSource.BLOCKS, 0.35F, 1.0F);
+      server.playSound(
+          null, pos, ModSoundEvents.FIREFLY_BUSH.get(), SoundSource.BLOCKS, 0.35F, 1.0F);
 
     if (elapsed % 10 == 0 && level instanceof ServerLevel server)
       spawnBrazierCropFireflies(server, table.activeBraziers);
@@ -330,15 +343,26 @@ public class RitualTableBlockEntity extends BlockEntity
     if (level instanceof ServerLevel server) {
       if (table.ritualKind == NaturesRitualRecipe.RitualKind.NATURE) {
         NatureRitual.onTick(
-            server, pos, table.energyPositions, table.activeBraziers,
-            table.nextBrazierIndex, table.cachedBrazierPos, elapsed,
-            elapsed - table.activeBraziers.size() * 50, table.transformTicksRemaining);
+            server,
+            pos,
+            table.energyPositions,
+            table.activeBraziers,
+            table.nextBrazierIndex,
+            table.cachedBrazierPos,
+            elapsed,
+            elapsed - table.activeBraziers.size() * 50,
+            table.transformTicksRemaining);
       } else {
         spawnEnvironmentalParticles(server, pos, table, elapsed);
         if (table.ritualKind == NaturesRitualRecipe.RitualKind.CELESTIAL)
           CelestialRitual.onTick(
-              server, pos, table.energyPositions, elapsed,
-              table.transformTicksRemaining, !table.pendingOutput.isEmpty(), table.requiresSoul);
+              server,
+              pos,
+              table.energyPositions,
+              elapsed,
+              table.transformTicksRemaining,
+              !table.pendingOutput.isEmpty(),
+              table.requiresSoul);
         else if (table.ritualKind == NaturesRitualRecipe.RitualKind.SUMMONING)
           SummoningRitual.onTick(server, pos, elapsed, table.transformTicksRemaining);
       }
@@ -353,8 +377,7 @@ public class RitualTableBlockEntity extends BlockEntity
           stopRitualSound(server, pos, ModSoundEvents.FIREFLY_BUSH.get().getLocation());
           stopRitualSound(server, pos, ModSoundEvents.RITUAL_PROCESS.get().getLocation());
         }
-        if (level instanceof ServerLevel server)
-          SummoningRitual.onPrepared(server, pos);
+        if (level instanceof ServerLevel server) SummoningRitual.onPrepared(server, pos);
         if (level instanceof ServerLevel server && table.activatingPlayerId != null) {
           Player activatingPlayer =
               server.getServer().getPlayerList().getPlayer(table.activatingPlayerId);
@@ -372,7 +395,8 @@ public class RitualTableBlockEntity extends BlockEntity
         table.resolutionTicksRemaining = RESOLUTION_DURATION;
         if (level instanceof ServerLevel server) {
           stopRitualSound(server, pos, ModSoundEvents.FIREFLY_BUSH.get().getLocation());
-          server.playSound(null, pos, ModSoundEvents.RITUAL_END.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
+          server.playSound(
+              null, pos, ModSoundEvents.RITUAL_END.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
         }
         table.syncVisualState();
       }
@@ -382,7 +406,8 @@ public class RitualTableBlockEntity extends BlockEntity
   private static void spawnBrazierCropFireflies(ServerLevel server, List<BlockPos> braziers) {
     for (BlockPos brazier : braziers) {
       // Sample a few columns in an 8 x 8 square; never scan the whole garden per tick.
-      samples: for (int attempt = 0; attempt < 8; attempt++) {
+      samples:
+      for (int attempt = 0; attempt < 8; attempt++) {
         int x = brazier.getX() + server.random.nextInt(8) - 4;
         int z = brazier.getZ() + server.random.nextInt(8) - 4;
         for (int dy = -1; dy <= 1; dy++) {
@@ -395,20 +420,32 @@ public class RitualTableBlockEntity extends BlockEntity
             double px = crop.getX() + 0.5 + (server.random.nextDouble() - 0.5) * 0.36;
             double py = crop.getY() + 0.5 + server.random.nextDouble() * 0.25;
             double pz = crop.getZ() + 0.5 + (server.random.nextDouble() - 0.5) * 0.36;
-            server.sendParticles(ModParticleTypes.FIREFLY.get(), px, py, pz, 0,
+            server.sendParticles(
+                ModParticleTypes.FIREFLY.get(),
+                px,
+                py,
+                pz,
+                0,
                 (server.random.nextDouble() - 0.5) * 0.012,
                 0.004 + server.random.nextDouble() * 0.008,
-                (server.random.nextDouble() - 0.5) * 0.012, 1.0);
+                (server.random.nextDouble() - 0.5) * 0.012,
+                1.0);
           }
           int leaves = 1 + server.random.nextInt(2);
           for (int i = 0; i < leaves; i++) {
             double px = crop.getX() + 0.5 + (server.random.nextDouble() - 0.5) * 0.36;
             double py = crop.getY() + 0.5 + server.random.nextDouble() * 0.25;
             double pz = crop.getZ() + 0.5 + (server.random.nextDouble() - 0.5) * 0.36;
-            server.sendParticles(ModParticleTypes.LEAVES.get(), px, py, pz, 0,
+            server.sendParticles(
+                ModParticleTypes.LEAVES.get(),
+                px,
+                py,
+                pz,
+                0,
                 (server.random.nextDouble() - 0.5) * 0.02,
                 0.01 + server.random.nextDouble() * 0.01,
-                (server.random.nextDouble() - 0.5) * 0.02, 1.0);
+                (server.random.nextDouble() - 0.5) * 0.02,
+                1.0);
           }
           break samples;
         }
@@ -448,7 +485,8 @@ public class RitualTableBlockEntity extends BlockEntity
         || (table.ritualState == RitualState.PROCESSING_OFFERINGS
             && recipe.offerings().size() != table.activeBraziers.size())) return false;
     if (table.ritualKind == NaturesRitualRecipe.RitualKind.CELESTIAL
-        && new HashSet<>(table.energyPositions).size() != table.energyPositions.size()) return false;
+        && new HashSet<>(table.energyPositions).size() != table.energyPositions.size())
+      return false;
     if (table.ritualState == RitualState.PROCESSING_OFFERINGS) {
       for (int index = table.nextBrazierIndex; index < table.activeBraziers.size(); index++) {
         if (index == table.nextBrazierIndex && !table.cachedParticleItem.isEmpty()) continue;
@@ -497,7 +535,11 @@ public class RitualTableBlockEntity extends BlockEntity
             brazier.getBlockPos().getX() + 0.5,
             brazier.getBlockPos().getY() + 1.05,
             brazier.getBlockPos().getZ() + 0.5,
-            5, 0.12, 0.12, 0.12, 0.015);
+            5,
+            0.12,
+            0.12,
+            0.12,
+            0.015);
         NatureRitual.playNatureOffering(server, brazier.getBlockPos(), table.nextBrazierIndex);
       }
     }
@@ -505,17 +547,22 @@ public class RitualTableBlockEntity extends BlockEntity
     if (currentTime >= 18 && currentTime < 50 && level instanceof ServerLevel server) {
       spawnItemParticles(
           server, table.cachedParticleItem, brazier.getBlockPos(), pos, currentTime - 18, 32);
-      if (table.ritualKind == NaturesRitualRecipe.RitualKind.NATURE
-          && currentTime % 3 == 1) {
+      if (table.ritualKind == NaturesRitualRecipe.RitualKind.NATURE && currentTime % 3 == 1) {
         double progress = (currentTime - 18) / 31.0;
         server.sendParticles(
             ModParticleTypes.HEX_MOTES.get(),
-            brazier.getBlockPos().getX() + 0.5 +
-                (pos.getX() - brazier.getBlockPos().getX()) * progress,
+            brazier.getBlockPos().getX()
+                + 0.5
+                + (pos.getX() - brazier.getBlockPos().getX()) * progress,
             brazier.getBlockPos().getY() + 1.05 + 0.1 * progress,
-            brazier.getBlockPos().getZ() + 0.5 +
-                (pos.getZ() - brazier.getBlockPos().getZ()) * progress,
-            1, 0.04, 0.04, 0.04, 0.0);
+            brazier.getBlockPos().getZ()
+                + 0.5
+                + (pos.getZ() - brazier.getBlockPos().getZ()) * progress,
+            1,
+            0.04,
+            0.04,
+            0.04,
+            0.0);
       }
     }
 

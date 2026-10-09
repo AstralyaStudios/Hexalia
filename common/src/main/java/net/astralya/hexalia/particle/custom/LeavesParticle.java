@@ -25,8 +25,7 @@ public class LeavesParticle extends SimpleAnimatedParticle {
     hasPhysics = false;
     friction = 0.93F;
     gravity = 0.0F;
-    tumbleSpeed = (random.nextBoolean() ? 1.0F : -1.0F)
-        * (0.035F + random.nextFloat() * 0.025F);
+    tumbleSpeed = (random.nextBoolean() ? 1.0F : -1.0F) * (0.035F + random.nextFloat() * 0.025F);
     swayOffset = random.nextDouble() * Math.PI * 2.0;
     roll = random.nextFloat() * Mth.TWO_PI;
     oRoll = roll;

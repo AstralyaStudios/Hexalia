@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-10T08:21:35.6443735	Tags for minecraft:item mod id hexalia
+// 1.21.1	2026-09-29T19:14:33.972015537	Tags for minecraft:item mod id hexalia
 f81420bd44d26fe748f8984fe4a8fe9e922e7bfc data/accessories/tags/item/charm.json
 296713d866a119358ca0808d01bb3f2da741037e data/accessories/tags/item/hat.json
 f43cac5debef6ee153d2475d6f92101f968c7569 data/accessories/tags/item/necklace.json
@@ -21,8 +21,8 @@ a0f37c79468375b1d559715974a57615f1f9a8fa data/c/tags/item/tools/ranged_weapon.js
 4fe948e82c91bb9d745a4fb4550825f8abb7aa3f data/hexalia/tags/item/brews.json
 0a9e24febf41067c0d25e9952dd0c726cba969b9 data/hexalia/tags/item/cottonwood_logs.json
 5515a7b886a966f1b5e57c9bd9e40c1554d7054f data/hexalia/tags/item/crushed_herbs.json
-73ced0e0ca04c9d4361a93b3580cfc489cdbf4de data/hexalia/tags/item/herbs.json
 c5fa8cc0124b3c75c98d6353dd0ed48dc05669d0 data/hexalia/tags/item/herb_jar_storable.json
+73ced0e0ca04c9d4361a93b3580cfc489cdbf4de data/hexalia/tags/item/herbs.json
 14638f513cf5866bc52c8a7b462a195ab48698c7 data/hexalia/tags/item/offhand_equipment.json
 7896ddd2e8c6ec7d4cef0baa1cfa8a0d521a5645 data/hexalia/tags/item/stun_immune_headwear.json
 1a1512524ea2d31de1cf2d4fa628a19d295b8932 data/hexalia/tags/item/tulips.json
@@ -33,7 +33,7 @@ f3cc2dd5ecf1532bbb967f1c90716ff45b38c136 data/minecraft/tags/item/boats.json
 075b893ec4b335ad1b86e750d584a3e91b2e7131 data/minecraft/tags/item/chest_boats.json
 a0f37c79468375b1d559715974a57615f1f9a8fa data/minecraft/tags/item/enchantable/bow.json
 60ab3e9fea4d0f350e66ff7663ce9fb1e011fa82 data/minecraft/tags/item/enchantable/chest_armor.json
-76d5df9bf9dd9f1cf4f4ae37f6cb18ee551b837d data/minecraft/tags/item/enchantable/durability.json
+351c8b2a30b23933aaf52664dc0472411f721570 data/minecraft/tags/item/enchantable/durability.json
 b20432616c7b772536bf786601d751969e37f5e1 data/minecraft/tags/item/enchantable/foot_armor.json
 a8418cd5d46ade4467943adeca40fb350fb1bd06 data/minecraft/tags/item/enchantable/head_armor.json
 3d5a26baa0b87c87bbd3587d5c4afb47c1bfe29f data/minecraft/tags/item/enchantable/leg_armor.json

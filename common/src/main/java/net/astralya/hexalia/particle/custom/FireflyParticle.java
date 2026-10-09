@@ -15,8 +15,16 @@ public class FireflyParticle extends TextureSheetParticle {
   private double accelerationY;
   private double accelerationZ;
   private int turnTicks;
-  private FireflyParticle(ClientLevel level, double x, double y, double z,
-      double vx, double vy, double vz, SpriteSet sprites) {
+
+  private FireflyParticle(
+      ClientLevel level,
+      double x,
+      double y,
+      double z,
+      double vx,
+      double vy,
+      double vz,
+      SpriteSet sprites) {
     super(level, x, y, z);
     this.xd = vx;
     this.yd = vy;
@@ -50,8 +58,10 @@ public class FireflyParticle extends TextureSheetParticle {
       return;
     }
     float progress = (float) this.age / this.lifetime;
-    this.alpha = Math.min(Mth.clamp(progress / 0.3F, 0.0F, 1.0F),
-        Mth.clamp((1.0F - progress) / 0.5F, 0.0F, 1.0F));
+    this.alpha =
+        Math.min(
+            Mth.clamp(progress / 0.3F, 0.0F, 1.0F),
+            Mth.clamp((1.0F - progress) / 0.5F, 0.0F, 1.0F));
     if (--this.turnTicks <= 0) {
       this.accelerationX = (this.random.nextDouble() - 0.5) * 0.003;
       this.accelerationY = (this.random.nextDouble() - 0.5) * 0.002;
@@ -72,8 +82,15 @@ public class FireflyParticle extends TextureSheetParticle {
     }
 
     @Override
-    public Particle createParticle(SimpleParticleType type, ClientLevel level,
-        double x, double y, double z, double vx, double vy, double vz) {
+    public Particle createParticle(
+        SimpleParticleType type,
+        ClientLevel level,
+        double x,
+        double y,
+        double z,
+        double vx,
+        double vy,
+        double vz) {
       return new FireflyParticle(level, x, y, z, vx, vy, vz, sprites);
     }
   }

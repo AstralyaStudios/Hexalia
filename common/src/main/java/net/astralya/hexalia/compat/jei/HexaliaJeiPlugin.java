@@ -35,11 +35,11 @@ public final class HexaliaJeiPlugin implements IModPlugin {
         new MortarAndPestleJeiCategory(guiHelper),
         new SmallCauldronJeiCategory(guiHelper),
         new NaturesRitualJeiCategory(
-            guiHelper, HexaliaJeiRecipeTypes.NATURES_RITUAL,
-            "jei.hexalia.category.natures_ritual"),
+            guiHelper, HexaliaJeiRecipeTypes.NATURES_RITUAL, "jei.hexalia.category.natures_ritual"),
         new CelestialInfusionJeiCategory(guiHelper),
         new NaturesRitualJeiCategory(
-            guiHelper, HexaliaJeiRecipeTypes.SUMMONING_RITUAL,
+            guiHelper,
+            HexaliaJeiRecipeTypes.SUMMONING_RITUAL,
             "jei.hexalia.category.summoning_ritual"),
         new MutationJeiCategory(guiHelper));
   }

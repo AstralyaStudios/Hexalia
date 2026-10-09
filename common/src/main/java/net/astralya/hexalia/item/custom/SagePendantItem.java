@@ -2,9 +2,9 @@ package net.astralya.hexalia.item.custom;
 
 import java.util.List;
 import net.astralya.hexalia.component.ModComponents;
+import net.astralya.hexalia.event.SagePendantEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.astralya.hexalia.event.SagePendantEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -21,24 +21,26 @@ public class SagePendantItem extends Item {
   }
 
   public static int storedExperience(ItemStack stack) {
-    return Math.clamp(stack.getOrDefault(ModComponents.SAGE_PENDANT_EXPERIENCE.get(), 0), 0, CAPACITY);
+    return Math.clamp(
+        stack.getOrDefault(ModComponents.SAGE_PENDANT_EXPERIENCE.get(), 0), 0, CAPACITY);
   }
 
   public static void storeBonus(ItemStack stack, int gainedExperience) {
     int stored = storedExperience(stack);
     if (stored >= CAPACITY || gainedExperience <= 0) return;
 
-    int remainder = Math.clamp(stack.getOrDefault(ModComponents.SAGE_PENDANT_REMAINDER.get(), 0), 0, 3);
+    int remainder =
+        Math.clamp(stack.getOrDefault(ModComponents.SAGE_PENDANT_REMAINDER.get(), 0), 0, 3);
     long quarters = (long) gainedExperience + remainder;
     int next = stored + (int) Math.min(CAPACITY - stored, quarters / 4);
     stack.set(ModComponents.SAGE_PENDANT_EXPERIENCE.get(), next);
-    stack.set(ModComponents.SAGE_PENDANT_REMAINDER.get(), next == CAPACITY ? 0 : (int) (quarters % 4));
+    stack.set(
+        ModComponents.SAGE_PENDANT_REMAINDER.get(), next == CAPACITY ? 0 : (int) (quarters % 4));
   }
 
   public static void releaseExperience(ItemStack stack, int amount) {
     stack.set(ModComponents.SAGE_PENDANT_EXPERIENCE.get(), storedExperience(stack) - amount);
-    if (storedExperience(stack) == 0)
-      stack.set(ModComponents.SAGE_PENDANT_REMAINDER.get(), 0);
+    if (storedExperience(stack) == 0) stack.set(ModComponents.SAGE_PENDANT_REMAINDER.get(), 0);
   }
 
   @Override

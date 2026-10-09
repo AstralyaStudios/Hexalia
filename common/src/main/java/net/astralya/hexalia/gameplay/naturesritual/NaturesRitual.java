@@ -116,8 +116,7 @@ public final class NaturesRitual {
       NatureRitual.onStart(server, pos, match.usedBraziers);
     } else {
       play(level, pos);
-      if (kind == NaturesRitualRecipe.RitualKind.CELESTIAL)
-        CelestialRitual.onStart(server, pos);
+      if (kind == NaturesRitualRecipe.RitualKind.CELESTIAL) CelestialRitual.onStart(server, pos);
       else SummoningRitual.onStart(server, pos);
     }
     return true;

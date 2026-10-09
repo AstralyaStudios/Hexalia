@@ -43,10 +43,11 @@ public final class AccessoriesIntegration {
 
   public static void addEquippedStackLookup(BiFunction<Player, Item, ItemStack> lookup) {
     BiFunction<Player, Item, ItemStack> previous = equippedStackLookup;
-    equippedStackLookup = (player, item) -> {
-      ItemStack found = previous.apply(player, item);
-      return found.isEmpty() ? lookup.apply(player, item) : found;
-    };
+    equippedStackLookup =
+        (player, item) -> {
+          ItemStack found = previous.apply(player, item);
+          return found.isEmpty() ? lookup.apply(player, item) : found;
+        };
     equippedLookup = (player, item) -> !equippedStackLookup.apply(player, item).isEmpty();
   }
 }

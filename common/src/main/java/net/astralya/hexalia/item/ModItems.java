@@ -175,7 +175,8 @@ public final class ModItems {
 
   public static final RegistrySupplier<Item> SAGE_PENDANT =
       ITEMS.register(
-          "sage_pendant", () -> new SagePendantItem(accessoryProperties("sage_pendant").stacksTo(1)));
+          "sage_pendant",
+          () -> new SagePendantItem(accessoryProperties("sage_pendant").stacksTo(1)));
 
   public static final RegistrySupplier<Item> SEAFOAM_TALISMAN =
       ITEMS.register(
@@ -544,15 +545,18 @@ public final class ModItems {
 
   public static final RegistrySupplier<Item> FOUL_SAC =
       ITEMS.register(
-          "foul_sac", () -> new ThrownSacItem(defaultProperties().stacksTo(16), FoulSacProjectile::new));
+          "foul_sac",
+          () -> new ThrownSacItem(defaultProperties().stacksTo(16), FoulSacProjectile::new));
 
   public static final RegistrySupplier<Item> FROST_SAC =
       ITEMS.register(
-          "frost_sac", () -> new ThrownSacItem(defaultProperties().stacksTo(16), FrostSacProjectile::new));
+          "frost_sac",
+          () -> new ThrownSacItem(defaultProperties().stacksTo(16), FrostSacProjectile::new));
 
   public static final RegistrySupplier<Item> SEARING_SAC =
       ITEMS.register(
-          "searing_sac", () -> new ThrownSacItem(defaultProperties().stacksTo(16), SearingSacProjectile::new));
+          "searing_sac",
+          () -> new ThrownSacItem(defaultProperties().stacksTo(16), SearingSacProjectile::new));
 
   public static final RegistrySupplier<Item> THORNBOW =
       ITEMS.register("thornbow", () -> new ThornbowItem(defaultProperties().durability(128)));

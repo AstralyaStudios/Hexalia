@@ -2,8 +2,8 @@ package net.astralya.hexalia.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import net.astralya.hexalia.gameplay.mutation.MutationProcess;
 import net.astralya.hexalia.item.custom.MutavisItem;
@@ -83,12 +83,18 @@ public class MorphoraBlock extends BushBlock {
     }
     MutationProcess.startMorphora(level, morphoraPos, funded, unfunded);
     MutavisItem.playApplicationSound(level, morphoraPos);
-    level.playSound(null, morphoraPos, SoundEvents.MOSS_PLACE, SoundSource.BLOCKS, 0.75F,
+    level.playSound(
+        null,
+        morphoraPos,
+        SoundEvents.MOSS_PLACE,
+        SoundSource.BLOCKS,
+        0.75F,
         1.0F + level.random.nextFloat() * 0.15F);
     return true;
   }
 
-  private static BlockPos findLocalGrass(ServerLevel level, BlockPos target, Set<BlockPos> reserved) {
+  private static BlockPos findLocalGrass(
+      ServerLevel level, BlockPos target, Set<BlockPos> reserved) {
     BlockPos below = target.below();
     if (isAvailableGrass(level, below, reserved)) return below;
     for (int y = -1; y <= 0; y++) {
@@ -104,6 +110,8 @@ public class MorphoraBlock extends BushBlock {
   }
 
   private static boolean isAvailableGrass(ServerLevel level, BlockPos pos, Set<BlockPos> reserved) {
-    return !reserved.contains(pos) && level.hasChunkAt(pos) && level.getBlockState(pos).is(Blocks.GRASS_BLOCK);
+    return !reserved.contains(pos)
+        && level.hasChunkAt(pos)
+        && level.getBlockState(pos).is(Blocks.GRASS_BLOCK);
   }
 }
