@@ -42,6 +42,7 @@ public class HexaliaFabric implements ModInitializer {
 
 	private static void registerCore() {
 		HexaliaMod.init();
+		ModRegistries.registerCompostable();
 		if (net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("trinkets")) {
 			net.astralya.hexalia.fabric.integration.TrinketsIntegration.register();
 		}
