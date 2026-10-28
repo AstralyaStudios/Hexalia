@@ -31,7 +31,7 @@
       "type": "text",
       "title": "Talismanes y amuletos",
       "anchor": "accessories",
-      "text": "Estos pequeños talismanes conceden sus dones mientras los llevas puestos."
+      "text": "Estos pequeños talismanes conceden sus dones mientras los llevas puestos.$(br2)Se pueden encontrar al explorar cofres de estructuras, incluidas mazmorras, pirámides del desierto, templos de la jungla, minas abandonadas, fortalezas, portales en ruinas, mansiones del bosque, ciudades antiguas y cabañas de herborista."
     },
     {
       "type": "spotlight",
@@ -40,7 +40,7 @@
         "hexalia:moonward_ring"
       ],
       "title": "Espuma Marina y Anillo Lunar",
-      "text": "El Talismán de Espuma Marina te ayuda a respirar bajo el agua. El Anillo Lunar elimina Ceguera y Oscuridad."
+      "text": "El Talismán de Espuma Marina te ayuda a respirar bajo el agua. El Anillo Lunar elimina Ceguera y Oscuridad.$(br2)Se encuentran en cofres de estructuras."
     },
     {
       "type": "spotlight",
@@ -49,13 +49,13 @@
         "hexalia:wyrd_feather"
       ],
       "title": "Corazón y pluma",
-      "text": "El Racimo de Corazón de Bruja concede dos corazones extra. La Pluma Wyrd puede protegerte de un golpe o proyectil."
+      "text": "El Racimo de Corazón de Bruja concede dos corazones extra. La Pluma Wyrd puede protegerte de un golpe o proyectil.$(br2)Se encuentran en cofres de estructuras."
     },
     {
       "type": "spotlight",
       "item": "hexalia:green_omen",
       "title": "Presagio Verde",
-      "text": "Al cosechar un cultivo maduro, el Presagio Verde puede duplicar sus frutos."
+      "text": "Al cosechar un cultivo maduro, el Presagio Verde puede duplicar sus frutos.$(br2)Se encuentran en cofres de estructuras."
     },
     {
       "type": "spotlight",
