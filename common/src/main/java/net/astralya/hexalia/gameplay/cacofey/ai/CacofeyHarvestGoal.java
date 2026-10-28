@@ -31,11 +31,14 @@ public class CacofeyHarvestGoal extends Goal {
   private static final double ARRIVE_DISTANCE = 2.0D;
   private static final float TRAVEL_SPEED = 1.2F;
   private static final int SCAN_COOLDOWN = 40;
+  private static final int TRAVEL_TIMEOUT = 200;
 
   private final CacofeyEntity cacofey;
   private Phase phase = Phase.IDLE;
   private BlockPos cropPos = null;
   private int scanTimer = 0;
+  private int travelDeadline;
+  private BlockPos anchorPos;
 
   public CacofeyHarvestGoal(CacofeyEntity cacofey) {
     this.cacofey = cacofey;
@@ -44,13 +47,14 @@ public class CacofeyHarvestGoal extends Goal {
 
   @Override
   public boolean canUse() {
-    if (!cacofey.isTame()) {
+    if (cacofey.level().isClientSide || !cacofey.isTame() || cacofey.isTheftTimerActive()) {
       return false;
     }
     if (cacofey.getMode() != CacofeyMode.WANDER) {
       return false;
     }
-    if (cacofey.getAnchorPos() == null) {
+    if (cacofey.getAnchorPos() == null
+        || !(cacofey.level().getBlockEntity(cacofey.getAnchorPos()) instanceof Container)) {
       return false;
     }
     if (phase != Phase.IDLE) {
@@ -60,15 +64,20 @@ public class CacofeyHarvestGoal extends Goal {
       scanTimer--;
       return false;
     }
-    return findMatureCrop();
+    return cacofey.isHoldingItem() || findMatureCrop();
   }
 
   @Override
   public boolean canContinueToUse() {
+    if (!cacofey.isTame() || cacofey.isTheftTimerActive()) {
+      return false;
+    }
     if (cacofey.getMode() != CacofeyMode.WANDER) {
       return false;
     }
-    if (cacofey.getAnchorPos() == null) {
+    if (anchorPos == null
+        || !anchorPos.equals(cacofey.getAnchorPos())
+        || !(cacofey.level().getBlockEntity(anchorPos) instanceof Container)) {
       return false;
     }
     return phase != Phase.IDLE;
@@ -76,8 +85,14 @@ public class CacofeyHarvestGoal extends Goal {
 
   @Override
   public void start() {
-    phase = Phase.MOVING_TO_CROP;
-    navigateToCrop();
+    anchorPos = cacofey.getAnchorPos();
+    if (cacofey.isHoldingItem()) {
+      phase = Phase.MOVING_TO_CONTAINER;
+      navigateToContainer();
+    } else {
+      phase = Phase.MOVING_TO_CROP;
+      navigateToCrop();
+    }
   }
 
   @Override
@@ -85,6 +100,7 @@ public class CacofeyHarvestGoal extends Goal {
     cacofey.getNavigation().stop();
     phase = Phase.IDLE;
     cropPos = null;
+    anchorPos = null;
     scanTimer = SCAN_COOLDOWN;
   }
 
@@ -101,7 +117,7 @@ public class CacofeyHarvestGoal extends Goal {
 
   private void tickMoveToCrop() {
     if (cropPos == null || !isMatureCrop(cacofey.level().getBlockState(cropPos))) {
-      phase = Phase.IDLE;
+      stop();
       return;
     }
 
@@ -113,6 +129,8 @@ public class CacofeyHarvestGoal extends Goal {
     if (distanceToCrop() <= ARRIVE_DISTANCE) {
       cacofey.getNavigation().stop();
       phase = Phase.HARVESTING;
+    } else if (cacofey.getNavigation().isDone() || cacofey.tickCount >= travelDeadline) {
+      stop();
     }
   }
 
@@ -123,7 +141,7 @@ public class CacofeyHarvestGoal extends Goal {
 
     BlockState state = serverLevel.getBlockState(cropPos);
     if (!isMatureCrop(state)) {
-      phase = Phase.IDLE;
+      stop();
       return;
     }
 
@@ -152,9 +170,9 @@ public class CacofeyHarvestGoal extends Goal {
   }
 
   private void tickMoveToContainer() {
-    BlockPos anchor = cacofey.getAnchorPos();
+    BlockPos anchor = anchorPos;
     if (anchor == null) {
-      phase = Phase.IDLE;
+      stop();
       return;
     }
 
@@ -166,6 +184,8 @@ public class CacofeyHarvestGoal extends Goal {
         <= ARRIVE_DISTANCE * ARRIVE_DISTANCE) {
       cacofey.getNavigation().stop();
       phase = Phase.DEPOSITING;
+    } else if (cacofey.getNavigation().isDone() || cacofey.tickCount >= travelDeadline) {
+      stop();
     }
   }
 
@@ -176,7 +196,7 @@ public class CacofeyHarvestGoal extends Goal {
 
     BlockPos anchor = cacofey.getAnchorPos();
     if (anchor == null) {
-      phase = Phase.IDLE;
+      stop();
       return;
     }
 
@@ -262,20 +282,33 @@ public class CacofeyHarvestGoal extends Goal {
   }
 
   private void navigateToCrop() {
-    if (cropPos != null) {
-      cacofey
-          .getNavigation()
-          .moveTo(
-              cropPos.getX() + 0.5D, cropPos.getY() + 1.5D, cropPos.getZ() + 0.5D, TRAVEL_SPEED);
+    travelDeadline = cacofey.tickCount + TRAVEL_TIMEOUT;
+    if (cropPos == null
+        || (distanceToCrop() > ARRIVE_DISTANCE
+            && !cacofey
+                .getNavigation()
+                .moveTo(
+                    cropPos.getX() + 0.5,
+                    cropPos.getY() + 1.5,
+                    cropPos.getZ() + 0.5,
+                    TRAVEL_SPEED))) {
+      stop();
     }
   }
 
   private void navigateToContainer() {
-    BlockPos anchor = cacofey.getAnchorPos();
-    if (anchor != null) {
-      cacofey
-          .getNavigation()
-          .moveTo(anchor.getX() + 0.5D, anchor.getY() + 1.5D, anchor.getZ() + 0.5D, TRAVEL_SPEED);
+    travelDeadline = cacofey.tickCount + TRAVEL_TIMEOUT;
+    if (anchorPos == null
+        || (cacofey.distanceToSqr(Vec3.atCenterOf(anchorPos.above()))
+                > ARRIVE_DISTANCE * ARRIVE_DISTANCE
+            && !cacofey
+                .getNavigation()
+                .moveTo(
+                    anchorPos.getX() + 0.5,
+                    anchorPos.getY() + 1.5,
+                    anchorPos.getZ() + 0.5,
+                    TRAVEL_SPEED))) {
+      stop();
     }
   }
 
