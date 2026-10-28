@@ -45,6 +45,7 @@ public class CacofeyStealGoal extends Goal {
 
   @Override
   public boolean canUse() {
+    if (cacofey.isTame() && !cacofey.isTheftTimerActive()) return false;
     if (cacofey.isHoldingItem()) {
       if (phase == Phase.SCAN) phase = Phase.FLEE;
       return true;
@@ -63,6 +64,7 @@ public class CacofeyStealGoal extends Goal {
 
   @Override
   public boolean canContinueToUse() {
+    if (cacofey.isTame() && !cacofey.isTheftTimerActive()) return false;
     if (cacofey.isHoldingItem()) return true;
     if (cacofey.isTame()) return false;
     return target != null && target.isAlive() && !target.isCreative();
