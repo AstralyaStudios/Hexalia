@@ -28,7 +28,7 @@
       "item": "hexalia:briar_sickle",
       "title": "Hoz de Zarzas",
       "anchor": "briar_sickle",
-      "text": "Corta varias plantas de una vez y ayuda a recolectar sus recursos."
+      "text": "Haz clic derecho con la Hoz de Zarzas para cortar hierba, helechos, flores, brotes de árboles y hojas en un área de 3×3 a la altura del bloque seleccionado. Agáchate y haz clic derecho para obtener los objetos que soltarían al usar tijeras."
     },
     {
       "type": "spotlight",

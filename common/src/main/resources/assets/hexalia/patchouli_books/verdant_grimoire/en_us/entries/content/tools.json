@@ -28,7 +28,7 @@
       "item": "hexalia:briar_sickle",
       "title": "Briar Sickle",
       "anchor": "briar_sickle",
-      "text": "A harvesting tool designed for clearing vegetation. It cuts through plants in a wide area and can be used with care to gather resources directly from blocks."
+      "text": "Right-click with the Briar Sickle to clear grass, ferns, flowers, saplings, and leaves in a 3×3 area at the clicked block’s height. Sneak and right-click to collect shears-style drops instead."
     },
     {
       "type": "spotlight",
