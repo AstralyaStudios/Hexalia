@@ -41,7 +41,7 @@
       "item": "hexalia:siren_kelp",
       "title": "Alga de Sirena",
       "anchor": "siren_kelp",
-      "text": "El Alga de Sirena se refina en Pasta de Sirena y se emplea en preparaciones relacionadas con el agua."
+      "text": "El Alga de Sirena se refina en Pasta de Sirena y se emplea en preparaciones relacionadas con el agua.$(br2)El Alga de Sirena puede plantarse en bloques llenos de agua sobre superficies adecuadas. Para propagarla, plántala sobre Tierra Infundida y aplica polvo de hueso. Puede extenderse a espacios submarinos cercanos, aunque no siempre tendrá éxito. No se propaga de forma natural."
     },
     {
       "type": "spotlight",
