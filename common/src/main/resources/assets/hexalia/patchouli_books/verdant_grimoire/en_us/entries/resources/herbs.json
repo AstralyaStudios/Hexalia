@@ -41,7 +41,7 @@
       "item": "hexalia:siren_kelp",
       "title": "Siren Kelp",
       "anchor": "siren_kelp",
-      "text": "An aquatic herb refined into Siren Paste. Its uses are often tied to water, aquatic boons, and protection against flame."
+      "text": "An aquatic herb refined into Siren Paste. Its uses are often tied to water, aquatic boons, and protection against flame.$(br2)Siren Kelp can be planted in full water on suitable surfaces. To propagate it, plant it on Infused Dirt and apply bone meal. It may spread to nearby underwater spaces, though success is not guaranteed. Siren Kelp does not spread naturally."
     },
     {
       "type": "spotlight",
