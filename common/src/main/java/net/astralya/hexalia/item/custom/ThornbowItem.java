@@ -16,6 +16,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
 public class ThornbowItem extends BowItem {
@@ -46,6 +48,17 @@ public class ThornbowItem extends BowItem {
         player, player.getXRot(), player.getYRot(), 0.0F, power * 3.0F, 1.0F);
     if (power == 1.0F) {
       projectile.setCritArrow(true);
+    }
+    int powerLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
+    if (powerLevel > 0) {
+      projectile.setBaseDamage(projectile.getBaseDamage() + powerLevel * 0.5D + 0.5D);
+    }
+    int punchLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);
+    if (punchLevel > 0) {
+      projectile.setKnockback(punchLevel);
+    }
+    if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stack) > 0) {
+      projectile.setSecondsOnFire(100);
     }
     level.addFreshEntity(projectile);
     level.playSound(
