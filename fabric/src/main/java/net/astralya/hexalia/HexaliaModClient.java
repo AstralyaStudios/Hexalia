@@ -14,6 +14,7 @@ import net.astralya.hexalia.client.renderer.blockentity.ShelfBlockEntityRenderer
 import net.astralya.hexalia.client.renderer.blockentity.SmallCauldronBlockEntityRenderer;
 import net.astralya.hexalia.client.renderer.entity.CacofeyRenderer;
 import net.astralya.hexalia.client.renderer.entity.CinderhewProjectileRenderer;
+import com.terraformersmc.terraform.boat.impl.client.TerraformBoatEntityRenderer;
 import net.astralya.hexalia.client.renderer.entity.SilkMothRenderer;
 import net.astralya.hexalia.client.renderer.entity.ThornArrowRenderer;
 import net.astralya.hexalia.client.screen.NestingBlockScreen;
@@ -193,6 +194,8 @@ public class HexaliaModClient implements ClientModInitializer {
     }
 
     private static void registerEntityRenderers() {
+        EntityRendererRegistry.register(ModEntities.MOD_BOAT.get(), context -> new TerraformBoatEntityRenderer(context, false));
+        EntityRendererRegistry.register(ModEntities.MOD_CHEST_BOAT.get(), context -> new TerraformBoatEntityRenderer(context, true));
         EntityRendererRegistry.register(ModEntities.RABBAGE.get(), ThrownItemRenderer::new);
         EntityRendererRegistry.register(ModEntities.PURIFYING_SAC.get(), ThrownItemRenderer::new);
         EntityRendererRegistry.register(ModEntities.FOUL_SAC.get(), ThrownItemRenderer::new);
