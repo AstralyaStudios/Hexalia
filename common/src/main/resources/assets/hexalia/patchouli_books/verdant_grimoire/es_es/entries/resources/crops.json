@@ -58,6 +58,11 @@
       "text": "Rabbage se obtiene mediante un $(l:hexalia:core_mechanics/natures_ritual)Ritual de la Naturaleza$(/l). Puede servir tanto de alimento como de herramienta."
     },
     {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:rabbage_seeds_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
       "type": "text",
       "title": "Cultivo",
       "text": "Cultiva lo que encuentres: muchos recursos de Hexalia revelan su valor al sembrarlos y cuidarlos."

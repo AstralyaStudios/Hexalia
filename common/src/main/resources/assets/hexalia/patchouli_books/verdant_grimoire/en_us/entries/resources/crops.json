@@ -58,6 +58,11 @@
       "text": "Formed through $(l:hexalia:core_mechanics/natures_ritual)Nature's Ritual$(/l), Rabbage is both a resource and a tool, capable of being used in unconventional ways beyond simple nourishment."
     },
     {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:rabbage_seeds_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
       "type": "text",
       "title": "On Cultivation",
       "text": "Many crops begin in the wild, but their true value comes from cultivation. With the right knowledge, they can be grown, processed, and integrated into more advanced Hexalia systems."
