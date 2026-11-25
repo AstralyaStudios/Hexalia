@@ -25,13 +25,13 @@
       "type": "spotlight",
       "item": "hexalia:earplugs",
       "title": "Tapones para los Oídos",
-      "text": "Protegen del grito aturdidor de la Mandrágora; úsalos al cosecharla."
+      "text": "Protegen del grito aturdidor de la Mandrágora; úsalos al cosecharla. Los tapones también pueden equiparse en la ranura normal del casco."
     },
     {
       "type": "text",
       "title": "Talismanes y amuletos",
       "anchor": "accessories",
-      "text": "Estos pequeños talismanes conceden sus dones mientras los llevas puestos.$(br2)Se pueden encontrar al explorar cofres de estructuras, incluidas mazmorras, pirámides del desierto, templos de la jungla, minas abandonadas, fortalezas, portales en ruinas, mansiones del bosque, ciudades antiguas y cabañas de herborista."
+      "text": "Lleva un accesorio en la mano secundaria para activar sus efectos o equípalo en su ranura correspondiente si tu modpack dispone de ella. Los anillos, collares y amuletos utilizan sus respectivas ranuras.$(br2)Se pueden encontrar al explorar cofres de estructuras, incluidas mazmorras, pirámides del desierto, templos de la jungla, minas abandonadas, fortalezas, portales en ruinas, mansiones del bosque, ciudades antiguas y cabañas de herborista."
     },
     {
       "type": "spotlight",

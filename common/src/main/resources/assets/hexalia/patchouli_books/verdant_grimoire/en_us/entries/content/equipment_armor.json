@@ -26,13 +26,13 @@
       "type": "spotlight",
       "item": "hexalia:earplugs",
       "title": "Earplugs",
-      "text": "Protects the wearer from the harmful cries of Mandrakes, making them essential for safe harvesting."
+      "text": "Protects the wearer from the harmful cries of Mandrakes, making them essential for safe harvesting. Earplugs can also be worn in the regular helmet slot."
     },
     {
       "type": "text",
       "title": "Talismans & Charms",
       "anchor": "accessories",
-      "text": "These small relics grant their gift while worn. Their shapes suggest where they rest, but no special knowledge of the fastening is needed.$(br2)Can be found while exploring structure chests, including dungeons, desert pyramids, jungle temples, mineshafts, strongholds, ruined portals, woodland mansions, ancient cities, and Herbalist Huts."
+      "text": "Hold an accessory in your off hand to activate its effects, or equip it in its corresponding slot if your pack provides one. Rings, necklaces, and charms use their respective accessory slots.$(br2)Can be found while exploring structure chests, including dungeons, desert pyramids, jungle temples, mineshafts, strongholds, ruined portals, woodland mansions, ancient cities, and Herbalist Huts."
     },
     {
       "type": "spotlight",
