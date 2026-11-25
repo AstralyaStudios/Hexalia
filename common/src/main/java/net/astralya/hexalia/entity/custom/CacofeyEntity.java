@@ -16,8 +16,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -292,7 +294,26 @@ public class CacofeyEntity extends TamableAnimal implements GeoEntity {
   public InteractionResult mobInteract(Player player, InteractionHand hand) {
     ItemStack stack = player.getItemInHand(hand);
 
-    if (stack.is(ModItems.GALEBERRIES_COOKIE.get())) {
+    boolean isCookie = stack.is(ModItems.GALEBERRIES_COOKIE.get());
+    if (this.isTame() && this.isOwnedBy(player)
+        && (isCookie || stack.is(ModItems.GALEBERRIES.get()))) {
+      if (this.level() instanceof ServerLevel server && this.getHealth() < this.getMaxHealth()) {
+        float previousHealth = this.getHealth();
+        this.heal(isCookie ? 4.0F : 2.0F);
+        if (this.getHealth() > previousHealth) {
+          if (!player.getAbilities().instabuild) {
+            stack.shrink(1);
+          }
+          this.playSound(SoundEvents.GENERIC_EAT, 0.5F, 1.0F);
+          server.sendParticles(
+              ParticleTypes.HEART, this.getX(), this.getY() + this.getBbHeight(), this.getZ(),
+              2, 0.15D, 0.1D, 0.15D, 0.0D);
+        }
+      }
+      return InteractionResult.sidedSuccess(this.level().isClientSide);
+    }
+
+    if (isCookie) {
       if (!this.isTame()) {
         if (!this.level().isClientSide) {
           if (!player.getAbilities().instabuild) {
